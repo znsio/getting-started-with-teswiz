@@ -1,0 +1,57 @@
+buildscript {
+    ext {
+        gradleVersion = '6.7.1'
+        teswizVersion = 'c2cd583830'
+    }
+    repositories {
+        mavenLocal()
+    }
+}
+
+plugins {
+    id "java"
+    id "idea"
+    id "maven-publish"
+}
+
+version '0.0.1'
+project.ext.log4jProperties = "src/test/resources/log4j2.properties"
+
+repositories {
+    mavenLocal()
+    maven { url 'https://jitpack.io' }
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+compileJava { options.encoding = "UTF-8" }
+
+dependencies {
+    implementation("com.github.znsio:teswiz:${project.teswizVersion}") {
+        transitive = false
+    }
+}
+
+task run(type: JavaExec) {
+    doFirst {
+        def configFile = System.getenv("RUN_IN_CI") ? "./configs/pcloudy_config.properties" : "./src/test/resources/com/znsio/e2e/features/configs/config.properties"
+        print "configFile: $configFile"
+        systemProperties = System.properties
+        def runnerArgs = [
+                "${configFile}",
+                "com/znsio/e2e",
+                "src/test/resources"
+        ]
+        args = runnerArgs
+    }
+    main = "com.znsio.e2e.runner.Runner"
+    classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+}
+
+wrapper {
+    gradleVersion = project.gradleVersion // version from gradle.properties
+}

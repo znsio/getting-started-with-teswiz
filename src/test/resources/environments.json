@@ -1,0 +1,6 @@
+{
+  "prod": {
+    "BASE_URL_API": "http://the-internet.herokuapp.com",
+    "BASE_URL": "http://the-internet.herokuapp.com/"
+  }
+}

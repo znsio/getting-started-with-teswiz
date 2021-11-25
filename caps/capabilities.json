@@ -10,7 +10,7 @@
     "enablePerformanceLogging": true,
     "printPageSourceOnFindFailure": true,
     "app": {
-      "local": "./src/test/resources/sampleApps/TheApp-VR-v1.apk"
+      "local": "./temp/sampleApps/TheApp-VR-v1.apk"
     },
     "deviceName": "android",
     "noSign": true

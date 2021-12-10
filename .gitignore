@@ -11,7 +11,7 @@ out/
 *.png
 *.jpeg
 *.jpg
-#temp/
+temp/
 test-output/
 target/
 .metadata/

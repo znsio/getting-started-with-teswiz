@@ -2,8 +2,8 @@ import java.text.SimpleDateFormat
 
 buildscript {
     ext {
-        gradleVersion = '7.1'
-        teswizVersion = '4df31dfa1d'
+        gradleVersion = '7.3.3'
+        teswizVersion = '195bbac896'
     }
     repositories {
         mavenLocal()
@@ -37,16 +37,21 @@ dependencies {
     }
 }
 
-static def getCurrentTimestamp ()
-{
-    Date today = new Date ()
-    SimpleDateFormat df = new SimpleDateFormat ("MM-dd-yyyy_HH-mm-ss")
-    return df.format (today)
+static def getCurrentDatestamp() {
+    Date today = new Date()
+    SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy")
+    return df.format(today)
+}
+
+static def getCurrentTimestamp() {
+    Date today = new Date()
+    SimpleDateFormat df = new SimpleDateFormat("HH-mm-ss")
+    return df.format(today)
 }
 
 task run(type: JavaExec) {
     doFirst {
-        def logDirectory = "target/" + getCurrentTimestamp()
+        def logDirectory = "target/" + getCurrentDatestamp() + "/" + getCurrentTimestamp()
         println "Using LOG_DIR: $logDirectory"
         System.setProperty "LOG_DIR", "$logDirectory"
 

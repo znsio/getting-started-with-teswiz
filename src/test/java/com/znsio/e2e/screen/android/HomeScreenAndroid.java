@@ -1,8 +1,11 @@
 package com.znsio.e2e.screen.android;
 
-import com.znsio.e2e.screen.*;
-import com.znsio.e2e.tools.*;
-import org.openqa.selenium.*;
+import com.znsio.e2e.screen.EchoScreen;
+import com.znsio.e2e.screen.HomeScreen;
+import com.znsio.e2e.screen.LoginScreen;
+import com.znsio.e2e.tools.Driver;
+import com.znsio.e2e.tools.Visual;
+import org.openqa.selenium.By;
 
 public class HomeScreenAndroid extends HomeScreen {
     private final Driver driver;

@@ -7,8 +7,6 @@ import com.applitools.eyes.visualgrid.model.ScreenOrientation;
 import com.context.SessionContext;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.APPLITOOLS;
-import com.znsio.e2e.entities.Platform;
-import com.znsio.e2e.runner.Runner;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -28,7 +26,7 @@ public class RunTestCukes extends AbstractTestNGCucumberTests {
 
     @Override
     @DataProvider(parallel = true)
-    public Object[][] scenarios () {
+    public Object[][] scenarios() {
         LOGGER.info(String.format("ThreadID: %d: in overridden scenarios%n", Thread.currentThread().getId()));
         Object[][] scenarios = super.scenarios();
         LOGGER.info(scenarios);
@@ -36,24 +34,18 @@ public class RunTestCukes extends AbstractTestNGCucumberTests {
     }
 
     @Before
-    public void beforeTestScenario (Scenario scenario) {
+    public void beforeTestScenario(Scenario scenario) {
         LOGGER.info(String.format("ThreadID: %d: in overridden beforeTestScenario%n", Thread.currentThread().getId()));
-        setupApplitoolsUFGConfiguration();
-    }
-
-    private void setupApplitoolsUFGConfiguration() {
-        if (Runner.platform.equals(Platform.web)) {
-            Configuration ufgConfig = new Configuration();
-            ufgConfig.addBrowser(1024, 1024, BrowserType.CHROME);
-            ufgConfig.addBrowser(1024, 1024, BrowserType.FIREFOX);
-            ufgConfig.addDeviceEmulation(DeviceName.iPhone_X, ScreenOrientation.PORTRAIT);
-            ufgConfig.addDeviceEmulation(DeviceName.OnePlus_7T_Pro, ScreenOrientation.LANDSCAPE);
-            context.addTestState(APPLITOOLS.UFG_CONFIG, ufgConfig);
-        }
+        Configuration ufgConfig = new Configuration();
+        ufgConfig.addBrowser(1024, 1024, BrowserType.CHROME);
+        ufgConfig.addBrowser(1024, 1024, BrowserType.FIREFOX);
+        ufgConfig.addDeviceEmulation(DeviceName.iPhone_X, ScreenOrientation.PORTRAIT);
+        ufgConfig.addDeviceEmulation(DeviceName.OnePlus_7T_Pro, ScreenOrientation.LANDSCAPE);
+        context.addTestState(APPLITOOLS.UFG_CONFIG, ufgConfig);
     }
 
     @After
-    public void afterTestScenario (Scenario scenario) {
+    public void afterTestScenario(Scenario scenario) {
         LOGGER.info(String.format("ThreadID: %d: in overridden afterTestScenario%n", Thread.currentThread().getId()));
     }
 }

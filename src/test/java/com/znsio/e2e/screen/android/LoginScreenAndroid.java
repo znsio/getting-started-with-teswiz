@@ -1,10 +1,12 @@
 package com.znsio.e2e.screen.android;
 
-import com.znsio.e2e.screen.*;
-import com.znsio.e2e.tools.*;
-import org.openqa.selenium.*;
+import com.znsio.e2e.screen.LoginScreen;
+import com.znsio.e2e.tools.Driver;
+import com.znsio.e2e.tools.Visual;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
-import static com.znsio.e2e.tools.Wait.*;
+import static com.znsio.e2e.tools.Wait.waitFor;
 
 public class LoginScreenAndroid extends LoginScreen {
     private final Driver driver;
@@ -29,7 +31,7 @@ public class LoginScreenAndroid extends LoginScreen {
         driver.findElementByAccessibilityId(userNameId).sendKeys(username);
         driver.findElementByAccessibilityId(passwordId).clear();
         driver.findElementByAccessibilityId(passwordId).sendKeys(password);
-//        driver.waitForClickabilityOf(passwordId).sendKeys(username);
+//        driver.waitForVisibilityOf(passwordId).sendKeys(username);
         visually.takeScreenshot(SCREEN_NAME, "enterLoginDetails");
         visually.checkWindow(SCREEN_NAME, "entered login details");
         return this;

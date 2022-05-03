@@ -1,10 +1,12 @@
 package com.znsio.e2e.screen.web;
 
-import com.znsio.e2e.screen.*;
-import com.znsio.e2e.tools.*;
-import org.openqa.selenium.*;
+import com.znsio.e2e.screen.LoginScreen;
+import com.znsio.e2e.tools.Driver;
+import com.znsio.e2e.tools.Visual;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
-import static com.znsio.e2e.tools.Wait.*;
+import static com.znsio.e2e.tools.Wait.waitFor;
 
 public class LoginScreenWeb extends LoginScreen {
     private final Driver driver;

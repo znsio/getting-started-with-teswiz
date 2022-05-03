@@ -1,9 +1,12 @@
 package com.znsio.e2e.screen.web;
 
-import com.znsio.e2e.screen.*;
-import com.znsio.e2e.tools.*;
-import org.apache.log4j.*;
-import org.openqa.selenium.*;
+import com.znsio.e2e.screen.EchoScreen;
+import com.znsio.e2e.screen.HomeScreen;
+import com.znsio.e2e.screen.LoginScreen;
+import com.znsio.e2e.tools.Driver;
+import com.znsio.e2e.tools.Visual;
+import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 
 public class HomeScreenWeb extends HomeScreen {
     private static final String NOT_YET_IMPLEMENTED = "NOT_YET_IMPLEMENTED";
@@ -11,7 +14,7 @@ public class HomeScreenWeb extends HomeScreen {
     private final Driver driver;
     private final Visual visually;
     private final String SCREEN_NAME = HomeScreenWeb.class.getSimpleName();
-    private By loginFormLinkText = By.linkText("Form Authentication");
+    private final By loginFormLinkText = By.linkText("Form Authentication");
 
     public HomeScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;

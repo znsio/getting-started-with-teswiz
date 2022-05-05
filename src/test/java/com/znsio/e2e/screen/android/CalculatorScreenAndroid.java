@@ -3,7 +3,6 @@ package com.znsio.e2e.screen.android;
 import com.znsio.e2e.screen.CalculatorScreen;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 
 import static com.znsio.e2e.tools.Wait.waitFor;

@@ -53,7 +53,7 @@ public class CartSteps {
 
     @Then("Cart should have {string} added")
     public void cartShouldHaveFoodItemsAdded(String foodItemsValue) {
-        new SwiggyRestaurantProfileBL().getFoodItemsCountValueFromCartSection(foodItemsValue);
+        new SwiggyRestaurantProfileBL().getFoodItemsTotalCountValueFromCartSection(foodItemsValue);
     }
 
 

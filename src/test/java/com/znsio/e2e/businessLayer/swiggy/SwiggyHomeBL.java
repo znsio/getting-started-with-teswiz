@@ -25,10 +25,16 @@ public class SwiggyHomeBL {
         this.currentPlatform = Runner.platform;
     }
 
+    public SwiggyHomeBL navigateToHomePage() {
+        SwiggyHomeScreen.get();
+        return this;
+    }
+
     public SwiggyHomeBL searchForDeliveryLocation(String deliveryLoc){
         SwiggyHomeScreen.get().searchForDeliveryLocation(deliveryLoc);
         return this;
     }
+
 
 
 }

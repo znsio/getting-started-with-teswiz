@@ -28,6 +28,12 @@ public abstract class CartSectionInRestaurantProfileScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract String getItemsCountInCartSection();
+    public abstract String getTotalItemsCountInCartSection();
+
+    public abstract String getSingleAddedItemNameFromCartSection();
+
+    public abstract int getSingleAddedItemCountFromCartSection();
+
+    public abstract boolean isCartEmpty();
 
 }

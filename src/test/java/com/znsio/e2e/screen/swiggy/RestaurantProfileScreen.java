@@ -23,8 +23,6 @@ public abstract class RestaurantProfileScreen {
         Visual visually = fetchEyes(Thread.currentThread().getId());
 
         switch (platform) {
-            //case android:
-            //   return new SwiggyHomeScreenAndroid(driver, visually);
             case web:
                 return new RestaurantProfileScreenWeb(driver, visually);
         }
@@ -33,5 +31,16 @@ public abstract class RestaurantProfileScreen {
 
     public abstract RestaurantProfileScreen addFoodItemsToCart(int unitOfItemsToAdd,String foodCategory);
 
+    public abstract RestaurantProfileScreen addFoodItemsToCart(String foodCategory);
+
     public abstract int getItemsCountFromDishImage(String foodCategory);
+
+    public abstract String getFoodItemNameToBeAdded();
+
+    public abstract int getFoodItemOrderCount();
+
+    public abstract RestaurantProfileScreen incrementCartValue();
+
+    public abstract RestaurantProfileScreen decrementCartValueFromProfileSection(int itemsAlreadyAdded);
+
 }

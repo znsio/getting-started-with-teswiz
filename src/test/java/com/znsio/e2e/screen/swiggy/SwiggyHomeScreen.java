@@ -23,8 +23,6 @@ public abstract class SwiggyHomeScreen {
         Visual visually = fetchEyes(Thread.currentThread().getId());
 
         switch (platform) {
-            //case android:
-             //   return new SwiggyHomeScreenAndroid(driver, visually);
             case web:
                 return new SwiggyHomeScreenWeb(driver, visually);
         }

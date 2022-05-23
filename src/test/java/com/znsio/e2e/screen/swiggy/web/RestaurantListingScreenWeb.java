@@ -7,6 +7,9 @@ import com.znsio.e2e.tools.Visual;
 import com.znsio.e2e.tools.Wait;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class RestaurantListingScreenWeb extends RestaurantListingScreen {
 
@@ -17,8 +20,10 @@ public class RestaurantListingScreenWeb extends RestaurantListingScreen {
     private final String SCREEN_NAME = RestaurantListingScreenWeb.class.getSimpleName();
 
     private By ratingsSortXpath = By.xpath("//div[contains(text(),'Rating')]");
-
+    private By searchedRestaurantsCount = By.xpath("//div[@id='all_restaurants']//div[contains(text(),'restaurants')]");
+    private By searchResultRestaurantListXpath = By.xpath("//div[@id='all_restaurants']//div/a[not(text()='Search')]");
     private String restaurantNameXpathStr = "//div[@id='all_restaurants']//div[contains(text(),'%s')]";
+
     public RestaurantListingScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
@@ -36,7 +41,34 @@ public class RestaurantListingScreenWeb extends RestaurantListingScreen {
     @Override
     public RestaurantProfileScreen selectRestaurantByName(String restaurantName) {
         By restaurantNameXpath = By.xpath(String.format(restaurantNameXpathStr,restaurantName));
+        driver.moveToElement(restaurantNameXpath);
         driver.waitTillElementIsPresent(restaurantNameXpath).click();
+        return RestaurantProfileScreen.get();
+    }
+
+    @Override
+    public int getRestaurantCountForSearchedLocation() {
+        String totalRestaurantsStr=driver.waitTillElementIsPresent(searchedRestaurantsCount).getText();
+        String[] arrayOfRestaurangCountsplit=totalRestaurantsStr.split(" ");
+        LOGGER.info("Restaurants Found for Searched Delivery Location:"+arrayOfRestaurangCountsplit[0]);
+        return Integer.parseInt(arrayOfRestaurangCountsplit[0]);
+    }
+
+    /**
+     *
+     * @param oneBasedIndxValue It's an 1 based Index value that comes as String hence needs to be parsed and has to be subtracted by 1 to derive original index value.
+     * @return will be returning page object for Restaurant's profile page.
+     */
+    @Override
+    public RestaurantProfileScreen selectRestaurantByIndex(String oneBasedIndxValue) {
+        List<WebElement> restaurantWebEleList=driver.findElements(searchResultRestaurantListXpath);
+        for(int i=0;i<restaurantWebEleList.size();i++){
+            if(i==(Integer.parseInt(oneBasedIndxValue)-1)){
+                LOGGER.info("Navigating to Selected Restaurant's profile page:"+restaurantWebEleList.get(i).getAttribute("href"));
+                restaurantWebEleList.get(i).click();
+                break;
+            }
+        }
         return RestaurantProfileScreen.get();
     }
 }

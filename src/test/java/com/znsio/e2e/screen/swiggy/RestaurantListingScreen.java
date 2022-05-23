@@ -23,8 +23,6 @@ public abstract class RestaurantListingScreen {
             Visual visually = fetchEyes(Thread.currentThread().getId());
 
             switch (platform) {
-                //case android:
-                //   return new SwiggyHomeScreenAndroid(driver, visually);
                 case web:
                     return new RestaurantListingScreenWeb(driver, visually);
             }
@@ -34,4 +32,8 @@ public abstract class RestaurantListingScreen {
     public  abstract RestaurantListingScreen sortRestaurantByRating();
 
     public abstract RestaurantProfileScreen selectRestaurantByName(String restaurantName);
+
+    public abstract int getRestaurantCountForSearchedLocation();
+
+    public abstract RestaurantProfileScreen selectRestaurantByIndex(String oneBasedIndxValue);
 }

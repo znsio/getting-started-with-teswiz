@@ -31,8 +31,20 @@ public class SwiggyRestaurantListingBL {
         return this;
     }
 
+    public SwiggyRestaurantListingBL getRestaurantCountForSearchedLocation(){
+        int actualSearchedRestaurantcount=RestaurantListingScreen.get().getRestaurantCountForSearchedLocation();
+        LOGGER.info("Asserting that found restaurants:"+actualSearchedRestaurantcount+" is greater than 0" );
+        softly.assertThat(actualSearchedRestaurantcount).isGreaterThan(0);
+        return this;
+    }
+
     public SwiggyRestaurantProfileBL selectRestaurantByName(String restaurantName) {
         RestaurantListingScreen.get().selectRestaurantByName(restaurantName);
+        return new SwiggyRestaurantProfileBL();
+    }
+
+    public SwiggyRestaurantProfileBL selectRestaurantByIndex(String oneBasedIndxValue) {
+        RestaurantListingScreen.get().selectRestaurantByIndex(oneBasedIndxValue);
         return new SwiggyRestaurantProfileBL();
     }
 }

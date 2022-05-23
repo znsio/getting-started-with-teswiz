@@ -48,7 +48,7 @@ public class CartSectionInRestaurantProflieScreenWeb extends CartSectionInRestau
 
     @Override
     public boolean isCartEmpty() {
-        return driver.waitTillElementIsPresent(cartIsEmptyXpath).isDisplayed();
+        return driver.isElementPresent(cartIsEmptyXpath);
     }
 
 

@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.Random;
+import static com.znsio.e2e.tools.Wait.waitFor;
 
 public class RestaurantProfileScreenWeb extends RestaurantProfileScreen {
 
@@ -57,7 +58,7 @@ public class RestaurantProfileScreenWeb extends RestaurantProfileScreen {
                         LOGGER.info("Clicked ADD Button in Iteration:" + (i + 1));
                         driver.waitForClickabilityOf(addItemBtnXpath).click();
                         LOGGER.info("Clicked ADD ITEMS in Iteration:" + (i + 1));
-                        Thread.sleep(3000);
+                        waitFor(1);
                     }
                     else {
                         driver.waitForClickabilityOf(CartAddButtonXpath, 10).click();
@@ -69,7 +70,7 @@ public class RestaurantProfileScreenWeb extends RestaurantProfileScreen {
                         driver.moveToElement(CartIncrementButtonXpathUpd);
                         driver.findElement(CartIncrementButtonXpathUpd).click();
                         LOGGER.info("Clicked + Button in Iteration:" + (i + 1));
-                        Thread.sleep(3000);
+                        waitFor(1);
                         driver.findElement(repeatLastSelXpath).click();
                         //driver.waitForClickabilityOf(By.xpath("//button[contains(text(),'REPEAT LAST')]")).click();
                         LOGGER.info("Clicked REPEAT LAST Button in Iteration:" + (i + 1));
@@ -113,7 +114,7 @@ public class RestaurantProfileScreenWeb extends RestaurantProfileScreen {
                         LOGGER.info("Clicked ADD Button in Iteration:" + (i + 1));
                         driver.waitForClickabilityOf(addItemBtnXpath).click();
                         LOGGER.info("Clicked ADD ITEMS in Iteration:" + (i + 1));
-                        Thread.sleep(3000);
+                        waitFor(1);
                     }
                     else {
                         driver.waitForClickabilityOf(CartAddButtonXpath, 10).click();
@@ -125,7 +126,7 @@ public class RestaurantProfileScreenWeb extends RestaurantProfileScreen {
                         driver.moveToElement(CartIncrementButtonXpathUpd);
                         driver.findElement(CartIncrementButtonXpathUpd).click();
                         LOGGER.info("Clicked + Button in Iteration:" + (i + 1));
-                        Thread.sleep(3000);
+                        waitFor(1);
                         driver.findElement(repeatLastSelXpath).click();
                         //driver.waitForClickabilityOf(By.xpath("//button[contains(text(),'REPEAT LAST')]")).click();
                         LOGGER.info("Clicked REPEAT LAST Button in Iteration:" + (i + 1));
@@ -142,6 +143,69 @@ public class RestaurantProfileScreenWeb extends RestaurantProfileScreen {
             e.printStackTrace();
         }
         return RestaurantProfileScreen.get();
+    }
+
+    @Override
+    public RestaurantProfileScreen addFoodItemsToCart() {
+        Random random = new Random();
+        int unitOfItemsToAdd = random.nextInt((4-1)+1)+1;
+        String foodCategory = driver.findElements(By.xpath("//div[@id='menu-content']//a/div")).get(0).getText();
+        RestaurantProfileScreenWeb.foodCategory=foodCategory;
+        LOGGER.info("Adding "+unitOfItemsToAdd+" units of "+foodCategory+" items to cart");
+        //String itemToBeAddedToCartStr=getFoodItemToBeAdded(indexOfFoodItemToAdd,foodCategory);
+        By CartAddButtonXpath = By.xpath(String.format(CartAddButtonXpathStr,foodCategory,indexOfFoodItemToAdd));
+        By CartIncrementButtonXpath = By.xpath(String.format(CartIncrementButtonXpathStr,foodCategory,indexOfFoodItemToAdd));
+        By CartIncrementButtonXpathUpd = By.xpath(String.format(CartMultipleIncrementButtonXpathStr,foodCategory,indexOfFoodItemToAdd));
+        try {
+            int itemModificationsAvailable=driver.findElements(CartIncrementButtonXpath).size();
+            for (int i = 0; i < unitOfItemsToAdd; i++) {
+                if (i == 0) {
+                    if(itemModificationsAvailable>1){
+                        driver.waitForClickabilityOf(CartAddButtonXpath, 10).click();
+                        LOGGER.info("Clicked ADD Button in Iteration:" + (i + 1));
+                        driver.waitForClickabilityOf(addItemBtnXpath).click();
+                        LOGGER.info("Clicked ADD ITEMS in Iteration:" + (i + 1));
+                        waitFor(1);
+                    }
+                    else {
+                        driver.waitForClickabilityOf(CartAddButtonXpath, 10).click();
+                        LOGGER.info("Clicked ADD Button in Iteration:" + (i + 1));
+                    }
+                }
+                else {
+                    if(itemModificationsAvailable>1){
+                        driver.moveToElement(CartIncrementButtonXpathUpd);
+                        driver.findElement(CartIncrementButtonXpathUpd).click();
+                        LOGGER.info("Clicked + Button in Iteration:" + (i + 1));
+                        waitFor(1);
+                        driver.findElement(repeatLastSelXpath).click();
+                        LOGGER.info("Clicked REPEAT LAST Button in Iteration:" + (i + 1));
+                    }
+                    else{
+                        driver.moveToElement(CartIncrementButtonXpath);
+                        driver.findElement(CartIncrementButtonXpath).click();
+                        LOGGER.info("Clicked + Button in Iteration:" + (i + 1));
+                    }
+                }
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return RestaurantProfileScreen.get();
+    }
+
+    @Override
+    public int getItemsCountFromDishImage() {
+        By CartIncrementButtonXpath = By.xpath(String.format(CartIncrementButtonXpathStr,foodCategory,indexOfFoodItemToAdd));
+        By orderCounterXpath = By.xpath(String.format(orderCounterOnImageXpathStr,foodCategory,indexOfFoodItemToAdd));
+        By customisableOrderCounterOnImageXpath = By.xpath(String.format(customisableOrderCounterOnImageXpathStr,foodCategory,indexOfFoodItemToAdd));
+        int itemModificationsAvailable=driver.findElements(CartIncrementButtonXpath).size();
+        LOGGER.info("Customizable if count greater than 1:"+itemModificationsAvailable);
+        if(itemModificationsAvailable==1){
+            return Integer.parseInt(driver.waitTillElementIsPresent(orderCounterXpath).getText());}
+        else{
+            return Integer.parseInt(driver.waitTillElementIsPresent(customisableOrderCounterOnImageXpath).getText());}
     }
 
     @Override
@@ -168,7 +232,7 @@ public class RestaurantProfileScreenWeb extends RestaurantProfileScreen {
         String FoodItemToBeAdded = null;
         LOGGER.info("Fetching List of Food Items");
         By foodItemListXpath= By.xpath(String.format(foodItemXpathStr, foodCategory));
-        System.out.println(String.format(foodItemXpathStr, foodCategory));
+        //System.out.println(String.format(foodItemXpathStr, foodCategory));
         List<WebElement> FoodItems =driver.findElements(foodItemListXpath);
         for(int i=0;i<FoodItems.size();i++){
             if(i==(indexOfItem-1)){
@@ -203,7 +267,7 @@ public class RestaurantProfileScreenWeb extends RestaurantProfileScreen {
             } else {
                 driver.moveToElement(CartIncrementButtonXpathUpd);
                 driver.findElement(CartIncrementButtonXpathUpd).click();
-                Thread.sleep(3000);
+                waitFor(1);
                 driver.findElement(repeatLastSelXpath).click();
                 LOGGER.info("Clicked + Button in Restaurant Profile Section to Increment Value for Customisable item");
             }

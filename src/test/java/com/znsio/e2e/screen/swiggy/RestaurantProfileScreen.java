@@ -33,6 +33,9 @@ public abstract class RestaurantProfileScreen {
 
     public abstract RestaurantProfileScreen addFoodItemsToCart(String foodCategory);
 
+    public abstract RestaurantProfileScreen addFoodItemsToCart();
+    public abstract int getItemsCountFromDishImage();
+
     public abstract int getItemsCountFromDishImage(String foodCategory);
 
     public abstract String getFoodItemNameToBeAdded();

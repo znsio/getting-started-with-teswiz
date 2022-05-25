@@ -5,6 +5,7 @@ import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import static com.znsio.e2e.tools.Wait.waitFor;
 
 public class CartSectionInRestaurantProflieScreenWeb extends CartSectionInRestaurantProfileScreen {
 
@@ -26,14 +27,13 @@ public class CartSectionInRestaurantProflieScreenWeb extends CartSectionInRestau
         }
 
         public String getTotalItemsCountInCartSection(){
-            try{Thread.sleep(1000);}
-            catch(Exception e){e.printStackTrace();}
+            waitFor(1);
             return driver.waitTillElementIsPresent(cartSectionTotalItems).getText();
         }
 
     @Override
     public String getSingleAddedItemNameFromCartSection() {
-            return driver.waitTillElementIsPresent(cartSectionAddedItemsNameXpath).getText();
+            return driver.waitTillElementIsPresent(cartSectionAddedItemsNameXpath).getText().replaceAll("\\n.*","");
     }
 
     @Override

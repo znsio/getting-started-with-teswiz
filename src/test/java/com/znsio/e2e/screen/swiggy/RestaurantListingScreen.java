@@ -36,4 +36,8 @@ public abstract class RestaurantListingScreen {
     public abstract int getRestaurantCountForSearchedLocation();
 
     public abstract RestaurantProfileScreen selectRestaurantByIndex(String oneBasedIndxValue);
+
+    public abstract RestaurantProfileScreen selectRestaurantByRandomIndex();
+
+    public abstract String getSetDeliveryLocationName();
 }

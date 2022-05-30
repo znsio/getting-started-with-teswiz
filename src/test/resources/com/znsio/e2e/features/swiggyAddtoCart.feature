@@ -1,18 +1,12 @@
-Feature: Verify add to cart
+Feature: Verify add item to cart
 
   @swiggy @web
-  Scenario: To verify user is able to create cart
-    Given User is on Home Page
-    When user adds the location
-    |location|
-    |Nagpur, Maharashtra, India|
-    Then user will see Restaurants List for the Location
-    When User sort the Restaurant List by Rating
-    Then User should see Restaurant List
-    When user select Restaurant
-    Then Restaurant menu should get displayed
-    When Search and adds the Item
-    Then User should able to see cart created
+  Scenario: To verify guest user is able to create cart
+    Given user selects the "Nagpur, Maharashtra, India" location from the landing page
+    When user sort the restaurant List by "Rating"
+    When user selects restaurant from the result
+    Then user adds the items in the cart
+    And user should able to see cart created
 
 
 

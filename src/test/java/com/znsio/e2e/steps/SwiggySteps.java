@@ -2,18 +2,18 @@ package com.znsio.e2e.steps;
 
 import com.context.SessionContext;
 import com.context.TestExecutionContext;
+import com.znsio.e2e.businessLayer.RestaurantListingBL;
+import com.znsio.e2e.businessLayer.RestaurantMenuBL;
 import com.znsio.e2e.businessLayer.SwiggyCartBL;
+import com.znsio.e2e.businessLayer.SwiggyLocationSelectionBL;
 import com.znsio.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Drivers;
-import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
-
-import java.util.List;
-import java.util.Map;
 
 public class SwiggySteps {
 
@@ -28,53 +28,37 @@ public class SwiggySteps {
         LOGGER.info("allDrivers: " + (null == allDrivers));
     }
 
-    @Given("User is on Home Page")
-    public void userIsOnHomePage() {
-         LOGGER.info(System.out.printf(SAMPLE_TEST_CONTEXT.SWIGGY_USER, Runner.platform));
+
+    @Given("user selects the {string} location from the landing page")
+    public void userSelectsTheLocationFromTheLandingPage(String userSelectedLocation) {
+        LOGGER.info(System.out.printf(SAMPLE_TEST_CONTEXT.SWIGGY_USER, Runner.platform));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.SWIGGY_USER, Runner.platform, context);
         //context.addTestState(SAMPLE_TEST_CONTEXT.SWIGGY_USER,context);
         //new SwiggyCartBL(SAMPLE_TEST_CONTEXT.SWIGGY_USER, Runner.platform);
-        new SwiggyCartBL().openSwiggyHome();
+        new SwiggyLocationSelectionBL().openSwiggyHome()
+                .selectLocation(userSelectedLocation);
+        new RestaurantListingBL().validateLocation(userSelectedLocation);
     }
 
-    @When("user adds the location")
-    public void userAddsTheLocation(DataTable location) {
-        List<Map<String, String>> data = location.asMaps(String.class, String.class);
-        new SwiggyCartBL().addLocation(data.get(0).get("location"));
+    @When("user sort the restaurant List by {string}")
+    public void userSortTheRestaurantListBy(String criteria) {
+        new RestaurantListingBL().selectRatingTab(criteria)
+                .validateRestaurantList();
     }
 
-    @Then("user will see Restaurants List for the Location")
-    public void userWillSeeRestaurantsListForTheLocation() {
-        new SwiggyCartBL().validateLocationInRestaurantPage();
+    @When("user selects restaurant from the result")
+    public void userSelectsRestaurantFromTheResult() {
+        new RestaurantListingBL().clickOnRestauturant();
+        new RestaurantMenuBL().validateRestaurantName();
     }
 
-    @When("User sort the Restaurant List by Rating")
-    public void userSortTheRestaurantListBy() {
-        new SwiggyCartBL().selectRatingTab();
+
+    @Then("user adds the items in the cart")
+    public void userAddsTheItemsInTheCart() {
+        new RestaurantMenuBL().selectFoodItem();
     }
 
-    @Then("User should see Restaurant List")
-    public void userShouldSeeRestaurantList() {
-        new SwiggyCartBL().validateRestaurantList();
-    }
-
-    @When("user select Restaurant")
-    public void userSelect() {
-        new SwiggyCartBL().clickOnRestaturant();
-
-    }
-
-    @Then("Restaurant menu should get displayed")
-    public void menuShouldGetDisplayed() {
-        new SwiggyCartBL().validateRestaurantName();
-    }
-
-    @When("Search and adds the Item")
-    public void searchAndAddsTheItem() {
-        new SwiggyCartBL().selectFoodItem();
-    }
-
-    @Then("User should able to see cart created")
+    @And("user should able to see cart created")
     public void userShouldAbleToSeeCartCreated() {
         new SwiggyCartBL().openCart()
                 .validateItemName();

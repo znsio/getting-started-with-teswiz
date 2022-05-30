@@ -33,7 +33,7 @@ public abstract class RestaurantListingScreen {
 
     public abstract String getLocationName();
 
-    public abstract RestaurantListingScreen clickOnRating();
+    public abstract RestaurantListingScreen clickOnRating(String searchCriteria);
 
     public abstract Integer getRestaurantList() ;
 

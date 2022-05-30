@@ -11,14 +11,16 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static com.znsio.e2e.tools.Wait.waitFor;
+
 public class RestaurantListScreenWeb extends RestaurantListingScreen {
     private final Driver driver;
     private final Visual visually;
     private final String SCREEN_NAME = RestaurantListScreenWeb.class.getSimpleName();
 
-    private static String searchType = "//div[text()='%s']";
+    private static String searchTypeByXpath = "//div[text()='%s']";
 
-    private final By ratingTabByXpath = By.xpath("//div[text()='Rating']");
+    private final By ratingTabByXpath = By.xpath("//div[text()='%s']");
 
     private final By location = By.xpath("//span[@class='_3HusE']");
     private final By restaurantListByXpath = By.xpath("//div[@class='_3XX_A']/a[1]//div[@class='nA6kb']");
@@ -41,8 +43,10 @@ public class RestaurantListScreenWeb extends RestaurantListingScreen {
     }
 
     @Override
-    public RestaurantListingScreen clickOnRating() {
-        driver.waitTillElementIsPresent(ratingTabByXpath).click();
+    public RestaurantListingScreen clickOnRating(String searchCriteria) {
+        waitFor(2);
+        String searchType = String.format(searchTypeByXpath, searchCriteria);
+        driver.waitTillElementIsPresent(By.xpath(searchType)).click();
         return this;
     }
 

@@ -4,18 +4,18 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.e2e.screen.CartScreen;
+import com.znsio.e2e.screen.RestaurantListingScreen;
+import com.znsio.e2e.screen.RestaurantMenuScreen;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.asserts.SoftAssert;
 
-public class SwiggyCartBL {
-
+public class RestaurantMenuBL {
 
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
-    public SwiggyCartBL(String userPersona, Platform forPlatform) {
+    public RestaurantMenuBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
@@ -24,23 +24,25 @@ public class SwiggyCartBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public SwiggyCartBL() {
+    public RestaurantMenuBL() {
         long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
         this.currentUserPersona = SAMPLE_TEST_CONTEXT.SWIGGY_USER;
         this.currentPlatform = Runner.platform;
     }
-
-    public SwiggyCartBL openCart() {
-        CartScreen.get().openCartOption();
+    public RestaurantMenuBL validateRestaurantName() {
+        String restaurantName = RestaurantMenuScreen.get().getRestaurantName();
+        SoftAssert softAssert = new SoftAssert();
+        String listingPageRestaurantName = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.RESTAURANTNAME);
+        softAssert.assertEquals(restaurantName, listingPageRestaurantName,"Restaurant Name does not matched" );
+        softly.assertThat(restaurantName).isEqualTo(listingPageRestaurantName);
+        softAssert.assertAll();
         return this;
     }
-
-    public SwiggyCartBL validateItemName() {
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(CartScreen.get().getItemName(),context.getTestStateAsString(SAMPLE_TEST_CONTEXT.FOOD_ITEM_NAME),"Item Name doesnot matched");
-        softAssert.assertAll();
+    public RestaurantMenuBL selectFoodItem() {
+        RestaurantMenuScreen.get().searchAndSelectFoodItem()
+                .increaseTheQuanity();
         return this;
     }
 }

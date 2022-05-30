@@ -4,18 +4,17 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.e2e.screen.CartScreen;
+import com.znsio.e2e.screen.SwiggyHomeScreen;
 import org.assertj.core.api.SoftAssertions;
-import org.testng.asserts.SoftAssert;
 
-public class SwiggyCartBL {
+public class SwiggyLocationSelectionBL {
 
 
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
-    public SwiggyCartBL(String userPersona, Platform forPlatform) {
+    public SwiggyLocationSelectionBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
@@ -24,7 +23,7 @@ public class SwiggyCartBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public SwiggyCartBL() {
+    public SwiggyLocationSelectionBL() {
         long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
@@ -32,15 +31,14 @@ public class SwiggyCartBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public SwiggyCartBL openCart() {
-        CartScreen.get().openCartOption();
+    public SwiggyLocationSelectionBL openSwiggyHome() {
+        SwiggyHomeScreen.get();
         return this;
+    }
+    public RestaurantListingBL selectLocation(String userSelectedLocation){
+        SwiggyHomeScreen.get().addRestaurantLocation(userSelectedLocation);
+        return new RestaurantListingBL();
     }
 
-    public SwiggyCartBL validateItemName() {
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(CartScreen.get().getItemName(),context.getTestStateAsString(SAMPLE_TEST_CONTEXT.FOOD_ITEM_NAME),"Item Name doesnot matched");
-        softAssert.assertAll();
-        return this;
-    }
+
 }

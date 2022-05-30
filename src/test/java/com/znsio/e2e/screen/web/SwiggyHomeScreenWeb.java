@@ -14,6 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
+import static com.znsio.e2e.tools.Wait.waitFor;
+
 public class SwiggyHomeScreenWeb extends SwiggyHomeScreen {
 
     private final Driver driver;
@@ -32,17 +34,17 @@ public class SwiggyHomeScreenWeb extends SwiggyHomeScreen {
     }
 
 
-    public SwiggyHomeScreen addRestaurantLocation(String arg0) {
+    public SwiggyHomeScreen addRestaurantLocation(String userEnteredLocation) {
         driver.waitTillElementIsPresent(location).click();
-        driver.findElement(location).sendKeys(arg0);
+        driver.findElement(location).sendKeys(userEnteredLocation);
         driver.waitTillElementIsPresent(locationList);
-        // new WebDriverWait(driver,20).until(ExpectedConditions.presenceOfAllElementsLocatedBy(locationList));
         List<WebElement> list = driver.findElements(locationList);
         if (list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getText().contains(arg0)) {
+                if (list.get(i).getText().contains(userEnteredLocation)) {
                     context.addTestState(SAMPLE_TEST_CONTEXT.USER_ENTERED_LOCATION,list.get(i).getText());
                     list.get(i).click();
+                    waitFor(3);
                     break;
                 }
             }

@@ -27,7 +27,7 @@ public abstract class RestaurantScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract RestaurantScreen addItem();
+    public abstract RestaurantScreen addItem(int noOfItems);
 
     public abstract RestaurantScreen removeItem();
 }

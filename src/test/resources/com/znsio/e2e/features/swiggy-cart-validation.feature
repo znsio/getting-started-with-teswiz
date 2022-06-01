@@ -9,9 +9,6 @@ Feature: Verify the Swiggy cart functionality
     And I am able to create cart by adding 2 food items to cart
     Then the corresponding food items are displayed in the cart
     And the cart counter increases
-    When I remove the food item from a filled cart
-    Then the corresponding food item is removed from the cart
-    And the cart counter decreases
-    When I remove the only food item from the cart
-    Then the corresponding food item is removed from the cart
+    When I remove all the food item from the cart
+    Then the corresponding food items are removed from the cart
     And the cart becomes empty

@@ -3,6 +3,7 @@ package com.znsio.e2e.businessLayer;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
+import com.znsio.e2e.screen.CartScreen;
 import com.znsio.e2e.screen.RestaurantListScreen;
 import com.znsio.e2e.screen.RestaurantScreen;
 import com.znsio.e2e.screen.SwiggyHomeScreen;
@@ -23,13 +24,13 @@ public class CartBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public CartBL selectLocation(String location){
+    public CartBL selectLocation(String location) {
         //verify after entering location and selecting it browser navigates to restaurant list
         SwiggyHomeScreen.get().setRestaurantLocation(location);
         return this;
     }
 
-    public CartBL sortByRating(){
+    public CartBL sortByRating() {
         //verify if browser is on restaurant list page and then click in sort by rating
         RestaurantListScreen.get().sortRestaurants();
         return this;
@@ -40,26 +41,38 @@ public class CartBL {
         return this;
     }
 
-    public CartBL addToCart(int count){
-        RestaurantScreen.get().addItem();
-        context.addTestState("Cart Items",count);
+    public CartBL addToCart(int noOfItems) {
+        context.addTestState("ExpectedCartCount", noOfItems);
+        RestaurantScreen.get().addItem(noOfItems);
+        System.out.println("After add to cart");
         return this;
     }
 
-    public CartBL verifyCartContent(){
+    public CartBL verifyCartContentAdd() {
+        //get method that returns the object to be asserted softly
+        softly.assertThat(CartScreen.get().verifyContentAdd()).as("Cart content does not match").isEqualTo(true);
         return this;
     }
 
-    public CartBL verifyCartCounter(){
+    public CartBL verifyCartCounter() {
+//        System.out.println(CartScreen.get().getCartCounter()+"  <==Cart counter==>  "+context.getTestState("CartItemCountNew"));
+        softly.assertThat(CartScreen.get().getCartCounter()).as("Cart counter is not updated").isEqualTo(context.getTestState("ExpectedCartCount").toString());
         return this;
     }
 
-    public CartBL removeFromCart(){
+    public CartBL removeFromCart() {
         RestaurantScreen.get().removeItem();
+        System.out.println("After remove from cart");
         return this;
     }
 
-    public CartBL verifyEmptyCart(){
+    public CartBL verifyCartContentRemove(){
+        softly.assertThat(CartScreen.get().verifyContentRemove()).as("Cart content does not match").isEqualTo(true);
+        return this;
+    }
+
+    public CartBL verifyEmptyCart() {
+        softly.assertThat(CartScreen.get().getCartCounter()).as("Cart counter is not updated").isEqualTo("0");
         return this;
     }
 

@@ -31,10 +31,9 @@ public class SwiggyHomeScreenWeb extends SwiggyHomeScreen {
     @Override
     public SwiggyHomeScreen setRestaurantLocation(String location) {
         driver.waitForClickabilityOf(locationTextbox).click();
-//        driver.findElement(locationTextbox).clear();
+        driver.findElement(locationTextbox).clear();
         driver.findElement(locationTextbox).sendKeys(location);
         String selectLocation= String.format(fistSuggestion,location);
-//        waitFor(3);
         driver.waitForClickabilityOf(By.xpath(selectLocation)).click();
         return this;
     }

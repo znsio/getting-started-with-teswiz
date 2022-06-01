@@ -14,7 +14,7 @@ public class RestaurantListScreenWeb extends RestaurantListScreen{
     private static final String SCREEN_NAME = SwiggyHomeScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final By ratingsButton = By.xpath("//div[@class='_3Ynv-']/div[3]");
-//    private final By restaurantTile= By.xpath();
+    private final By restaurantTile= By.xpath("//div/div/div[2]/div[contains(text(),'House Of The Fried')]");
     private final TestExecutionContext context;
 
     public RestaurantListScreenWeb(Driver driver, Visual visually) {
@@ -33,6 +33,7 @@ public class RestaurantListScreenWeb extends RestaurantListScreen{
 
     @Override
     public RestaurantListScreen selectRestaurantFromList() {
+        driver.waitForClickabilityOf(restaurantTile).click();
         return this;
     }
 }

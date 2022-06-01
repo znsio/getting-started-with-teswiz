@@ -17,7 +17,7 @@ public class CartSteps {
     private final TestExecutionContext context;
     private final Drivers allDrivers;
 
-    public CartSteps(){
+    public CartSteps() {
         context = SessionContext.getTestExecutionContext(Thread.currentThread().getId());
         LOGGER.info("context: " + context.getTestName());
         allDrivers = (Drivers) context.getTestState(SAMPLE_TEST_CONTEXT.ALL_DRIVERS);
@@ -26,67 +26,52 @@ public class CartSteps {
 
     @Given("I am on restaurants page after selecting location {string} from home page")
     public void iAmOnRestaurantsPageAfterSelectingLocationFromHomePage(String loc) {
-
-        LOGGER.info(System.out.printf("iLoginWithInvalidCredentials - Persona:'%s' on Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, Runner.platform));
+        LOGGER.info(System.out.printf("I am on restaurants page after selecting location - Persona:'%s' on Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, Runner.platform));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
-        context.addTestState(SAMPLE_TEST_CONTEXT.ME,Runner.platform);
-        new CartBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).selectLocation(loc);
+        context.addTestState(SAMPLE_TEST_CONTEXT.ME, Runner.platform);
+        new CartBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).selectLocation(loc);
     }
 
     @And("I sort the restaurants' listings by rating before selecting a restaurant")
     public void iSortTheRestaurantsListingsByRatingBeforeSelectingARestaurant() {
-        new CartBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).sortByRating();
-        new CartBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).selectRestaurant();
-        System.out.println("In restaurants list page");
+        LOGGER.info(System.out.printf("I sort the restaurants listings by rating before selecting a restaurant"));
+        new CartBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).sortByRating();
+        new CartBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).selectRestaurant();
     }
 
     @And("I am able to create cart by adding {int} food items to cart")
     public void iAmAbleToCreateCartByAddingFewFoodItemsToCart(int itemCount) {
-        for (int i = 0; i < itemCount; i++) {
-            new CartBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).addToCart(itemCount);
-        }
-        System.out.println("In Restaurant details page "+itemCount);
+        LOGGER.info(System.out.printf("I am able to create cart by adding food items to cart"));
+        new CartBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).addToCart(itemCount);
     }
 
     @Then("the corresponding food items are displayed in the cart")
     public void theCorrespondingFoodItemsAreDisplayedInTheCart() {
-        new CartBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).verifyCartContent();
-        System.out.println("In Cart page");
+        LOGGER.info((System.out.printf("Items added to cart are being displayed in cart")));
+        new CartBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).verifyCartContentAdd();
     }
 
     @And("the cart counter increases")
     public void theCartCounterIncreases() {
-        System.out.println("Checking counter in cart");
-        new CartBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).verifyCartCounter();
+        LOGGER.info((System.out.printf("The cart counter increases")));
+        new CartBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).verifyCartCounter();
     }
 
-    @When("I remove the food item from a filled cart")
-    public void iRemoveTheFoodItemFromAFilledCart() {
-        System.out.println("Check for removing item from cart");
-        new CartBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).removeFromCart();
+    @When("I remove all the food item from the cart")
+    public void iRemoveAllTheFoodItemFromTheCart() {
+        LOGGER.info((System.out.printf("All items in the cart are removed")));
+        new CartBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).removeFromCart();
     }
 
-    @Then("the corresponding food item is removed from the cart")
-    public void theCorrespondingFoodItemIsRemovedFromTheCart() {
-        System.out.println("Check for change in cart list details");
-        new CartBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).verifyCartContent();
-    }
-
-    @And("the cart counter decreases")
-    public void theCartCounterDecreases() {
-        System.out.println("Check for decrease in cart counter");
-        new CartBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).verifyCartCounter();
-    }
-
-    @When("I remove the only food item from the cart")
-    public void iRemoveTheOnlyFoodItemFromTheCart() {
-        System.out.println("Remove last item from cart");
-        new CartBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).removeFromCart();
+    @Then("the corresponding food items are removed from the cart")
+    public void theCorrespondingFoodItemsAreRemovedFromTheCart() {
+        LOGGER.info((System.out.printf("Cart shows no items present")));
+        new CartBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).verifyCartContentRemove();
     }
 
     @And("the cart becomes empty")
     public void theCartBecomesEmpty() {
-        System.out.println("Check if cart is empty");
-        new CartBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).verifyEmptyCart();
+        LOGGER.info((System.out.printf("Check if cart is empty")));
+        new CartBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).verifyEmptyCart();
     }
 }

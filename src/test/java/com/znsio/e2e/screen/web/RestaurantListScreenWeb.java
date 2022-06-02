@@ -23,7 +23,7 @@ public class RestaurantListScreenWeb extends RestaurantListingScreen {
     private final By ratingTabByXpath = By.xpath("//div[text()='%s']");
 
     private final By location = By.xpath("//span[@class='_3HusE']");
-    private final By restaurantListByXpath = By.xpath("//div[@class='_3XX_A']/a[1]//div[@class='nA6kb']");
+    private final By restaurantListByXpath = By.xpath("//a//div[@class='nA6kb']");
     private final TestExecutionContext context;
 
 
@@ -43,7 +43,7 @@ public class RestaurantListScreenWeb extends RestaurantListingScreen {
     }
 
     @Override
-    public RestaurantListingScreen clickOnRating(String searchCriteria) {
+    public RestaurantListingScreen searchRestaurantBy(String searchCriteria) {
         waitFor(2);
         String searchType = String.format(searchTypeByXpath, searchCriteria);
         driver.waitTillElementIsPresent(By.xpath(searchType)).click();
@@ -51,7 +51,7 @@ public class RestaurantListScreenWeb extends RestaurantListingScreen {
     }
 
     @Override
-    public Integer getRestaurantList() {
+    public Integer getRestaurantCount() {
         driver.waitTillElementIsPresent(restaurantListByXpath);
         List<WebElement> restaurantList = driver.findElements(restaurantListByXpath);
         return restaurantList.size();

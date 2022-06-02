@@ -32,15 +32,11 @@ public class SwiggyCartBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public SwiggyCartBL openCart() {
-        CartScreen.get().openCartOption();
-        return this;
-    }
 
-    public SwiggyCartBL validateItemName() {
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(CartScreen.get().getItemName(),context.getTestStateAsString(SAMPLE_TEST_CONTEXT.FOOD_ITEM_NAME),"Item Name doesnot matched");
-        softAssert.assertAll();
+    public SwiggyCartBL userAbleToSeeCartCreated(){
+        CartScreen.get().openCartOption();
+        String foodItemAddedFromRestaurantMenu = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.FOOD_ITEM_NAME);
+        softly.assertThat(CartScreen.get().getItemNameAddedInCart()).as("Item Name does not matched").isEqualTo(foodItemAddedFromRestaurantMenu);
         return this;
     }
 }

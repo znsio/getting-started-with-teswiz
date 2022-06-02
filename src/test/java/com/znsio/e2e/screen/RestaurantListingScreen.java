@@ -33,9 +33,9 @@ public abstract class RestaurantListingScreen {
 
     public abstract String getLocationName();
 
-    public abstract RestaurantListingScreen clickOnRating(String searchCriteria);
+    public abstract RestaurantListingScreen searchRestaurantBy(String searchCriteria);
 
-    public abstract Integer getRestaurantList() ;
+    public abstract Integer getRestaurantCount() ;
 
     public abstract RestaurantListingScreen selectRestaurant();
 }

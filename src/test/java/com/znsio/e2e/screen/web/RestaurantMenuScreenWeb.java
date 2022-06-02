@@ -26,16 +26,14 @@ public class RestaurantMenuScreenWeb extends RestaurantMenuScreen {
     private final String SCREEN_NAME = RestaurantMenuScreenWeb.class.getSimpleName();
     private final By restaurantNameByxpath = By.xpath("//h1[@class='_3aqeL']");
 
-    private final By menuListByXpath = By.xpath("//div[@class='_1RPOp' and text()='ADD']/ancestor::div[3]/preceding-sibling::div//h3[contains(@class,'itemNameText')]");
-    private static String addButtonByXpath = "//h3[contains(text(),'%s')]/ancestor::div[2]/following-sibling::div//div[text()='ADD']";
+    private final By menuListByXpath = By.xpath("//div[text()='ADD']/ancestor::div/preceding-sibling::div/div/h3");
+    private static String addButtonByXpath = "//h3[contains(text(),'%s')]/ancestor::div/following-sibling::div//div[text()='ADD']";
 
     private final By searchFoodItem = By.xpath("//input[@placeholder='Search for dishes...']");
 
     private final By customiseItemByXpath = By.xpath("//div[contains(text(),'Customize')]");
 
-    private final By addItemButtonByXpath = By.xpath("//span[text()='Add Item']");
-
-    private final By cartOptionByXpath = By.xpath("//span[text()='Cart']");
+    private final By cartOptionInRestaurantMenuByXpath = By.xpath("//div[text()='Cart']");
 
     public RestaurantMenuScreenWeb(Driver driver, Visual visually) {
         long threadId = Thread.currentThread().getId();
@@ -54,7 +52,7 @@ public class RestaurantMenuScreenWeb extends RestaurantMenuScreen {
 
 
     @Override
-    public RestaurantMenuScreen searchAndSelectFoodItem() {
+    public RestaurantMenuScreen addFoodItemFromMenu() {
         driver.waitTillElementIsPresent(menuListByXpath);
         List<WebElement> menuList = driver.findElements(menuListByXpath);
         Random rand = new Random();
@@ -64,18 +62,15 @@ public class RestaurantMenuScreenWeb extends RestaurantMenuScreen {
         // driver.scrollTillElementIntoView(By.xpath(addButtonxpath));
         driver.findElement(By.xpath(addButtonxpath)).click();
         context.addTestState(SAMPLE_TEST_CONTEXT.FOOD_ITEM_NAME, itemName.getText());
-        waitFor(3);
+        driver.waitTillElementIsPresent(cartOptionInRestaurantMenuByXpath);
         if (driver.isElementPresent(customiseItemByXpath)) {
             driver.findElement(customiseItemByXpath).click();
-            waitFor(3);
+            driver.waitTillElementIsPresent(cartOptionInRestaurantMenuByXpath);
         }
 
         return this;
 
     }
 
-    @Override
-    public RestaurantMenuScreen increaseTheQuanity() {
-        return this;
-    }
+
 }

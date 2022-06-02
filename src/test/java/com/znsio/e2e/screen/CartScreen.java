@@ -34,5 +34,7 @@ public abstract class CartScreen {
 
     public abstract CartScreen openCartOption();
 
-    public abstract String getItemName();
+    public abstract String getItemNameAddedInCart();
+
+    public abstract Boolean validateCartOptionVisible();
 }

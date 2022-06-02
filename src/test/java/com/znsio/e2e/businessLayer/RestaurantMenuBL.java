@@ -4,10 +4,10 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.e2e.runner.Runner;
+import com.znsio.e2e.screen.CartScreen;
 import com.znsio.e2e.screen.RestaurantListingScreen;
 import com.znsio.e2e.screen.RestaurantMenuScreen;
 import org.assertj.core.api.SoftAssertions;
-import org.testng.asserts.SoftAssert;
 
 public class RestaurantMenuBL {
 
@@ -33,16 +33,23 @@ public class RestaurantMenuBL {
     }
     public RestaurantMenuBL validateRestaurantName() {
         String restaurantName = RestaurantMenuScreen.get().getRestaurantName();
-        SoftAssert softAssert = new SoftAssert();
         String listingPageRestaurantName = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.RESTAURANTNAME);
-        softAssert.assertEquals(restaurantName, listingPageRestaurantName,"Restaurant Name does not matched" );
-        softly.assertThat(restaurantName).isEqualTo(listingPageRestaurantName);
-        softAssert.assertAll();
+        softly.assertThat(restaurantName).as("Restaurant Name doesnot match with selected one").isEqualTo(listingPageRestaurantName);
         return this;
     }
-    public RestaurantMenuBL selectFoodItem() {
-        RestaurantMenuScreen.get().searchAndSelectFoodItem()
-                .increaseTheQuanity();
+    public RestaurantMenuBL userAddsTheItemsInTheCart() {
+        RestaurantMenuScreen.get().addFoodItemFromMenu();
+        softly.assertThat(validateCartOptionInRestaurantMenuScreen()).as("Cart is empty").isTrue();
         return this;
+    }
+
+    public RestaurantMenuBL userSelectRestaurantFromListingPage(){
+        RestaurantListingScreen.get().selectRestaurant();
+        validateRestaurantName();
+        return this;
+    }
+
+    private Boolean validateCartOptionInRestaurantMenuScreen(){
+        return CartScreen.get().validateCartOptionVisible();
     }
 }

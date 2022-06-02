@@ -23,7 +23,7 @@ public class SwiggyHomeScreenWeb extends SwiggyHomeScreen {
     private final Visual visually;
     private final String SCREEN_NAME = SwiggyHomeScreenWeb.class.getSimpleName();
     private final By location = By.id("location");
-    private final By locationList = By.xpath("//div[@class='_1oLDb']//span[2]");
+    private final By locationList = By.xpath("//span[contains(@class,'_2W-T9')]");
 
     public SwiggyHomeScreenWeb(Driver driver, Visual visually) {
         long threadId = Thread.currentThread().getId();

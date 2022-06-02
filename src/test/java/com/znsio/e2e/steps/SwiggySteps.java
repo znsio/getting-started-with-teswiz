@@ -30,39 +30,34 @@ public class SwiggySteps {
 
 
     @Given("user selects the {string} location from the landing page")
-    public void userSelectsTheLocationFromTheLandingPage(String userSelectedLocation) {
+    public void userSelectsTheLocationFromTheLandingPage(String geoLocation) {
         LOGGER.info(System.out.printf(SAMPLE_TEST_CONTEXT.SWIGGY_USER, Runner.platform));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.SWIGGY_USER, Runner.platform, context);
-        //context.addTestState(SAMPLE_TEST_CONTEXT.SWIGGY_USER,context);
-        //new SwiggyCartBL(SAMPLE_TEST_CONTEXT.SWIGGY_USER, Runner.platform);
-        new SwiggyLocationSelectionBL().openSwiggyHome()
-                .selectLocation(userSelectedLocation);
-        new RestaurantListingBL().validateLocation(userSelectedLocation);
+        new SwiggyLocationSelectionBL()
+                .selectLocationFromHomePage(geoLocation).verifyLocationIsSet(geoLocation);
+
+
     }
 
     @When("user sort the restaurant List by {string}")
     public void userSortTheRestaurantListBy(String criteria) {
-        new RestaurantListingBL().selectRatingTab(criteria)
-                .validateRestaurantList();
+        new RestaurantListingBL().userSortTheRestaurantListByCriteria(criteria);
     }
 
-    @When("user selects restaurant from the result")
+    @And("user selects restaurant from the result")
     public void userSelectsRestaurantFromTheResult() {
-        new RestaurantListingBL().clickOnRestauturant();
-        new RestaurantMenuBL().validateRestaurantName();
+        new RestaurantMenuBL().userSelectRestaurantFromListingPage();
     }
 
 
     @Then("user adds the items in the cart")
     public void userAddsTheItemsInTheCart() {
-        new RestaurantMenuBL().selectFoodItem();
+        new RestaurantMenuBL().userAddsTheItemsInTheCart();
     }
 
     @And("user should able to see cart created")
     public void userShouldAbleToSeeCartCreated() {
-        new SwiggyCartBL().openCart()
-                .validateItemName();
-    }
+        new SwiggyCartBL().userAbleToSeeCartCreated();}
 
 
 }

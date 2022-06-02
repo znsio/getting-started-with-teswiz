@@ -4,10 +4,7 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.e2e.screen.CartScreen;
 import com.znsio.e2e.screen.RestaurantListingScreen;
-import com.znsio.e2e.screen.RestaurantMenuScreen;
-import com.znsio.e2e.screen.SwiggyHomeScreen;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.asserts.SoftAssert;
 
@@ -17,6 +14,7 @@ public class RestaurantListingBL {
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
+
     public RestaurantListingBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -35,31 +33,12 @@ public class RestaurantListingBL {
     }
 
 
-    public RestaurantListingBL validateLocation(String userEnteredLocation) {
-        String restaurantListingPageLocation = RestaurantListingScreen.get().getLocationName();
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(restaurantListingPageLocation,userEnteredLocation,"Location does not Matches");
-        softAssert.assertAll();
+    public RestaurantListingBL userSortTheRestaurantListByCriteria(String criteria) {
+        RestaurantListingScreen.get().searchRestaurantBy(criteria);
+        int restaurantCount = RestaurantListingScreen.get().getRestaurantCount();
+        softly.assertThat(restaurantCount).as("Restaurant List is empty").isNotEqualTo(0);
         return this;
-    }
 
-
-    public RestaurantListingBL selectRatingTab(String criteria){
-        RestaurantListingScreen.get().clickOnRating(criteria);
-        return this;
-    }
-
-    public RestaurantListingBL validateRestaurantList() {
-        int restaurantList = RestaurantListingScreen.get().getRestaurantList();
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertNotEquals(restaurantList ,0,"Restaurant List is empty");
-        softAssert.assertAll();
-        return this;
-    }
-
-    public RestaurantMenuBL clickOnRestauturant() {
-        RestaurantListingScreen.get().selectRestaurant();
-    return new RestaurantMenuBL();
     }
 
 

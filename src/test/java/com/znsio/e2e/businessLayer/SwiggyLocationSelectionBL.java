@@ -4,8 +4,10 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.e2e.runner.Runner;
+import com.znsio.e2e.screen.RestaurantListingScreen;
 import com.znsio.e2e.screen.SwiggyHomeScreen;
 import org.assertj.core.api.SoftAssertions;
+import org.testng.asserts.SoftAssert;
 
 public class SwiggyLocationSelectionBL {
 
@@ -35,9 +37,21 @@ public class SwiggyLocationSelectionBL {
         SwiggyHomeScreen.get();
         return this;
     }
-    public RestaurantListingBL selectLocation(String userSelectedLocation){
+    public SwiggyLocationSelectionBL setGeoLocation(String userSelectedLocation){
         SwiggyHomeScreen.get().addRestaurantLocation(userSelectedLocation);
+        return this;
+    }
+
+    public RestaurantListingBL verifyLocationIsSet(String userEnteredLocation) {
+        String restaurantListingPageLocation = RestaurantListingScreen.get().getLocationName();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(restaurantListingPageLocation, userEnteredLocation, "Location does not Matches");
         return new RestaurantListingBL();
+    }
+
+    public SwiggyLocationSelectionBL selectLocationFromHomePage(String geoLocation){
+        SwiggyHomeScreen.get().addRestaurantLocation(geoLocation);
+        return this;
     }
 
 

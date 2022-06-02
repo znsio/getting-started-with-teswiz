@@ -21,6 +21,8 @@ public class CartScreenWeb extends CartScreen {
     private final By itemNameInCartByXpath = By.xpath("//div[@class='_33KRy']");
 
     private final By plusButtonByXpath =By.xpath("//div[text()='+']");
+
+    private final By cartOptionInRestaurantMenuPageByXpath = By.xpath("//div[text()='Cart']");
     public CartScreenWeb(Driver driver, Visual visually) {
 
             long threadId = Thread.currentThread().getId();
@@ -38,9 +40,14 @@ public class CartScreenWeb extends CartScreen {
     }
 
     @Override
-    public String getItemName() {
+    public String getItemNameAddedInCart() {
         driver.waitTillElementIsPresent(itemNameInCartByXpath);
         return driver.findElement(itemNameInCartByXpath).getText().replaceAll("\\n.*","");
+    }
+
+    @Override
+    public Boolean validateCartOptionVisible() {
+        return driver.findElement(cartOptionInRestaurantMenuPageByXpath).isDisplayed();
     }
 
 

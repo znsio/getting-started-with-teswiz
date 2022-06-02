@@ -3,7 +3,6 @@ package com.znsio.e2e.screen;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.screen.web.RestaurantMenuScreenWeb;
-import com.znsio.e2e.screen.web.SwiggyHomeScreenWeb;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import org.apache.commons.lang3.NotImplementedException;
@@ -33,7 +32,6 @@ public abstract class RestaurantMenuScreen {
 
     public abstract String getRestaurantName();
 
-    public abstract RestaurantMenuScreen searchAndSelectFoodItem();
+    public abstract RestaurantMenuScreen addFoodItemFromMenu();
 
-    public abstract RestaurantMenuScreen increaseTheQuanity();
 }

@@ -35,6 +35,8 @@ public class RestaurantProfileScreenWeb extends RestaurantProfileScreen {
     private String customisableOrderCounterOnImageXpathStr = "//div[@id='menu-content']//h2[contains(text(),'%s')]/parent::div//div[@itemscope][%s]//div[contains(text(),'+')]//following-sibling::div[not(contains(text(),'Customisable'))][3]";
     private By addItemBtnXpath = By.xpath("//span[contains(text(),'Add Item')]");
     private By repeatLastSelXpath = By.xpath("//button[contains(text(),'REPEAT LAST')]");
+    private By foodCategoriesListXpath = By.xpath("//div[@id='menu-content']//a/div");
+
     public RestaurantProfileScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
@@ -149,7 +151,7 @@ public class RestaurantProfileScreenWeb extends RestaurantProfileScreen {
     public RestaurantProfileScreen addFoodItemsToCart() {
         Random random = new Random();
         int unitOfItemsToAdd = random.nextInt((4-1)+1)+1;
-        String foodCategory = driver.findElements(By.xpath("//div[@id='menu-content']//a/div")).get(0).getText();
+        String foodCategory = driver.findElements(foodCategoriesListXpath).get(0).getText();
         RestaurantProfileScreenWeb.foodCategory=foodCategory;
         LOGGER.info("Adding "+unitOfItemsToAdd+" units of "+foodCategory+" items to cart");
         //String itemToBeAddedToCartStr=getFoodItemToBeAdded(indexOfFoodItemToAdd,foodCategory);
@@ -228,7 +230,7 @@ public class RestaurantProfileScreenWeb extends RestaurantProfileScreen {
      * @param indexOfItem is a 1 based index expected when method is called
      * @return will send back textual value of Food Item which can be further used in Xpaths for adding that particular item to cart.
      */
-    public String getFoodItemToBeAdded(int indexOfItem,String foodCategory){
+    private String getFoodItemToBeAdded(int indexOfItem,String foodCategory){
         String FoodItemToBeAdded = null;
         LOGGER.info("Fetching List of Food Items");
         By foodItemListXpath= By.xpath(String.format(foodItemXpathStr, foodCategory));

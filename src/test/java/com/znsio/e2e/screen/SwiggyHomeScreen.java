@@ -27,4 +27,6 @@ public abstract class SwiggyHomeScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
     public abstract SwiggyHomeScreen setRestaurantLocation(String location);
+
+    public abstract String getLocationSelected();
 }

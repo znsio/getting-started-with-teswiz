@@ -32,11 +32,11 @@ public class CartSteps {
         new CartBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).selectLocation(loc);
     }
 
-    @And("I sort the restaurants' listings by rating before selecting a restaurant")
-    public void iSortTheRestaurantsListingsByRatingBeforeSelectingARestaurant() {
+    @And("I sort the restaurants' listings by rating before selecting restaurant {string}")
+    public void iSortTheRestaurantsListingsByRatingBeforeSelectingRestaurant(String restaurantName) {
         LOGGER.info(System.out.printf("I sort the restaurants listings by rating before selecting a restaurant"));
         new CartBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).sortByRating();
-        new CartBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).selectRestaurant();
+        new CartBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).selectRestaurant(restaurantName);
     }
 
     @And("I am able to create cart by adding {int} food items to cart")

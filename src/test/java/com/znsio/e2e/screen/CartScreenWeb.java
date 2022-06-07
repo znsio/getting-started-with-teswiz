@@ -41,8 +41,6 @@ public class CartScreenWeb extends CartScreen {
         for (int ithItem = 1; ithItem <= (Integer) context.getTestState("ExpectedCartCount"); ithItem++) {
             //check if Item name x is = null then skip the loop and continue
             expectedItem = context.getTestState("Item name " + ithItem).toString();
-            System.out.println("EXPECTED==> " + expectedItem);
-            System.out.println(("ACTUAL==> " + cartItems.get(ithItem - 1)));
             if (!cartItems.contains(expectedItem))
                 contentChecker = false;
         }
@@ -59,7 +57,6 @@ public class CartScreenWeb extends CartScreen {
         }
         for (int ithItem = 1; ithItem <= (Integer) context.getTestState("ExpectedCartCount"); ithItem++) {
             expectedItem = context.getTestState("Removed item name " + ithItem).toString();
-            System.out.println("EXPECTED==> " + expectedItem);
             if (cartItems.contains(expectedItem))
                 contentChecker = false;
         }
@@ -69,6 +66,6 @@ public class CartScreenWeb extends CartScreen {
     @Override
     public String getCartCounter() {
         //"//a[@href='/checkout']/span/span"
-        return driver.waitTillElementIsPresent(cartCounter).getText();
+        return driver.waitForClickabilityOf(cartCounter).getText();
     }
 }

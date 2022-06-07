@@ -21,7 +21,7 @@ public abstract class RestaurantListScreen {
         Platform platform = Runner.fetchPlatform(Thread.currentThread().getId());
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
         Visual visually = fetchEyes(Thread.currentThread().getId());
-        switch (platform){
+        switch (platform) {
             case web:
                 return new RestaurantListScreenWeb(driver, visually);
         }
@@ -30,5 +30,7 @@ public abstract class RestaurantListScreen {
 
     public abstract RestaurantListScreen sortRestaurants();
 
-    public abstract RestaurantListScreen selectRestaurantFromList();
+    public abstract RestaurantListScreen selectRestaurantFromList(String restaurantName);
+
+    public abstract String getRestaurantNameSelected();
 }

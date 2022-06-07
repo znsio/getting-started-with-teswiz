@@ -25,19 +25,19 @@ public class CartBL {
     }
 
     public CartBL selectLocation(String location) {
-        //verify after entering location and selecting it browser navigates to restaurant list
         SwiggyHomeScreen.get().setRestaurantLocation(location);
+        softly.assertThat(SwiggyHomeScreen.get().getLocationSelected()).as("Location selected is not same as input location").contains(location);
         return this;
     }
 
     public CartBL sortByRating() {
-        //verify if browser is on restaurant list page and then click in sort by rating
         RestaurantListScreen.get().sortRestaurants();
         return this;
     }
 
-    public CartBL selectRestaurant() {
-        RestaurantListScreen.get().selectRestaurantFromList();
+    public CartBL selectRestaurant(String restaurantName) {
+        RestaurantListScreen.get().selectRestaurantFromList(restaurantName);
+        softly.assertThat(RestaurantListScreen.get().getRestaurantNameSelected()).as("Restaurant selected is not same as input restaurant").isEqualTo(restaurantName);
         return this;
     }
 
@@ -55,7 +55,6 @@ public class CartBL {
     }
 
     public CartBL verifyCartCounter() {
-//        System.out.println(CartScreen.get().getCartCounter()+"  <==Cart counter==>  "+context.getTestState("CartItemCountNew"));
         softly.assertThat(CartScreen.get().getCartCounter()).as("Cart counter is not updated").isEqualTo(context.getTestState("ExpectedCartCount").toString());
         return this;
     }

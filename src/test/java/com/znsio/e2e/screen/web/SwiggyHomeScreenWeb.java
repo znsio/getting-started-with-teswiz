@@ -17,6 +17,7 @@ public class SwiggyHomeScreenWeb extends SwiggyHomeScreen {
     private static final String SCREEN_NAME = SwiggyHomeScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final By locationTextbox = By.xpath("//input[@id=\'location\']");
+    private final By locationHeader= By.xpath("//span[@class='_3HusE']");
     private final String fistSuggestion = "//div/span[2][contains(text(),'%s')]";
     private final TestExecutionContext context;
 
@@ -36,5 +37,10 @@ public class SwiggyHomeScreenWeb extends SwiggyHomeScreen {
         String selectLocation= String.format(fistSuggestion,location);
         driver.waitForClickabilityOf(By.xpath(selectLocation)).click();
         return this;
+    }
+
+    @Override
+    public String getLocationSelected() {
+        return driver.waitForClickabilityOf(locationHeader).getText();
     }
 }

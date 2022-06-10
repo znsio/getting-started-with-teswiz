@@ -14,12 +14,14 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import org.apache.log4j.Logger;
 import org.testng.annotations.DataProvider;
 
-public class RunTestCukes extends AbstractTestNGCucumberTests {
+public class RunTestCukes
+        extends AbstractTestNGCucumberTests {
     private static final Logger LOGGER = Logger.getLogger(RunTestCukes.class.getName());
     private final TestExecutionContext context;
 
     public RunTestCukes() {
-        long threadId = Thread.currentThread().getId();
+        long threadId = Thread.currentThread()
+                              .getId();
         LOGGER.info("RunTestCukes constructor: ThreadId: " + threadId);
         context = SessionContext.getTestExecutionContext(threadId);
     }
@@ -27,7 +29,8 @@ public class RunTestCukes extends AbstractTestNGCucumberTests {
     @Override
     @DataProvider(parallel = true)
     public Object[][] scenarios() {
-        LOGGER.info(String.format("ThreadID: %d: in overridden scenarios%n", Thread.currentThread().getId()));
+        LOGGER.info(String.format("ThreadID: %d: in overridden scenarios%n", Thread.currentThread()
+                                                                                   .getId()));
         Object[][] scenarios = super.scenarios();
         LOGGER.info(scenarios);
         return scenarios;
@@ -35,7 +38,8 @@ public class RunTestCukes extends AbstractTestNGCucumberTests {
 
     @Before
     public void beforeTestScenario(Scenario scenario) {
-        LOGGER.info(String.format("ThreadID: %d: in overridden beforeTestScenario%n", Thread.currentThread().getId()));
+        LOGGER.info(String.format("ThreadID: %d: in overridden beforeTestScenario%n", Thread.currentThread()
+                                                                                            .getId()));
         Configuration ufgConfig = new Configuration();
         ufgConfig.addBrowser(1024, 1024, BrowserType.CHROME);
         ufgConfig.addBrowser(1024, 1024, BrowserType.FIREFOX);
@@ -46,6 +50,7 @@ public class RunTestCukes extends AbstractTestNGCucumberTests {
 
     @After
     public void afterTestScenario(Scenario scenario) {
-        LOGGER.info(String.format("ThreadID: %d: in overridden afterTestScenario%n", Thread.currentThread().getId()));
+        LOGGER.info(String.format("ThreadID: %d: in overridden afterTestScenario%n", Thread.currentThread()
+                                                                                           .getId()));
     }
 }

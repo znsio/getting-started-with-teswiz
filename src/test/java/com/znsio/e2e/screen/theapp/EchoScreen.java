@@ -1,9 +1,9 @@
-package com.znsio.e2e.screen;
+package com.znsio.e2e.screen.theapp;
 
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.e2e.screen.android.EchoScreenAndroid;
-import com.znsio.e2e.screen.web.EchoScreenWeb;
+import com.znsio.e2e.screen.android.theapp.EchoScreenAndroid;
+import com.znsio.e2e.screen.web.theapp.EchoScreenWeb;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import org.apache.commons.lang3.NotImplementedException;
@@ -17,12 +17,15 @@ public abstract class EchoScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     public static EchoScreen get() {
-        Driver driver = fetchDriver(Thread.currentThread().getId());
-        Platform platform = Runner.fetchPlatform(Thread.currentThread().getId());
+        Driver driver = fetchDriver(Thread.currentThread()
+                                          .getId());
+        Platform platform = Runner.fetchPlatform(Thread.currentThread()
+                                                       .getId());
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
-        Visual visually = fetchEyes(Thread.currentThread().getId());
+        Visual visually = fetchEyes(Thread.currentThread()
+                                          .getId());
 
-        switch (platform) {
+        switch(platform) {
             case android:
                 return new EchoScreenAndroid(driver, visually);
             case web:

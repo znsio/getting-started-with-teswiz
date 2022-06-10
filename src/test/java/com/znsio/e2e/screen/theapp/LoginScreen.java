@@ -1,9 +1,9 @@
-package com.znsio.e2e.screen;
+package com.znsio.e2e.screen.theapp;
 
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.e2e.screen.android.LoginScreenAndroid;
-import com.znsio.e2e.screen.web.LoginScreenWeb;
+import com.znsio.e2e.screen.android.theapp.LoginScreenAndroid;
+import com.znsio.e2e.screen.web.theapp.LoginScreenWeb;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import org.apache.commons.lang3.NotImplementedException;
@@ -17,12 +17,15 @@ public abstract class LoginScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     public static LoginScreen get() {
-        Driver driver = fetchDriver(Thread.currentThread().getId());
-        Platform platform = Runner.fetchPlatform(Thread.currentThread().getId());
+        Driver driver = fetchDriver(Thread.currentThread()
+                                          .getId());
+        Platform platform = Runner.fetchPlatform(Thread.currentThread()
+                                                       .getId());
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
-        Visual visually = fetchEyes(Thread.currentThread().getId());
+        Visual visually = fetchEyes(Thread.currentThread()
+                                          .getId());
 
-        switch (platform) {
+        switch(platform) {
             case android:
                 return new LoginScreenAndroid(driver, visually);
             case web:

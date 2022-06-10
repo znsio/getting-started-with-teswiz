@@ -1,6 +1,6 @@
-package com.znsio.e2e.screen.web;
+package com.znsio.e2e.screen.web.theapp;
 
-import com.znsio.e2e.screen.LoginScreen;
+import com.znsio.e2e.screen.theapp.LoginScreen;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import org.openqa.selenium.By;
@@ -8,7 +8,8 @@ import org.openqa.selenium.WebElement;
 
 import static com.znsio.e2e.tools.Wait.waitFor;
 
-public class LoginScreenWeb extends LoginScreen {
+public class LoginScreenWeb
+        extends LoginScreen {
     private final Driver driver;
     private final Visual visually;
     private final String SCREEN_NAME = LoginScreenWeb.class.getSimpleName();
@@ -27,8 +28,10 @@ public class LoginScreenWeb extends LoginScreen {
     @Override
     public LoginScreen enterLoginDetails(String username, String password) {
         waitFor(2);
-        driver.findElement(userNameId).sendKeys(username);
-        driver.findElement(passwordId).sendKeys(password);
+        driver.findElement(userNameId)
+              .sendKeys(username);
+        driver.findElement(passwordId)
+              .sendKeys(password);
         visually.takeScreenshot(SCREEN_NAME, "enterLoginDetails");
         visually.checkWindow(SCREEN_NAME, "entered login details");
         return this;
@@ -36,7 +39,8 @@ public class LoginScreenWeb extends LoginScreen {
 
     @Override
     public LoginScreen login() {
-        driver.findElement(loginButtonXpath).click();
+        driver.findElement(loginButtonXpath)
+              .click();
         waitFor(2);
         return this;
     }
@@ -46,7 +50,8 @@ public class LoginScreenWeb extends LoginScreen {
         WebElement alertText = driver.waitForClickabilityOf(errorMessageId);
         visually.takeScreenshot(SCREEN_NAME, "Invalid Login alert");
         visually.checkWindow(SCREEN_NAME, "Invalid Login alert");
-        return alertText.getText().trim();
+        return alertText.getText()
+                        .trim();
     }
 
     @Override

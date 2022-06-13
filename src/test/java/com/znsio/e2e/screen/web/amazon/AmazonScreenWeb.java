@@ -4,7 +4,6 @@ import com.znsio.e2e.screen.amazon.AmazonScreen;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 
 
 public class AmazonScreenWeb extends AmazonScreen {
@@ -13,7 +12,6 @@ public class AmazonScreenWeb extends AmazonScreen {
     private final Driver driver;
     private final Visual visually;
     private final String SCREEN_NAME = AmazonScreenWeb.class.getSimpleName();
-    private final By loginFormLinkText = By.linkText("Form Authentication");
 
     public AmazonScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -22,30 +20,50 @@ public class AmazonScreenWeb extends AmazonScreen {
     }
 
     @Override
-    public AmazonScreen login(String page) {
-        // Login steps
-        System.out.println("Login");
+    public AmazonScreen login() {
+        System.out.println("login");
+        return this;
+    }
+
+    @Override
+    public AmazonScreen navigateToPage(String page) {
+        System.out.println("navigateToPage");
         return this;
     }
 
     @Override
     public AmazonScreen searchForItem(String keyWord) {
-        // Search steps
-        System.out.println("Search");
+        System.out.println("searchForItem");
+        return this;
+    }
+
+    @Override
+    public AmazonScreen verifySearchedResults() {
+        System.out.println("verifySearchedResults");
+        return this;
+    }
+
+    @Override
+    public AmazonScreen selectAnyProductFromListingPage() {
+        System.out.println("selectAnyProductFromListingPage");
+        return this;
+    }
+
+    @Override
+    public AmazonScreen validateProductOnDetailsPage() {
+        System.out.println("validateProductOnDetailsPage");
         return this;
     }
 
     @Override
     public AmazonScreen addToCart() {
-        // Add to cart steps
-        System.out.println("Add to cart");
+        System.out.println("addToCart");
         return this;
     }
 
     @Override
     public AmazonScreen verifyCart() {
-        // Verify cart steps
-        System.out.println("Verify Cart");
+        System.out.println("verifyCart");
         return this;
     }
 }

@@ -28,9 +28,17 @@ public abstract class AmazonScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract AmazonScreen login(String page);
+    public abstract AmazonScreen login();
+
+    public abstract AmazonScreen navigateToPage(String page);
 
     public abstract AmazonScreen searchForItem(String keyWord);
+
+    public abstract AmazonScreen verifySearchedResults();
+
+    public abstract AmazonScreen selectAnyProductFromListingPage();
+
+    public abstract AmazonScreen validateProductOnDetailsPage();
 
     public abstract AmazonScreen addToCart();
 

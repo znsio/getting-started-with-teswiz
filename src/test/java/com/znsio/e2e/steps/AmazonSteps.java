@@ -2,7 +2,7 @@ package com.znsio.e2e.steps;
 
 import com.context.SessionContext;
 import com.context.TestExecutionContext;
-import com.znsio.e2e.businessLayer.amazon.AmazonBL;
+import com.znsio.e2e.businessLayer.amazon.*;
 import com.znsio.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Drivers;
@@ -28,22 +28,26 @@ public class AmazonSteps {
     public void userIsLoggedInAndIsOn(String page) {
         LOGGER.info(System.out.printf("iLoggedInAndOnHomePage - Persona:'%s'", SAMPLE_TEST_CONTEXT.ME));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
-        new AmazonBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).login(page);
+        new AmazonLoginSignUpBL().login();
+        new AmazonLoginSignUpBL().navigateToPage(page);
     }
 
     @When("User searches for {string}")
     public void userSearchesFor(String keyWord) {
-        new AmazonBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).searchForItem(keyWord);
+        new AmazonHomeBL().searchForItem(keyWord);
+        new AmazonProductListingBL().verifySearchedResults();
     }
 
     @And("User adds a product to cart")
     public void userAddsAProductToCart() {
-        new AmazonBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).addToCart();
+        new AmazonProductListingBL().selectAnyProductFromListingPage();
+        new AmazonProductDetailsBL().validateProductOnDetailsPage();
+        new AmazonProductDetailsBL().addToCart();
     }
 
     @Then("Product is added to the cart")
     public void productIsAddedToTheCart() {
-        new AmazonBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).verifyCart();
+        new AmazonCartBL().verifyCart();
     }
 
 }

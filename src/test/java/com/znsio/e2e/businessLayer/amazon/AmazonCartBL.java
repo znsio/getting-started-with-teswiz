@@ -23,6 +23,7 @@ public class AmazonCartBL {
         this.currentPlatform = forPlatform;
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
+
     public AmazonCartBL() {
         long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -31,7 +32,7 @@ public class AmazonCartBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public AmazonCartBL verifyCart(){
+    public AmazonCartBL verifyCart() {
         AmazonScreen.get().verifyCart();
         return this;
     }

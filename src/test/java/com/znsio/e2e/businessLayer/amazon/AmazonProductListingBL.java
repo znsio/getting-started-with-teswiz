@@ -23,6 +23,7 @@ public class AmazonProductListingBL {
         this.currentPlatform = forPlatform;
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
+
     public AmazonProductListingBL() {
         long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -31,12 +32,12 @@ public class AmazonProductListingBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public AmazonProductListingBL verifySearchedResults(){
+    public AmazonProductListingBL verifySearchedResults() {
         AmazonScreen.get().verifySearchedResults();
         return this;
     }
 
-    public AmazonProductListingBL selectAnyProductFromListingPage(){
+    public AmazonProductListingBL selectAnyProductFromListingPage() {
         AmazonScreen.get().selectAnyProductFromListingPage();
         return this;
     }

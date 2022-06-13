@@ -32,12 +32,12 @@ public class AmazonLoginSignUpBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public AmazonLoginSignUpBL login(){
+    public AmazonLoginSignUpBL login() {
         AmazonScreen.get().login();
         return this;
     }
 
-    public AmazonLoginSignUpBL navigateToPage(String page){
+    public AmazonLoginSignUpBL navigateToPage(String page) {
         AmazonScreen.get().navigateToPage(page);
         return this;
     }

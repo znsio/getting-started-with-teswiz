@@ -4,8 +4,7 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.e2e.screen.amazon.AmazonScreen;
-import io.cucumber.java.tr.Ama;
+import com.znsio.e2e.screen.amazon.ProductDetailsScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -34,12 +33,12 @@ public class AmazonProductDetailsBL {
     }
 
     public AmazonProductDetailsBL validateProductOnDetailsPage() {
-        AmazonScreen.get().validateProductOnDetailsPage();
+        ProductDetailsScreen.get().validateProductOnDetailsPage();
         return this;
     }
 
     public AmazonProductDetailsBL addToCart() {
-        AmazonScreen.get().addToCart();
+        ProductDetailsScreen.get().addToCart();
         return this;
     }
 

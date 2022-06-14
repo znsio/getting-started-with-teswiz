@@ -4,7 +4,7 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.e2e.screen.amazon.AmazonScreen;
+import com.znsio.e2e.screen.amazon.MyCartScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -33,7 +33,7 @@ public class AmazonCartBL {
     }
 
     public AmazonCartBL verifyCart() {
-        AmazonScreen.get().verifyCart();
+        MyCartScreen.get().verifyCart();
         return this;
     }
 

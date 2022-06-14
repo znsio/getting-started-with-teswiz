@@ -4,7 +4,7 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.e2e.screen.amazon.AmazonScreen;
+import com.znsio.e2e.screen.amazon.ProductListingScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -32,13 +32,13 @@ public class AmazonProductListingBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public AmazonProductListingBL verifySearchedResults() {
-        AmazonScreen.get().verifySearchedResults();
+    public AmazonProductListingBL verifySearchedResults(String keyWord) {
+        ProductListingScreen.get().verifySearchedResults(keyWord);
         return this;
     }
 
     public AmazonProductListingBL selectAnyProductFromListingPage() {
-        AmazonScreen.get().selectAnyProductFromListingPage();
+        ProductListingScreen.get().selectAnyProductFromListingPage();
         return this;
     }
 }

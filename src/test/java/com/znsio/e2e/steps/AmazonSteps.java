@@ -35,7 +35,7 @@ public class AmazonSteps {
     @When("User searches for {string}")
     public void userSearchesFor(String keyWord) {
         new AmazonHomeBL().searchForItem(keyWord);
-        new AmazonProductListingBL().verifySearchedResults();
+        new AmazonProductListingBL().verifySearchedResults(keyWord);
     }
 
     @And("User adds a product to cart")

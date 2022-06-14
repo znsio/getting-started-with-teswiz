@@ -4,7 +4,7 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.e2e.screen.amazon.AmazonScreen;
+import com.znsio.e2e.screen.amazon.LoginSignUpScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -33,12 +33,12 @@ public class AmazonLoginSignUpBL {
     }
 
     public AmazonLoginSignUpBL login() {
-        AmazonScreen.get().login();
+        LoginSignUpScreen.get().login();
         return this;
     }
 
     public AmazonLoginSignUpBL navigateToPage(String page) {
-        AmazonScreen.get().navigateToPage(page);
+        LoginSignUpScreen.get().navigateToPage(page);
         return this;
     }
 }

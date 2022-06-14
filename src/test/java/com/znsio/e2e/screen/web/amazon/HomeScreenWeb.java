@@ -22,7 +22,7 @@ public class HomeScreenWeb extends HomeScreen {
 
     @Override
     public HomeScreenWeb login() {
-        if(driver.findElementByXpath("//span[@id='nav-link-accountList-nav-line-1']").getText().contains("Sign in")){
+        if (driver.findElementByXpath("//span[@id='nav-link-accountList-nav-line-1']").getText().contains("Sign in")) {
             driver.findElementByXpath("//span[text()='Account & Lists']").click();
             driver.findElementByXpath("//input[@type='email']").sendKeys("email");
             driver.findElementByXpath("//input[@id='continue']").click();

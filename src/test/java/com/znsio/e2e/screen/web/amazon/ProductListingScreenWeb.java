@@ -14,6 +14,7 @@ public class ProductListingScreenWeb extends ProductListingScreen {
     private final Driver driver;
     private final Visual visually;
     private final String SCREEN_NAME = ProductListingScreenWeb.class.getSimpleName();
+    private static String selectedItemFromProductLists;
 
     public ProductListingScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -30,8 +31,13 @@ public class ProductListingScreenWeb extends ProductListingScreen {
 
     @Override
     public ProductDetailsScreen selectAnyProductFromListingPage() {
-        driver.findElementByXpath("//img[@class='s-image']").click();
+        selectedItemFromProductLists = driver.findElementByXpath("(//span[@class='a-size-medium a-color-base a-text-normal'])[1]").getText();
+        driver.findElementByXpath("(//img[@class='s-image'])[1]").click();
         // Jump to next tab code
         return ProductDetailsScreen.get();
+    }
+
+    public static String getSelectedItemName() {
+        return selectedItemFromProductLists;
     }
 }

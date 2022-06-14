@@ -4,6 +4,7 @@ import com.znsio.e2e.screen.amazon.MyCartScreen;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 
 public class MyCartScreenWeb extends MyCartScreen {
     private static final String NOT_YET_IMPLEMENTED = "NOT_YET_IMPLEMENTED";
@@ -21,7 +22,7 @@ public class MyCartScreenWeb extends MyCartScreen {
     @Override
     public MyCartScreen verifyCart() {
         driver.findElementByXpath("//span[@class='nav-cart-icon nav-sprite']").click();
-        // Verify cart code
+        Assert.assertTrue(driver.findElementByXpath("//span[@class='a-truncate-cut']").getText().equals(ProductListingScreenWeb.getSelectedItemName()));
         return this;
     }
 }

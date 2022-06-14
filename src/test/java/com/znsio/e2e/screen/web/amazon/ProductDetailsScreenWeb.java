@@ -4,6 +4,7 @@ import com.znsio.e2e.screen.amazon.ProductDetailsScreen;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 
 public class ProductDetailsScreenWeb extends ProductDetailsScreen {
     private static final String NOT_YET_IMPLEMENTED = "NOT_YET_IMPLEMENTED";
@@ -20,7 +21,7 @@ public class ProductDetailsScreenWeb extends ProductDetailsScreen {
 
     @Override
     public ProductDetailsScreen validateProductOnDetailsPage() {
-        // Validate product on details page code
+        Assert.assertTrue(ProductListingScreenWeb.getSelectedItemName().equals(driver.findElementByXpath("//span[@id='productTitle']").getText()));
         return this;
     }
 

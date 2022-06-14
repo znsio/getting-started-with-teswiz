@@ -22,11 +22,13 @@ public class HomeScreenWeb extends HomeScreen {
 
     @Override
     public HomeScreenWeb login() {
-        driver.findElementByXpath("//span[text()='Account & Lists']").click();
-        driver.findElementByXpath("//input[@type='email']").sendKeys("email");
-        driver.findElementByXpath("//input[@id='continue']").click();
-        driver.findElementByXpath("//input[@type='password']").sendKeys("password");
-        driver.findElementByXpath("//span[@id='auth-signin-button']").click();
+        if(driver.findElementByXpath("//span[@id='nav-link-accountList-nav-line-1']").getText().contains("Sign in")){
+            driver.findElementByXpath("//span[text()='Account & Lists']").click();
+            driver.findElementByXpath("//input[@type='email']").sendKeys("email");
+            driver.findElementByXpath("//input[@id='continue']").click();
+            driver.findElementByXpath("//input[@type='password']").sendKeys("password");
+            driver.findElementByXpath("//span[@id='auth-signin-button']").click();
+        }
         driver.findElementByXpath("//div[@id='nav-logo']").click();
         return this;
     }

@@ -24,7 +24,7 @@ public class AmazonSteps {
         LOGGER.info("allDrivers: " + (null == allDrivers));
     }
 
-    @Given("User is on Home Page")
+    @Given("User is on homepage")
     public void userIsLoggedInAndIsOn(String page) {
         LOGGER.info(System.out.printf("iLoggedInAndOnHomePage - Persona:'%s'", SAMPLE_TEST_CONTEXT.ME));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);

@@ -31,7 +31,7 @@ public class ProductListingScreenWeb extends ProductListingScreen {
     @Override
     public ProductDetailsScreen selectAnyProductFromListingPage() {
         driver.findElementByXpath("//img[@class='s-image']").click();
-        // Jump to next tab
+        // Jump to next tab code
         return ProductDetailsScreen.get();
     }
 }

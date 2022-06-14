@@ -28,7 +28,7 @@ public abstract class HomeScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract HomeScreen login(String page);
+    public abstract HomeScreen login();
 
     public abstract ProductListingScreen searchForItem(String keyWord);
 }

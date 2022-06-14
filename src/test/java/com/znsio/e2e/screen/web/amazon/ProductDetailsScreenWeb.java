@@ -20,8 +20,7 @@ public class ProductDetailsScreenWeb extends ProductDetailsScreen {
 
     @Override
     public ProductDetailsScreen validateProductOnDetailsPage() {
-        // Validate product on details page
-        System.out.println("validateProductOnDetailsPage");
+        // Validate product on details page code
         return this;
     }
 

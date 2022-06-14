@@ -32,8 +32,8 @@ public class AmazonHomeBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public AmazonHomeBL login(String page) {
-        HomeScreen.get().login(page);
+    public AmazonHomeBL login() {
+        HomeScreen.get().login();
         return this;
     }
 

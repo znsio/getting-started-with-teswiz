@@ -24,24 +24,21 @@ public class AmazonSteps {
         LOGGER.info("allDrivers: " + (null == allDrivers));
     }
 
-    @Given("User is logged-in and is on {string}")
+    @Given("User is on Home Page")
     public void userIsLoggedInAndIsOn(String page) {
         LOGGER.info(System.out.printf("iLoggedInAndOnHomePage - Persona:'%s'", SAMPLE_TEST_CONTEXT.ME));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
-        new AmazonHomeBL().login(page);
+        new AmazonHomeBL().login();
     }
 
     @When("User searches for {string}")
     public void userSearchesFor(String keyWord) {
-        new AmazonHomeBL().searchForItem(keyWord);
-        new AmazonProductListingBL().verifySearchedResults(keyWord);
+        new AmazonHomeBL().searchForItem(keyWord).verifySearchedResults(keyWord);
     }
 
     @And("User adds a product to cart")
     public void userAddsAProductToCart() {
-        new AmazonProductListingBL().selectAnyProductFromListingPage();
-        new AmazonProductDetailsBL().validateProductOnDetailsPage();
-        new AmazonProductDetailsBL().addToCart();
+        new AmazonProductListingBL().selectAnyProductFromListingPage().validateProductOnDetailsPage().addToCart();
     }
 
     @Then("Product is added to the cart")

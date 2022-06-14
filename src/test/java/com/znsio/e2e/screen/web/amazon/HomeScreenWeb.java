@@ -21,7 +21,7 @@ public class HomeScreenWeb extends HomeScreen {
     }
 
     @Override
-    public HomeScreenWeb login(String page) {
+    public HomeScreenWeb login() {
         driver.findElementByXpath("//span[text()='Account & Lists']").click();
         driver.findElementByXpath("//input[@type='email']").sendKeys("email");
         driver.findElementByXpath("//input[@id='continue']").click();

@@ -21,7 +21,7 @@ public class MyCartScreenWeb extends MyCartScreen {
     @Override
     public MyCartScreen verifyCart() {
         driver.findElementByXpath("//span[@class='nav-cart-icon nav-sprite']").click();
-        System.out.println("verifyCart");
+        // Verify cart code
         return this;
     }
 }

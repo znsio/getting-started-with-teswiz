@@ -32,8 +32,13 @@ public class AmazonHomeBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public AmazonHomeBL searchForItem(String keyWord) {
-        HomeScreen.get().searchForItem(keyWord);
+    public AmazonHomeBL login(String page) {
+        HomeScreen.get().login(page);
         return this;
+    }
+
+    public AmazonProductListingBL searchForItem(String keyWord) {
+        HomeScreen.get().searchForItem(keyWord);
+        return new AmazonProductListingBL();
     }
 }

@@ -37,8 +37,8 @@ public class AmazonProductListingBL {
         return this;
     }
 
-    public AmazonProductListingBL selectAnyProductFromListingPage() {
+    public AmazonProductDetailsBL selectAnyProductFromListingPage() {
         ProductListingScreen.get().selectAnyProductFromListingPage();
-        return this;
+        return new AmazonProductDetailsBL();
     }
 }

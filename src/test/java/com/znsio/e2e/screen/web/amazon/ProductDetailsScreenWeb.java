@@ -20,13 +20,15 @@ public class ProductDetailsScreenWeb extends ProductDetailsScreen {
 
     @Override
     public ProductDetailsScreen validateProductOnDetailsPage() {
+        // Validate product on details page
         System.out.println("validateProductOnDetailsPage");
         return this;
     }
 
     @Override
     public ProductDetailsScreen addToCart() {
-        System.out.println("addToCart");
+        driver.findElementByXpath("//input[@id='add-to-cart-button']").click();
+        driver.findElementByXpath("(//a[@id='attach-close_sideSheet-link'])[1]").click();
         return this;
     }
 }

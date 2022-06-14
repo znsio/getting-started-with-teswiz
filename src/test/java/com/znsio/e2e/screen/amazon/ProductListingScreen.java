@@ -30,5 +30,5 @@ public abstract class ProductListingScreen {
 
     public abstract ProductListingScreen verifySearchedResults(String keyWord);
 
-    public abstract ProductListingScreen selectAnyProductFromListingPage();
+    public abstract ProductDetailsScreen selectAnyProductFromListingPage();
 }

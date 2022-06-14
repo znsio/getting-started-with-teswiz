@@ -1,6 +1,7 @@
 package com.znsio.e2e.screen.web.amazon;
 
 import com.znsio.e2e.screen.amazon.HomeScreen;
+import com.znsio.e2e.screen.amazon.ProductListingScreen;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import org.apache.log4j.Logger;
@@ -20,8 +21,20 @@ public class HomeScreenWeb extends HomeScreen {
     }
 
     @Override
-    public HomeScreen searchForItem(String keyWord) {
-        System.out.println("searchForItem");
+    public HomeScreenWeb login(String page) {
+        driver.findElementByXpath("//span[text()='Account & Lists']").click();
+        driver.findElementByXpath("//input[@type='email']").sendKeys("email");
+        driver.findElementByXpath("//input[@id='continue']").click();
+        driver.findElementByXpath("//input[@type='password']").sendKeys("password");
+        driver.findElementByXpath("//span[@id='auth-signin-button']").click();
+        driver.findElementByXpath("//div[@id='nav-logo']").click();
         return this;
+    }
+
+    @Override
+    public ProductListingScreen searchForItem(String keyWord) {
+        driver.findElementByXpath("//input[@id='twotabsearchtextbox']").sendKeys(keyWord);
+        driver.findElementByXpath("//input[@id='nav-search-submit-button']").click();
+        return ProductListingScreen.get();
     }
 }

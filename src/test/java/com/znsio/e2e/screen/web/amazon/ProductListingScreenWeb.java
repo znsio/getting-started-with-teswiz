@@ -1,9 +1,12 @@
 package com.znsio.e2e.screen.web.amazon;
 
+import com.znsio.e2e.screen.amazon.ProductDetailsScreen;
 import com.znsio.e2e.screen.amazon.ProductListingScreen;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import org.apache.log4j.Logger;
+import org.junit.Assert;
+
 
 public class ProductListingScreenWeb extends ProductListingScreen {
     private static final String NOT_YET_IMPLEMENTED = "NOT_YET_IMPLEMENTED";
@@ -20,13 +23,15 @@ public class ProductListingScreenWeb extends ProductListingScreen {
 
     @Override
     public ProductListingScreen verifySearchedResults(String keyWord) {
-        System.out.println("verifySearchedResults");
+        String showingResultsFor = driver.findElementByXpath("//div[@class='a-section a-spacing-small a-spacing-top-small']/span[@class='a-color-state a-text-bold']").getText();
+        Assert.assertTrue(showingResultsFor.contains(keyWord));
         return this;
     }
 
     @Override
-    public ProductListingScreen selectAnyProductFromListingPage() {
-        System.out.println("selectAnyProductFromListingPage");
-        return this;
+    public ProductDetailsScreen selectAnyProductFromListingPage() {
+        driver.findElementByXpath("//img[@class='s-image']").click();
+        // Jump to next tab
+        return ProductDetailsScreen.get();
     }
 }

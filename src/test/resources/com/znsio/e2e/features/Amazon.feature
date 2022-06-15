@@ -1,7 +1,7 @@
-@amazon @web
+@web @prod
 Feature: Add to cart functionality
 
-  @web
+  @amazon
   Scenario: User can add products to cart
     Given User is on homepage
     When User searches for "Mobile"

@@ -25,7 +25,7 @@ public class AmazonSteps {
     }
 
     @Given("User is on homepage")
-    public void userIsLoggedInAndIsOn(String page) {
+    public void userIsOnHomepage(String page) {
         LOGGER.info(System.out.printf("iLoggedInAndOnHomePage - Persona:'%s'", SAMPLE_TEST_CONTEXT.ME));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
         new AmazonHomeBL().login();

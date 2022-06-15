@@ -1,4 +1,4 @@
-@web
+@amazon @web
 Feature: Add to cart functionality
 
   @web

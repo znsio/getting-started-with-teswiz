@@ -4,12 +4,9 @@ import com.znsio.e2e.screen.amazon.HomeScreen;
 import com.znsio.e2e.screen.amazon.ProductListingScreen;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import org.apache.log4j.Logger;
 
 
 public class HomeScreenWeb extends HomeScreen {
-    private static final String NOT_YET_IMPLEMENTED = "NOT_YET_IMPLEMENTED";
-    private static final Logger LOGGER = Logger.getLogger(HomeScreenWeb.class.getName());
     private final Driver driver;
     private final Visual visually;
     private final String SCREEN_NAME = HomeScreenWeb.class.getSimpleName();

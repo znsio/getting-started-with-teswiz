@@ -1,25 +1,26 @@
 package com.znsio.e2e.screen.web.amazon;
 
+import com.context.TestExecutionContext;
+import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.screen.amazon.ProductDetailsScreen;
 import com.znsio.e2e.screen.amazon.ProductListingScreen;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import org.apache.log4j.Logger;
 import org.junit.Assert;
 
 
 public class ProductListingScreenWeb extends ProductListingScreen {
-    private static final String NOT_YET_IMPLEMENTED = "NOT_YET_IMPLEMENTED";
-    private static final Logger LOGGER = Logger.getLogger(ProductListingScreenWeb.class.getName());
     private final Driver driver;
     private final Visual visually;
     private final String SCREEN_NAME = ProductListingScreenWeb.class.getSimpleName();
-    private static String selectedItemFromProductLists;
+    private final TestExecutionContext context;
 
     public ProductListingScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
         visually.takeScreenshot(SCREEN_NAME, "Product listing screen");
+        long threadId = Thread.currentThread().getId();
+        this.context = Runner.getTestExecutionContext(threadId);
     }
 
     @Override
@@ -31,13 +32,9 @@ public class ProductListingScreenWeb extends ProductListingScreen {
 
     @Override
     public ProductDetailsScreen selectAnyProductFromListingPage() {
-        selectedItemFromProductLists = driver.findElementByXpath("(//span[@class='a-size-medium a-color-base a-text-normal'])[1]").getText();
-        driver.findElementByXpath("(//img[@class='s-image'])[1]").click();
+        context.addTestState("selectedItemName", driver.findElementByXpath("(//span[@class='a-size-medium a-color-base a-text-normal'])[1]").getText());
+        driver.findElementByXpath("(//span[@class='a-size-medium a-color-base a-text-normal'])[1]").click();
         // Jump to next tab code
         return ProductDetailsScreen.get();
-    }
-
-    public static String getSelectedItemName() {
-        return selectedItemFromProductLists;
     }
 }

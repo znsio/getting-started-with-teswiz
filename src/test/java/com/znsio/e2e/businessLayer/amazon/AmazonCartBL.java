@@ -5,11 +5,9 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.screen.amazon.MyCartScreen;
-import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
 public class AmazonCartBL {
-    private static final Logger LOGGER = Logger.getLogger(AmazonCartBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
@@ -36,5 +34,4 @@ public class AmazonCartBL {
         MyCartScreen.get().verifyCart();
         return this;
     }
-
 }

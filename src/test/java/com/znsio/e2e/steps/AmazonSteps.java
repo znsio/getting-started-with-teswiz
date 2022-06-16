@@ -33,7 +33,8 @@ public class AmazonSteps {
 
     @When("User searches for {string}")
     public void userSearchesFor(String keyWord) {
-        new AmazonHomeBL().searchForItem(keyWord).verifySearchedResults(keyWord);
+        String contentInSearchBox = context.getTestStateAsString("contentInSearchBox");
+        new AmazonHomeBL().searchForItem(keyWord).verifySearchedResults(contentInSearchBox);
     }
 
     @And("User adds a product to cart")

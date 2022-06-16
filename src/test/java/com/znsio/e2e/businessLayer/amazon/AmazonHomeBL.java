@@ -36,7 +36,6 @@ public class AmazonHomeBL {
     }
 
     public AmazonProductListingBL searchForItem(String keyWord) {
-        context.addTestState("contentInSearchBox", keyWord);
         HomeScreen.get().searchForItem(keyWord);
         return new AmazonProductListingBL();
     }

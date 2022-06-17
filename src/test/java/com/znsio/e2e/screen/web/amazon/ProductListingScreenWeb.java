@@ -34,7 +34,7 @@ public class ProductListingScreenWeb extends ProductListingScreen {
     public ProductDetailsScreen selectAnyProductFromListingPage() {
         context.addTestState("selectedItemName", driver.findElementByXpath("(//span[@class='a-size-medium a-color-base a-text-normal'])[1]").getText());
         driver.findElementByXpath("(//span[@class='a-size-medium a-color-base a-text-normal'])[1]").click();
-        // Jump to next tab code
+        driver.switchToNextTab();
         return ProductDetailsScreen.get();
     }
 }

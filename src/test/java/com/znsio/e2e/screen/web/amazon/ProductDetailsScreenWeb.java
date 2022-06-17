@@ -30,7 +30,6 @@ public class ProductDetailsScreenWeb extends ProductDetailsScreen {
     @Override
     public ProductDetailsScreen addToCart() {
         driver.findElementByXpath("//input[@id='add-to-cart-button']").click();
-        driver.findElementByXpath("(//a[@id='attach-close_sideSheet-link'])[1]").click();
         return this;
     }
 }

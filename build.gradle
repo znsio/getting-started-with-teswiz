@@ -3,7 +3,8 @@ import java.text.SimpleDateFormat
 buildscript {
     ext {
         gradleVersion = '7.3.3'
-        teswizVersion = '0.0.67'
+        //teswizVersion = '0.0.67'
+        teswizVersion = 'ccab6709e7'
     }
     repositories {
         mavenLocal()
@@ -55,7 +56,8 @@ task run(type: JavaExec) {
         println "Using LOG_DIR: $logDirectory"
         System.setProperty "LOG_DIR", "$logDirectory"
 
-        def configFile = System.getenv("RUN_IN_CI") ? "./configs/pcloudy_config.properties" : "./configs/calculator_config.properties"
+        //def configFile = System.getenv("RUN_IN_CI") ? "./configs/pcloudy_config.properties" : "./configs/calculator_config.properties"
+        def configFile = System.getenv("RUN_IN_CI") ? "./configs/pcloudy_config.properties" : "./configs/Amazon_config.properties"
         configFile = System.getenv("CONFIG") ? System.getenv("CONFIG") : configFile
 
         print "configFile: $configFile"

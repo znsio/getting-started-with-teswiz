@@ -7,4 +7,4 @@ Simply download the repo as a zip file, or clone it, and run the command:
 
 # Getting started
 
-Refer to prerequisites mentioned here https://github.com/znsio/teswiz#prerequisites
+Refer to prerequisites mentioned here https://github.com/znsio/teswiz#prerequisites# getting-started-with-teswiz

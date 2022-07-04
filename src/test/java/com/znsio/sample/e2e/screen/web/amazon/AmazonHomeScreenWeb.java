@@ -27,7 +27,6 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
         visually.checkWindow(SCREEN_NAME,"On Amazon Launch/Home Screen");
         return driver.getInnerDriver().getTitle().equals(PAGE_TITLE);
 
-//        return driver.findElements(homePageSectionHeaders).size();
     }
 
 }

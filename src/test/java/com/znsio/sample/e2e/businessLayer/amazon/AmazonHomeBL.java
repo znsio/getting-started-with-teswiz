@@ -43,6 +43,7 @@ public class AmazonHomeBL {
         AmazonNavigationScreen.get();
         return this;
     }
+
     public AmazonSearchResultBL UserSearchsForProduct(String productName) {
         AmazonNavigationScreen.get().iSearchForProduct(productName);
         return new AmazonSearchResultBL();

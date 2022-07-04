@@ -21,10 +21,9 @@ public class SearchResultScreenWeb extends SearchResultScreen {
     private final Visual visually;
     private final TestExecutionContext context;
 
-    private static final By bySearchResultCountHeaderXpath =By.xpath("//span[@data-component-type='s-result-info-bar']//descendant::span[1]");
-    private static final By byProductBeingSearchedXpath =By.xpath("//span[@data-component-type='s-result-info-bar']//descendant::span[3]");
+    private static final By bySearchResultHeaderXpath =By.xpath("//span[@data-component-type='s-result-info-bar']//div[contains(@class,'a-section')]");
     private static final By bySearchResultProductsXpath =By.xpath("//div[@data-component-type='s-search-result']");
-    private static final By byFirstProductNameXpath =By.xpath("//div[@data-component-type='s-search-result'][1]//descendant::h2/a");
+    private static final By byProductNameInResultXpath =By.xpath("//div[@data-component-type='s-search-result']//h2/a");
     private static final String textExpectedInSearchCountIndicator="results for";
 
     public SearchResultScreenWeb(Driver driver, Visual visually) {
@@ -38,17 +37,17 @@ public class SearchResultScreenWeb extends SearchResultScreen {
     public boolean isUserOnSearchResultPage() {
         LOGGER.debug("On search result Page");
         visually.checkWindow(SCREEN_NAME,"On search results page");
-        String searchedProductCountText=driver.findElement(bySearchResultCountHeaderXpath).getText() +driver.findElement(byProductBeingSearchedXpath).getText();
+        String searchedProductHeaderText =driver.findElement(bySearchResultHeaderXpath).getText();
         String searchedProduct=context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_SEARCHED);
-        if(searchedProductCountText.contains(searchedProduct)
-            && searchedProductCountText.contains(textExpectedInSearchCountIndicator))
+        if(searchedProductHeaderText.contains(searchedProduct)
+            && searchedProductHeaderText.contains(textExpectedInSearchCountIndicator))
             return true;
         return false;
     }
 
     @Override
     public ProductScreen iClickTheFirstProductInSearchResult() {
-        WebElement firstItem=driver.findElement(byFirstProductNameXpath);
+        WebElement firstItem=driver.findElement(byProductNameInResultXpath);
         context.addTestState(SAMPLE_TEST_CONTEXT.FIRST_PRODUCT_ON_RESULTS_PAGE,firstItem.getText());
         firstItem.click();
         driver.switchToNextTab();

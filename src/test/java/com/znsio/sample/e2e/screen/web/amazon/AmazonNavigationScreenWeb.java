@@ -10,6 +10,7 @@ import com.znsio.sample.e2e.screen.amazon.AmazonNavigationScreen;
 import com.znsio.sample.e2e.screen.amazon.SearchResultScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class AmazonNavigationScreenWeb extends AmazonNavigationScreen {
     private static final String SCREEN_NAME = AmazonNavigationScreenWeb.class.getSimpleName();
@@ -33,10 +34,11 @@ public class AmazonNavigationScreenWeb extends AmazonNavigationScreen {
     @Override
     public SearchResultScreen iSearchForProduct(String productName) {
         LOGGER.debug("Search for product");
+        WebElement searchTextBox=driver.findElement(bySearchTextBoxId);
         context.addTestState(SAMPLE_TEST_CONTEXT.PRODUCT_SEARCHED,productName);
-        driver.findElement(bySearchTextBoxId).click();
-        driver.findElement(bySearchTextBoxId).clear();
-        driver.findElement(bySearchTextBoxId).sendKeys(productName);
+        searchTextBox.click();
+        searchTextBox.clear();
+        searchTextBox.sendKeys(productName);
         driver.findElement(bySearchIconId).click();
         return SearchResultScreen.get();
     }

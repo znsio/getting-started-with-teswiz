@@ -29,7 +29,7 @@ public class AmazonCartSteps {
     @Given("User is on HomePage")
     public void userIsOnHomePage() {
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
-        LOGGER.info(System.out.printf("userIsOnHomePage - Persona:'%s'", SAMPLE_TEST_CONTEXT.ME));
+        LOGGER.info(String.format("userIsOnHomePage - Persona:'%s'", SAMPLE_TEST_CONTEXT.ME));
         new AmazonHomeBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).validateUserIsOnTheHomePage();
     }
 

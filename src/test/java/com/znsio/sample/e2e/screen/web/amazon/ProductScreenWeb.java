@@ -20,7 +20,7 @@ public class ProductScreenWeb extends ProductScreen {
 //    private static final By backToProductLinkId=By.id("breadcrumb-back-link");
     private static final By byShareProductDetailsButton =By.xpath("//i[@title='Share']");
     private static final By byProductTitleId =By.id("productTitle");
-    private static final By byProductPriceXpath =By.xpath("//div[@id='corePriceDisplay_desktop_feature_div']//span[@class='a-offscreen']");
+    private static final By byProductPriceXpath =By.xpath("//span[@class='a-price']/span[@class='a-offscreen']");
     private static final By byAddToCartButtonId =By.id("add-to-cart-button");
     private static final By byCartPopupCloseButtonId =By.id("attach-close_sideSheet-link");
 

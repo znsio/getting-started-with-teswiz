@@ -7,13 +7,12 @@ import com.znsio.e2e.tools.Drivers;
 import com.znsio.sample.e2e.businessLayer.amazon.NavBarBL;
 import com.znsio.sample.e2e.businessLayer.amazon.ProductDetailsBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.steps.TheAppSteps;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.apache.log4j.Logger;
 
 public class ProductDetailsSteps {
-    private static final Logger LOGGER = Logger.getLogger(TheAppSteps.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ProductDetailsSteps.class.getName());
     private final TestExecutionContext context;
     private final Drivers allDrivers;
 
@@ -29,13 +28,13 @@ public class ProductDetailsSteps {
     public void iVerifyTheItemsInCart(String itemsCount) {
         LOGGER.info(String.format("I verify the items in cart, Platform: '%s'", SAMPLE_TEST_CONTEXT.ME,
                 Runner.platform));
-        new NavBarBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).verifyItemsCountInCart(Integer.parseInt(itemsCount));
+        new NavBarBL().verifyItemsCountInCart(Integer.parseInt(itemsCount));
     }
 
     @Then("I add above item to cart")
     public void iAddAboveItemToCart() {
         LOGGER.info(String.format("I add item to cart, Platform: '%s'", SAMPLE_TEST_CONTEXT.ME,
                 Runner.platform));
-        new ProductDetailsBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).addItemsToCard();
+        new ProductDetailsBL().addItemsToCard();
     }
 }

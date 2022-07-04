@@ -4,8 +4,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.amazon.web.ShoppingCartWeb;
-import com.znsio.sample.e2e.screen.theapp.AppLaunchScreen;
+import com.znsio.sample.e2e.screen.amazon.web.ShoppingCartScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
@@ -13,9 +12,8 @@ import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
 public abstract class ShoppingCartScreen {
-    private static final String SCREEN_NAME = AppLaunchScreen.class.getSimpleName();
+    private static final String SCREEN_NAME = ShoppingCartScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-
 
     public static ShoppingCartScreen get() {
         Driver driver = fetchDriver(Thread.currentThread()
@@ -28,13 +26,11 @@ public abstract class ShoppingCartScreen {
 
         switch (platform) {
             case web:
-                return new ShoppingCartWeb(driver, visually);
+                return new ShoppingCartScreenWeb(driver, visually);
             default:
                 throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
         }
     }
 
     public abstract String getProductTitle();
-
-
 }

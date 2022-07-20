@@ -43,6 +43,7 @@ public class AppLaunchScreenAndroid
     public EchoScreen selectEcho() {
         driver.waitForClickabilityOf(byEchoMessageXpath)
               .click();
+        visually.checkWindow(SCREEN_NAME, "Selected Echo");
         return EchoScreen.get();
     }
 

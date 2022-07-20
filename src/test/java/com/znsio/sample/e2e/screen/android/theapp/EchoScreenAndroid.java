@@ -1,8 +1,8 @@
 package com.znsio.sample.e2e.screen.android.theapp;
 
-import com.znsio.sample.e2e.screen.theapp.EchoScreen;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.screen.theapp.EchoScreen;
 import org.openqa.selenium.By;
 
 public class EchoScreenAndroid
@@ -30,6 +30,7 @@ public class EchoScreenAndroid
               .click();
         driver.waitForClickabilityOf(byGoBackToHomeScreenButtonXpath)
               .click();
+        visually.checkWindow(SCREEN_NAME, "Check echo");
         return this;
     }
 }

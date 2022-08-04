@@ -4,18 +4,18 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.android.jiomeet.LandingScreenAndroid;
+import com.znsio.sample.e2e.screen.android.jiomeet.InAMeetingScreenAndroid;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
-public abstract class LandingScreen {
-    private static final String SCREEN_NAME = LandingScreen.class.getSimpleName();
+public abstract class InAMeetingScreen {
+    private static final String SCREEN_NAME = InAMeetingScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public static LandingScreen get() {
+    public static InAMeetingScreen get() {
         Driver driver = fetchDriver(Thread.currentThread()
                                           .getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread()
@@ -26,12 +26,18 @@ public abstract class LandingScreen {
 
         switch(platform) {
             case android:
-                return new LandingScreenAndroid(driver, visually);
+                return new InAMeetingScreenAndroid(driver, visually);
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract String getSignedInWelcomeMessage();
+    public abstract boolean isMeetingStarted();
 
-    public abstract InAMeetingScreen startInstantMeeting();
+    public abstract String getMeetingId();
+
+    public abstract String getMeetingPassword();
+
+    public abstract InAMeetingScreen unmute();
+
+    public abstract InAMeetingScreen mute();
 }

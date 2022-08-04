@@ -5,6 +5,8 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Drivers;
 import com.znsio.sample.e2e.businessLayer.jiomeet.AuthBL;
+import com.znsio.sample.e2e.businessLayer.jiomeet.InAMeetingBL;
+import com.znsio.sample.e2e.businessLayer.jiomeet.LandingBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -38,13 +40,20 @@ public class JioMeetSteps {
 
     @And("I start an instant meeting")
     public void iStartAnInstantMeeting() {
-    }
-
-    @When("I {string} myself")
-    public void iMyself(String arg0) {
+        new LandingBL().startInstantMeeting();
     }
 
     @Then("I should be able to {string} myself")
     public void iShouldBeAbleToMyself(String arg0) {
+    }
+
+    @When("I Unmute myself")
+    public void iUnmuteMyself() {
+        new InAMeetingBL().unmuteMyself();
+    }
+
+    @Then("I should be able to Mute myself")
+    public void iShouldBeAbleToMuteMyself() {
+        new InAMeetingBL().muteMyself();
     }
 }

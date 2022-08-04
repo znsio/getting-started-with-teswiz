@@ -35,4 +35,6 @@ public abstract class SignInScreen {
     }
 
     public abstract LandingScreen signIn(String username, String password);
+
+    public abstract InAMeetingScreen joinAMeeting(String meetingId, String meetingPassword, String currentUserPersona);
 }

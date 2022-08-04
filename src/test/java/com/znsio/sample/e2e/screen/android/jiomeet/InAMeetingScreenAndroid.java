@@ -29,6 +29,7 @@ public class InAMeetingScreenAndroid
     @Override
     public boolean isMeetingStarted() {
         try {
+            enableInMeetingControls("isMeetingStarted");
             driver.waitTillElementIsPresent(micStatusId);
             return true;
         } catch(Exception e) {

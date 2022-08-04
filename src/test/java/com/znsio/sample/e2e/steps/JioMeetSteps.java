@@ -2,10 +2,12 @@ package com.znsio.sample.e2e.steps;
 
 import com.context.SessionContext;
 import com.context.TestExecutionContext;
+import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Drivers;
 import com.znsio.sample.e2e.businessLayer.jiomeet.AuthBL;
 import com.znsio.sample.e2e.businessLayer.jiomeet.InAMeetingBL;
+import com.znsio.sample.e2e.businessLayer.jiomeet.JoinAMeetingBL;
 import com.znsio.sample.e2e.businessLayer.jiomeet.LandingBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import io.cucumber.java.en.And;
@@ -43,10 +45,6 @@ public class JioMeetSteps {
         new LandingBL().startInstantMeeting();
     }
 
-    @Then("I should be able to {string} myself")
-    public void iShouldBeAbleToMyself(String arg0) {
-    }
-
     @When("I Unmute myself")
     public void iUnmuteMyself() {
         new InAMeetingBL().unmuteMyself();
@@ -55,5 +53,21 @@ public class JioMeetSteps {
     @Then("I should be able to Mute myself")
     public void iShouldBeAbleToMuteMyself() {
         new InAMeetingBL().muteMyself();
+    }
+
+    @Given("{string} logs-in and starts an instant meeting on {string}")
+    public void logsInAndStartsAnInstantMeetingOn(String userPersona, String fromPlatform) {
+        Platform currentPlatform = Platform.valueOf(fromPlatform);
+        allDrivers.createDriverFor(userPersona, currentPlatform, context);
+        new AuthBL(userPersona, currentPlatform).signInAndStartMeeting(Runner.getTestDataAsMap(userPersona));
+    }
+
+    @And("{string} joins the meeting from {string}")
+    public void joinsTheMeetingFrom(String userPersona, String fromPlatform) {
+        Platform currentPlatform = Platform.valueOf(fromPlatform);
+        allDrivers.createDriverFor(userPersona, currentPlatform, context);
+        String meetingId = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.MEETING_ID);
+        String meetingPassword = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.MEETING_PASSWORD);
+        new JoinAMeetingBL(userPersona, currentPlatform).joinMeeting(meetingId, meetingPassword);
     }
 }

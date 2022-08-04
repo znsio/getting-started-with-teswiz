@@ -54,4 +54,8 @@ public class AuthBL {
                                           .isEqualTo(expectedWelcomeMessage);
         return new LandingBL(currentUserPersona, currentPlatform);
     }
+
+    public InAMeetingBL signInAndStartMeeting(Map userPersona) {
+        return signIn(userPersona).startInstantMeeting();
+    }
 }

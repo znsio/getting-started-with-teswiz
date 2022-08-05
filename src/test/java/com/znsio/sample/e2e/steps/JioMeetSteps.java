@@ -16,6 +16,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 
+import java.util.Locale;
 import java.util.Map;
 
 public class JioMeetSteps {
@@ -69,5 +70,27 @@ public class JioMeetSteps {
         String meetingId = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.MEETING_ID);
         String meetingPassword = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.MEETING_PASSWORD);
         new JoinAMeetingBL(userPersona, currentPlatform).joinMeeting(meetingId, meetingPassword);
+    }
+
+    @Given("{string} logs-in and starts an instant meeting in {string} on {string}")
+    public void logsInAndStartsAnInstantMeetingInOn(String userPersona, String appName, String platform) {
+        appName = appName.toLowerCase(Locale.ROOT);
+        Platform onPlatform = Platform.valueOf(platform);
+        LOGGER.info(System.out.printf("startOn - Persona:'%s', AppName: '%s', Platform: '%s'", userPersona, appName, onPlatform.name()));
+        context.addTestState(userPersona, userPersona);
+        allDrivers.createDriverFor(userPersona, appName, onPlatform, context);
+        new AuthBL(userPersona, onPlatform).signInAndStartMeeting(Runner.getTestDataAsMap(userPersona));
+    }
+
+    @And("{string} joins the meeting from {string} on {string}")
+    public void joinsTheMeetingFromOn(String userPersona, String appName, String platform) {
+        appName = appName.toLowerCase(Locale.ROOT);
+        Platform onPlatform = Platform.valueOf(platform);
+        LOGGER.info(System.out.printf("startOn - Persona:'%s', AppName: '%s', Platform: '%s'", userPersona, appName, onPlatform.name()));
+        context.addTestState(userPersona, userPersona);
+        allDrivers.createDriverFor(userPersona, appName, onPlatform, context);
+        String meetingId = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.MEETING_ID);
+        String meetingPassword = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.MEETING_PASSWORD);
+        new JoinAMeetingBL(userPersona, onPlatform).joinMeeting(meetingId, meetingPassword);
     }
 }

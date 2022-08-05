@@ -26,8 +26,8 @@ Feature: In a meeting scenarios
 
   @multiuser-android @multi-app
   Scenario: Guest (on android) and host (on Android) can chat in a meeting
-    Given "Host" logs-in and starts an instant meeting on "android"
-    And "Guest" joins the meeting from "android-oldversion"
+    Given "Host" logs-in and starts an instant meeting in "jiomeetLatest" on "android"
+    And "Guest" joins the meeting from "jiomeetOldVersion" on "android"
     Then "Host" should be able to get to chat window
     When "Host" sends "Hey" chat message
     Then "Guest" should see the chat message on its chat window

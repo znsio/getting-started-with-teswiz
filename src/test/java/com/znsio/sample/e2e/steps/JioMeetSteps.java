@@ -3,6 +3,7 @@ package com.znsio.sample.e2e.steps;
 import com.context.SessionContext;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
+import com.znsio.e2e.exceptions.InvalidTestDataException;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Drivers;
 import com.znsio.sample.e2e.businessLayer.jiomeet.AuthBL;
@@ -88,7 +89,22 @@ public class JioMeetSteps {
         Platform onPlatform = Platform.valueOf(platform);
         LOGGER.info(System.out.printf("startOn - Persona:'%s', AppName: '%s', Platform: '%s'", userPersona, appName, onPlatform.name()));
         context.addTestState(userPersona, userPersona);
-        allDrivers.createDriverFor(userPersona, appName, onPlatform, context);
+        switch(onPlatform) {
+            case android:
+            case iOS:
+            case windows:
+                allDrivers.createDriverFor(userPersona, appName, onPlatform, context);
+                break;
+            case web:
+                String[] parts = appName.toLowerCase(Locale.ROOT).split("-");
+                String app = parts[0];
+                String browserName = parts[1];
+                allDrivers.createDriverFor(userPersona, app, browserName, onPlatform, context);
+                break;
+            default:
+                throw new InvalidTestDataException("Unexpected value for platform: " + onPlatform);
+        }
+
         String meetingId = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.MEETING_ID);
         String meetingPassword = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.MEETING_PASSWORD);
         new JoinAMeetingBL(userPersona, onPlatform).joinMeeting(meetingId, meetingPassword);

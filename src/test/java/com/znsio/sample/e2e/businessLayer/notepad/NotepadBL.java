@@ -2,8 +2,8 @@ package com.znsio.sample.e2e.businessLayer.notepad;
 
 import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
-import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.e2e.runner.Runner;
+import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.ScreenShotScreen;
 import com.znsio.sample.e2e.screen.notepad.NotepadScreen;
 import org.apache.log4j.Logger;

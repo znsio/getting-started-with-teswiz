@@ -2,9 +2,9 @@ package com.znsio.sample.e2e.screen.android.theapp;
 
 import com.context.TestExecutionContext;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.sample.e2e.screen.theapp.ClipboardDemoScreen;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.screen.theapp.ClipboardDemoScreen;
 import io.appium.java_client.MobileElement;
 import org.apache.log4j.Logger;
 

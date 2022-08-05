@@ -1,11 +1,11 @@
 package com.znsio.sample.e2e.screen.android.theapp;
 
+import com.znsio.e2e.tools.Driver;
+import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.theapp.AppLaunchScreen;
 import com.znsio.sample.e2e.screen.theapp.ClipboardDemoScreen;
 import com.znsio.sample.e2e.screen.theapp.EchoScreen;
 import com.znsio.sample.e2e.screen.theapp.LoginScreen;
-import com.znsio.e2e.tools.Driver;
-import com.znsio.e2e.tools.Visual;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
@@ -16,7 +16,7 @@ public class AppLaunchScreenAndroid
     private final Driver driver;
     private final Visual visually;
     private final String byClipboardDemoAccessibilityId = "Clipboard Demo";
-    private final String loginScreenAccessibilityId = "Login Screen";
+    private final String byLoginScreenAccessibilityId = "Login Screen";
     private final By byGoBackToHomeScreenButtonXpath = By.xpath("//android.widget.ImageButton[@content-desc=\"Navigate Up\"]");
     private final By byEchoMessageXpath = By.xpath("//android.view.ViewGroup[@content-desc=\"Echo Box\"]/android.view.ViewGroup");
 
@@ -27,7 +27,7 @@ public class AppLaunchScreenAndroid
 
     @Override
     public LoginScreen selectLogin() {
-        driver.findElementByAccessibilityId(loginScreenAccessibilityId)
+        driver.findElementByAccessibilityId(byLoginScreenAccessibilityId)
               .click();
         return LoginScreen.get();
     }

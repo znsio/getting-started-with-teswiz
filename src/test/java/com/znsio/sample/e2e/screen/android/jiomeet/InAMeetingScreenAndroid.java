@@ -4,6 +4,7 @@ import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.exceptions.jiomeet.InAMeetingException;
 import com.znsio.sample.e2e.screen.jiomeet.InAMeetingScreen;
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,12 +15,14 @@ public class InAMeetingScreenAndroid
         extends InAMeetingScreen {
     private final Driver driver;
     private final Visual visually;
-    private final String SCREEN_NAME = InAMeetingScreenAndroid.class.getSimpleName();
-    private final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-    private final By micStatusId = By.id("com.jio.rilconferences:id/mic_status_label");
-    private final By meetingId = By.id("com.jio.rilconferences:id/caller_number");
-    private final By meetingPasswordId = By.id("com.jio.rilconferences:id/caller_password");
+    private static final String SCREEN_NAME = InAMeetingScreenAndroid.class.getSimpleName();
+    private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
+
+    private final By byMicStatusId = By.id("com.jio.rilconferences:id/mic_status_label");
+    private final By byMeetingId = By.id("com.jio.rilconferences:id/caller_number");
+    private final By byMeetingPasswordId = By.id("com.jio.rilconferences:id/caller_password");
     private final By byTopHeaderControlsPanelId = By.id("videoTopLayout1");
+    private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
 
     public InAMeetingScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -30,7 +33,7 @@ public class InAMeetingScreenAndroid
     public boolean isMeetingStarted() {
         try {
             enableInMeetingControls("isMeetingStarted");
-            driver.waitTillElementIsPresent(micStatusId);
+            driver.waitTillElementIsPresent(byMicStatusId);
             return true;
         } catch(Exception e) {
             return false;
@@ -44,7 +47,7 @@ public class InAMeetingScreenAndroid
     @Override
     public String getMeetingId() {
         enableInMeetingControls("getMeetingId");
-        return driver.waitTillElementIsPresent(meetingId)
+        return driver.waitTillElementIsPresent(byMeetingId)
                      .getText()
                      .replace("-", "");
     }
@@ -74,7 +77,7 @@ public class InAMeetingScreenAndroid
     @Override
     public String getMeetingPassword() {
         enableInMeetingControls("getMeetingPassword");
-        return driver.waitTillElementIsPresent(meetingPasswordId)
+        return driver.waitTillElementIsPresent(byMeetingPasswordId)
                      .getText()
                      .replace("Password: ", "");
     }
@@ -83,7 +86,7 @@ public class InAMeetingScreenAndroid
     public InAMeetingScreen unmute() {
         enableInMeetingControls("unmute");
         visually.checkWindow(SCREEN_NAME, "mic should be muted");
-        WebElement micStatus = driver.waitTillElementIsPresent(micStatusId);
+        WebElement micStatus = driver.waitTillElementIsPresent(byMicStatusId);
         LOGGER.info("unmute- current mic status: " + micStatus.getText());
         if(micStatus.getText()
                     .equals("Mute")) {
@@ -98,7 +101,7 @@ public class InAMeetingScreenAndroid
     public InAMeetingScreen mute() {
         enableInMeetingControls("mute");
         visually.checkWindow(SCREEN_NAME, "mic should be unmuted");
-        WebElement micStatus = driver.waitTillElementIsPresent(micStatusId);
+        WebElement micStatus = driver.waitTillElementIsPresent(byMicStatusId);
         LOGGER.info("mute- current mic status: " + micStatus.getText());
         if(micStatus.getText()
                     .equals("Unmute")) {
@@ -107,5 +110,10 @@ public class InAMeetingScreenAndroid
             micStatus.click();
         }
         return this;
+    }
+
+    @Override
+    public String getMicLabelText() {
+        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
     }
 }

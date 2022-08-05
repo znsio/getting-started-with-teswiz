@@ -13,13 +13,13 @@ public class LoginScreenAndroid
         extends LoginScreen {
     private final Driver driver;
     private final Visual visually;
-    private final String SCREEN_NAME = LoginScreenAndroid.class.getSimpleName();
+    private static final String SCREEN_NAME = LoginScreenAndroid.class.getSimpleName();
 
-    private final String userNameId = "username";
-    private final String passwordId = "password";
-    private final String loginButtonId = "loginBtn";
-    private final By errorMessageId = By.id("android:id/message");
-    private final By dismissAlertId = By.id("android:id/button1");
+    private final String byUserNameId = "username";
+    private final String byPasswordId = "password";
+    private final String byLoginButtonId = "loginBtn";
+    private final By byErrorMessageId = By.id("android:id/message");
+    private final By byDismissAlertId = By.id("android:id/button1");
 
     public LoginScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -29,10 +29,10 @@ public class LoginScreenAndroid
     @Override
     public LoginScreen enterLoginDetails(String username, String password) {
         waitFor(2);
-        WebElement userNameElement = driver.findElementByAccessibilityId(userNameId);
+        WebElement userNameElement = driver.findElementByAccessibilityId(byUserNameId);
         userNameElement.clear();
         userNameElement.sendKeys(username);
-        WebElement passwordElement = driver.findElementByAccessibilityId(passwordId);
+        WebElement passwordElement = driver.findElementByAccessibilityId(byPasswordId);
         passwordElement.clear();
         passwordElement.sendKeys(password);
         //        driver.waitForVisibilityOf(passwordId).sendKeys(username);
@@ -45,7 +45,7 @@ public class LoginScreenAndroid
     @Override
     public LoginScreen login() {
         waitFor(1);
-        driver.findElementByAccessibilityId(loginButtonId)
+        driver.findElementByAccessibilityId(byLoginButtonId)
               .click();
         waitFor(2);
         return this;
@@ -53,14 +53,14 @@ public class LoginScreenAndroid
 
     @Override
     public String getInvalidLoginError() {
-        WebElement alertText = driver.waitForClickabilityOf(errorMessageId);
+        WebElement alertText = driver.waitForClickabilityOf(byErrorMessageId);
         visually.checkWindow(SCREEN_NAME, "Invalid Login alert");
         return alertText.getText();
     }
 
     @Override
     public LoginScreen dismissAlert() {
-        driver.waitForClickabilityOf(dismissAlertId)
+        driver.waitForClickabilityOf(byDismissAlertId)
               .click();
         waitFor(2);
         visually.checkWindow(SCREEN_NAME, "Invalid Login alert dismissed");

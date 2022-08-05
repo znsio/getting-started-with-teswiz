@@ -14,18 +14,18 @@ public class SignInScreenAndroid
         extends SignInScreen {
     private final Driver driver;
     private final Visual visually;
-    private final String SCREEN_NAME = SignInScreenAndroid.class.getSimpleName();
-    private final By signInId = By.id("com.jio.rilconferences:id/signIn");
-    private final By userNameId = By.id("com.jio.rilconferences:id/edit_mobile_number");
-    private final By proceedButtonId = By.id("com.jio.rilconferences:id/btn_otp_next");
-    private final By passwordId = By.id("com.jio.rilconferences:id/edt_otp_number");
-    private final By welcomeMessageId = By.id("com.jio.rilconferences:id/textUserName");
-    private final By joinMeetingId = By.id("com.jio.rilconferences:id/joinMeetingBtn");
-    private final By enterMeetingId = By.id("com.jio.rilconferences:id/inputMeetingLink");
-    private final By enterMeetingPasswordId = By.id("com.jio.rilconferences:id/inputMeetingPassword");
-    private final By enterDisplayNameId = By.id("com.jio.rilconferences:id/inputUserName");
-    private final By enterMeeting = By.id("com.jio.rilconferences:id/buttonNext");
-    private final By joinMeeting = By.id("com.jio.rilconferences:id/buttonJoinMeeting");
+    private static final String SCREEN_NAME = SignInScreenAndroid.class.getSimpleName();
+    private final By bySignInId = By.id("com.jio.rilconferences:id/signIn");
+    private final By byUserNameId = By.id("com.jio.rilconferences:id/edit_mobile_number");
+    private final By byProceedButtonId = By.id("com.jio.rilconferences:id/btn_otp_next");
+    private final By byPasswordId = By.id("com.jio.rilconferences:id/edt_otp_number");
+    private final By byWelcomeMessageId = By.id("com.jio.rilconferences:id/textUserName");
+    private final By byJoinMeetingId = By.id("com.jio.rilconferences:id/joinMeetingBtn");
+    private final By byEnterMeetingId = By.id("com.jio.rilconferences:id/inputMeetingLink");
+    private final By byEnterMeetingPasswordId = By.id("com.jio.rilconferences:id/inputMeetingPassword");
+    private final By byEnterDisplayNameId = By.id("com.jio.rilconferences:id/inputUserName");
+    private final By byEnterMeeting = By.id("com.jio.rilconferences:id/buttonNext");
+    private final By byJoinMeeting = By.id("com.jio.rilconferences:id/buttonJoinMeeting");
 
     public SignInScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -37,7 +37,7 @@ public class SignInScreenAndroid
         startSignInProcess().enterUsernameAndProceed(username)
                             .enterPasswordAndSignIn(password);
 
-        driver.waitTillElementIsPresent(welcomeMessageId);
+        driver.waitTillElementIsPresent(byWelcomeMessageId);
         return LandingScreen.get();
     }
 
@@ -48,51 +48,51 @@ public class SignInScreenAndroid
     }
 
     private SignInScreenAndroid joinAMeeting() {
-        driver.waitTillElementIsPresent(joinMeetingId)
+        driver.waitTillElementIsPresent(byJoinMeetingId)
               .click();
         return this;
     }
 
     private SignInScreenAndroid enterMeetingDetails(String meetingId, String meetingPassword, String currentUserPersona) {
-        driver.waitTillElementIsPresent(enterMeetingId)
+        driver.waitTillElementIsPresent(byEnterMeetingId)
               .sendKeys(meetingId);
-        driver.waitTillElementIsPresent(enterMeetingPasswordId)
+        driver.waitTillElementIsPresent(byEnterMeetingPasswordId)
               .sendKeys(meetingPassword);
-        driver.waitTillElementIsPresent(enterDisplayNameId)
+        driver.waitTillElementIsPresent(byEnterDisplayNameId)
               .sendKeys(currentUserPersona);
-        driver.waitTillElementIsPresent(enterMeeting)
+        driver.waitTillElementIsPresent(byEnterMeeting)
               .click();
-        driver.waitTillElementIsPresent(joinMeeting)
+        driver.waitTillElementIsPresent(byJoinMeeting)
               .click();
         waitFor(8);
         return this;
     }
 
     private SignInScreenAndroid enterPasswordAndSignIn(String password) {
-        WebElement passwordElement = driver.waitTillElementIsPresent(passwordId);
+        WebElement passwordElement = driver.waitTillElementIsPresent(byPasswordId);
         passwordElement.click();
         passwordElement.clear();
         passwordElement.sendKeys(password);
         visually.checkWindow(SCREEN_NAME, "Password entered");
-        driver.waitForClickabilityOf(proceedButtonId)
+        driver.waitForClickabilityOf(byProceedButtonId)
               .click();
         return this;
     }
 
     private SignInScreenAndroid enterUsernameAndProceed(String username) {
-        WebElement usernameElement = driver.waitTillElementIsPresent(userNameId);
+        WebElement usernameElement = driver.waitTillElementIsPresent(byUserNameId);
         usernameElement.click();
         usernameElement.clear();
         usernameElement.sendKeys(username);
         visually.checkWindow(SCREEN_NAME, "Username entered");
-        driver.waitForClickabilityOf(proceedButtonId)
+        driver.waitForClickabilityOf(byProceedButtonId)
               .click();
         return this;
     }
 
     private SignInScreenAndroid startSignInProcess() {
         visually.checkWindow(SCREEN_NAME, "Start Sign In process");
-        driver.waitTillElementIsPresent(signInId)
+        driver.waitTillElementIsPresent(bySignInId)
               .click();
         return this;
     }

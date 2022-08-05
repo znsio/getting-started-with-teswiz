@@ -2,9 +2,9 @@ package com.znsio.sample.e2e.screen.notepad;
 
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.sample.e2e.screen.windows.notepad.NotepadScreenWindows;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.screen.windows.notepad.NotepadScreenWindows;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 

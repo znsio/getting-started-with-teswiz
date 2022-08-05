@@ -12,9 +12,9 @@ public class LandingScreenAndroid
         extends LandingScreen {
     private final Driver driver;
     private final Visual visually;
-    private final String SCREEN_NAME = LandingScreenAndroid.class.getSimpleName();
-    private final By welcomeMessageId = By.id("com.jio.rilconferences:id/textUserName");
-    private final By startInstantMeetingId = By.id("com.jio.rilconferences:id/buttonStartMeeting");
+    private static final String SCREEN_NAME = LandingScreenAndroid.class.getSimpleName();
+    private final By byWelcomeMessageId = By.id("com.jio.rilconferences:id/textUserName");
+    private final By byStartInstantMeetingId = By.id("com.jio.rilconferences:id/buttonStartMeeting");
 
     public LandingScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -23,17 +23,17 @@ public class LandingScreenAndroid
 
     @Override
     public String getSignedInWelcomeMessage() {
-        return driver.waitTillElementIsPresent(welcomeMessageId)
+        return driver.waitTillElementIsPresent(byWelcomeMessageId)
                      .getText();
     }
 
     @Override
     public InAMeetingScreen startInstantMeeting() {
         visually.checkWindow(SCREEN_NAME, "Start instant meeting");
-        driver.waitTillElementIsPresent(startInstantMeetingId)
+        driver.waitTillElementIsPresent(byStartInstantMeetingId)
               .click();
         visually.checkWindow(SCREEN_NAME, "Options before starting meeting");
-        driver.waitTillElementIsPresent(startInstantMeetingId)
+        driver.waitTillElementIsPresent(byStartInstantMeetingId)
               .click();
         waitFor(8);
         return InAMeetingScreen.get();

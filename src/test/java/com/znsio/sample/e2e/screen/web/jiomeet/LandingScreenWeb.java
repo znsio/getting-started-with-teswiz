@@ -5,9 +5,9 @@ import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.android.jiomeet.LandingScreenAndroid;
 import com.znsio.sample.e2e.screen.jiomeet.InAMeetingScreen;
 import com.znsio.sample.e2e.screen.jiomeet.LandingScreen;
-import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class LandingScreenWeb
         extends LandingScreen {
@@ -18,6 +18,9 @@ public class LandingScreenWeb
     private final By byHeadingXpath = By.xpath("//h3[contains(@class,'heading')]");
     private final By byWelcomeTextDescriptionXpath = By.xpath("//p[@class='desc']");
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
+    private final By byStartAMeetingOptionXpath = By.xpath("//div[text()='Start a Meeting']");
+    private final By byPMIButtonXpath = By.xpath("//span[contains(text(), 'Personal Meeting ID')]");
+    private final By byStartMeetingButtonXpath = By.xpath("//button[contains(text(), 'Start')]");
 
     public LandingScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -36,7 +39,23 @@ public class LandingScreenWeb
 
     @Override
     public InAMeetingScreen startInstantMeeting() {
-        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
+        driver.waitForClickabilityOf(byStartAMeetingOptionXpath)
+              .click();
+        return startsTheMeeting();
+    }
+
+    private InAMeetingScreen startsTheMeeting() {
+        WebElement startMeetingButton = driver.waitForClickabilityOf(byStartMeetingButtonXpath);
+        visually.checkWindow(SCREEN_NAME, "Start meeting using 'One time Meeting ID'");
+        startMeetingButton.click();
+        return this.waitForInAMeetingScreenToLoad();
+    }
+
+    private InAMeetingScreen waitForInAMeetingScreenToLoad() {
+        InAMeetingScreen inAMeetingScreen = InAMeetingScreen.get();
+        inAMeetingScreen.getMicLabelText();
+        visually.checkWindow(SCREEN_NAME, "Meeting started");
+        return inAMeetingScreen;
     }
 
     @Override

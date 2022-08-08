@@ -1,13 +1,17 @@
 package com.znsio.sample.e2e.screen.web.jiomeet;
 
+import com.context.TestExecutionContext;
 import com.epam.reportportal.service.ReportPortal;
+import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.jiomeet.InAMeetingScreen;
-import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.Date;
@@ -22,11 +26,18 @@ public class InAMeetingScreenWeb
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private final By byMeetingInfoIconXpath = By.xpath("//div[@class='icon pointer']");
     private final By byMicLabelXpath = By.xpath("//div[contains(@class,'mic-section')]");
+    private final By byCurrentMeetingNumberXpath = By.xpath("//div[text()='Meeting ID']/following-sibling::div");
+    private final By byCurrentMeetingPinXpath = By.xpath("//div[text()='Password']/following-sibling::div");
+    private final By byCurrentMeetingInvitationLinkXpath = By.xpath("//div[text()='Invitation Link']/following-sibling::div");
+    private final TestExecutionContext context;
 
     public InAMeetingScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
         this.innerDriver = this.driver.getInnerDriver();
+        long threadId = Thread.currentThread()
+                              .getId();
+        context = Runner.getTestExecutionContext(threadId);
     }
 
     @Override
@@ -37,22 +48,49 @@ public class InAMeetingScreenWeb
 
     @Override
     public String getMeetingId() {
-        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
+        WebElement infoIcon = driver.waitTillElementIsPresent(byMeetingInfoIconXpath, 20);
+        JavascriptExecutor js = (JavascriptExecutor) innerDriver;
+        js.executeScript("arguments[0].click()", infoIcon);
+        visually.takeScreenshot(SCREEN_NAME, "getCurrentMeetingDetails");
+        String meetingId = driver.waitForClickabilityOf(byCurrentMeetingNumberXpath)
+                                 .getText();
+        meetingId = meetingId.replaceAll("\\s", "");
+        String pin = driver.waitForClickabilityOf(byCurrentMeetingPinXpath)
+                           .getText();
+        String invitationLink = driver.waitForClickabilityOf(byCurrentMeetingInvitationLinkXpath)
+                                      .getText();
+        js.executeScript("arguments[0].click()", infoIcon);//to close the meeting info frame
+        visually.takeScreenshot(SCREEN_NAME, "After closing meeting info icon");
+        LOGGER.info("On Web the meeting id: " + meetingId + " Password: " + pin);
+
+        context.addTestState(SAMPLE_TEST_CONTEXT.MEETING_ID, meetingId);
+        context.addTestState(SAMPLE_TEST_CONTEXT.MEETING_PASSWORD, pin);
+        context.addTestState(SAMPLE_TEST_CONTEXT.INVITATION_LINK, invitationLink);
+        return meetingId;
     }
 
     @Override
     public String getMeetingPassword() {
-        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
+        String pin = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.MEETING_PASSWORD);
+        return pin;
     }
 
     @Override
     public InAMeetingScreen unmute() {
-        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
+        enableInMeetingControls("unmute");
+        driver.waitTillElementIsPresent(By.xpath("//div[contains(text(),'Unmute')]"))
+              .click();
+        visually.checkWindow(SCREEN_NAME, "Mic is unmuted");
+        return this;
     }
 
     @Override
     public InAMeetingScreen mute() {
-        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
+        enableInMeetingControls("mute");
+        driver.waitTillElementIsPresent(By.xpath("//div[contains(text(),'Mute')]"))
+              .click();
+        visually.checkWindow(SCREEN_NAME, "Mic is muted");
+        return this;
     }
 
     @Override

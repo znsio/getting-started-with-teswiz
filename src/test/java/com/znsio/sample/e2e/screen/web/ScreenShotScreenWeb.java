@@ -3,12 +3,14 @@ package com.znsio.sample.e2e.screen.web;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.ScreenShotScreen;
+import org.apache.log4j.Logger;
 
 public class ScreenShotScreenWeb
         extends ScreenShotScreen {
     private final Driver driver;
     private final Visual visually;
     private static final String SCREEN_NAME = ScreenShotScreenWeb.class.getSimpleName();
+    private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     public ScreenShotScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;

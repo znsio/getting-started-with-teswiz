@@ -5,6 +5,7 @@ import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.jiomeet.InAMeetingScreen;
 import com.znsio.sample.e2e.screen.jiomeet.LandingScreen;
 import com.znsio.sample.e2e.screen.jiomeet.SignInScreen;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -15,6 +16,7 @@ public class SignInScreenAndroid
     private final Driver driver;
     private final Visual visually;
     private static final String SCREEN_NAME = SignInScreenAndroid.class.getSimpleName();
+    private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final By bySignInId = By.id("com.jio.rilconferences:id/signIn");
     private final By byUserNameId = By.id("com.jio.rilconferences:id/edit_mobile_number");
     private final By byProceedButtonId = By.id("com.jio.rilconferences:id/btn_otp_next");
@@ -37,8 +39,8 @@ public class SignInScreenAndroid
         startSignInProcess().enterUsernameAndProceed(username)
                             .enterPasswordAndSignIn(password);
 
-        driver.waitTillElementIsPresent(byWelcomeMessageId);
-        return LandingScreen.get();
+        return LandingScreen.get()
+                            .waitTillWelcomeMessageIsSeen();
     }
 
     @Override

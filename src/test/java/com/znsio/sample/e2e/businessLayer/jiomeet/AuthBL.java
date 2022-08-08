@@ -42,7 +42,10 @@ public class AuthBL {
         String username = String.valueOf(userDetails.get("username"));
         String password = String.valueOf(userDetails.get("password"));
         String firstName = String.valueOf(userDetails.get("firstName"));
-        String expectedWelcomeMessage = "Hello " + firstName + " \n" + "what would you like to do?";
+        String lastName = String.valueOf(userDetails.get("lastName"));
+        String expectedWelcomeMessageAndroid = "Hello " + firstName + " \n" + "what would you like to do?";
+        String expectedWelcomeMessageWeb = "Hello " + firstName + " " + lastName + ", what would you like to do?";
+        String expectedWelcomeMessage = currentPlatform.equals(Platform.web) ? expectedWelcomeMessageWeb : expectedWelcomeMessageAndroid;
 
         String signedInWelcomeMessage = SignInScreen.get()
                                                     .signIn(username, password)

@@ -96,7 +96,8 @@ public class JioMeetSteps {
                 allDrivers.createDriverFor(userPersona, appName, onPlatform, context);
                 break;
             case web:
-                String[] parts = appName.toLowerCase(Locale.ROOT).split("-");
+                String[] parts = appName.toLowerCase(Locale.ROOT)
+                                        .split("-");
                 String app = parts[0];
                 String browserName = parts[1];
                 allDrivers.createDriverFor(userPersona, app, browserName, onPlatform, context);

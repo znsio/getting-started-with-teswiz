@@ -17,7 +17,6 @@ public class InAMeetingScreenAndroid
     private final Visual visually;
     private static final String SCREEN_NAME = InAMeetingScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-
     private final By byMicStatusId = By.id("com.jio.rilconferences:id/mic_status_label");
     private final By byMeetingId = By.id("com.jio.rilconferences:id/caller_number");
     private final By byMeetingPasswordId = By.id("com.jio.rilconferences:id/caller_password");

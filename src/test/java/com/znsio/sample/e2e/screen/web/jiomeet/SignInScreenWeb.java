@@ -6,7 +6,7 @@ import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.jiomeet.InAMeetingScreen;
 import com.znsio.sample.e2e.screen.jiomeet.LandingScreen;
 import com.znsio.sample.e2e.screen.jiomeet.SignInScreen;
-import org.apache.commons.lang3.NotImplementedException;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -16,12 +16,18 @@ public class SignInScreenWeb
     private final Driver driver;
     private final Visual visually;
     private static final String SCREEN_NAME = SignInScreenWeb.class.getSimpleName();
+    private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private final By byEnterMeetingId = By.id("meetingId");
     private final By byJoinMeetingButtonId = By.id("headerJoinMeetingButton");
     private final By byEnterPasswordId = By.id("pin");
     private final By byNameId = By.id("name");
     private final By byJoinMeetingButtonXpath = By.xpath("//button[contains(text(), 'Join')]");
+    private final By bySignInXpath = By.xpath("//a[text()='Sign In']");
+    private final By byUsernameId = By.id("username");
+    private final By byProceedButtonId = By.id("proceedButton");
+    private final By byPasswordId = By.id("password");
+    private final By bySigninButtonId = By.id("signinButton");
 
     public SignInScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -30,7 +36,23 @@ public class SignInScreenWeb
 
     @Override
     public LandingScreen signIn(String username, String password) {
-        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
+        driver.waitTillElementIsPresent(bySignInXpath)
+              .click();
+        WebElement usernameElement = driver.waitTillElementIsPresent(byUsernameId);
+        usernameElement.clear();
+        usernameElement.sendKeys(username);
+
+        driver.waitTillElementIsPresent(byProceedButtonId)
+              .click();
+
+        WebElement passwordElement = driver.waitTillElementIsPresent(byPasswordId);
+        passwordElement.clear();
+        passwordElement.sendKeys(password);
+
+        driver.waitTillElementIsPresent(bySigninButtonId)
+              .click();
+
+        return LandingScreen.get();
     }
 
     @Override

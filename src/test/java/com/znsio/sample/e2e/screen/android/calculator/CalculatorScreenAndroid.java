@@ -3,6 +3,7 @@ package com.znsio.sample.e2e.screen.android.calculator;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.calculator.CalculatorScreen;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
 import static com.znsio.e2e.tools.Wait.waitFor;
@@ -12,6 +13,7 @@ public class CalculatorScreenAndroid
     private final Driver driver;
     private final Visual visually;
     private static final String SCREEN_NAME = CalculatorScreenAndroid.class.getSimpleName();
+    private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     public CalculatorScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;

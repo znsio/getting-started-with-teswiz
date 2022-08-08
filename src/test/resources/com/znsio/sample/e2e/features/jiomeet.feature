@@ -1,7 +1,7 @@
 @jiomeet @prod @inMeeting
 Feature: In a meeting scenarios
 
-  @android @single-user
+  @android @web @single-user
   Scenario: User should be able to change the mic settings
     Given I sign in as a registered "Host"
     And I start an instant meeting

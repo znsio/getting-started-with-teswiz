@@ -12,10 +12,10 @@ import org.openqa.selenium.By;
 public class AppLaunchScreenWeb
         extends AppLaunchScreen {
     private static final String NOT_YET_IMPLEMENTED = "NOT_YET_IMPLEMENTED";
-    private static final Logger LOGGER = Logger.getLogger(AppLaunchScreenWeb.class.getName());
+    private static final String SCREEN_NAME = AppLaunchScreenWeb.class.getSimpleName();
+    private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = AppLaunchScreenWeb.class.getSimpleName();
     private final By byLoginFormLinkText = By.linkText("Form Authentication");
 
     public AppLaunchScreenWeb(Driver driver, Visual visually) {

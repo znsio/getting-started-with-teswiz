@@ -5,6 +5,7 @@ import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.android.jiomeet.LandingScreenAndroid;
+import com.znsio.sample.e2e.screen.web.jiomeet.LandingScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
@@ -27,6 +28,8 @@ public abstract class LandingScreen {
         switch(platform) {
             case android:
                 return new LandingScreenAndroid(driver, visually);
+            case web:
+                return new LandingScreenWeb(driver, visually);
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
@@ -34,4 +37,6 @@ public abstract class LandingScreen {
     public abstract String getSignedInWelcomeMessage();
 
     public abstract InAMeetingScreen startInstantMeeting();
+
+    public abstract LandingScreen waitTillWelcomeMessageIsSeen();
 }

@@ -3,6 +3,7 @@ package com.znsio.sample.e2e.screen.web.theapp;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.theapp.LoginScreen;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -13,6 +14,8 @@ public class LoginScreenWeb
     private final Driver driver;
     private final Visual visually;
     private static final String SCREEN_NAME = LoginScreenWeb.class.getSimpleName();
+    private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
+
     private final By byUserNameId = By.id("username");
     private final By byPasswordId = By.id("password");
     private final By byLoginButtonXpath = By.xpath("//button/i[contains(text(),\"Login\")]");

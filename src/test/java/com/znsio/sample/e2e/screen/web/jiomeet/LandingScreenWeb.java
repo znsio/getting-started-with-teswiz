@@ -26,6 +26,7 @@ public class LandingScreenWeb
 
     @Override
     public String getSignedInWelcomeMessage() {
+        visually.checkWindow(SCREEN_NAME, "get signedin welcome message");
         String welcomeText = driver.waitTillElementIsPresent(byHeadingXpath)
                                    .getText();
         welcomeText += " " + driver.waitTillElementIsPresent(byWelcomeTextDescriptionXpath)
@@ -41,6 +42,7 @@ public class LandingScreenWeb
     @Override
     public LandingScreen waitTillWelcomeMessageIsSeen() {
         driver.waitTillElementIsPresent(byHeadingXpath);
+        visually.checkWindow(SCREEN_NAME, "signedin successfully");
         return this;
     }
 }

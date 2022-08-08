@@ -38,6 +38,8 @@ public class SignInScreenWeb
     public LandingScreen signIn(String username, String password) {
         driver.waitTillElementIsPresent(bySignInXpath)
               .click();
+
+        visually.checkWindow(SCREEN_NAME, "Start signin");
         WebElement usernameElement = driver.waitTillElementIsPresent(byUsernameId);
         usernameElement.clear();
         usernameElement.sendKeys(username);
@@ -48,6 +50,8 @@ public class SignInScreenWeb
         WebElement passwordElement = driver.waitTillElementIsPresent(byPasswordId);
         passwordElement.clear();
         passwordElement.sendKeys(password);
+
+        visually.checkWindow(SCREEN_NAME, "Credentials entered");
 
         driver.waitTillElementIsPresent(bySigninButtonId)
               .click();

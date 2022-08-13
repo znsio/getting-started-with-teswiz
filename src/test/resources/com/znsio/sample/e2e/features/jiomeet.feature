@@ -25,7 +25,7 @@ Feature: In a meeting scenarios
     Then "Guest" should see the chat message on its chat window
 
   @multiuser-android @multi-app
-  Scenario: Guest (on android) and host (on Android) can chat in a meeting
+  Scenario: Guest (on older-app-verion on android) and host (on Android) can chat in a meeting
     Given "Host" logs-in and starts an instant meeting in "jiomeetLatest" on "android"
     And "Guest" joins the meeting from "jiomeetOldVersion" on "android"
     Then "Host" should be able to get to chat window
@@ -33,7 +33,7 @@ Feature: In a meeting scenarios
     Then "Guest" should see the chat message on its chat window
 
   @multiuser-android-web @multi-app
-  Scenario: Guest (on android) and host (on Android) can chat in a meeting
+  Scenario: Guest-1 (on older-app-version on android), Guest-2 (on chrome) and host (on Android) can chat in a meeting
     Given "Host" logs-in and starts an instant meeting in "jiomeetLatest" on "android"
     And "Guest-1" joins the meeting from "jiomeetOldVersion" on "android"
     And "Guest-2" joins the meeting from "jiomeet-chrome" on "web"

@@ -29,6 +29,11 @@ Refer to prerequisites mentioned here https://github.com/znsio/teswiz#prerequisi
 ## Multiuser-Multiapp Android-web tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android-web and @multi-app" ./gradlew run
 
+# Configuration options
+Test execution using teswiz is highly configurable. This enables you to control what type of tests you want to execute, and where (environment, local/cloud), etc. 
+
+Refer here for all the configuration options: https://github.com/znsio/teswiz#configuration-parameters
+
 # Rich Reports using cucumber-reporting
 teswiz creates rich reports for offline consuption using cucumber-reporting (https://github.com/damianszczepanik/cucumber-reporting)
 

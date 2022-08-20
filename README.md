@@ -11,22 +11,22 @@ Refer to prerequisites mentioned here https://github.com/znsio/teswiz#prerequisi
 
 # Running the sample tests
 
-## Android tests
+### Android tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @single-user" PLATFORM=android ./gradlew run 
 
-## Web tests
+### Web tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @single-user" PLATFORM=web ./gradlew run 
 
-## Multiuser Android-web tests
+### Multiuser Android-web tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android-web" ./gradlew run
 
-## Multiuser Android tests
+### Multiuser Android tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android and @single-app" ./gradlew run
 
-## Multiuser-Multiapp Android tests
+### Multiuser-Multiapp Android tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android and @multi-app" ./gradlew run
 
-## Multiuser-Multiapp Android-web tests
+### Multiuser-Multiapp Android-web tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android-web and @multi-app" ./gradlew run
 
 # Configuration options

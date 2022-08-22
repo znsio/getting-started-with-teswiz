@@ -32,6 +32,9 @@ public class InAMeetingScreenAndroid
     public boolean isMeetingStarted() {
         try {
             enableInMeetingControls("isMeetingStarted");
+            visually.checkWindow(SCREEN_NAME, "isMeetingStarted");
+            // the on-screen controls may get hidden again by the time the visual validation is done
+            enableInMeetingControls("isMeetingStarted");
             driver.waitTillElementIsPresent(byMicStatusId);
             return true;
         } catch(Exception e) {
@@ -85,6 +88,8 @@ public class InAMeetingScreenAndroid
     public InAMeetingScreen unmute() {
         enableInMeetingControls("unmute");
         visually.checkWindow(SCREEN_NAME, "mic should be muted");
+        // the on-screen controls may get hidden again by the time the visual validation is done
+        enableInMeetingControls("unmute");
         WebElement micStatus = driver.waitTillElementIsPresent(byMicStatusId);
         LOGGER.info("unmute- current mic status: " + micStatus.getText());
         if(micStatus.getText()
@@ -100,6 +105,8 @@ public class InAMeetingScreenAndroid
     public InAMeetingScreen mute() {
         enableInMeetingControls("mute");
         visually.checkWindow(SCREEN_NAME, "mic should be unmuted");
+        // the on-screen controls may get hidden again by the time the visual validation is done
+        enableInMeetingControls("mute");
         WebElement micStatus = driver.waitTillElementIsPresent(byMicStatusId);
         LOGGER.info("mute- current mic status: " + micStatus.getText());
         if(micStatus.getText()

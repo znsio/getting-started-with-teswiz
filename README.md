@@ -14,20 +14,45 @@ Refer to prerequisites mentioned here https://github.com/znsio/teswiz#prerequisi
 ### Android tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @single-user" PLATFORM=android ./gradlew run 
 
+  With Visual Testing enabled:
+
+    CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @single-user" PLATFORM=android IS_VISUAL=true ./gradlew run
+
 ### Web tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @single-user" PLATFORM=web ./gradlew run 
+
+  With Visual Testing enabled:
+
+    CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @single-user" PLATFORM=web IS_VISUAL=true ./gradlew run
 
 ### Multiuser Android tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android and @single-app" ./gradlew run
 
+  With Visual Testing enabled:
+
+    CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android and @single-app" IS_VISUAL=true ./gradlew run
+
 ### Multiuser Android-web tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android-web and @single-app" ./gradlew run
+
+  With Visual Testing enabled:
+
+    CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android-web and @single-app" IS_VISUAL=true ./gradlew run
 
 ### Multiuser-Multiapp Android tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android and @multi-app" ./gradlew run
 
+  With Visual Testing enabled:
+
+    CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android and @multi-app" IS_VISUAL=true ./gradlew run
+
 ### Multiuser-Multiapp Android-web tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android-web and @multi-app" ./gradlew run
+
+  With Visual Testing enabled:
+
+    CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android-web and @multi-app" IS_VISUAL=true ./gradlew run
+
 
 # Visual Test Automation
 To enable Visual test automation using Applitools Visual AI, follow the steps below:

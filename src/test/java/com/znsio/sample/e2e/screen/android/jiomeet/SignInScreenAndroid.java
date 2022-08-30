@@ -50,6 +50,7 @@ public class SignInScreenAndroid
     }
 
     private SignInScreenAndroid joinAMeeting() {
+        visually.checkWindow(SCREEN_NAME, "joinAMeeting");
         driver.waitTillElementIsPresent(byJoinMeetingId)
               .click();
         return this;
@@ -64,6 +65,7 @@ public class SignInScreenAndroid
               .sendKeys(currentUserPersona);
         driver.waitTillElementIsPresent(byEnterMeeting)
               .click();
+        visually.checkWindow(SCREEN_NAME, "enterMeetingDetails");
         driver.waitTillElementIsPresent(byJoinMeeting)
               .click();
         waitFor(8);

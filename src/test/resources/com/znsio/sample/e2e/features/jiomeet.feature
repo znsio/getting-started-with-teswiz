@@ -8,7 +8,7 @@ Feature: In a meeting scenarios
     When I Unmute myself
     Then I should be able to Mute myself
 
-  @multiuser-android-web
+  @multiuser-android-web @single-app
   Scenario: Guest (on Web) and host (on Android) can chat in a meeting
     Given "Host" logs-in and starts an instant meeting on "android"
     And "Guest" joins the meeting from "web"

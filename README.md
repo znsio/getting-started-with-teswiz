@@ -11,23 +11,59 @@ Refer to prerequisites mentioned here https://github.com/znsio/teswiz#prerequisi
 
 # Running the sample tests
 
-## Android tests
+### Android tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @single-user" PLATFORM=android ./gradlew run 
 
-## Web tests
+  With Visual Testing enabled:
+
+    CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @single-user" PLATFORM=android IS_VISUAL=true ./gradlew run
+
+### Web tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @single-user" PLATFORM=web ./gradlew run 
 
-## Multiuser Android-web tests
-    CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android-web" ./gradlew run
+  With Visual Testing enabled:
 
-## Multiuser Android tests
+    CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @single-user" PLATFORM=web IS_VISUAL=true ./gradlew run
+
+### Multiuser Android tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android and @single-app" ./gradlew run
 
-## Multiuser-Multiapp Android tests
+  With Visual Testing enabled:
+
+    CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android and @single-app" IS_VISUAL=true ./gradlew run
+
+### Multiuser Android-web tests
+    CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android-web and @single-app" ./gradlew run
+
+  With Visual Testing enabled:
+
+    CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android-web and @single-app" IS_VISUAL=true ./gradlew run
+
+### Multiuser-Multiapp Android tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android and @multi-app" ./gradlew run
 
-## Multiuser-Multiapp Android-web tests
+  With Visual Testing enabled:
+
+    CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android and @multi-app" IS_VISUAL=true ./gradlew run
+
+### Multiuser-Multiapp Android-web tests
     CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android-web and @multi-app" ./gradlew run
+
+  With Visual Testing enabled:
+
+    CONFIG=./configs/jiomeet_config.properties TAG="@jiomeet and @multiuser-android-web and @multi-app" IS_VISUAL=true ./gradlew run
+
+
+# Visual Test Automation
+To enable Visual test automation using Applitools Visual AI, follow the steps below:
+* In build.gradle, provide your APPLITOOLS_API_KEY:
+
+    > environment "APPLITOOLS_API_KEY", System.getenv("teswiz_APPLITOOLS_API_KEY")
+
+* Enable visual validation by setting `IS_VISUAL=true` in either of:
+  * the config file, or
+  * from the command line - ex: `CONFIG=./configs/jiomeet_config.properties IS_VISUAL=true ./gradlew run`, or
+  * as an environment variable
 
 # Configuration options
 Test execution using teswiz is highly configurable. This enables you to control what type of tests you want to execute, and where (environment, local/cloud), etc. 

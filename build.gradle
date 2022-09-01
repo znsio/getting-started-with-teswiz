@@ -56,7 +56,7 @@ task run(type: JavaExec) {
         System.setProperty "LOG_DIR", "$logDirectory"
         environment "APPLITOOLS_API_KEY", System.getenv("teswiz_APPLITOOLS_API_KEY")
 
-        def configFile = System.getenv("RUN_IN_CI") ? "./configs/pcloudy_config.properties" : "./configs/jiomeet_config.properties"
+        def configFile = System.getenv("RUN_IN_CI") ? "./configs/pcloudy_config.properties" : "./configs/Amazon_config.properties"
         configFile = System.getenv("CONFIG") ? System.getenv("CONFIG") : configFile
 
         print "configFile: $configFile"

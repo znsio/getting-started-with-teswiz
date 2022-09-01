@@ -20,8 +20,6 @@ public class AmazonSteps {
     private static final Logger LOGGER = Logger.getLogger(AmazonSteps.class.getName());
     private final TestExecutionContext context;
     private final Drivers allDrivers;
-    private int previousCartValue;
-
     public AmazonSteps() {
         context = SessionContext.getTestExecutionContext(Thread.currentThread()
                 .getId());
@@ -38,18 +36,17 @@ public class AmazonSteps {
 
     @When("I search for {string}")
     public void iSearchForAProduct(String searchProductQuery) {
-        context.addTestState(searchProductQuery, searchProductQuery);
         new HomePageBL().searchForAProduct(searchProductQuery);
     }
 
     @And("Add first product to cart")
-    public void iAddProductToCart(){
+    public void iAddProductToCart() {
         new SearchPageBL().selectProduct();
         new ProductPageBL().addProductToCart().navigateToCart();
     }
 
     @Then("Product gets added to the cart")
-    public void iVerifyProductsInTheCart(){
+    public void iVerifyProductsInTheCart() {
         new CartPageBL().validateAddedProduct();
     }
 }

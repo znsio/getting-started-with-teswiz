@@ -24,7 +24,7 @@ public abstract class HomePageScreen {
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
 
-        switch(platform) {
+        switch (platform) {
             case web:
                 return new HomePageScreenWeb(driver, visually);
         }

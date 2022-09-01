@@ -13,13 +13,14 @@ public class HomePageBL {
     private final SoftAssertions softly;
     private final TestExecutionContext context;
 
-    public HomePageBL(){
+    public HomePageBL() {
         long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
         String currentUserPersona = CONTEXT_AMAZON.ME;
         Platform currentPlatform = Runner.platform;
-      }
+    }
+
     public HomePageBL searchForAProduct(String productName) {
         HomePageScreen.get().searchProduct(productName);
         return this;

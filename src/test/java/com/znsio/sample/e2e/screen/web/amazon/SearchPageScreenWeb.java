@@ -47,7 +47,7 @@ public class SearchPageScreenWeb extends SearchPageScreen {
     }
 
     @Override
-    public SearchPageScreen waitTillSearchResultMessageIsDisplayed(){
+    public SearchPageScreen waitTillSearchResultMessageIsDisplayed() {
         driver.waitTillElementIsPresent(bySearchResultPageMessageBarXpath);
         return this;
     }
@@ -61,7 +61,7 @@ public class SearchPageScreenWeb extends SearchPageScreen {
 
         //fetching card title
         widgetTitle = firstWidget.findElement(byWidgetTitleChildXpath).getText().trim();
-        context.addTestState(CONTEXT_AMAZON.PRODUCT_SELECTED,widgetTitle);
+        context.addTestState(CONTEXT_AMAZON.PRODUCT_SELECTED, widgetTitle);
 
         //complete card is not clickable, clicking on specific element
         firstWidget.findElement(byWidgetClickableElemChildXpath).click();

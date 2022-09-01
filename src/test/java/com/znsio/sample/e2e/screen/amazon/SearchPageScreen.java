@@ -25,7 +25,7 @@ public abstract class SearchPageScreen {
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
 
-        switch(platform) {
+        switch (platform) {
             case web:
                 return new SearchPageScreenWeb(driver, visually);
         }
@@ -33,7 +33,10 @@ public abstract class SearchPageScreen {
     }
 
     public abstract boolean isSearchResultPageLoaded();
+
     public abstract String getSearchResultLabelText();
+
     public abstract SearchPageScreen waitTillSearchResultMessageIsDisplayed();
+
     public abstract ProductPageScreen selectProductFromSearchResultPage();
 }

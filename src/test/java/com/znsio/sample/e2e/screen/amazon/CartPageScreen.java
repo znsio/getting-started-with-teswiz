@@ -15,7 +15,7 @@ import static com.znsio.e2e.runner.Runner.fetchEyes;
 
 public abstract class CartPageScreen {
 
-    private static final String SCREEN_NAME = SearchPageScreen.class.getSimpleName();
+    private static final String SCREEN_NAME = CartPageScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     public static CartPageScreen get() {
@@ -27,7 +27,7 @@ public abstract class CartPageScreen {
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
 
-        switch(platform) {
+        switch (platform) {
             case web:
                 return new CartPageScreenWeb(driver, visually);
         }
@@ -37,5 +37,6 @@ public abstract class CartPageScreen {
     public abstract CartPageScreen waitTillCartIsDisplayed();
 
     public abstract Map<String, String> getCartContents();
+
     public abstract String getCartHeaderText();
 }

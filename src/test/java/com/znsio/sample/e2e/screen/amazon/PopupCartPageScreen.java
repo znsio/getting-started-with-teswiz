@@ -13,7 +13,7 @@ import static com.znsio.e2e.runner.Runner.fetchEyes;
 
 public abstract class PopupCartPageScreen {
 
-    private static final String SCREEN_NAME = SearchPageScreen.class.getSimpleName();
+    private static final String SCREEN_NAME = PopupCartPageScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     public static PopupCartPageScreen get() {
@@ -25,7 +25,7 @@ public abstract class PopupCartPageScreen {
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
 
-        switch(platform) {
+        switch (platform) {
             case web:
                 return new PopupCartPageScreenWeb(driver, visually);
         }
@@ -35,6 +35,7 @@ public abstract class PopupCartPageScreen {
     public abstract PopupCartPageScreen waitTillProductAddedToCart();
 
     public abstract CartPageScreen navigateToCartFromAddedToCartPopup();
+
     public abstract String getAddedToCartSuccessMsg();
 
 }

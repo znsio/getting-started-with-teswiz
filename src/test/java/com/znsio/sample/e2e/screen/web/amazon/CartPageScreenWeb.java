@@ -37,7 +37,7 @@ public class CartPageScreenWeb extends CartPageScreen {
     @Override
     public Map<String, String> getCartContents() {
         //currently coding it for single product only
-        Map <String, String> cartContentDetails = new HashMap<>();
+        Map<String, String> cartContentDetails = new HashMap<>();
 
         WebElement cartContent = driver.findElement(byActiveCartContentsXpath);
 
@@ -46,7 +46,7 @@ public class CartPageScreenWeb extends CartPageScreen {
         String productPrice = cartContent.findElement(byProductPriceChildXpath).getText().trim();
         cartContentDetails.put("productPrice", productPrice);
         String productQuantity = cartContent.findElement(byProductQuantityChildXpath).getText().trim();
-        cartContentDetails.put("productQuantity",productQuantity);
+        cartContentDetails.put("productQuantity", productQuantity);
 
         LOGGER.info(String.format("Cart contents are: Product Name - '%s', Price - '%s', Quantity - '%s'.",
                 productName, productPrice, productQuantity));

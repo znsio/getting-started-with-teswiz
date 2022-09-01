@@ -13,13 +13,14 @@ import org.openqa.selenium.WebDriver;
 public class PopupCartPageScreenWeb extends PopupCartPageScreen {
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = HomePageScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = PopupCartPageScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final TestExecutionContext context;
     private final WebDriver innerDriver;
 
     private final By byProceedToCheckoutXpath = By.xpath("//span[@id='attach-sidesheet-checkout-button']");
     private final By byGoToCartXpath = By.xpath("//input[@aria-labelledby='attach-sidesheet-view-cart-button-announce']");
+    private final By byAddedToCartMsgXpath = By.xpath("//span[contains(@class,'sw-atc-text')]");
     public PopupCartPageScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
@@ -39,7 +40,12 @@ public class PopupCartPageScreenWeb extends PopupCartPageScreen {
     @Override
     public CartPageScreen navigateToCartFromAddedToCartPopup() {
         driver.waitForClickabilityOf(byGoToCartXpath).click();
-        return this.waitTillNavigatedToCart();
+        return waitTillNavigatedToCart();
+    }
+
+    @Override
+    public String getAddedToCartSuccessMsg() {
+        return driver.findElement(byAddedToCartMsgXpath).getText().trim();
     }
 
     private CartPageScreen waitTillNavigatedToCart() {

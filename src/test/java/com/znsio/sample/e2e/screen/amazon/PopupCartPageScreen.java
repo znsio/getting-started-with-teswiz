@@ -35,5 +35,6 @@ public abstract class PopupCartPageScreen {
     public abstract PopupCartPageScreen waitTillProductAddedToCart();
 
     public abstract CartPageScreen navigateToCartFromAddedToCartPopup();
+    public abstract String getAddedToCartSuccessMsg();
 
 }

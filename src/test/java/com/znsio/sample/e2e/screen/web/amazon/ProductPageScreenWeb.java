@@ -7,7 +7,6 @@ import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.entities.CONTEXT_AMAZON;
 import com.znsio.sample.e2e.screen.amazon.PopupCartPageScreen;
 import com.znsio.sample.e2e.screen.amazon.ProductPageScreen;
-import com.znsio.sample.e2e.screen.android.jiomeet.LandingScreenAndroid;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +15,7 @@ public class ProductPageScreenWeb extends ProductPageScreen {
 
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = LandingScreenAndroid.class.getSimpleName();
+    private static final String SCREEN_NAME = ProductPageScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final TestExecutionContext context;
     private final WebDriver innerDriver;
@@ -51,11 +50,12 @@ public class ProductPageScreenWeb extends ProductPageScreen {
     @Override
     public PopupCartPageScreen addProductToCart() {
         driver.waitForClickabilityOf(byAddToCartButtonXpath).click();
-        return this.waitForAddingToCartToPerform();
+        return waitForAddingToCartToPerform();
     }
 
     private PopupCartPageScreen waitForAddingToCartToPerform() {
-        return PopupCartPageScreen.get().waitTillProductAddedToCart();
+         PopupCartPageScreen popupCartPageScreen = PopupCartPageScreen.get().waitTillProductAddedToCart();
+         return popupCartPageScreen;
     }
 
     @Override

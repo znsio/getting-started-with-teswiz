@@ -2,7 +2,6 @@ package com.znsio.sample.e2e.screen.amazon.web;
 
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.businessLayer.amazon.CartPageBL;
 import com.znsio.sample.e2e.screen.amazon.AmazonProductPageScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -10,7 +9,7 @@ import org.openqa.selenium.By;
 public class AmazonProductPageWeb extends AmazonProductPageScreen {
     private final Visual visually;
     private final Driver driver;
-    public static final String SCREEN_NAME = AmazonGridWallPageWeb.class.getSimpleName();
+    public static final String SCREEN_NAME = AmazonProductPageWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final By button_AddToCart = By.xpath("//input[@value='Add to Cart']");
     private final By button_BuyNow = By.xpath("//input[@id='buy-now-button']");
@@ -29,14 +28,10 @@ public class AmazonProductPageWeb extends AmazonProductPageScreen {
     }
 
     @Override
-    public Boolean verifyProductDescSyncWithGridWallPage(String expectedDescFromGridWallPage) {
-        Boolean isProductDescMatchWithGridWallPage = false;
+    public String verifyProductDescSyncWithGridWallPage() {
         String descInProductPage = driver.findElement(productDesc).getText();
-        if (descInProductPage.equals(expectedDescFromGridWallPage)) {
-            isProductDescMatchWithGridWallPage =true;
-        }
-        LOGGER.info(expectedDescFromGridWallPage);
-        return isProductDescMatchWithGridWallPage;
+        LOGGER.info("Product description in product page : "+descInProductPage);
+        return descInProductPage;
     }
 
     @Override
@@ -49,9 +44,9 @@ public class AmazonProductPageWeb extends AmazonProductPageScreen {
     }
 
     @Override
-    public CartPageBL clickAddToCartButton() {
+    public Boolean clickAddToCartButton() {
         driver.waitTillElementIsPresent(button_AddToCart,5).click();
         visually.takeScreenshot(SCREEN_NAME, "After Selecting the Add to cart button");
-        return new CartPageBL();
+        return true;
     }
 }

@@ -3,17 +3,15 @@ package com.znsio.sample.e2e.businessLayer.amazon;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.sample.e2e.businessLayer.jiomeet.LandingBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazon.AmazonCartPageScreen;
-import com.znsio.sample.e2e.screen.amazon.AmazonGridWallPageScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartPageBL {
-    private static final Logger LOGGER = Logger.getLogger(LandingBL.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(CartPageBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
@@ -41,12 +39,13 @@ public class CartPageBL {
     }
 
     public CartPageBL clickCartButton() {
-        AmazonCartPageScreen.get().clickCartButton();
+        assertThat(AmazonCartPageScreen.get().clickCartButton()).as(currentUserPersona + "Add to cart button is not clicked")
+                .isTrue();
         return this;
     }
 
-    public CartPageBL verifyAddedProductIsReflectionInCart(String expectedProductDesc) {
-        Boolean isProductAddedToTheCart = AmazonCartPageScreen.get().verifyAddedProductIsReflectionInCart(expectedProductDesc);
+    public CartPageBL verifyAddedProductIsReflectionInCart() {
+        Boolean isProductAddedToTheCart = AmazonCartPageScreen.get().verifyAddedProductIsReflectionInCart();
         assertThat(isProductAddedToTheCart).as(currentUserPersona + "Added product is not reflected in the Cart page")
                 .isTrue();
         return this;

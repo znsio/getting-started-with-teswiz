@@ -4,8 +4,6 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.businessLayer.amazon.GridWallPageBL;
-import com.znsio.sample.e2e.businessLayer.amazon.ProductPageBL;
 import com.znsio.sample.e2e.screen.amazon.web.AmazonGridWallPageWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
@@ -37,5 +35,6 @@ public abstract class AmazonGridWallPageScreen {
 
     public abstract Boolean checkForProductResultsSize();
 
-    public abstract ProductPageBL selectProduct(String productToBeSelected) ;
+    public abstract Boolean selectProduct() ;
+
 }

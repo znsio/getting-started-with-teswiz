@@ -3,10 +3,10 @@ package com.znsio.sample.e2e.businessLayer.amazon;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.sample.e2e.screen.amazon.AmazonGridWallPageScreen;
 import com.znsio.sample.e2e.screen.amazon.AmazonHomePageScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class HomePageBL {
     private static final Logger LOGGER = Logger.getLogger(HomePageBL.class.getName());
@@ -26,7 +26,8 @@ public class HomePageBL {
     }
 
     public GridWallPageBL searchProduct(String productToSearch)  {
-        AmazonHomePageScreen.get().searchProduct(productToSearch);
+        assertThat(AmazonHomePageScreen.get().searchProduct(productToSearch)).as(currentUserPersona + "Added product is not reflected in the Cart page")
+                .isTrue();
         return new GridWallPageBL();
     }
 }

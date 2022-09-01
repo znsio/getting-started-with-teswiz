@@ -4,8 +4,6 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.businessLayer.amazon.CartPageBL;
-import com.znsio.sample.e2e.screen.amazon.web.AmazonGridWallPageWeb;
 import com.znsio.sample.e2e.screen.amazon.web.AmazonProductPageWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
@@ -35,10 +33,10 @@ public abstract class AmazonProductPageScreen {
 
     public abstract Boolean validateProductPageDisplay ();
 
-    public abstract Boolean verifyProductDescSyncWithGridWallPage (String expectedDescFromGridWallPage);
+    public abstract String verifyProductDescSyncWithGridWallPage ();
 
     public abstract Boolean verifyAddToCartButton();
 
-    public abstract CartPageBL clickAddToCartButton();
+    public abstract Boolean clickAddToCartButton();
 
 }

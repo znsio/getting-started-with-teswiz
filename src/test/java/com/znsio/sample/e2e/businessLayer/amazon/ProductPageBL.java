@@ -4,7 +4,6 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.amazon.AmazonGridWallPageScreen;
 import com.znsio.sample.e2e.screen.amazon.AmazonProductPageScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
@@ -12,7 +11,7 @@ import org.assertj.core.api.SoftAssertions;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductPageBL {
-    private static final Logger LOGGER = Logger.getLogger(HomePageBL.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ProductPageBL.class.getName());
     private TestExecutionContext context;
     private  SoftAssertions softly;
     private  String currentUserPersona;
@@ -37,13 +36,12 @@ public class ProductPageBL {
         this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
         this.currentPlatform = Runner.platform;
     }
-    public ProductPageBL verifyProductPageAndProductDesc(String expectedProductDesc){
+    public ProductPageBL verifyProductDetails(){
         Boolean isProductPageDisplayed = AmazonProductPageScreen.get().validateProductPageDisplay();
         assertThat(isProductPageDisplayed).as(currentUserPersona + " Product page is not displayed")
                 .isTrue();
-        Boolean isProductDescMatchWithGridWallPage = AmazonProductPageScreen.get().verifyProductDescSyncWithGridWallPage(expectedProductDesc);
-        assertThat(isProductDescMatchWithGridWallPage).as(currentUserPersona + "Product description is not matched between Gridwall page and product page")
-               .isTrue();
+        String isProductDescMatchWithGridWallPage = AmazonProductPageScreen.get().verifyProductDescSyncWithGridWallPage();
+        assertThat(isProductDescMatchWithGridWallPage).isEqualTo(context.getTestState(SAMPLE_TEST_CONTEXT.AMAZON_PRODUCTDESC));
         return this;
     }
 
@@ -55,7 +53,8 @@ public class ProductPageBL {
     }
 
     public CartPageBL clickAddToCartButton() {
-        AmazonProductPageScreen.get().clickAddToCartButton();
+        assertThat( AmazonProductPageScreen.get().clickAddToCartButton()).as(currentUserPersona + "Add to cart button is not clicked")
+                .isTrue();
         return new CartPageBL();
     }
 }

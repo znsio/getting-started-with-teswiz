@@ -4,9 +4,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.businessLayer.amazon.CartPageBL;
 import com.znsio.sample.e2e.screen.amazon.web.AmazonCartPageWeb;
-import com.znsio.sample.e2e.screen.amazon.web.AmazonGridWallPageWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
@@ -32,7 +30,7 @@ public abstract class AmazonCartPageScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract CartPageBL clickCartButton();
+    public abstract Boolean clickCartButton();
 
-    public abstract Boolean verifyAddedProductIsReflectionInCart(String expectedProductDesc) ;
+    public abstract Boolean verifyAddedProductIsReflectionInCart() ;
 }

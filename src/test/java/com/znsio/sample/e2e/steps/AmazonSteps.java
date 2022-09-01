@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
 import java.awt.*;
 
 public class AmazonSteps {
-    private static final Logger LOGGER = Logger.getLogger(JioMeetSteps.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AmazonSteps.class.getName());
     private final TestExecutionContext context;
     private final Drivers allDrivers;
 
@@ -30,49 +30,30 @@ public class AmazonSteps {
         LOGGER.info("allDrivers: " + (null == allDrivers));
     }
 
-    @Given("User is on amazon homepage")
-    public void userIsOnAmazonHomepage() {
+    @Given("I am in the amazon homepage")
+    public void iAmInTheAmazonHomepage() {
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
     }
 
-    @When("User search for {string}")
-    public void userSearchFor(String productToSearch) {
+    @When("I searches for {string}")
+    public void iSearchesFor(String productToSearch) {
         new HomePageBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).searchProduct(productToSearch);
 
     }
 
-    @Then("User should see the search results")
-    public void userShouldSeeTheSearchResults() {
+    @Then("product should be visible in the search results")
+    public void productShouldBeVisibleInTheSearchResults() {
         new GridWallPageBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).verifyTheResultsInTheProductListingPage();
     }
 
-    @And("User navigates to cart")
-    public void userNavigatesToCart() {
-        new CartPageBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).clickCartButton();
+    @And("I add an product to cart")
+    public void iAddAnProductToCart() {
+        new GridWallPageBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).selectFirstProductFromTheSearchResults();
+        new ProductPageBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).verifyProductDetails().verifyAddToCartButton().clickAddToCartButton();
     }
 
-    @And("User should see Add to Cart")
-    public void userShouldSeeAddToCart() {
-        new ProductPageBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).verifyAddToCartButton();
-    }
-
-    @When("User selects Add to Cart")
-    public void userSelectsAddToCart() {
-        new ProductPageBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).clickAddToCartButton();
-    }
-
-    @When("User selects {string} product from the search results")
-    public void userSelectsProductFromTheSearchResults(String productToBeSelected) {
-        new GridWallPageBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).selectFirstProductFromTheSearchResults(productToBeSelected);
-    }
-
-    @Then("User should see the product page and product title syncing {string}")
-    public void userShouldSeeTheProductPageAndProductTitleSyncing(String expectedProductDesc) {
-        new ProductPageBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).verifyProductPageAndProductDesc(expectedProductDesc);
-    }
-
-    @Then("User should see the added item in the cart {string}")
-    public void userShouldSeeTheAddedItemInTheCart(String expectedProductDesc) {
-        new CartPageBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).verifyAddedProductIsReflectionInCart(expectedProductDesc);
+    @Then("I should see the added item into the cart")
+    public void iShouldSeeTheAddedItemIntoTheCart() {
+        new CartPageBL(SAMPLE_TEST_CONTEXT.ME,Runner.platform).clickCartButton().verifyAddedProductIsReflectionInCart();
     }
 }

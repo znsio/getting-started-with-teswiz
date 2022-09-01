@@ -5,7 +5,6 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.businessLayer.jiomeet.InAMeetingBL;
 import com.znsio.sample.e2e.entities.CONTEXT_AMAZON;
-import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazon.CartPageScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
@@ -20,7 +19,7 @@ public class CartPageBL {
         long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
-        String currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
+        String currentUserPersona = CONTEXT_AMAZON.ME;
         Platform currentPlatform = Runner.platform;
     }
 
@@ -28,6 +27,7 @@ public class CartPageBL {
 
         Map<String, String> cartProducts = CartPageScreen.get().getCartContents();
         assertThat(cartProducts.get("productName")).isEqualTo(context.getTestState(CONTEXT_AMAZON.PRODUCT_TITLE));
+        LOGGER.info("Cart content validated.");
         //assertThat(cartProducts.get("productQuantity")).isEqualTo(context.getTestState(CONTEXT_AMAZON.PRODUCT_QUANTITY));
         return this;
 

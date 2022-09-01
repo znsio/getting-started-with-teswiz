@@ -37,4 +37,5 @@ public abstract class CartPageScreen {
     public abstract CartPageScreen waitTillCartIsDisplayed();
 
     public abstract Map<String, String> getCartContents();
+    public abstract String getCartHeaderText();
 }

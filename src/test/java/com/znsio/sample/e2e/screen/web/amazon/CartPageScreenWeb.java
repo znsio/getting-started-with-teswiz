@@ -13,13 +13,14 @@ import java.util.Map;
 public class CartPageScreenWeb extends CartPageScreen {
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = HomePageScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = CartPageScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     private final By byActiveCartContentsXpath = By.xpath("//div[@data-name='Active Cart']");
     private final By byProductTitleChildXpath = By.xpath(".//span[@class='a-truncate-cut']");
     private final By byProductPriceChildXpath = By.xpath(".//span[contains(@class,'sc-product-price')]");
     private final By byProductQuantityChildXpath = By.xpath(".//span[@class='a-dropdown-prompt']");
+    private final By byCartHeaderTextXpath = By.xpath("//div[contains(@class,'sc-cart-header')]");
 
     public CartPageScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -51,5 +52,10 @@ public class CartPageScreenWeb extends CartPageScreen {
                 productName, productPrice, productQuantity));
 
         return cartContentDetails;
+    }
+
+    @Override
+    public String getCartHeaderText() {
+        return driver.findElement(byCartHeaderTextXpath).getText().trim();
     }
 }

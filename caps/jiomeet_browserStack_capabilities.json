@@ -1,0 +1,39 @@
+{
+  "android": {
+    "app": {
+      "local": "./temp/sampleApps/com.jio.rilconferences_v4.21.6.7-421607_Android-5.0.apk"
+    },
+    "appActivity": "org.jio.meet.introduction.views.SplashActivity",
+    "appPackage": "com.jio.rilconferences",
+    "automationName": "UiAutomator2",
+    "autoGrantPermissions": true,
+    "device": "Samsung",
+    "newCommandTimeout": 300,
+    "launchTimeout": 90000,
+    "unicodeKeyboard": true,
+    "resetKeyboard": true,
+    "autoAcceptAlerts": true,
+    "platformName": "Android",
+    "platformVersion": "11",
+    "noReset": false,
+    "browserstack.enableCameraImageInjection": true,
+    "browserstack.geoLocation": "IN",
+    "browserstack.timezone": "Kolkata",
+    "browserstack.debug": "false",
+    "browserstack.networkLogs": "false",
+    "browserstack.acceptInsecureCerts": "true",
+    "browserstack.locale": "IN",
+    "project": "teswiz"
+  },
+  "cloud": {
+    "android": [
+    ]
+  },
+  "hostMachines": [
+    {
+      "machineIP": "hub.browserstack.com",
+      "isCloud": true,
+      "cloudName": "browserstack"
+    }
+  ]
+}

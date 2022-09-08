@@ -32,7 +32,7 @@ Feature: In a meeting scenarios
     When "Host" sends "Hey" chat message
     Then "Guest" should see the chat message on its chat window
 
-  @multiuser-android-web @multi-app
+  @multiuser-android-web @multi-app @chat
   Scenario: Guest-1 (on older-app-version on android), Guest-2 (on chrome) and host (on Android) can chat in a meeting
     Given "Host" logs-in and starts an instant meeting in "jiomeetLatest" on "android"
     And "Guest-1" joins the meeting from "jiomeetOldVersion" on "android"

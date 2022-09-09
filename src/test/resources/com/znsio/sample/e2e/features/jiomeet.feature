@@ -39,4 +39,4 @@ Feature: In a meeting scenarios
     And "Guest-2" joins the meeting from "jiomeet-chrome" on "web"
     Then "Host" should be able to get to chat window
     When "Host" sends "Hey" chat message
-    Then "Guest" should see the chat message on its chat window
+    Then "Guest-2" should see the chat message on its chat window

@@ -64,7 +64,7 @@ task run(type: JavaExec) {
 
 //      You can also specify which config file to use based on the value of RUN_IN_CI as shown below
 //
-//        def configFile = System.getenv("RUN_IN_CI") ? "./configs/pcloudy_config.properties" : "./configs/jiomeet_config.properties"
+//        def configFile = System.getenv("RUN_IN_CI") ? "./configs/calculator_pcloudy_config.properties" : "./configs/jiomeet_local_config.properties"
 //        configFile = System.getenv("CONFIG") ? System.getenv("CONFIG") : configFile
 
         print "configFile: $configFile"

@@ -22,6 +22,9 @@ public class AmazonSteps {
     }
 
     Given("I sign in as a registered {string} on Amazon")
-    public void iSignInAsARegisteredOnAmazon(String arg0) {
+    public void iSignInAsARegisteredOnAmazon(String username, String password) {
+
+
+
     }
 }

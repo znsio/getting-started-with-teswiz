@@ -4,6 +4,7 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.businessLayer.jiomeet.LandingBL;
+import com.znsio.sample.e2e.entities.Amazon;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazon.AmazonLoginScreen;
 import org.apache.log4j.Logger;
@@ -32,12 +33,13 @@ public class AmazonLoginBL {
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
-        this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
+        this.currentUserPersona = Amazon.ME;
         this.currentPlatform = Runner.platform;
     }
 
     public AmazonLoginBL loginToAmazon() {
-        AmazonLoginScreen.get().login(amazon.getUsernam(), amazon.getPassword());
+        AmazonLoginScreen.get().login(Amazon.getUsername(), Amazon.getPassword());
+
         return this;
     }
 

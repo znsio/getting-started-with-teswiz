@@ -8,4 +8,3 @@ Feature: Scenario for amazon
     Then I should be able to see that iphone list
     When I add the iphone in cart
     Then iphone should be added to cart
-

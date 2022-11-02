@@ -5,6 +5,7 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.tools.Drivers;
 import com.znsio.sample.e2e.businessLayer.amazon.*;
 import com.znsio.sample.e2e.businessLayer.theapp.LoginBL;
+import com.znsio.sample.e2e.entities.Amazon;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -21,7 +22,7 @@ public class AmazonSteps {
         context = SessionContext.getTestExecutionContext(Thread.currentThread()
                 .getId());
         LOGGER.info("context: " + context.getTestName());
-        allDrivers = (Drivers) context.getTestState(SAMPLE_TEST_CONTEXT.ALL_DRIVERS);
+        allDrivers = (Drivers) context.getTestState(Amazon.ALL_DRIVERS);
         LOGGER.info("allDrivers: " + (null == allDrivers));
     }
 
@@ -50,4 +51,6 @@ public class AmazonSteps {
     public void iphoneShouldBeAddedToCart() {
         new cartPageBL().iSeeTheIphone13SuccessfullyAddedToCart();
     }
+
+
 }

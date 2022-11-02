@@ -5,11 +5,10 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.businessLayer.jiomeet.LandingBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.amazon.AmazonLoginScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
-public class AmazonLoginBL {
+public class iphoneDetailPageBL {
 
     private static final Logger LOGGER = Logger.getLogger(LandingBL.class.getName());
     private final TestExecutionContext context;
@@ -17,7 +16,8 @@ public class AmazonLoginBL {
     private final String currentUserPersona;
     private final Platform currentPlatform;
 
-    public AmazonLoginBL(String userPersona, Platform forPlatform) {
+
+    public iphoneDetailPageBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -27,7 +27,7 @@ public class AmazonLoginBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public AmazonLoginBL() {
+    public iphoneDetailPageBL() {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -36,12 +36,12 @@ public class AmazonLoginBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public AmazonLoginBL loginToAmazon() {
-        AmazonLoginScreen.get().login(amazon.getUsernam(), amazon.getPassword());
+    public iphoneDetailPageBL authenticateIphone13DetailPage() {
         return this;
     }
 
 
-
-
+    public iphoneDetailPageBL addToCart() {
+        return this;
+    }
 }

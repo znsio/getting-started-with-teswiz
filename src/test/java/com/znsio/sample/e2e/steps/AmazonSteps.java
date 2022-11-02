@@ -3,7 +3,8 @@ package com.znsio.sample.e2e.steps;
 import com.context.SessionContext;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.tools.Drivers;
-import com.znsio.sample.e2e.businessLayer.amazon.AmazonLoginBL;
+import com.znsio.sample.e2e.businessLayer.amazon.*;
+import com.znsio.sample.e2e.businessLayer.theapp.LoginBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -32,21 +33,21 @@ public class AmazonSteps {
 
     @When("I search for iphone")
     public void iSearchForIphone() {
-        new AmazonHomePage().searchForIphone13();
+        new HomePageBL().searchForIphone13();
     }
 
     @Then("I should be able to see that iphone list")
     public void iShouldBeAbleToSeeThatIphoneList() {
-        new AmazonSearchResultPage().iSeeTheListOfIphone13();
+        new SearchResultPageBL().iSeeTheListOfIphone13();
     }
 
     @When("I add the iphone in cart")
     public void iAddTheIphoneInCart() {
-        new iphoneDetailPage().authenticateIphone13DetailPage().addToCart();
+        new iphoneDetailPageBL().authenticateIphone13DetailPage().addToCart();
     }
 
     @Then("iphone should be added to cart")
     public void iphoneShouldBeAddedToCart() {
-        new cartPage().iSeeTheIphone13SuccessfullyAddedToCart();
+        new cartPageBL().iSeeTheIphone13SuccessfullyAddedToCart();
     }
 }

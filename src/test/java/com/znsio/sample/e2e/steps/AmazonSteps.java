@@ -5,7 +5,6 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Drivers;
 import com.znsio.sample.e2e.businessLayer.amazon.*;
-import com.znsio.sample.e2e.entities.Amazon;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

@@ -5,7 +5,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.businessLayer.search.SearchBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.amazon.HomepPageScreen;
+import com.znsio.sample.e2e.screen.amazon.AmazonHomePageScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -38,7 +38,7 @@ public class HomePageBL {
 
 
     public SearchBL searchForIphone13() {
-        HomepPageScreen.get()
+        AmazonHomePageScreen.get()
                 .searchForiPhone13();
         return new SearchBL();
     }

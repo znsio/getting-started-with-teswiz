@@ -5,10 +5,14 @@ import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.amazon.AmazonHomePageScreen;
+import com.znsio.sample.e2e.screen.amazon.SearchResultPageScreen;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class AmazonHomePageScreenWeb extends AmazonHomePageScreen {
+    public static final By byClickingOnSearchBoxid = By.id("twotabsearchtextbox");
+    public static final By byClickOnSubmitId = By.id("nav-search-submit-button");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -18,7 +22,7 @@ public class AmazonHomePageScreenWeb extends AmazonHomePageScreen {
 
 
 
-    public AmazonHomePageScreenWeb(Driver driver, Visual visually) {
+    public AmazonHomePageScreenWeb (Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
         this.innerDriver = this.driver.getInnerDriver();
@@ -28,5 +32,12 @@ public class AmazonHomePageScreenWeb extends AmazonHomePageScreen {
     }
 
     @Override
+    public AmazonHomePageScreen searchForiPhone13() {
+        driver.findElement(byClickingOnSearchBoxid).click();
+        driver.findElement(byClickingOnSearchBoxid).sendKeys("iphone13");
+        driver.findElement(byClickOnSubmitId).click();
+        return SearchResultPageScreen;
+    }
+
 
 }

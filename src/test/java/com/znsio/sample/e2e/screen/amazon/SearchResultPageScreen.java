@@ -34,4 +34,6 @@ public abstract class SearchResultPageScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
+    public abstract SearchResultPageScreen isIphoneListVisible ();
+
 }

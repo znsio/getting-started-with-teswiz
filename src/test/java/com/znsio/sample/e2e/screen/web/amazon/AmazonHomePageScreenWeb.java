@@ -32,11 +32,12 @@ public class AmazonHomePageScreenWeb extends AmazonHomePageScreen {
     }
 
     @Override
-    public AmazonHomePageScreen searchForiPhone13() {
+    public SearchResultPageScreen searchForiPhone13() {
         driver.findElement(byClickingOnSearchBoxid).click();
         driver.findElement(byClickingOnSearchBoxid).sendKeys("iphone13");
         driver.findElement(byClickOnSubmitId).click();
-        return SearchResultPageScreen;
+        return SearchResultPageScreen.get();
+     //   return null;
     }
 
 

@@ -3,20 +3,20 @@ package com.znsio.sample.e2e.screen.amazon;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
-import com.znsio.e2e.tools.Visual;;
-import com.znsio.sample.e2e.screen.web.amazon.AmazonHomePageScreenWeb;
+import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.screen.web.amazon.IphoneSuccessfullyAddedToCartScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
-public abstract class AmazonHomePageScreen {
+public abstract class IphoneSuccessfullyAddedToCartScreen {
 
-    private static final String SCREEN_NAME = AmazonHomePageScreen.class.getSimpleName();
+    private static final String SCREEN_NAME = IphoneSuccessfullyAddedToCartScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public static AmazonHomePageScreen get() {
+    public static IphoneSuccessfullyAddedToCartScreen get() {
         Driver driver = fetchDriver(Thread.currentThread()
                 .getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread()
@@ -29,10 +29,12 @@ public abstract class AmazonHomePageScreen {
             //         case android:
             //             return new AmazonScreenAndroid(driver, visually);
             case web:
-                return new AmazonHomePageScreenWeb(driver, visually);
+                return new IphoneSuccessfullyAddedToCartScreenWeb(driver, visually) {
+                };
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract SearchResultPageScreen searchForiPhone13();
+
+    public abstract IphoneSuccessfullyAddedToCartScreen iphone13IsDisplayedOnCart();
 }

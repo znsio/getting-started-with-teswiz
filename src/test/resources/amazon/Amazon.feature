@@ -1,7 +1,7 @@
 
 Feature: Scenario for amazon
 
-  @web
+  @web @amazon
   Scenario: User should be able to add iphone 13 to the cart
     Given I logged in with valid credentials
     When I search for iphone

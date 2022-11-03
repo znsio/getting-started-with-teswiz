@@ -4,18 +4,13 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.amazon.IphoneDetailPageScreen;
+import com.znsio.sample.e2e.screen.amazon.IphoneSuccessfullyAddedToCartScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.util.Iterator;
-import java.util.Set;
-
-public class IphoneDetailPageScreenWeb extends IphoneDetailPageScreen {
-
-    public static final By clickOnFirstIphone13 = By.xpath("(//span[contains(text(),'iPhone 13')])[1]");
-    public static final By byAddToCartId = By.id("add-to-cart-button");
+public class IphoneSuccessfullyAddedToCartScreenWeb extends IphoneSuccessfullyAddedToCartScreen {
+    public static final By byCartButtonid = By.id("attach-sidesheet-view-cart-button");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -25,7 +20,7 @@ public class IphoneDetailPageScreenWeb extends IphoneDetailPageScreen {
 
 
 
-    public IphoneDetailPageScreenWeb (Driver driver, Visual visually) {
+    public IphoneSuccessfullyAddedToCartScreenWeb (Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
         this.innerDriver = this.driver.getInnerDriver();
@@ -34,18 +29,13 @@ public class IphoneDetailPageScreenWeb extends IphoneDetailPageScreen {
         context = Runner.getTestExecutionContext(threadId);
     }
 
-
     @Override
-    public IphoneDetailPageScreen selectFirstIphone() {
-        driver.findElement(clickOnFirstIphone13).click();
-        driver.switchToNextTab();
-     return IphoneDetailPageScreen.get();
-     //   return null;
-    }
-
-    @Override
-    public IphoneDetailPageScreen addIphoneToCart() {
-        driver.findElement(byAddToCartId).click();
-        return IphoneDetailPageScreen.get();
+    public IphoneSuccessfullyAddedToCartScreen iphone13IsDisplayedOnCart() {
+       driver.findElement(byCartButtonid).click();
+       String textFromCartPage = driver.findElement(By.xpath("a-truncate-cut")).getText();
+       if (textFromCartPage.contains("iPhone 13")) {
+            LOGGER.info("iphone 13 successfully added to cart");
+       }
+        return this;
     }
 }

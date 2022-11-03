@@ -36,6 +36,7 @@ public abstract class IphoneDetailPageScreen {
     }
 
 
-    public abstract  IphoneDetailPageScreen selectFirstIphone();
+    public abstract IphoneDetailPageScreen selectFirstIphone();
 
+    public abstract IphoneDetailPageScreen addIphoneToCart();
 }

@@ -35,9 +35,9 @@ public class AmazonLoginBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public AmazonLoginBL loginToAmazon() {
+    public HomePageBL loginToAmazon() {
         AmazonLoginScreen.get()
                            .login(SAMPLE_TEST_CONTEXT.getUsername(), SAMPLE_TEST_CONTEXT.getPassword());
-        return new AmazonLoginBL();
+        return new HomePageBL();
     }
 }

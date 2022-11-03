@@ -19,11 +19,11 @@ public class SAMPLE_TEST_CONTEXT
     }
 
     public static String getUsername() {
-        return "raghavgarg@gmail.vom";
+        return "raghav.gargril291900@gmail.com";
     }
 
     public static String getPassword() {
-        return "fjdvdbfv";
+        return "P@ssw0rd";
     }
 
 }

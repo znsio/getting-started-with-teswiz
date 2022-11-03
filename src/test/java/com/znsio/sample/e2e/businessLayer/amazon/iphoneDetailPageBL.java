@@ -46,7 +46,9 @@ public class iphoneDetailPageBL {
 
 
     public iphoneDetailPageBL addToCart() {
-
+        IphoneDetailPageScreen
+                .get()
+                .addIphoneToCart();
         return this;
     }
 }

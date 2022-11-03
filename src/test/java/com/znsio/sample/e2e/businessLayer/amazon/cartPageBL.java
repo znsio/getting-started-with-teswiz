@@ -5,6 +5,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.businessLayer.jiomeet.LandingBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.sample.e2e.screen.amazon.IphoneSuccessfullyAddedToCartScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -38,6 +39,6 @@ public class cartPageBL {
 
 
     public void iSeeTheIphone13SuccessfullyAddedToCart() {
-
+        IphoneSuccessfullyAddedToCartScreen.get().iphone13IsDisplayedOnCart();
     }
 }

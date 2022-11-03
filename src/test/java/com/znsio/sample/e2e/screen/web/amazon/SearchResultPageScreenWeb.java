@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class SearchResultPageScreenWeb extends SearchResultPageScreen {
+    public static final By byListOfiphonexpath = By.xpath("//span[contains(text(),'iPhone 13')]");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -30,12 +31,12 @@ public class SearchResultPageScreenWeb extends SearchResultPageScreen {
 
 
     @Override
-    public SearchResultPageScreen isIphoneListVisible() {
-        int listofIphone13OnSearchResultPage = driver.findElements(By.xpath("//span[contains(text(),'iPhone 13')]")).size();
+    public boolean isIphoneListVisible() {
+        int listofIphone13OnSearchResultPage = driver.findElements(byListOfiphonexpath).size();
         if (listofIphone13OnSearchResultPage >0) {
-            return new SearchResultPageScreen;
+            return true;
         } else {
-            return null;
+            return false;
         }
     }
 }

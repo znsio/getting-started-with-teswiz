@@ -14,7 +14,16 @@ public class Amazon  extends TEST_CONTEXT {
     public static final String ME = "me";
 
     public Amazon (String userpersona, Platform onPlatform) {
-        this.username = "";
-        this.password = "";
+        this.username = "sdhcdh@gmail.com";
+        this.password = "fdvdfvdfvdv";
+    }
+
+
+    public static String getUsername() {
+        return "raghavgarg@gmail.vom";
+    }
+
+    public static String getPassword() {
+        return "fjdvdbfv";
     }
 }

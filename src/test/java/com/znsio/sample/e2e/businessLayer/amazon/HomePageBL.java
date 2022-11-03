@@ -3,13 +3,14 @@ package com.znsio.sample.e2e.businessLayer.amazon;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.sample.e2e.businessLayer.jiomeet.LandingBL;
+import com.znsio.sample.e2e.businessLayer.search.SearchBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.sample.e2e.screen.amazon.HomepPageScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
 public class HomePageBL {
-    private static final Logger LOGGER = Logger.getLogger(LandingBL.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(HomePageBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
@@ -36,7 +37,9 @@ public class HomePageBL {
     }
 
 
-    public void searchForIphone13() {
-
+    public SearchBL searchForIphone13() {
+        HomepPageScreen.get()
+                .searchForiPhone13();
+        return new SearchBL();
     }
 }

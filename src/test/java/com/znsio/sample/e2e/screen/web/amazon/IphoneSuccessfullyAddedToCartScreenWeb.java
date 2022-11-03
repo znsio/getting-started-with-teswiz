@@ -35,6 +35,8 @@ public class IphoneSuccessfullyAddedToCartScreenWeb extends IphoneSuccessfullyAd
        String textFromCartPage = driver.findElement(By.xpath("a-truncate-cut")).getText();
        if (textFromCartPage.contains("iPhone 13")) {
             LOGGER.info("iphone 13 successfully added to cart");
+       } else {
+           LOGGER.info("iphone 13 not added to cart");
        }
         return this;
     }

@@ -25,8 +25,6 @@ public abstract class AmazonLoginScreen {
                 .getId());
 
         switch(platform) {
-   //         case android:
-   //             return new AmazonScreenAndroid(driver, visually);
             case web:
                 return new AmazonScreenWeb(driver, visually) {
                 };

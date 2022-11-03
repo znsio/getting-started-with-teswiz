@@ -26,8 +26,6 @@ public abstract class IphoneSuccessfullyAddedToCartScreen {
                 .getId());
 
         switch(platform) {
-            //         case android:
-            //             return new AmazonScreenAndroid(driver, visually);
             case web:
                 return new IphoneSuccessfullyAddedToCartScreenWeb(driver, visually) {
                 };

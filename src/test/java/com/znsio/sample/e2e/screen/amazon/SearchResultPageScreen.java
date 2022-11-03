@@ -26,8 +26,6 @@ public abstract class SearchResultPageScreen {
                 .getId());
 
         switch(platform) {
-            //         case android:
-            //             return new AmazonScreenAndroid(driver, visually);
             case web:
                 return new SearchResultPageScreenWeb(driver, visually);
         }

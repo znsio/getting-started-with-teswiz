@@ -37,9 +37,9 @@ public class AmazonLogInScreenWeb extends AmazonLogInScreen {
 
     @Override
     public boolean isLoginToAmazonHomePage(String username, String password){
-        driver.findElement(byUserNameId).sendKeys(SAMPLE_TEST_CONTEXT.username);
+        driver.findElement(byUserNameId).sendKeys(SAMPLE_TEST_CONTEXT.USER_NAME);
         driver.findElement(byContinueButton).click();
-        driver.findElement(byPasswordId).sendKeys(SAMPLE_TEST_CONTEXT.password);
+        driver.findElement(byPasswordId).sendKeys(SAMPLE_TEST_CONTEXT.PASSWORD);
         return driver.isElementPresent(byAmazonLogo);
 
     }

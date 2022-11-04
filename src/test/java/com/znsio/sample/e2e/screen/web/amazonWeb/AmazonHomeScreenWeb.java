@@ -31,6 +31,7 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
     }
 
     public IphoneListScreen searchIphone13(){
+        driver.findElement(bySearchTabId).click();
         driver.findElement(bySearchTabId).sendKeys("iphone 13");
         driver.findElement(bySearchButton).click();
         return IphoneListScreen.get();

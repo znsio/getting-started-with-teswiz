@@ -32,6 +32,7 @@ public abstract class IphoneListScreen {
     }
 
     public abstract boolean verifyProductName();
+    public abstract boolean verifyThePresenceOfResultsText();
     public abstract boolean listCount();
     public abstract ProductPageScreen clickOnIphone();
 }

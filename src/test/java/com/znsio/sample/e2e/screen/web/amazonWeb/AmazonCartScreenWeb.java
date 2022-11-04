@@ -12,7 +12,7 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
     private static final String SCREEN_NAME = AmazonCartScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    private final By byProductName = By.xpath("//span[contains(text(),'Apple iPhone 13')]");
+    private final By bySubtotalText = By.id("sc-subtotal-label-activecart");
     private static final By shoppingCartHeading = By.cssSelector("div[class='a-row'] h1");
 
     public AmazonCartScreenWeb(Driver driver, Visual visually) {
@@ -29,8 +29,10 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
     }
 
     @Override
-    public String verifyAddedProductInCart() {
-     return driver.findElement(byProductName).getText();
+    public String verifySubTotalText() {
+        String product_name = driver.findElement(bySubtotalText).getText();
+        System.out.println("product_name"+ product_name);
+        return product_name;
     }
 
 }

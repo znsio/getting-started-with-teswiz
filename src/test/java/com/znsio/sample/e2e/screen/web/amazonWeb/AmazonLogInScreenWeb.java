@@ -5,6 +5,7 @@ import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.sample.e2e.screen.amazon.AmazonHomeScreen;
 import com.znsio.sample.e2e.screen.amazon.AmazonLogInScreen;
 import com.znsio.sample.e2e.screen.web.jiomeet.InAMeetingScreenWeb;
 import org.apache.log4j.Logger;
@@ -19,12 +20,12 @@ public class AmazonLogInScreenWeb extends AmazonLogInScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private final TestExecutionContext context;
-    private final By byUserNameId = By.id("username");
+    private final By byUserNameId = By.id("ap_email");
     private final By byContinueButton = By.id("continue");
     private final By byPasswordId = By.id("ap_password");
-    private final By byLoginButtonID = By.id("signInSubmit");
+    public static final By byClickOnSignIn = By.id("signInSubmit");
     private final By byAmazonLogo = By.cssSelector("div#nav-logo");
-    private final By byErrorMessageClassName = By.className("a-alert-heading");
+
 
     public AmazonLogInScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -36,11 +37,12 @@ public class AmazonLogInScreenWeb extends AmazonLogInScreen {
     }
 
     @Override
-    public boolean isLoginToAmazonHomePage(String username, String password){
+    public AmazonHomeScreen isLoginToAmazonHomePage(){
+        driver.findElement(byUserNameId).click();
         driver.findElement(byUserNameId).sendKeys(SAMPLE_TEST_CONTEXT.USER_NAME);
         driver.findElement(byContinueButton).click();
         driver.findElement(byPasswordId).sendKeys(SAMPLE_TEST_CONTEXT.PASSWORD);
-        return driver.isElementPresent(byAmazonLogo);
-
+        driver.findElement(byClickOnSignIn).click();
+        return AmazonHomeScreen.get();
     }
 }

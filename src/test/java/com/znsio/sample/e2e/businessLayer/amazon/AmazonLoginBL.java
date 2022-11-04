@@ -32,9 +32,9 @@ public class AmazonLoginBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public AmazonHomePageBL verifyLoginToAmazon(String username, String password) {
-        boolean amazonHomePage = AmazonLogInScreen.get().isLoginToAmazonHomePage(username,password);
-        assertThat(amazonHomePage).isTrue();
+    public AmazonHomePageBL LoginToAmazon() {
+        AmazonLogInScreen.get().isLoginToAmazonHomePage();
+//        assertThat(amazonHomePage).isTrue();
         return new AmazonHomePageBL();
     }
 

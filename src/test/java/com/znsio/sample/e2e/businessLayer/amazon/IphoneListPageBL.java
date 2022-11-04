@@ -36,6 +36,8 @@ public class IphoneListPageBL {
         assertThat(isPhoneNamePresent).isTrue();
         boolean isIphoneListPresent = IphoneListScreen.get().listCount();
         assertThat(isIphoneListPresent).isTrue();
+        boolean isResultsTextPresent = IphoneListScreen.get().verifyThePresenceOfResultsText();
+        assertThat(isResultsTextPresent).isTrue();
         return this;
     }
     public ProductPageBL clickOnFirstProduct() {

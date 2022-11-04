@@ -37,8 +37,8 @@ public class AmazonCartBL {
         return this;
     }
     public AmazonCartBL verifySameProductPresentInCart() {
-        String productName = AmazonCartScreen.get().verifyAddedProductInCart();
-        assertThat(productName).containsIgnoringCase("iphone 13");
+        String productName = AmazonCartScreen.get().verifySubTotalText();
+        assertThat(productName).containsIgnoringCase("Subtotal");
         return this;
     }
 }

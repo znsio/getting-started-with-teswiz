@@ -12,7 +12,8 @@ public class IphoneListScreenWeb extends IphoneListScreen {
     private final Visual visually;
     private static final String SCREEN_NAME = IphoneListScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-    private final By bySearchResult = By.xpath("//span[contains(text(),'iPhone 13')]");
+    private final By byResultsText = By.xpath("//span[contains(text(),'RESULTS')]");
+    private final By bySearchResults = By.xpath("//span[contains(text(),'Apple iPhone 13')]");
     private final By byFirstProductName = By.xpath("(//span[contains(text(),'iPhone 13')])[3]");
 
     public IphoneListScreenWeb(Driver driver, Visual visually) {
@@ -22,16 +23,24 @@ public class IphoneListScreenWeb extends IphoneListScreen {
     }
 
     public boolean verifyProductName(){
-       String result = driver.findElement(bySearchResult).getText();
-      if(result.contains("Apple iPhone 13"))
+       String firstProductName = driver.findElement(byFirstProductName).getText();
+      if(firstProductName.contains("iPhone 13"))
           return true;
       else
           return false;
     }
 
+    public boolean verifyThePresenceOfResultsText(){
+        String checkForResultsText = driver.findElement(byResultsText).getText();
+        if(checkForResultsText.equalsIgnoreCase("results"))
+        return true;
+                else
+                  return  false;
+    }
+
     public boolean listCount(){
-        driver.findElements(bySearchResult);
-        int result = driver.findElements(bySearchResult).size();
+        driver.findElements(bySearchResults);
+        int result = driver.findElements(bySearchResults).size();
         if(result>0)
             return true;
         else

@@ -13,7 +13,7 @@ public class ProductPageScreenWeb extends ProductPageScreen {
     private static final String SCREEN_NAME = ProductPageScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    private final By byProductName = By.id("IphoneScreen");
+    private final By byProductName = By.xpath("(//span[@id='productTitle'])");
     private final By byAddToCart = By.id("add-to-cart-button");
     private final By verifyCart = By.xpath("(//span[contains(text(),'Added to Cart')])[3]");
     private final By clickOnCart = By.cssSelector("input[aria-labelledby='attach-sidesheet-view-cart-button-announce']");
@@ -35,12 +35,13 @@ public class ProductPageScreenWeb extends ProductPageScreen {
 //    }
 
     public ProductPageScreen clickAddToCart(){
-        driver.findElement(byAddToCart).click();
+        driver.waitForClickabilityOf(byAddToCart).click();
+//        driver.waitForClickabilityOf(cartPopupCloseButton).click();
         return this;
     }
 
     public String checkSuccessMsgForAddToCart(){
-        String addedToCartText = driver.findElement(verifyCart).getText();
+        String addedToCartText = driver.waitTillElementIsPresent(verifyCart).getText();
         return addedToCartText;
     }
 

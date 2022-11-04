@@ -25,11 +25,11 @@ public class AmazonSteps {
         LOGGER.info("allDrivers: " + (null == allDrivers));
     }
 
-    @Given("I login to amazon with {string} and {string}")
-    public void i_login_to_amazon_with_and(String username, String password) {
-        LOGGER.info(System.out.printf("iLoginWithInvalidCredentials - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME));
+    @Given("I login to amazon with valid credentials")
+    public void i_login_to_amazon_with_valid_credentials() {
+        LOGGER.info(System.out.printf("i_login_to_amazon_with_valid_credentials", SAMPLE_TEST_CONTEXT.ME));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME,Runner.platform,context);
-        new AmazonLoginBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).verifyLoginToAmazon(username, password);
+        new AmazonLoginBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).LoginToAmazon();
     }
 
     @When("I searched for iphone13 and selected the first item result")

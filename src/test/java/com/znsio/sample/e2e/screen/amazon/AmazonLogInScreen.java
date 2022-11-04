@@ -31,5 +31,5 @@ public abstract class AmazonLogInScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract boolean isLoginToAmazonHomePage(String username, String Password);
+    public abstract AmazonHomeScreen isLoginToAmazonHomePage();
 }

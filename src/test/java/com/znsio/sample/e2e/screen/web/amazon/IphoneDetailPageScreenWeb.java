@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class IphoneDetailPageScreenWeb extends IphoneDetailPageScreen {
 
-    public static final By clickOnFirstIphone13 = By.xpath("(//span[contains(text(),'iPhone 13')])[2]");
+    public static final By clickOnFirstIphone13 = By.xpath("(//span[contains(text(),'iPhone 13')])[4]");
     public static final By byAddToCartId = By.id("add-to-cart-button");
     private final Driver driver;
     private final Visual visually;
@@ -45,7 +45,8 @@ public class IphoneDetailPageScreenWeb extends IphoneDetailPageScreen {
     @Override
     public IphoneDetailPageScreen addIphoneToCart() {
         driver.switchToNextTab();
-        driver.findElement(byAddToCartId).click();
+   //     driver.findElement(byAddToCartId).click();
+        driver.waitForClickabilityOf(byAddToCartId).click();
         return IphoneDetailPageScreen.get();
     }
 }

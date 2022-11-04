@@ -10,7 +10,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class IphoneSuccessfullyAddedToCartScreenWeb extends IphoneSuccessfullyAddedToCartScreen {
-    public static final By byCartButtonid = By.id("add-to-cart-button");
+    public static final By byCartButtonid = By.cssSelector("input[aria-labelledby='attach-sidesheet-view-cart-button-announce']");
+    public static final By byclickCartButtonOnCartPageXpath = By.xpath("(//span[@class='a-truncate-cut'])[1]");
+
+
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -31,9 +34,15 @@ public class IphoneSuccessfullyAddedToCartScreenWeb extends IphoneSuccessfullyAd
 
     @Override
     public IphoneSuccessfullyAddedToCartScreen iphone13IsDisplayedOnCart() {
-        driver.waitTillElementIsPresent(byCartButtonid);
-       driver.findElement(byCartButtonid).click();
-       String textFromCartPage = driver.findElement(By.xpath("a-truncate-cut")).getText();
+   /*     try {
+            driver.wait(7000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }*/
+   //     driver.waitTillElementIsPresent(byCartButtonid);
+        driver.waitForClickabilityOf(byCartButtonid).click();
+   //    driver.findElement(byCartButtonid).click();
+       String textFromCartPage = driver.findElement(byclickCartButtonOnCartPageXpath).getText();
        if (textFromCartPage.contains("iPhone 13")) {
             LOGGER.info("iphone 13 successfully added to cart");
        } else {

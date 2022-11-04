@@ -36,6 +36,8 @@ public class AmazonHomePageScreenWeb extends AmazonHomePageScreen {
         driver.findElement(byClickingOnSearchBoxid).click();
         driver.findElement(byClickingOnSearchBoxid).sendKeys("iphone13");
         driver.findElement(byClickOnSubmitId).click();
+        LOGGER.info("On Search Rsult Page");
+        visually.checkWindow(SCREEN_NAME,"On Amazon Search Result Page");
         return SearchResultPageScreen.get();
      //   return null;
     }

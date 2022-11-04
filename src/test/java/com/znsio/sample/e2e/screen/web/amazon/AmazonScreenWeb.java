@@ -46,6 +46,7 @@ public abstract class AmazonScreenWeb extends AmazonLoginScreen {
         LOGGER.info("Clicking on Password Field");
         driver.findElement(byPasswordid).sendKeys(password);
         driver.findElement(byClickOnSignId).click();
+        visually.checkWindow(SCREEN_NAME,"Successfully logged in");
         return AmazonHomePageScreen.get();
     }
 

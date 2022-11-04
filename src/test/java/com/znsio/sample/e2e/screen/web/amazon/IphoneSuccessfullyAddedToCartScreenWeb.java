@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class IphoneSuccessfullyAddedToCartScreenWeb extends IphoneSuccessfullyAddedToCartScreen {
-    public static final By byCartButtonid = By.id("attach-sidesheet-view-cart-button");
+    public static final By byCartButtonid = By.id("add-to-cart-button");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -31,6 +31,7 @@ public class IphoneSuccessfullyAddedToCartScreenWeb extends IphoneSuccessfullyAd
 
     @Override
     public IphoneSuccessfullyAddedToCartScreen iphone13IsDisplayedOnCart() {
+        driver.waitTillElementIsPresent(byCartButtonid);
        driver.findElement(byCartButtonid).click();
        String textFromCartPage = driver.findElement(By.xpath("a-truncate-cut")).getText();
        if (textFromCartPage.contains("iPhone 13")) {

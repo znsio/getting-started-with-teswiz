@@ -40,7 +40,6 @@ public class IphoneDetailPageScreenWeb extends IphoneDetailPageScreen {
         driver.findElement(clickOnFirstIphone13).click();
         driver.switchToNextTab();
      return IphoneDetailPageScreen.get();
-     //   return null;
     }
 
     @Override

@@ -50,7 +50,7 @@ public class AmazonSteps {
 
     @When("I add the iphone in cart")
     public void iAddTheIphoneInCart() {
-        new iphoneDetailPageBL()
+        new IphoneDetailPageBL()
                 .authenticateIphone13DetailPage()
                 .addToCart();
         LOGGER.info("iphone13 added to cart");

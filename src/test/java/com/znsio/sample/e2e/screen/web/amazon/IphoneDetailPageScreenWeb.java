@@ -9,9 +9,6 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.util.Iterator;
-import java.util.Set;
-
 public class IphoneDetailPageScreenWeb extends IphoneDetailPageScreen {
 
     public static final By clickOnFirstIphone13 = By.xpath("(//span[contains(text(),'iPhone 13')])[4]");
@@ -36,15 +33,19 @@ public class IphoneDetailPageScreenWeb extends IphoneDetailPageScreen {
 
 
     @Override
-    public IphoneDetailPageScreen selectFirstIphone() {
+    public boolean selectFirstIphone() {
         driver.findElement(clickOnFirstIphone13).click();
-        visually.checkWindow(SCREEN_NAME,"Iphone detail page opened");
-        return IphoneDetailPageScreen.get();
+        driver.switchToNextTab();
+        String validatePageTitle = driver.getInnerDriver().getTitle();
+        if (validatePageTitle.contains("Apple-iPhone-13")) {
+            visually.checkWindow(SCREEN_NAME,"Iphone detail page opened");
+            return true;
+        }
+        return false;
     }
 
     @Override
     public IphoneDetailPageScreen addIphoneToCart() {
-        driver.switchToNextTab();
    //     driver.findElement(byAddToCartId).click();
         driver.waitForClickabilityOf(byAddToCartId).click();
         return IphoneDetailPageScreen.get();

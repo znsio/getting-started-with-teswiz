@@ -3,22 +3,21 @@ package com.znsio.sample.e2e.businessLayer.amazon;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.sample.e2e.businessLayer.jiomeet.LandingBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazon.IphoneDetailPageScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
-public class iphoneDetailPageBL {
+public class IphoneDetailPageBL {
 
-    private static final Logger LOGGER = Logger.getLogger(LandingBL.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(IphoneDetailPageBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
 
 
-    public iphoneDetailPageBL(String userPersona, Platform forPlatform) {
+    public IphoneDetailPageBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -28,7 +27,7 @@ public class iphoneDetailPageBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public iphoneDetailPageBL() {
+    public IphoneDetailPageBL() {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -37,15 +36,16 @@ public class iphoneDetailPageBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public iphoneDetailPageBL authenticateIphone13DetailPage() {
-        IphoneDetailPageScreen
+    public IphoneDetailPageBL authenticateIphone13DetailPage() {
+       boolean isFirstIphoneClicked = IphoneDetailPageScreen
                 .get()
                 .selectFirstIphone();
+
         return this;
     }
 
 
-    public iphoneDetailPageBL addToCart() {
+    public IphoneDetailPageBL addToCart() {
         IphoneDetailPageScreen
                 .get()
                 .addIphoneToCart();

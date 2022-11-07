@@ -17,6 +17,7 @@ public class ProductPageScreenWeb extends ProductPageScreen {
     private final By byAddToCart = By.id("add-to-cart-button");
     private final By verifyCart = By.xpath("(//span[contains(text(),'Added to Cart')])[3]");
     private final By clickOnCart = By.cssSelector("input[aria-labelledby='attach-sidesheet-view-cart-button-announce']");
+    private final By byShareButton = By.xpath("//i[@title='Share']");
 
     public ProductPageScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -24,28 +25,34 @@ public class ProductPageScreenWeb extends ProductPageScreen {
         visually.checkWindow(SCREEN_NAME, "iphone screen");
     }
 
+    @Override
     public String verifyProductName(){
+        LOGGER.info("Validating the product name");
         String productName = driver.findElement(byProductName).getText();
         return productName;
     }
-
-//    public String verifyTitle(){
-//       = driver.ge
-//        return this;
+//    @Override
+//    public boolean verifyIfShareButtonIsPresent(){
+//        LOGGER.info("Validating the presence of share button");
+//        driver.waitTillElementIsPresent(byShareButton);
+//        return driver.isElementPresent(byShareButton);
 //    }
 
+    @Override
     public ProductPageScreen clickAddToCart(){
-        driver.waitForClickabilityOf(byAddToCart).click();
-//        driver.waitForClickabilityOf(cartPopupCloseButton).click();
+        LOGGER.info("adding items to the cart");
+        driver.waitForClickabilityOf(byAddToCart).click();;
         return this;
     }
-
+    @Override
     public String checkSuccessMsgForAddToCart(){
+        LOGGER.info("Verifying if the item is added to cart");
         String addedToCartText = driver.waitTillElementIsPresent(verifyCart).getText();
         return addedToCartText;
     }
-
+    @Override
     public AmazonCartScreen moveToCart(){
+        LOGGER.info("Click on cart button");
         driver.findElement(clickOnCart).click();
         return AmazonCartScreen.get();
     }

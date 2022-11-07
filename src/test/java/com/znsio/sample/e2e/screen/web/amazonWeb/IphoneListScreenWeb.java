@@ -31,6 +31,7 @@ public class IphoneListScreenWeb extends IphoneListScreen {
     }
 
     public boolean verifyThePresenceOfResultsText(){
+        LOGGER.debug("Verify the presence of RESULTS text");
         String checkForResultsText = driver.findElement(byResultsText).getText();
         if(checkForResultsText.equalsIgnoreCase("results"))
         return true;
@@ -39,6 +40,7 @@ public class IphoneListScreenWeb extends IphoneListScreen {
     }
 
     public boolean listCount(){
+        LOGGER.debug("Verify the presence of searched products");
         driver.findElements(bySearchResults);
         int result = driver.findElements(bySearchResults).size();
         if(result>0)
@@ -48,8 +50,10 @@ public class IphoneListScreenWeb extends IphoneListScreen {
     }
 
     public ProductPageScreen clickOnIphone(){
+        LOGGER.debug("clicking on first product from the list");
         driver.findElement(byFirstProductName).click();
         driver.switchToNextTab();
+        LOGGER.debug("Have successfully redirected to the product page");
         return ProductPageScreen.get();
     }
 }

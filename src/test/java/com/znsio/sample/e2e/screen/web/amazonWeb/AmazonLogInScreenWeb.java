@@ -39,10 +39,13 @@ public class AmazonLogInScreenWeb extends AmazonLogInScreen {
     @Override
     public AmazonHomeScreen isLoginToAmazonHomePage(){
         driver.findElement(byUserNameId).click();
+        LOGGER.debug("Enter username");
         driver.findElement(byUserNameId).sendKeys(SAMPLE_TEST_CONTEXT.USER_NAME);
         driver.findElement(byContinueButton).click();
+        LOGGER.debug("Enter password");
         driver.findElement(byPasswordId).sendKeys(SAMPLE_TEST_CONTEXT.PASSWORD);
         driver.findElement(byClickOnSignIn).click();
+        LOGGER.debug("Have successfully login to amazon");
         return AmazonHomeScreen.get();
     }
 }

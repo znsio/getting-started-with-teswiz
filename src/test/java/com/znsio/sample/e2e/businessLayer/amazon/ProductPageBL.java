@@ -32,10 +32,11 @@ public class ProductPageBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public ProductPageBL verifyProductDetailsAndTitle() {
+    public ProductPageBL verifyProductDetails() {
         String getProductName = ProductPageScreen.get().verifyProductName();
         assertThat(getProductName).containsIgnoringCase("iphone 13");
-//        assert product title
+//        boolean isShareButtonPresent = ProductPageScreen.get().verifyIfShareButtonIsPresent();
+//        assertThat(isShareButtonPresent).isTrue();
         return this;
     }
 

@@ -8,6 +8,6 @@ public class SAMPLE_TEST_CONTEXT
     public static final String MEETING_ID = "meetingId";
     public static final String MEETING_PASSWORD = "meetingPassword";
     public static final String INVITATION_LINK = "invitationLink";
-    public static final String USER_NAME = "ishant20.gupta@gmail.com";
-    public static final String PASSWORD = "Amaze@2020";
+    public static final String USER_NAME = "raghav.gargril291900@gmail.com";
+    public static final String PASSWORD = "P@ssw0rd";
 }

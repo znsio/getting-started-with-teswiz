@@ -34,11 +34,13 @@ public class AmazonCartBL {
     public AmazonCartBL verifyAmIOnCart() {
         String headingValue = AmazonCartScreen.get().AmIOnCartPage();
         assertThat(headingValue).containsIgnoringCase("Shopping Cart");
+        String productName = AmazonCartScreen.get().verifySubTotalText();
+        assertThat(productName).containsIgnoringCase("Subtotal");
         return this;
     }
     public AmazonCartBL verifySameProductPresentInCart() {
-        String productName = AmazonCartScreen.get().verifySubTotalText();
-        assertThat(productName).containsIgnoringCase("Subtotal");
+        boolean isSameProductIsInTheCart = AmazonCartScreen.get().verifyThePresenceOfAddedProductInTheCart();
+        assertThat(isSameProductIsInTheCart).isTrue();
         return this;
     }
 }

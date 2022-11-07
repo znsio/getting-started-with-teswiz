@@ -33,4 +33,5 @@ public abstract class AmazonCartScreen {
 
     public abstract String AmIOnCartPage();
     public abstract String verifySubTotalText();
+    public abstract boolean verifyThePresenceOfAddedProductInTheCart();
 }

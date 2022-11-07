@@ -27,25 +27,29 @@ public class AmazonSteps {
 
     @Given("I login to amazon with valid credentials")
     public void i_login_to_amazon_with_valid_credentials() {
-        LOGGER.info(System.out.printf("i_login_to_amazon_with_valid_credentials", SAMPLE_TEST_CONTEXT.ME));
+        LOGGER.info("i login to amazon with valid credentials");
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME,Runner.platform,context);
         new AmazonLoginBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).LoginToAmazon();
+        LOGGER.info("Have successfully redirected to home page");
     }
 
     @When("I searched for iphone13 and selected the first item result")
     public void i_searched_for_iphone13_and_selected_the_first_item_result() {
         LOGGER.info("I am on amazon HomePage and searches for iphone13");
         new AmazonHomePageBL().searchForIphone13();
+        LOGGER.info("Have landed on the results page");
         new IphoneListPageBL().validateIphoneResult();
         new IphoneListPageBL().clickOnFirstProduct();
+        LOGGER.info("Have landed on the Product page");
     }
 
     @And("I add the iphone13 to the cart")
     public void i_add_the_iphone13_to_the_cart() {
         LOGGER.info("I am on iphone page and adding the product to the cart");
-        new ProductPageBL().verifyProductDetailsAndTitle();
+        new ProductPageBL().verifyProductDetails();
         new ProductPageBL().addProductToCart();
         new ProductPageBL().verifyCart();
+        LOGGER.info("Have added the product to the cart");
         new ProductPageBL().clickOnCart();
     }
 
@@ -54,5 +58,6 @@ public class AmazonSteps {
         LOGGER.info("I am on the cart");
         new AmazonCartBL().verifyAmIOnCart();
         new AmazonCartBL().verifySameProductPresentInCart();
+        LOGGER.info("Have successfully verified the added item");
     }
 }

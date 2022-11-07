@@ -31,9 +31,11 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
     }
 
     public IphoneListScreen searchIphone13(){
+        LOGGER.debug("searching iphone in the search bar");
         driver.findElement(bySearchTabId).click();
         driver.findElement(bySearchTabId).sendKeys("iphone 13");
         driver.findElement(bySearchButton).click();
+        LOGGER.debug("Have redirected to product listing page");
         return IphoneListScreen.get();
     }
 }

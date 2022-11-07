@@ -12,9 +12,9 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
     private static final String SCREEN_NAME = AmazonCartScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    private final By bySubtotalText = By.id("sc-subtotal-label-activecart");
-    private static final By shoppingCartHeading = By.cssSelector("div[class='a-row'] h1");
-
+    private static final By bySubtotalText = By.id("sc-subtotal-label-activecart");
+    private static final By byShoppingCartHeading = By.cssSelector("div[class='a-row'] h1");
+    private static final By byProductNameAddedToTheCart = By.xpath("(//span[@class='a-truncate-cut'])[1]");
     public AmazonCartScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
@@ -25,14 +25,25 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
     public String AmIOnCartPage() {
         LOGGER.debug("On Shopping Cart Page");
         visually.checkWindow(SCREEN_NAME,"On Shopping Cart page");
-        return driver.findElement(shoppingCartHeading).getText();
+        return driver.findElement(byShoppingCartHeading).getText();
     }
 
     @Override
     public String verifySubTotalText() {
+        LOGGER.info("Verifying the presence of subtotal text on cart page");
         String product_name = driver.findElement(bySubtotalText).getText();
         System.out.println("product_name"+ product_name);
         return product_name;
+    }
+
+    @Override
+    public boolean verifyThePresenceOfAddedProductInTheCart(){
+        String productName = driver.findElement(byProductNameAddedToTheCart).getText();
+        System.out.println("productName-->" + productName);
+        if(productName.contains("iPhone 13"))
+            return true;
+        else
+            return false;
     }
 
 }

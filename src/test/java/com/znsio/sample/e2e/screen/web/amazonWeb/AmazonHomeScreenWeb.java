@@ -5,7 +5,7 @@ import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.amazon.AmazonHomeScreen;
-import com.znsio.sample.e2e.screen.amazon.IphoneListScreen;
+import com.znsio.sample.e2e.screen.amazon.SearchResultListPageScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -30,12 +30,12 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
         context = Runner.getTestExecutionContext(threadId);
     }
 
-    public IphoneListScreen searchIphone13(){
+    public SearchResultListPageScreen searchIphone13(){
         LOGGER.debug("searching iphone in the search bar");
         driver.findElement(bySearchTabId).click();
         driver.findElement(bySearchTabId).sendKeys("iphone 13");
         driver.findElement(bySearchButton).click();
         LOGGER.debug("Have redirected to product listing page");
-        return IphoneListScreen.get();
+        return SearchResultListPageScreen.get();
     }
 }

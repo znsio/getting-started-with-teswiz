@@ -39,7 +39,6 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
     @Override
     public boolean verifyThePresenceOfAddedProductInTheCart(){
         String productName = driver.findElement(byProductNameAddedToTheCart).getText();
-        System.out.println("productName-->" + productName);
         if(productName.contains("iPhone 13"))
             return true;
         else

@@ -31,14 +31,11 @@ public class AmazonCartBL {
         this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
         this.currentPlatform = Runner.platform;
     }
-    public AmazonCartBL verifyAmIOnCart() {
+    public AmazonCartBL verifyAmIOnCartAndSameItemIsPresent() {
         String headingValue = AmazonCartScreen.get().AmIOnCartPage();
         assertThat(headingValue).containsIgnoringCase("Shopping Cart");
         String productName = AmazonCartScreen.get().verifySubTotalText();
         assertThat(productName).containsIgnoringCase("Subtotal");
-        return this;
-    }
-    public AmazonCartBL verifySameProductPresentInCart() {
         boolean isSameProductIsInTheCart = AmazonCartScreen.get().verifyThePresenceOfAddedProductInTheCart();
         assertThat(isSameProductIsInTheCart).isTrue();
         return this;

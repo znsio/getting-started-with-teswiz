@@ -38,8 +38,8 @@ public class AmazonSteps {
         LOGGER.info("I am on amazon HomePage and searches for iphone13");
         new AmazonHomePageBL().searchForIphone13();
         LOGGER.info("Have landed on the results page");
-        new IphoneListPageBL().validateIphoneResult();
-        new IphoneListPageBL().clickOnFirstProduct();
+        new SearchResultListPageBL().validateIphoneResult();
+        new SearchResultListPageBL().clickOnFirstProduct();
         LOGGER.info("Have landed on the Product page");
     }
 
@@ -56,8 +56,7 @@ public class AmazonSteps {
     @Then("iphone13 is added to the cart")
     public void iphone13_is_added_to_the_cart() {
         LOGGER.info("I am on the cart");
-        new AmazonCartBL().verifyAmIOnCart();
-        new AmazonCartBL().verifySameProductPresentInCart();
+        new AmazonCartBL().verifyAmIOnCartAndSameItemIsPresent();
         LOGGER.info("Have successfully verified the added item");
     }
 }

@@ -7,7 +7,6 @@ import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazon.AmazonHomeScreen;
 import com.znsio.sample.e2e.screen.amazon.AmazonLogInScreen;
-import com.znsio.sample.e2e.screen.web.jiomeet.InAMeetingScreenWeb;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +15,7 @@ public class AmazonLogInScreenWeb extends AmazonLogInScreen {
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
-    private static final String SCREEN_NAME = InAMeetingScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = AmazonLogInScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private final TestExecutionContext context;
@@ -24,8 +23,6 @@ public class AmazonLogInScreenWeb extends AmazonLogInScreen {
     private final By byContinueButton = By.id("continue");
     private final By byPasswordId = By.id("ap_password");
     public static final By byClickOnSignIn = By.id("signInSubmit");
-    private final By byAmazonLogo = By.cssSelector("div#nav-logo");
-
 
     public AmazonLogInScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;

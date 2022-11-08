@@ -4,17 +4,17 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.amazon.IphoneListScreen;
+import com.znsio.sample.e2e.screen.amazon.SearchResultListPageScreen;
 import org.apache.log4j.Logger;
 
 import static org.assertj.core.api.Assertions.assertThat;
-public class IphoneListPageBL {
-    private static final Logger LOGGER = Logger.getLogger(IphoneListPageBL.class.getName());
+public class SearchResultListPageBL {
+    private static final Logger LOGGER = Logger.getLogger(SearchResultListPageBL.class.getName());
     private final TestExecutionContext context;
     private final String currentUserPersona;
     private final Platform currentPlatform;
 
-    public IphoneListPageBL(String userPersona, Platform forPlatform){
+    public SearchResultListPageBL(String userPersona, Platform forPlatform){
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -23,7 +23,7 @@ public class IphoneListPageBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public IphoneListPageBL() {
+    public SearchResultListPageBL() {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -31,17 +31,17 @@ public class IphoneListPageBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public IphoneListPageBL validateIphoneResult() {
-        boolean isPhoneNamePresent = IphoneListScreen.get().verifyProductName();
+    public SearchResultListPageBL validateIphoneResult() {
+        boolean isPhoneNamePresent = SearchResultListPageScreen.get().verifyProductName();
         assertThat(isPhoneNamePresent).isTrue();
-        boolean isIphoneListPresent = IphoneListScreen.get().listCount();
+        boolean isIphoneListPresent = SearchResultListPageScreen.get().listCount();
         assertThat(isIphoneListPresent).isTrue();
-        boolean isResultsTextPresent = IphoneListScreen.get().verifyThePresenceOfResultsText();
+        boolean isResultsTextPresent = SearchResultListPageScreen.get().verifyThePresenceOfResultsText();
         assertThat(isResultsTextPresent).isTrue();
         return this;
     }
     public ProductPageBL clickOnFirstProduct() {
-        IphoneListScreen.get().clickOnIphone();
+        SearchResultListPageScreen.get().clickOnIphone();
         return new ProductPageBL();
     }
 }

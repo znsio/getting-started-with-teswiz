@@ -9,5 +9,5 @@ public class SAMPLE_TEST_CONTEXT
     public static final String MEETING_PASSWORD = "meetingPassword";
     public static final String INVITATION_LINK = "invitationLink";
     public static final String USER_NAME = "raghav.gargril291900@gmail.com";
-    public static final String PASSWORD = "P@ssw0rd";
+    public static final String PASSWORD = "Hello123@";
 }

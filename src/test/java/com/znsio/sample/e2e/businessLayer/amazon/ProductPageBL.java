@@ -35,8 +35,6 @@ public class ProductPageBL {
     public ProductPageBL verifyProductDetails() {
         String getProductName = ProductPageScreen.get().verifyProductName();
         assertThat(getProductName).containsIgnoringCase("iphone 13");
-//        boolean isShareButtonPresent = ProductPageScreen.get().verifyIfShareButtonIsPresent();
-//        assertThat(isShareButtonPresent).isTrue();
         return this;
     }
 

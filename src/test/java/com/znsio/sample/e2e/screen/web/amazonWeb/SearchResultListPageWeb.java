@@ -2,32 +2,45 @@ package com.znsio.sample.e2e.screen.web.amazonWeb;
 
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.amazon.IphoneListScreen;
+import com.znsio.sample.e2e.screen.amazon.SearchResultListPageScreen;
 import com.znsio.sample.e2e.screen.amazon.ProductPageScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
-public class IphoneListScreenWeb extends IphoneListScreen {
+import java.util.ArrayList;
+import java.util.List;
+
+public class SearchResultListPageWeb extends SearchResultListPageScreen {
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = IphoneListScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = SearchResultListPageWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final By byResultsText = By.xpath("//span[contains(text(),'RESULTS')]");
     private final By bySearchResults = By.xpath("//span[contains(text(),'Apple iPhone 13')]");
-    private final By byFirstProductName = By.xpath("(//span[contains(text(),'iPhone 13')])[3]");
+    private final By byFirstProductName = By.xpath("//span[contains(text(),'iPhone 13')]");
 
-    public IphoneListScreenWeb(Driver driver, Visual visually) {
+    public SearchResultListPageWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
         visually.checkWindow(SCREEN_NAME, "listing screen");
     }
 
     public boolean verifyProductName(){
-       String firstProductName = driver.findElement(byFirstProductName).getText();
-      if(firstProductName.contains("iPhone 13"))
-          return true;
-      else
-          return false;
+        boolean isTextPresent = false;
+        List<WebElement> text = driver.findElements(byFirstProductName);
+        for (int i = 0; i < text.size(); i++)
+        {
+            if (text.get(i).toString().contains("iPhone 13"))
+            {
+                isTextPresent = true;
+                break;
+            }
+        }
+        if (isTextPresent)
+            return true;
+        else
+            return false;
     }
 
     public boolean verifyThePresenceOfResultsText(){
@@ -51,7 +64,12 @@ public class IphoneListScreenWeb extends IphoneListScreen {
 
     public ProductPageScreen clickOnIphone(){
         LOGGER.debug("clicking on first product from the list");
-        driver.findElement(byFirstProductName).click();
+        List<WebElement> text = driver.findElements(byFirstProductName);
+        for (int i = 0; i < text.size(); i++)
+        {
+                text.get(1).click();
+                break;
+        }
         driver.switchToNextTab();
         LOGGER.debug("Have successfully redirected to the product page");
         return ProductPageScreen.get();

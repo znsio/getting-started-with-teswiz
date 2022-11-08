@@ -30,8 +30,8 @@ public class AmazonHomePageBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public IphoneListPageBL searchForIphone13() {
+    public SearchResultListPageBL searchForIphone13() {
         AmazonHomeScreen.get().searchIphone13();
-        return new IphoneListPageBL();
+        return new SearchResultListPageBL();
     }
 }

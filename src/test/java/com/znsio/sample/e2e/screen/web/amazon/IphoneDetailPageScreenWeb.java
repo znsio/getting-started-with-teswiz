@@ -32,15 +32,16 @@ public class IphoneDetailPageScreenWeb extends IphoneDetailPageScreen {
     }
 
     @Override
-    public IphoneDetailPageScreen addIphoneToCart() {
+    public boolean addIphoneToCart() {
         driver.findElement(byAddToCartId).click();
         driver.waitTillElementIsPresent(validatingSidePannelById);
         boolean isSidePannelVisible = driver.findElement(validatingSidePannelById).isDisplayed();
         if(isSidePannelVisible) {
             LOGGER.info("Iphone added to cart");
+            return true;
         } else {
             LOGGER.error("Iphone is not added to cart");
+            return false;
         }
-        return IphoneDetailPageScreen.get();
     }
 }

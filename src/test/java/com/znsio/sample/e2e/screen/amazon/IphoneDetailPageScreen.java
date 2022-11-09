@@ -32,5 +32,5 @@ public abstract class IphoneDetailPageScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract IphoneDetailPageScreen addIphoneToCart();
+    public abstract boolean addIphoneToCart();
 }

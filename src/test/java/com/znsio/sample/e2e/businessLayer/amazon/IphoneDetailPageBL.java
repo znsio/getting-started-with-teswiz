@@ -8,6 +8,8 @@ import com.znsio.sample.e2e.screen.amazon.IphoneDetailPageScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class IphoneDetailPageBL {
 
     private static final Logger LOGGER = Logger.getLogger(IphoneDetailPageBL.class.getName());
@@ -38,9 +40,10 @@ public class IphoneDetailPageBL {
 
 
     public IphoneDetailPageBL addToCart() {
-        IphoneDetailPageScreen
+        boolean isIphoneAddedToCart = IphoneDetailPageScreen
                 .get()
                 .addIphoneToCart();
+        assertThat(isIphoneAddedToCart).isTrue();
         return this;
     }
 }

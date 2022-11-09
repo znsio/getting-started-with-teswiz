@@ -4,19 +4,19 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.web.amazon.IphoneSuccessfullyAddedToCartScreenWeb;
+import com.znsio.sample.e2e.screen.web.amazon.AmazonCartScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
-public abstract class IphoneSuccessfullyAddedToCartScreen {
+public abstract class AmazonCartScreen {
 
-    private static final String SCREEN_NAME = IphoneSuccessfullyAddedToCartScreen.class.getSimpleName();
+    private static final String SCREEN_NAME = AmazonCartScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public static IphoneSuccessfullyAddedToCartScreen get() {
+    public static AmazonCartScreenWeb get() {
         Driver driver = fetchDriver(Thread.currentThread()
                 .getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread()
@@ -27,12 +27,12 @@ public abstract class IphoneSuccessfullyAddedToCartScreen {
 
         switch(platform) {
             case web:
-                return new IphoneSuccessfullyAddedToCartScreenWeb(driver, visually) {
+                return new AmazonCartScreenWeb(driver, visually) {
                 };
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
 
-    public abstract IphoneSuccessfullyAddedToCartScreen iphone13IsDisplayedOnCart();
+    public abstract boolean iphone13IsDisplayedOnCart();
 }

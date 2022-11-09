@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 public class IphoneSuccessfullyAddedToCartScreenWeb extends IphoneSuccessfullyAddedToCartScreen {
     public static final By byCartButtonid = By.cssSelector("input[aria-labelledby='attach-sidesheet-view-cart-button-announce']");
     public static final By byclickCartButtonOnCartPageXpath = By.xpath("(//span[@class='a-truncate-cut'])[1]");
+    public static final By byCartPageId = By.id("sc-active-cart");
 
 
     private final Driver driver;
@@ -34,14 +35,12 @@ public class IphoneSuccessfullyAddedToCartScreenWeb extends IphoneSuccessfullyAd
 
     @Override
     public IphoneSuccessfullyAddedToCartScreen iphone13IsDisplayedOnCart() {
-   /*     try {
-            driver.wait(7000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }*/
-   //     driver.waitTillElementIsPresent(byCartButtonid);
+        driver.waitTillElementIsPresent(byCartButtonid);
         driver.waitForClickabilityOf(byCartButtonid).click();
-   //    driver.findElement(byCartButtonid).click();
+
+        driver.waitTillElementIsPresent(byCartPageId);
+        String validatingCartPage = driver.findElement(byCartPageId).getText();
+        LOGGER.info("Current Page:-" +validatingCartPage);
        String textFromCartPage = driver.findElement(byclickCartButtonOnCartPageXpath).getText();
        if (textFromCartPage.contains("iPhone 13")) {
             LOGGER.info("iphone 13 successfully added to cart");

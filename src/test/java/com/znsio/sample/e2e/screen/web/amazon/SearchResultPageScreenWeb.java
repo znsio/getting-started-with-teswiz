@@ -10,8 +10,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class SearchResultPageScreenWeb extends SearchResultPageScreen {
-  //  public static final By byListOfiphonexpath = By.xpath("//span[contains(text(),'iPhone 13')]");
-    public static final By byListOfiphonexpath = By.xpath("//span[contains(text(),'Apple iPhone 13')]");
+    public static final By getIphoneCountByXpath = By.xpath("//div[@class='a-section']");
+    public static final By clickOnFirstIphone13 = By.xpath("(//span[contains(text(),'iPhone 13')])[4]");
+
 
     private final Driver driver;
     private final Visual visually;
@@ -33,13 +34,26 @@ public class SearchResultPageScreenWeb extends SearchResultPageScreen {
 
 
     @Override
-    public boolean isIphoneListVisible() {
-      //  driver.waitTillElementIsPresent(byListOfiphonexpath);
-      //   int listofIphone13OnSearchResultPage = driver.findElements(byListOfiphonexpath).size();
-        int listofIphone13OnSearchResultPage = 5;
-        if (listofIphone13OnSearchResultPage >0) {
+    public SearchResultPageScreen isIphoneListVisible() {
+       int iphoneCountOnSRp =  driver.findElements(getIphoneCountByXpath).size();
+       if (iphoneCountOnSRp>0) {
+           LOGGER.info("List of Iphone on SRP page:-" +iphoneCountOnSRp);
+       } else {
+           LOGGER.error("Iphone list not visible");
+       }
+     return this;
+    }
+
+    @Override
+    public boolean selectFirstIphone() {
+        driver.findElement(clickOnFirstIphone13).click();
+        driver.switchToNextTab();
+        String validatePageTitle = driver.getInnerDriver().getTitle();
+        if (validatePageTitle.contains("Apple-iPhone-13")) {
+            LOGGER.info("Successfully opened the Iphone Detail Page");
             return true;
         } else {
+            LOGGER.error("Iphone Detail page not opened");
             return false;
         }
     }

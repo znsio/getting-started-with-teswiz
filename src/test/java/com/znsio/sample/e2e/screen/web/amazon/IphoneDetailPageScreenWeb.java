@@ -11,8 +11,8 @@ import org.openqa.selenium.WebDriver;
 
 public class IphoneDetailPageScreenWeb extends IphoneDetailPageScreen {
 
-    public static final By clickOnFirstIphone13 = By.xpath("(//span[contains(text(),'iPhone 13')])[4]");
     public static final By byAddToCartId = By.id("add-to-cart-button");
+    public static final By validatingSidePannelById = By.id("attach-accessory-pane");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -31,23 +31,16 @@ public class IphoneDetailPageScreenWeb extends IphoneDetailPageScreen {
         context = Runner.getTestExecutionContext(threadId);
     }
 
-
-    @Override
-    public boolean selectFirstIphone() {
-        driver.findElement(clickOnFirstIphone13).click();
-        driver.switchToNextTab();
-        String validatePageTitle = driver.getInnerDriver().getTitle();
-        if (validatePageTitle.contains("Apple-iPhone-13")) {
-            visually.checkWindow(SCREEN_NAME,"Iphone detail page opened");
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public IphoneDetailPageScreen addIphoneToCart() {
-   //     driver.findElement(byAddToCartId).click();
-        driver.waitForClickabilityOf(byAddToCartId).click();
+        driver.findElement(byAddToCartId).click();
+        driver.waitTillElementIsPresent(validatingSidePannelById);
+        boolean isSidePannelVisible = driver.findElement(validatingSidePannelById).isDisplayed();
+        if(isSidePannelVisible) {
+            LOGGER.info("Iphone added to cart");
+        } else {
+            LOGGER.error("Iphone is not added to cart");
+        }
         return IphoneDetailPageScreen.get();
     }
 }

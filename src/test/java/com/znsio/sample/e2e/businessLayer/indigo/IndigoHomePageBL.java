@@ -1,24 +1,24 @@
-package com.znsio.sample.e2e.businessLayer.amazon;
+package com.znsio.sample.e2e.businessLayer.indigo;
 
 import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.amazon.AmazonHomePageScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+import com.znsio.sample.e2e.screen.indigo.IndigoHomePageScreen;
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class HomePageBL {
-    private static final Logger LOGGER = Logger.getLogger(HomePageBL.class.getName());
+public class IndigoHomePageBL {
+    private static final Logger LOGGER = Logger.getLogger(IndigoHomePageBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
 
-
-    public HomePageBL(String userPersona, Platform forPlatform) {
+    public IndigoHomePageBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -28,7 +28,7 @@ public class HomePageBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public HomePageBL() {
+    public IndigoHomePageBL() {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -38,12 +38,21 @@ public class HomePageBL {
     }
 
 
-    public IphoneDetailPageBL searchForIphone13() {
-        boolean IphoneDetailPageOpened = AmazonHomePageScreen.get()
-                .searchForiPhone13()
-                .isIphoneListVisible()
-                .selectFirstIphone();
-        assertThat(IphoneDetailPageOpened).isTrue();
-        return new IphoneDetailPageBL();
+    public IndigoHomePageBL isLandingPageOpened() {
+           boolean validatingLandingPage = IndigoHomePageScreen.get()
+                                              .validateHomePage();
+        assertThat(validatingLandingPage).isTrue();
+        return this;
+    }
+
+    public IndigoFlightDetailsBL addArrivalDepartureDetails() {
+        boolean isFlightDetailsVisible = IndigoHomePageScreen.get()
+                                        .addCurrentLocationDetails()
+                                        .addDestinationDetails()
+                                        .addDateDetails()
+                                        .validateFlightDetails();
+        assertThat(isFlightDetailsVisible).isTrue();
+        return new IndigoFlightDetailsBL();
+        //need to discuss
     }
 }

@@ -36,14 +36,6 @@ public class IphoneDetailPageBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public IphoneDetailPageBL authenticateIphone13DetailPage() {
-       boolean isFirstIphoneClicked = IphoneDetailPageScreen
-                .get()
-                .selectFirstIphone();
-
-        return this;
-    }
-
 
     public IphoneDetailPageBL addToCart() {
         IphoneDetailPageScreen

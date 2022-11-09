@@ -8,6 +8,7 @@ import com.context.SessionContext;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.APPLITOOLS;
 import com.znsio.e2e.entities.TEST_CONTEXT;
+import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.steps.Hooks;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -15,6 +16,8 @@ import io.cucumber.java.Scenario;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import org.apache.log4j.Logger;
 import org.testng.annotations.DataProvider;
+
+import java.util.Map;
 
 public class RunTestCukes
         extends AbstractTestNGCucumberTests {
@@ -27,6 +30,9 @@ public class RunTestCukes
         LOGGER.info("RunTestCukes constructor: ThreadId: " + threadId);
         context = SessionContext.getTestExecutionContext(threadId);
         System.setProperty(TEST_CONTEXT.TAGS_TO_EXCLUDE_FROM_CUCUMBER_REPORT, "@android,@web,@prod,@sit,@eat,@uat,@qa");
+
+    //    String userName;
+   //     Map testDataForSO = (Map) Runner.getTestDataAsMap("prod").get(userName.toLowerCase());
     }
 
     @Override
@@ -50,6 +56,8 @@ public class RunTestCukes
         ufgConfig.addDeviceEmulation(DeviceName.iPhone_X, ScreenOrientation.PORTRAIT);
         ufgConfig.addDeviceEmulation(DeviceName.OnePlus_7T_Pro, ScreenOrientation.LANDSCAPE);
         context.addTestState(APPLITOOLS.UFG_CONFIG, ufgConfig);
+
+
     }
 
     @After

@@ -10,20 +10,5 @@ public class SAMPLE_TEST_CONTEXT
     public static final String MEETING_PASSWORD = "meetingPassword";
     public static final String INVITATION_LINK = "invitationLink";
 
-    private  final String username;
-    private  final String password;
-
-    public SAMPLE_TEST_CONTEXT(String userpersona, Platform onPlatform) {
-        this.username = "sdhcdh@gmail.com";
-        this.password = "fdvdfvdfvdv";
-    }
-
-    public static String getUsername() {
-        return "raghav.gargril291900@gmail.com";
-    }
-
-    public static String getPassword() {
-        return "P@ssw0rd";
-    }
 
 }

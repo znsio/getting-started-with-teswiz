@@ -33,4 +33,6 @@ public abstract class AmazonHomePageScreen {
     }
 
     public abstract SearchResultPageScreen searchForiPhone13();
+
+
 }

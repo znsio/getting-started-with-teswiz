@@ -8,6 +8,11 @@ import com.znsio.sample.e2e.screen.amazon.AmazonLoginScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+
 public class AmazonLoginBL {
 
     private static final Logger LOGGER = Logger.getLogger(AmazonLoginBL.class.getName());
@@ -15,6 +20,8 @@ public class AmazonLoginBL {
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
+    Map<String,String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
+
 
     public AmazonLoginBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread()
@@ -35,9 +42,11 @@ public class AmazonLoginBL {
         this.currentPlatform = Runner.platform;
     }
 
+
     public HomePageBL loginToAmazon() {
-        AmazonLoginScreen.get()
-                           .login(SAMPLE_TEST_CONTEXT.getUsername(), SAMPLE_TEST_CONTEXT.getPassword());
+        boolean isLoginDone = AmazonLoginScreen.get()
+                                .login(testData.get("username"),testData.get("password"));
+        assertThat(isLoginDone).isTrue();
         return new HomePageBL();
     }
 }

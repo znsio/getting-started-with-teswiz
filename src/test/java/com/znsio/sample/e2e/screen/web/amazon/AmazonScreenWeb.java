@@ -17,6 +17,8 @@ public abstract class AmazonScreenWeb extends AmazonLoginScreen {
     public static final By byPasswordid = By.id("ap_password");
     public static final By byClickOnSignId = By.id("signInSubmit");
     public static final By byClickOnAccounts = By.id("nav-link-accountList");
+    public static final By validatingUsernameByXpath = By.xpath("//div[@class='a-row a-spacing-base']//span");
+    public static final By validatingUsernameById = By.id("nav-link-accountList-nav-line-1");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -36,18 +38,33 @@ public abstract class AmazonScreenWeb extends AmazonLoginScreen {
     }
 
     @Override
-    public AmazonHomePageScreen login(String username, String password) {
-        LOGGER.info("Clicking on Login button on Amazon");
+    public boolean login(String username, String password) {
         driver.findElement(byClickOnAccounts).click();
-        visually.checkWindow(SCREEN_NAME,"On Amazon Login Screen");
-        LOGGER.info("Clicking on Username Field");
+        enterUsername(username);
+        enterPassword(password);
+        driver.waitTillElementIsPresent(validatingUsernameById,10);
+        visually.checkWindow(SCREEN_NAME,"Validating Amazon Homepage after Login");
+        String validatingLogin = driver.findElement(validatingUsernameById).getText().trim();
+        if (!validatingLogin.contains("Hello, sign in")) {
+            LOGGER.info("Successfully logged in as:-" +validatingLogin);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public AmazonScreenWeb enterUsername(String username) {
         driver.findElement(byUsernameTextBoxid).sendKeys(username);
         driver.findElement(clickOnContinueButtonid).click();
-        LOGGER.info("Clicking on Password Field");
+        String validateUsername = driver.findElement(validatingUsernameByXpath).getText();
+        LOGGER.info("Username on Login page:-" +validateUsername);
+        return this;
+    }
+
+    public AmazonScreenWeb enterPassword(String password) {
         driver.findElement(byPasswordid).sendKeys(password);
         driver.findElement(byClickOnSignId).click();
-        visually.checkWindow(SCREEN_NAME,"Successfully logged in");
-        return AmazonHomePageScreen.get();
+        return this;
     }
 
 }

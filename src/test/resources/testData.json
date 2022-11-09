@@ -7,6 +7,13 @@
       "password": "eotTesting@0",
       "firstName": "Eot",
       "lastName": "Testing"
+    },
+    "raghav.garg" : {
+      "username" : "raghav.gargril291900@gmail.com",
+      "password" : "Hello123@",
+      "item" : "iPhone 13",
+      "to": "Delhi",
+      "from": "Mumbai"
     }
   }
 }

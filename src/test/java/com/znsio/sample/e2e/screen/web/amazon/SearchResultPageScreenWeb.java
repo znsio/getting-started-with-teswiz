@@ -9,9 +9,13 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Map;
+
 public class SearchResultPageScreenWeb extends SearchResultPageScreen {
     public static final By getIphoneCountByXpath = By.xpath("//div[@class='a-section']");
     public static final By clickOnFirstIphone13 = By.xpath("(//span[contains(text(),'iPhone 13')])[4]");
+    public static final By validatingDetailPageById = By.id("dp-container");
+    public static final By byProductTitleId = By.id("productTitle");
 
 
     private final Driver driver;
@@ -20,6 +24,8 @@ public class SearchResultPageScreenWeb extends SearchResultPageScreen {
     private static final String SCREEN_NAME = SearchResultPageScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final TestExecutionContext context;
+    Map<String,String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
+
 
 
 
@@ -48,8 +54,9 @@ public class SearchResultPageScreenWeb extends SearchResultPageScreen {
     public boolean selectFirstIphone() {
         driver.findElement(clickOnFirstIphone13).click();
         driver.switchToNextTab();
-        String validatePageTitle = driver.getInnerDriver().getTitle();
-        if (validatePageTitle.contains("Apple-iPhone-13")) {
+        driver.waitTillElementIsPresent(validatingDetailPageById,15);
+        String validateProductTitle = driver.findElement(byProductTitleId).getText();
+        if (validateProductTitle.contains(testData.get("item"))) {
             LOGGER.info("Successfully opened the Iphone Detail Page");
             return true;
         } else {

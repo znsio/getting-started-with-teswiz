@@ -4,12 +4,13 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazon.AmazonHomeScreen;
 import com.znsio.sample.e2e.screen.amazon.AmazonLogInScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import java.util.Map;
 
 public class AmazonLogInScreenWeb extends AmazonLogInScreen {
     private final Driver driver;
@@ -23,7 +24,7 @@ public class AmazonLogInScreenWeb extends AmazonLogInScreen {
     private final By byContinueButton = By.id("continue");
     private final By byPasswordId = By.id("ap_password");
     public static final By byClickOnSignIn = By.id("signInSubmit");
-
+    Map<String,String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
     public AmazonLogInScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
@@ -37,10 +38,10 @@ public class AmazonLogInScreenWeb extends AmazonLogInScreen {
     public AmazonHomeScreen isLoginToAmazonHomePage(){
         driver.findElement(byUserNameId).click();
         LOGGER.debug("Enter username");
-        driver.findElement(byUserNameId).sendKeys(SAMPLE_TEST_CONTEXT.USER_NAME);
+        driver.findElement(byUserNameId).sendKeys(testData.get("username"));
         driver.findElement(byContinueButton).click();
         LOGGER.debug("Enter password");
-        driver.findElement(byPasswordId).sendKeys(SAMPLE_TEST_CONTEXT.PASSWORD);
+        driver.findElement(byPasswordId).sendKeys(testData.get("password"));
         driver.findElement(byClickOnSignIn).click();
         LOGGER.debug("Have successfully login to amazon");
         return AmazonHomeScreen.get();

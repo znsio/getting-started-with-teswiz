@@ -46,11 +46,9 @@ public class AmazonSteps {
     @And("I add the iphone13 to the cart")
     public void i_add_the_iphone13_to_the_cart() {
         LOGGER.info("I am on iphone page and adding the product to the cart");
-        new ProductPageBL().verifyProductDetails();
-        new ProductPageBL().addProductToCart();
-        new ProductPageBL().verifyCart();
+        new ProductPageBL().verifyAndAddProductToCart();
+        new ProductPageBL().verifyCartAndClickOnCart();
         LOGGER.info("Have added the product to the cart");
-        new ProductPageBL().clickOnCart();
     }
 
     @Then("iphone13 is added to the cart")

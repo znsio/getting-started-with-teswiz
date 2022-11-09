@@ -32,24 +32,16 @@ public class ProductPageBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public ProductPageBL verifyProductDetails() {
+    public ProductPageBL verifyAndAddProductToCart() {
         String getProductName = ProductPageScreen.get().verifyProductName();
         assertThat(getProductName).containsIgnoringCase("iphone 13");
-        return this;
-    }
-
-    public ProductPageBL addProductToCart() {
         ProductPageScreen.get().clickAddToCart();
         return this;
     }
 
-    public ProductPageBL verifyCart() {
+    public AmazonCartBL verifyCartAndClickOnCart() {
         String successMsg = ProductPageScreen.get().checkSuccessMsgForAddToCart();
         assertThat(successMsg).containsIgnoringCase("Added to Cart");
-        return this;
-    }
-
-    public AmazonCartBL clickOnCart() {
         ProductPageScreen.get().moveToCart();
         return new AmazonCartBL();
     }

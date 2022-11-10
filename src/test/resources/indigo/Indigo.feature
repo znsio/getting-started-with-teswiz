@@ -1,7 +1,7 @@
 
-  Feature: Goindigo flight results
+Feature: Goindigo flight results
 
-  #  TAG="@indigo and web" PLATFORM=web  ./gradlew run
+      #  TAG="@indigo and web" PLATFORM=web  ./gradlew run
     @web @indigo
     Scenario: Verify results for Departure time greater then 18:00 Hr
       Given I am in the landing page

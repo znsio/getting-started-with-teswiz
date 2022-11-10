@@ -54,7 +54,7 @@ public class SearchResultPageScreenWeb extends SearchResultPageScreen {
     public boolean selectFirstIphone() {
         driver.findElement(clickOnFirstIphone13).click();
         driver.switchToNextTab();
-        driver.waitTillElementIsPresent(validatingDetailPageById,15);
+        driver.waitTillElementIsPresent(validatingDetailPageById,20);
         String validateProductTitle = driver.findElement(byProductTitleId).getText();
         if (validateProductTitle.contains(testData.get("item"))) {
             LOGGER.info("Successfully opened the Iphone Detail Page");

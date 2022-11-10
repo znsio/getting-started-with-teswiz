@@ -19,7 +19,7 @@ public class IndigoHomePageScreenWeb extends IndigoHomePageScreen {
     public static final By byClickingOnFromDropdown = By.xpath("(//div[@class='autocomplete-result station-result clearfix airport-item pop-dest-stn selected'])[1]");
     public static final By byGettingFromTextXpath = By.xpath("//div[@id='bookFlightTab']//input[@placeholder='From']");
     public static final By byClickingOnToXpath = By.xpath("//input[@placeholder='To']");
-    public static final By byClickingOnToDropdown = By.xpath("(//div[@class='autocomplete-result station-result clearfix airport-item pop-dest-stn selected'])[1]");
+    public static final By byClickingOnToDropdown = By.xpath("(//div[@class='autocomplete-result station-result clearfix airport-item pop-dest-stn selected'])[2]");
     public static final By byGettingToTextXpath = By.xpath("//div[@id='bookFlightTab']//input[@placeholder='To']");
     public static final By byClickingOnSerchFlightClassName = By.className("hp-src-btn");
     public static final By byFlightDetailPageId = By.id("flightSelectMount");
@@ -44,6 +44,7 @@ public class IndigoHomePageScreenWeb extends IndigoHomePageScreen {
 
     @Override
     public boolean validateHomePage() {
+        driver.waitTillElementIsPresent(byIndigoPannelXpath,10);
         boolean isIndigoPageVisible = driver.findElement(byIndigoPannelXpath).isDisplayed();
         visually.checkWindow(SCREEN_NAME,"Validating goindigo Homepage");
         if (isIndigoPageVisible) {
@@ -57,35 +58,41 @@ public class IndigoHomePageScreenWeb extends IndigoHomePageScreen {
 
     @Override
     public IndigoHomePageScreen addCurrentLocationDetails() {
-        driver.findElement(byClickingOnFromXpath).click();
-        driver.findElement(byClickingOnFromXpath).sendKeys(testData.get("to"));
-        driver.findElement(byClickingOnFromDropdown).click();
-        String fromFlightData = driver.findElement(byGettingFromTextXpath).getText();
-        LOGGER.info("Validate From details:" +fromFlightData);
+        driver.waitTillElementIsPresent(byClickingOnFromXpath,20);
+    //     driver.findElement(byClickingOnFromXpath).click();
+     //   driver.findElement(byClickingOnFromXpath).click();
+   //     driver.findElement(byClickingOnFromXpath).sendKeys(testData.get("to"));
+      //  driver.findElement(byClickingOnFromDropdown).click();
+     //    String fromFlightData = driver.findElement(byGettingFromTextXpath).getText();
+ //       LOGGER.info("Validate From details:" +fromFlightData);
         return this;
     }
 
     @Override
     public IndigoHomePageScreen addDestinationDetails() {
-       driver.findElement(byClickingOnToXpath).click();
-       driver.findElement(byClickingOnToXpath).sendKeys(testData.get("from"));
-       driver.findElement(byClickingOnToDropdown).click();
-       String toFlightData = driver.findElement(byGettingToTextXpath).getText();
-        LOGGER.info("Validate From details:" +toFlightData);
+        driver.waitTillElementIsPresent(byClickingOnFromXpath,20);
+        driver.findElement(byClickingOnToXpath).click();
+        driver.findElement(byClickingOnToXpath).sendKeys(testData.get("from"));
+    //    driver.waitTillElementIsPresent(byClickingOnToDropdown,20);
+     //   driver.findElement(byClickingOnToDropdown).click();
+    //    String toFlightData = driver.findElement(byGettingToTextXpath).getText();
+     //   LOGGER.info("Validate From details:" +toFlightData);
         return this;
     }
 
     @Override
     public IndigoHomePageScreen addDateDetails() {
+
         driver.findElement(byClickingOnDate).click();
         return this;
     }
 
     @Override
     public boolean validateFlightDetails() {
-        visually.checkWindow(SCREEN_NAME,"Validating details entered on goindigo site");
+  //      visually.checkWindow(SCREEN_NAME,"Validating details entered on goindigo site");
         driver.findElement(byClickingOnSerchFlightClassName).click();
-        driver.waitTillElementIsPresent(byFlightDetailPageId);
+        driver.findElement(byClickingOnSerchFlightClassName).click();
+        driver.waitTillElementIsPresent(byFlightDetailPageId,25);
         boolean isFlightDetailsVisible = driver.findElement(byFlightDetailPageId).isDisplayed();
         if (isFlightDetailsVisible) {
             LOGGER.info("Is Indigo Flight Detail Page Displayed:" +isFlightDetailsVisible);

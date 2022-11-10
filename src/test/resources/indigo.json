@@ -1,8 +1,0 @@
-{
-  "prod": {
-    "FROM": "Delhi",
-    "DESTINATION": "Mumbai",
-    "DATE": "15/11/2022",
-    "TIME": "18:00"
-  }
-}

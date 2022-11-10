@@ -45,8 +45,8 @@ public class IndigoSteps {
                 .isFlightDetailsAvailable();
     }
 
-    @Then("I should be able to add filter for departure time greater than {int} pm")
-    public void iShouldBeAbleToAddFilterForDepartureTimeGreaterThanHrs(int time) {
+    @Then("I should be able to add filter for departure time")
+    public void iShouldBeAbleToAddFilterForDepartureTimeGreaterThanHrs() {
         new IndigoFlightDetailsBL()
                 .applyFilters();
     }

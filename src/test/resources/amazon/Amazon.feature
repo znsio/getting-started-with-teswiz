@@ -1,7 +1,7 @@
 
 Feature: Scenario for amazon cart functionality
 
-     # TAG="@amazon" PLATFORM=web  ./gradlew run
+    #CONFIG=./configs/amazon_config.properties TAG="@amazon and @web" PLATFORM=web  ./gradlew run
   @web @amazon
   Scenario: User should be able to add iphone 13 to the cart
     Given I logged in with valid credentials

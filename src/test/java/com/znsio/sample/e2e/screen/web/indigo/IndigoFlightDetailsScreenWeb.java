@@ -48,7 +48,11 @@ public class IndigoFlightDetailsScreenWeb extends IndigoFlightDetailsScreen {
         driver.findElement(byClickOnTimeFilterXpath).click();
         WebElement isTimeFilterSelected = (WebElement) driver.findElements(byClickingOn18Hrs);
         Boolean isFilterSelected = isTimeFilterSelected.isSelected();
-        LOGGER.info("Time filter is selected " +isFilterSelected);
+        if (isFilterSelected) {
+            LOGGER.info("Time filter is selected " +isFilterSelected);
+        } else {
+            LOGGER.error("Filter not applied");
+        }
         return this;
 
     }

@@ -100,6 +100,7 @@ public class IndigoHomePageScreenWeb extends IndigoHomePageScreen {
         } else {
             LOGGER.error("Is Indigo Flight Detail Page Displayed:" +isFlightDetailsVisible);
             return false;
+
         }
     }
 }

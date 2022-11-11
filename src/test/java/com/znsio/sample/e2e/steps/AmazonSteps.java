@@ -47,7 +47,7 @@ public class AmazonSteps {
     @Then("iphone should be added to cart")
     public void iphoneShouldBeAddedToCart() {
         new cartPageBL()
-                .iSeeTheIphone13SuccessfullyAddedToCart();
+                .validatingIphoneOnCart();
     }
 
 }

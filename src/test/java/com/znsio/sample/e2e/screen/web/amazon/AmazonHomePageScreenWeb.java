@@ -41,12 +41,12 @@ public class AmazonHomePageScreenWeb extends AmazonHomePageScreen {
         driver.findElement(byClickingOnSearchBoxid).sendKeys(searchedItem);
         driver.findElement(byClickOnSubmitId).click();
         String validateSearchResultPage = driver.findElement(validatingSearchResultPageTextByXpath).getText();
+        visually.checkWindow(SCREEN_NAME, "On Amazon Search Result Page");
         if (validateSearchResultPage.equals(searchedItem)) {
             LOGGER.info("Successfully opened the Search Result Page Of:- " + validateSearchResultPage);
         } else {
             LOGGER.error("Search result page not opened");
         }
-        visually.checkWindow(SCREEN_NAME, "On Amazon Search Result Page");
         return SearchResultPageScreen.get();
 
     }

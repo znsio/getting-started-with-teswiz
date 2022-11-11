@@ -42,12 +42,12 @@ public class SearchResultPageScreenWeb extends SearchResultPageScreen {
     @Override
     public SearchResultPageScreen isIphoneListVisible() {
        int iphoneCountOnSRp =  driver.findElements(getIphoneCountByXpath).size();
-       if (iphoneCountOnSRp>0) {
-           LOGGER.info("List of Iphone on SRP page:-" +iphoneCountOnSRp);
+        visually.checkWindow(SCREEN_NAME,"Validating Amazon Search Result Page");
+        if (iphoneCountOnSRp>0) {
+           LOGGER.info("List of Iphone on SRP page:- " +iphoneCountOnSRp);
        } else {
            LOGGER.error("Iphone list not visible");
        }
-        visually.checkWindow(SCREEN_NAME,"Validating Amazon Search Result Page");
         return this;
     }
 
@@ -56,6 +56,7 @@ public class SearchResultPageScreenWeb extends SearchResultPageScreen {
         driver.findElement(clickOnFirstIphone13).click();
         driver.switchToNextTab();
         driver.waitTillElementIsPresent(validatingDetailPageById,20);
+        visually.checkWindow(SCREEN_NAME,"Validating Iphone Detail page");
         String validateProductTitle = driver.findElement(byProductTitleId).getText();
         if (validateProductTitle.contains(testData.get("item"))) {
             LOGGER.info("Successfully opened the Iphone Detail Page");

@@ -48,6 +48,7 @@ public abstract class AmazonScreenWeb extends AmazonLoginScreen {
             LOGGER.info("Successfully logged in as:-" + validatingLogin);
             return true;
         } else {
+            LOGGER.error("Not logged in");
             return false;
         }
     }

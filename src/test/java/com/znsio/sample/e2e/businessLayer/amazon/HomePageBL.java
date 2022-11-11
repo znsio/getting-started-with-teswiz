@@ -14,17 +14,12 @@ public class HomePageBL {
     private static final Logger LOGGER = Logger.getLogger(HomePageBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
-    private final String currentUserPersona;
-    private final Platform currentPlatform;
-
 
     public HomePageBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
-        this.currentUserPersona = userPersona;
-        this.currentPlatform = forPlatform;
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
@@ -33,8 +28,6 @@ public class HomePageBL {
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
-        this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
-        this.currentPlatform = Runner.platform;
     }
 
 
@@ -43,7 +36,7 @@ public class HomePageBL {
                 .searchForiPhone13()
                 .isIphoneListVisible()
                 .selectFirstIphone();
-        assertThat(IphoneDetailPageOpened).isTrue();
+        softly.assertThat(IphoneDetailPageOpened).isTrue();
         return new IphoneDetailPageBL();
     }
 }

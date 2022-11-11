@@ -15,8 +15,6 @@ public class IphoneDetailPageBL {
     private static final Logger LOGGER = Logger.getLogger(IphoneDetailPageBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
-    private final String currentUserPersona;
-    private final Platform currentPlatform;
 
 
     public IphoneDetailPageBL(String userPersona, Platform forPlatform) {
@@ -24,8 +22,6 @@ public class IphoneDetailPageBL {
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
-        this.currentUserPersona = userPersona;
-        this.currentPlatform = forPlatform;
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
@@ -34,8 +30,6 @@ public class IphoneDetailPageBL {
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
-        this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
-        this.currentPlatform = Runner.platform;
     }
 
 
@@ -43,7 +37,7 @@ public class IphoneDetailPageBL {
         boolean isIphoneAddedToCart = IphoneDetailPageScreen
                 .get()
                 .addIphoneToCart();
-        assertThat(isIphoneAddedToCart).isTrue();
+        softly.assertThat(isIphoneAddedToCart).isTrue();
         return this;
     }
 }

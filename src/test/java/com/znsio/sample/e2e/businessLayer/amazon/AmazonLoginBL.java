@@ -18,8 +18,6 @@ public class AmazonLoginBL {
     private static final Logger LOGGER = Logger.getLogger(AmazonLoginBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
-    private final String currentUserPersona;
-    private final Platform currentPlatform;
     Map<String, String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
 
 
@@ -28,8 +26,6 @@ public class AmazonLoginBL {
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
-        this.currentUserPersona = userPersona;
-        this.currentPlatform = forPlatform;
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
@@ -38,15 +34,13 @@ public class AmazonLoginBL {
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
-        this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
-        this.currentPlatform = Runner.platform;
     }
 
 
     public HomePageBL loginToAmazon() {
         boolean isLoginDone = AmazonLoginScreen.get()
                 .login(testData.get("username"), testData.get("password"));
-        assertThat(isLoginDone).isTrue();
+        softly.assertThat(isLoginDone).isTrue();
         return new HomePageBL();
     }
 }

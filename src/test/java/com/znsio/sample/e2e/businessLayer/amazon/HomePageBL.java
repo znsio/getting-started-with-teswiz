@@ -29,6 +29,7 @@ public class HomePageBL {
 
 
     public IphoneDetailPageBL searchForIphone13() {
+        LOGGER.info("Validating is iphone Search Result Page opened");
         boolean IphoneDetailPageOpened = AmazonHomePageScreen.get()
                 .searchForiPhone13()
                 .isIphoneListVisible()

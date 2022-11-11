@@ -31,6 +31,7 @@ public class cartPageBL {
 
 
     public cartPageBL validatingIphoneOnCart() {
+        LOGGER.info("Validating is iphone added to cart");
         boolean isIphoneAddedToCart = AmazonCartScreen.get().iphone13IsDisplayedOnCart();
         softly.assertThat(isIphoneAddedToCart).isTrue();
         return this;

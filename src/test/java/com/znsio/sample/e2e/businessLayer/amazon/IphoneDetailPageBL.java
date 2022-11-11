@@ -31,6 +31,7 @@ public class IphoneDetailPageBL {
 
 
     public IphoneDetailPageBL addToCart() {
+        LOGGER.info("Validating iphone detail page opened:-");
         boolean isIphoneAddedToCart = IphoneDetailPageScreen
                 .get()
                 .addIphoneToCart();

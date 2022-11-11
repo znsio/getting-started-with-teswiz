@@ -34,6 +34,7 @@ public class AmazonLoginBL {
 
 
     public HomePageBL loginToAmazon() {
+        LOGGER.info("Validating login");
         boolean isLoginDone = AmazonLoginScreen.get()
                 .login(testData.get("username"), testData.get("password"));
         softly.assertThat(isLoginDone).isTrue();

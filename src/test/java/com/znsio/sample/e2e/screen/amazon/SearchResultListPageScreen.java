@@ -7,6 +7,7 @@ import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.web.amazonWeb.SearchResultListPageWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
+
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
@@ -23,7 +24,7 @@ public abstract class SearchResultListPageScreen {
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
 
-        switch(platform) {
+        switch (platform) {
             case web:
                 return new SearchResultListPageWeb(driver, visually);
         }
@@ -31,7 +32,10 @@ public abstract class SearchResultListPageScreen {
     }
 
     public abstract boolean verifyProductName();
+
     public abstract boolean verifyThePresenceOfResultsText();
+
     public abstract boolean listCount();
+
     public abstract ProductPageScreen clickOnIphone();
 }

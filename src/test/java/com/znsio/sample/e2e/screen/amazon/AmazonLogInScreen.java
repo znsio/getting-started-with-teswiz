@@ -24,7 +24,7 @@ public abstract class AmazonLogInScreen {
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
 
-        switch(platform) {
+        switch (platform) {
             case web:
                 return new AmazonLogInScreenWeb(driver, visually);
         }

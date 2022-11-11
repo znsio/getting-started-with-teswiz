@@ -15,7 +15,7 @@ public class ProductPageBL {
     private final String currentUserPersona;
     private final Platform currentPlatform;
 
-    public ProductPageBL(String userPersona, Platform forPlatform){
+    public ProductPageBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);

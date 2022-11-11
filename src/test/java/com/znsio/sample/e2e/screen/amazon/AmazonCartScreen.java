@@ -24,7 +24,7 @@ public abstract class AmazonCartScreen {
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
 
-        switch(platform) {
+        switch (platform) {
             case web:
                 return new AmazonCartScreenWeb(driver, visually);
         }
@@ -32,6 +32,8 @@ public abstract class AmazonCartScreen {
     }
 
     public abstract String AmIOnCartPage();
+
     public abstract String verifySubTotalText();
+
     public abstract boolean verifyThePresenceOfAddedProductInTheCart();
 }

@@ -24,7 +24,7 @@ public abstract class AmazonHomeScreen {
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
 
-        switch(platform) {
+        switch (platform) {
             case web:
                 return new AmazonHomeScreenWeb(driver, visually);
         }
@@ -32,5 +32,6 @@ public abstract class AmazonHomeScreen {
     }
 
     public abstract boolean verifyAmazonHomePage();
+
     public abstract SearchResultListPageScreen searchIphone13();
 }

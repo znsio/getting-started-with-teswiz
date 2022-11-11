@@ -24,7 +24,7 @@ public abstract class ProductPageScreen {
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
 
-        switch(platform) {
+        switch (platform) {
             case web:
                 return new ProductPageScreenWeb(driver, visually);
         }
@@ -32,7 +32,10 @@ public abstract class ProductPageScreen {
     }
 
     public abstract String verifyProductName();
+
     public abstract ProductPageScreen clickAddToCart();
+
     public abstract String checkSuccessMsgForAddToCart();
+
     public abstract AmazonCartScreen moveToCart();
 }

@@ -28,7 +28,7 @@ public class AmazonSteps {
     @Given("I login to amazon with valid credentials")
     public void i_login_to_amazon_with_valid_credentials() {
         LOGGER.info("i login to amazon with valid credentials");
-        allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME,Runner.platform,context);
+        allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
         new AmazonLoginBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).LoginToAmazon();
         LOGGER.info("Have successfully redirected to home page");
     }

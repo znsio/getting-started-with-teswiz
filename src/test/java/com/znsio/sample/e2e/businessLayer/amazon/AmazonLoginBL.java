@@ -34,7 +34,6 @@ public class AmazonLoginBL {
 
     public AmazonHomePageBL LoginToAmazon() {
         AmazonLogInScreen.get().isLoginToAmazonHomePage();
-//        assertThat(amazonHomePage).isTrue();
         return new AmazonHomePageBL();
     }
 

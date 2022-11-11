@@ -7,12 +7,11 @@ import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.web.amazonWeb.SearchResultListPageWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
-
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
 public abstract class SearchResultListPageScreen {
-    private static final String SCREEN_NAME = AmazonHomeScreen.class.getSimpleName();
+    private static final String SCREEN_NAME = SearchResultListPageScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     public static SearchResultListPageScreen get() {

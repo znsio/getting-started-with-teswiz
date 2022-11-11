@@ -32,7 +32,6 @@ public abstract class ProductPageScreen {
     }
 
     public abstract String verifyProductName();
-//    public abstract boolean verifyIfShareButtonIsPresent();
     public abstract ProductPageScreen clickAddToCart();
     public abstract String checkSuccessMsgForAddToCart();
     public abstract AmazonCartScreen moveToCart();

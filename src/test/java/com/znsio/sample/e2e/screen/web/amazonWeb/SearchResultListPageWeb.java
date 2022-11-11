@@ -17,7 +17,6 @@ public class SearchResultListPageWeb extends SearchResultListPageScreen {
     private static final String SCREEN_NAME = SearchResultListPageWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final By byResultsText = By.xpath("//span[contains(text(),'RESULTS')]");
-    private final By bySearchResults = By.xpath("//span[contains(text(),'Apple iPhone 13')]");
     private final By byFirstProductName = By.xpath("//span[contains(text(),'iPhone 13')]");
 
     public SearchResultListPageWeb(Driver driver, Visual visually) {
@@ -26,13 +25,11 @@ public class SearchResultListPageWeb extends SearchResultListPageScreen {
         visually.checkWindow(SCREEN_NAME, "listing screen");
     }
 
-    public boolean verifyProductName(){
+    public boolean verifyProductName() {
         boolean isTextPresent = false;
         List<WebElement> text = driver.findElements(byFirstProductName);
-        for (int i = 0; i < text.size(); i++)
-        {
-            if (text.get(i).toString().contains("iPhone 13"))
-            {
+        for (int i = 0; i < text.size(); i++) {
+            if (text.get(i).toString().contains("iPhone")) {
                 isTextPresent = true;
                 break;
             }
@@ -43,32 +40,32 @@ public class SearchResultListPageWeb extends SearchResultListPageScreen {
             return false;
     }
 
-    public boolean verifyThePresenceOfResultsText(){
+    public boolean verifyThePresenceOfResultsText() {
         LOGGER.debug("Verify the presence of RESULTS text");
         String checkForResultsText = driver.findElement(byResultsText).getText();
-        if(checkForResultsText.equalsIgnoreCase("results"))
-        return true;
-                else
-                  return  false;
-    }
-
-    public boolean listCount(){
-        LOGGER.debug("Verify the presence of searched products");
-        driver.findElements(bySearchResults);
-        int result = driver.findElements(bySearchResults).size();
-        if(result>0)
+        if (checkForResultsText.equalsIgnoreCase("results"))
             return true;
         else
-        return false;
+            return false;
     }
 
-    public ProductPageScreen clickOnIphone(){
-        LOGGER.debug("clicking on first product from the list");
+    public boolean listCount() {
+        LOGGER.debug("Verify the presence of searched products");
+        driver.findElements(byFirstProductName);
+        int result = driver.findElements(byFirstProductName).size();
+        if (result > 0)
+            return true;
+        else
+            return false;
+    }
+
+    public ProductPageScreen clickOnIphone() {
+        LOGGER.debug("clicking on first product from the searched result");
+        driver.waitForClickabilityOf(byFirstProductName);
         List<WebElement> text = driver.findElements(byFirstProductName);
-        for (int i = 0; i < text.size(); i++)
-        {
-                text.get(1).click();
-                break;
+        for (int i = 0; i < text.size(); i++) {
+            text.get(1).click();
+            break;
         }
         driver.switchToNextTab();
         LOGGER.debug("Have successfully redirected to the product page");

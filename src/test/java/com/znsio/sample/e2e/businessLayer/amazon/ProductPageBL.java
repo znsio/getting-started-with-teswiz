@@ -33,15 +33,15 @@ public class ProductPageBL {
     }
 
     public ProductPageBL verifyAndAddProductToCart() {
-        String getProductName = ProductPageScreen.get().verifyProductName();
-        assertThat(getProductName).containsIgnoringCase("iphone 13");
+        String checkForProductName = ProductPageScreen.get().verifyProductName();
+        assertThat(checkForProductName).containsIgnoringCase("iphone 13");
         ProductPageScreen.get().clickAddToCart();
         return this;
     }
 
     public AmazonCartBL verifyCartAndClickOnCart() {
-        String successMsg = ProductPageScreen.get().checkSuccessMsgForAddToCart();
-        assertThat(successMsg).containsIgnoringCase("Added to Cart");
+        String successMessage = ProductPageScreen.get().checkSuccessMsgForAddToCart();
+        assertThat(successMessage).containsIgnoringCase("Added to Cart");
         ProductPageScreen.get().moveToCart();
         return new AmazonCartBL();
     }

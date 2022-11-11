@@ -20,11 +20,14 @@ public class AmazonLogInScreenWeb extends AmazonLogInScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private final TestExecutionContext context;
+
+    private final By byUserSignIn = By.id("nav-link-accountList");
     private final By byUserNameId = By.id("ap_email");
     private final By byContinueButton = By.id("continue");
     private final By byPasswordId = By.id("ap_password");
     public static final By byClickOnSignIn = By.id("signInSubmit");
-    Map<String,String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
+    Map<String, String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
+
     public AmazonLogInScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
@@ -35,8 +38,9 @@ public class AmazonLogInScreenWeb extends AmazonLogInScreen {
     }
 
     @Override
-    public AmazonHomeScreen isLoginToAmazonHomePage(){
-        driver.findElement(byUserNameId).click();
+    public AmazonHomeScreen isLoginToAmazonHomePage() {
+        driver.findElement(byUserSignIn).click();
+//        driver.findElement(byUserNameId).click();
         LOGGER.debug("Enter username");
         driver.findElement(byUserNameId).sendKeys(testData.get("username"));
         driver.findElement(byContinueButton).click();

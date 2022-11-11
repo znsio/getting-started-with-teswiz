@@ -18,6 +18,8 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private final TestExecutionContext context;
+
+    private final By byAmazonLogo = By.xpath("//a[@aria-label='Amazon']");
     private final By bySearchTabId = By.id("twotabsearchtextbox");
     private final By bySearchButton = By.id("nav-search-submit-button");
 
@@ -30,7 +32,13 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
         context = Runner.getTestExecutionContext(threadId);
     }
 
-    public SearchResultListPageScreen searchIphone13(){
+    public boolean verifyAmazonHomePage() {
+        driver.waitTillElementIsPresent(byAmazonLogo);
+        return driver.isElementPresent(byAmazonLogo);
+    }
+
+    public SearchResultListPageScreen searchIphone13() {
+
         LOGGER.debug("searching iphone in the search bar");
         driver.findElement(bySearchTabId).click();
         driver.findElement(bySearchTabId).sendKeys("iphone 13");

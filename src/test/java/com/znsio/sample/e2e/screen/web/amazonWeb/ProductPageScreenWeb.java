@@ -12,7 +12,6 @@ public class ProductPageScreenWeb extends ProductPageScreen {
     private final Visual visually;
     private static final String SCREEN_NAME = ProductPageScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-
     private final By byProductName = By.xpath("(//span[@id='productTitle'])");
     private final By byAddToCart = By.id("add-to-cart-button");
     private final By verifyCart = By.xpath("(//span[contains(text(),'Added to Cart')])[3]");
@@ -26,32 +25,28 @@ public class ProductPageScreenWeb extends ProductPageScreen {
     }
 
     @Override
-    public String verifyProductName(){
+    public String verifyProductName() {
         LOGGER.info("Validating the product name");
         String productName = driver.findElement(byProductName).getText();
         return productName;
     }
-//    @Override
-//    public boolean verifyIfShareButtonIsPresent(){
-//        LOGGER.info("Validating the presence of share button");
-//        driver.waitTillElementIsPresent(byShareButton);
-//        return driver.isElementPresent(byShareButton);
-//    }
 
     @Override
-    public ProductPageScreen clickAddToCart(){
+    public ProductPageScreen clickAddToCart() {
         LOGGER.info("adding items to the cart");
-        driver.waitForClickabilityOf(byAddToCart).click();;
+        driver.waitForClickabilityOf(byAddToCart).click();
         return this;
     }
+
     @Override
-    public String checkSuccessMsgForAddToCart(){
+    public String checkSuccessMsgForAddToCart() {
         LOGGER.info("Verifying if the item is added to cart");
         String addedToCartText = driver.waitTillElementIsPresent(verifyCart).getText();
         return addedToCartText;
     }
+
     @Override
-    public AmazonCartScreen moveToCart(){
+    public AmazonCartScreen moveToCart() {
         LOGGER.info("Click on cart button");
         driver.findElement(clickOnCart).click();
         return AmazonCartScreen.get();

@@ -56,7 +56,6 @@ task run(type: JavaExec) {
         System.setProperty "LOG_DIR", "$logDirectory"
         environment "APPLITOOLS_API_KEY", System.getenv("teswiz_APPLITOOLS_API_KEY")
 
-//        def configFile = System.getenv("CONFIG")
         def configFile = "./configs/amazonAssignment1.properties"
         if(null == configFile || !file(configFile).exists()) {
             println("CONFIG file not provided, or does not exist")

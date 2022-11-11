@@ -31,5 +31,6 @@ public abstract class AmazonHomeScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
+    public abstract boolean verifyAmazonHomePage();
     public abstract SearchResultListPageScreen searchIphone13();
 }

@@ -6,6 +6,7 @@ import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazon.AmazonHomeScreen;
 import org.apache.log4j.Logger;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AmazonHomePageBL {
     private static final Logger LOGGER = Logger.getLogger(AmazonHomePageBL.class.getName());
@@ -30,7 +31,9 @@ public class AmazonHomePageBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public SearchResultListPageBL searchForIphone13() {
+    public SearchResultListPageBL VerifyAmazonHomePageAndSearchForIphone13() {
+        boolean verifyAmazonLogo = AmazonHomeScreen.get().verifyAmazonHomePage();
+        assertThat(verifyAmazonLogo).isTrue();
         AmazonHomeScreen.get().searchIphone13();
         return new SearchResultListPageBL();
     }

@@ -36,7 +36,7 @@ public class AmazonSteps {
     @When("I searched for iphone13 and selected the first item result")
     public void i_searched_for_iphone13_and_selected_the_first_item_result() {
         LOGGER.info("I am on amazon HomePage and searches for iphone13");
-        new AmazonHomePageBL().searchForIphone13();
+        new AmazonHomePageBL().VerifyAmazonHomePageAndSearchForIphone13();
         LOGGER.info("Have landed on the results page");
         new SearchResultListPageBL().validateIphoneResult();
         new SearchResultListPageBL().clickOnFirstProduct();

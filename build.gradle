@@ -57,7 +57,7 @@ task run(type: JavaExec) {
         environment "APPLITOOLS_API_KEY", System.getenv("teswiz_APPLITOOLS_API_KEY")
 
         def configFile = System.getenv("CONFIG")
-        if(null == configFile || !file(configFile).exists()) {
+        if (null == configFile || !file(configFile).exists()) {
             println("CONFIG file not provided, or does not exist")
             assert file(configFile).exists()
         }

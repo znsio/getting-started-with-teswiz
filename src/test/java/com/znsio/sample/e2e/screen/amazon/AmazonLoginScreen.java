@@ -24,7 +24,7 @@ public abstract class AmazonLoginScreen {
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
 
-        switch(platform) {
+        switch (platform) {
             case web:
                 return new AmazonScreenWeb(driver, visually) {
                 };
@@ -32,5 +32,5 @@ public abstract class AmazonLoginScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract boolean login (String username, String password );
+    public abstract boolean login(String username, String password);
 }

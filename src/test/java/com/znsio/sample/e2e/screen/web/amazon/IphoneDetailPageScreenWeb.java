@@ -36,6 +36,7 @@ public class IphoneDetailPageScreenWeb extends IphoneDetailPageScreen {
         driver.findElement(byAddToCartId).click();
         driver.waitTillElementIsPresent(validatingSidePannelById);
         boolean isSidePannelVisible = driver.findElement(validatingSidePannelById).isDisplayed();
+        visually.checkWindow(SCREEN_NAME,"Validating iphone added to cart in Iphone Detail page");
         if(isSidePannelVisible) {
             LOGGER.info("Iphone added to cart");
             return true;

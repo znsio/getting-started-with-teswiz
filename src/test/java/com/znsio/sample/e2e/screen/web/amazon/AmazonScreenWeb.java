@@ -27,7 +27,6 @@ public abstract class AmazonScreenWeb extends AmazonLoginScreen {
     private final TestExecutionContext context;
 
 
-
     public AmazonScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
@@ -42,11 +41,11 @@ public abstract class AmazonScreenWeb extends AmazonLoginScreen {
         driver.findElement(byClickOnAccounts).click();
         enterUsername(username);
         enterPassword(password);
-        driver.waitTillElementIsPresent(validatingUsernameById,10);
-        visually.checkWindow(SCREEN_NAME,"Validating Amazon Homepage after Login");
+        driver.waitTillElementIsPresent(validatingUsernameById, 10);
+        visually.checkWindow(SCREEN_NAME, "Validating Amazon Homepage after Login");
         String validatingLogin = driver.findElement(validatingUsernameById).getText().trim();
         if (!validatingLogin.contains("Hello, sign in")) {
-            LOGGER.info("Successfully logged in as:-" +validatingLogin);
+            LOGGER.info("Successfully logged in as:-" + validatingLogin);
             return true;
         } else {
             return false;
@@ -57,7 +56,7 @@ public abstract class AmazonScreenWeb extends AmazonLoginScreen {
         driver.findElement(byUsernameTextBoxid).sendKeys(username);
         driver.findElement(clickOnContinueButtonid).click();
         String validateUsername = driver.findElement(validatingUsernameByXpath).getText();
-        LOGGER.info("Username on Login page:-" +validateUsername);
+        LOGGER.info("Username on Login page:-" + validateUsername);
         return this;
     }
 

@@ -20,7 +20,7 @@ public class AmazonLoginBL {
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
-    Map<String,String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
+    Map<String, String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
 
 
     public AmazonLoginBL(String userPersona, Platform forPlatform) {
@@ -45,7 +45,7 @@ public class AmazonLoginBL {
 
     public HomePageBL loginToAmazon() {
         boolean isLoginDone = AmazonLoginScreen.get()
-                                .login(testData.get("username"),testData.get("password"));
+                .login(testData.get("username"), testData.get("password"));
         assertThat(isLoginDone).isTrue();
         return new HomePageBL();
     }

@@ -8,6 +8,8 @@ import com.znsio.sample.e2e.screen.amazon.AmazonCartScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class cartPageBL {
 
     private static final Logger LOGGER = Logger.getLogger(cartPageBL.class.getName());
@@ -37,7 +39,9 @@ public class cartPageBL {
     }
 
 
-    public void iSeeTheIphone13SuccessfullyAddedToCart() {
+    public cartPageBL iSeeTheIphone13SuccessfullyAddedToCart() {
         boolean isIphoneAddedToCart = AmazonCartScreen.get().iphone13IsDisplayedOnCart();
+        assertThat(isIphoneAddedToCart).isTrue();
+        return this;
     }
 }

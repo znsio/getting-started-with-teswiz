@@ -22,8 +22,7 @@ public class AmazonHomePageScreenWeb extends AmazonHomePageScreen {
     private static final String SCREEN_NAME = AmazonHomePageScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final TestExecutionContext context;
-    Map<String,String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
-
+    Map<String, String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
 
 
     public AmazonHomePageScreenWeb(Driver driver, Visual visually) {

@@ -25,7 +25,7 @@ public abstract class SearchResultPageScreen {
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
 
-        switch(platform) {
+        switch (platform) {
             case web:
                 return new SearchResultPageScreenWeb(driver, visually);
         }

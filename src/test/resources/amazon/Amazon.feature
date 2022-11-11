@@ -1,4 +1,3 @@
-
 Feature: Scenario for amazon cart functionality
 
     #CONFIG=./configs/amazon_config.properties TAG="@amazon and @web" PLATFORM=web  ./gradlew run

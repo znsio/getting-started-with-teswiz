@@ -23,8 +23,7 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
     private final TestExecutionContext context;
 
 
-
-    public AmazonCartScreenWeb (Driver driver, Visual visually) {
+    public AmazonCartScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
         this.innerDriver = this.driver.getInnerDriver();
@@ -37,17 +36,17 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
     public boolean iphone13IsDisplayedOnCart() {
         driver.waitTillElementIsPresent(byCartButtonid);
         driver.waitForClickabilityOf(byCartButtonid).click();
-
         driver.waitTillElementIsPresent(byCartPageId);
         String validatingCartPage = driver.findElement(byCartPageId).getText();
-        LOGGER.info("Current Page:-" +validatingCartPage);
-       String textFromCartPage = driver.findElement(byclickCartButtonOnCartPageXpath).getText();
-       if (textFromCartPage.contains("iPhone 13")) {
+        LOGGER.info("Current Page:-" + validatingCartPage);
+        String textFromCartPage = driver.findElement(byclickCartButtonOnCartPageXpath).getText();
+        visually.checkWindow(SCREEN_NAME, "Validating Cart Page after selecting product");
+        if (textFromCartPage.contains("iPhone 13")) {
             LOGGER.info("iphone 13 successfully added to cart");
             return true;
-       } else {
-           LOGGER.info("iphone 13 not added to cart");
-           return false;
-       }
+        } else {
+            LOGGER.info("iphone 13 not added to cart");
+            return false;
+        }
     }
 }

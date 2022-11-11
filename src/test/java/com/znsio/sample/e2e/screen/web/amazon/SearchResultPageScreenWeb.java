@@ -47,7 +47,8 @@ public class SearchResultPageScreenWeb extends SearchResultPageScreen {
        } else {
            LOGGER.error("Iphone list not visible");
        }
-     return this;
+        visually.checkWindow(SCREEN_NAME,"Validating Amazon Search Result Page");
+        return this;
     }
 
     @Override

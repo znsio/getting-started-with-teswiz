@@ -35,7 +35,7 @@ public class AmazonHomePageScreenWeb extends AmazonHomePageScreen {
     }
 
     @Override
-    public SearchResultPageScreen searchForiPhone13() {
+    public SearchResultPageScreen searchForProduct() {
         String searchedItem = testData.get("item");
         driver.findElement(byClickingOnSearchBoxid).click();
         driver.findElement(byClickingOnSearchBoxid).sendKeys(searchedItem);

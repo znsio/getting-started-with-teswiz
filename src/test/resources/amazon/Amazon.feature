@@ -4,6 +4,6 @@ Feature: Scenario for amazon cart functionality
   @web @amazon
   Scenario: User should be able to add iphone 13 to the cart
     Given I logged in with valid credentials
-    When I search for iphone
-    And I add the iphone in cart
+    When I search for product
+    And I add the product in cart
     Then iphone should be added to cart

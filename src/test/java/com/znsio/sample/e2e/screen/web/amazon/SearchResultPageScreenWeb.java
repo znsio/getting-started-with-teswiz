@@ -11,8 +11,8 @@ import org.openqa.selenium.WebDriver;
 import java.util.Map;
 
 public class SearchResultPageScreenWeb extends SearchResultPageScreen {
-    public static final By getIphoneCountByXpath = By.xpath("//div[@class='a-section']");
-    public static final By clickOnFirstIphone13 = By.xpath("(//span[contains(text(),'iPhone 13')])[4]");
+    public static final By getProductCountByXpath = By.xpath("//div[@class='a-section']");
+    public static final By clickOnFirstproduct = By.xpath("(//span[contains(text(),'iPhone 13')])[4]");
     public static final By validatingDetailPageById = By.id("dp-container");
     public static final By byProductTitleId = By.id("productTitle");
 
@@ -23,6 +23,7 @@ public class SearchResultPageScreenWeb extends SearchResultPageScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final TestExecutionContext context;
     Map<String, String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
+    String product = testData.get("item");
 
 
     public SearchResultPageScreenWeb(Driver driver, Visual visually) {
@@ -36,29 +37,29 @@ public class SearchResultPageScreenWeb extends SearchResultPageScreen {
 
 
     @Override
-    public SearchResultPageScreen isIphoneListVisible() {
-        int iphoneCountOnSRp = driver.findElements(getIphoneCountByXpath).size();
+    public SearchResultPageScreen isProductListVisible() {
+        int productCountOnSRp = driver.findElements(getProductCountByXpath).size();
         visually.checkWindow(SCREEN_NAME, "Validating Amazon Search Result Page");
-        if (iphoneCountOnSRp > 0) {
-            LOGGER.info("List of Iphone on SRP page:- " + iphoneCountOnSRp);
+        if (productCountOnSRp > 0) {
+            LOGGER.info("List of "+product+" on SRP page:- " +productCountOnSRp);
         } else {
-            LOGGER.error("Iphone list not visible");
+            LOGGER.error(product+" list not visible");
         }
         return this;
     }
 
     @Override
-    public boolean selectFirstIphone() {
-        driver.findElement(clickOnFirstIphone13).click();
+    public boolean selectFirstProduct() {
+        driver.findElement(clickOnFirstproduct).click();
         driver.switchToNextTab();
         driver.waitTillElementIsPresent(validatingDetailPageById, 20);
-        visually.checkWindow(SCREEN_NAME, "Validating Iphone Detail page");
+        visually.checkWindow(SCREEN_NAME, "Validating "+product+" Detail page");
         String validateProductTitle = driver.findElement(byProductTitleId).getText();
-        if (validateProductTitle.contains(testData.get("item"))) {
-            LOGGER.info("Successfully opened the Iphone Detail Page");
+        if (validateProductTitle.contains(product)) {
+            LOGGER.info("Successfully opened the "+product+" Detail Page");
             return true;
         } else {
-            LOGGER.error("Iphone Detail page not opened");
+            LOGGER.error(product +"Detail page not opened");
             return false;
         }
     }

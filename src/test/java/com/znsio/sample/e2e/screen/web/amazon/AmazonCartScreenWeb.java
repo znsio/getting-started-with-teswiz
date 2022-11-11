@@ -9,6 +9,8 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Map;
+
 public class AmazonCartScreenWeb extends AmazonCartScreen {
     public static final By byCartButtonid = By.cssSelector("input[aria-labelledby='attach-sidesheet-view-cart-button-announce']");
     public static final By byclickCartButtonOnCartPageXpath = By.xpath("(//span[@class='a-truncate-cut'])[1]");
@@ -21,6 +23,8 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
     private static final String SCREEN_NAME = AmazonCartScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final TestExecutionContext context;
+    Map<String, String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
+    String product = testData.get("item");
 
 
     public AmazonCartScreenWeb(Driver driver, Visual visually) {
@@ -41,11 +45,11 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
         LOGGER.info("Current Page:-" + validatingCartPage);
         String textFromCartPage = driver.findElement(byclickCartButtonOnCartPageXpath).getText();
         visually.checkWindow(SCREEN_NAME, "Validating Cart Page after selecting product");
-        if (textFromCartPage.contains("iPhone 13")) {
-            LOGGER.info("iphone 13 successfully added to cart");
+        if (textFromCartPage.contains(product)) {
+            LOGGER.info(product+ " successfully added to cart");
             return true;
         } else {
-            LOGGER.info("iphone 13 not added to cart");
+            LOGGER.info(product+ "not added to cart");
             return false;
         }
     }

@@ -9,6 +9,8 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Map;
+
 public class IphoneDetailPageScreenWeb extends IphoneDetailPageScreen {
 
     public static final By byAddToCartId = By.id("add-to-cart-button");
@@ -19,7 +21,8 @@ public class IphoneDetailPageScreenWeb extends IphoneDetailPageScreen {
     private static final String SCREEN_NAME = AmazonHomePageScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final TestExecutionContext context;
-
+    Map<String, String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
+    String product = testData.get("item");
 
 
     public IphoneDetailPageScreenWeb (Driver driver, Visual visually) {
@@ -36,12 +39,12 @@ public class IphoneDetailPageScreenWeb extends IphoneDetailPageScreen {
         driver.findElement(byAddToCartId).click();
         driver.waitTillElementIsPresent(validatingSidePannelById);
         boolean isSidePannelVisible = driver.findElement(validatingSidePannelById).isDisplayed();
-        visually.checkWindow(SCREEN_NAME,"Validating iphone added to cart in Iphone Detail page");
+        visually.checkWindow(SCREEN_NAME,"Validating "+product+ " added to cart in "+product+ "Detail page");
         if(isSidePannelVisible) {
-            LOGGER.info("Iphone added to cart");
+            LOGGER.info(product+ " added to cart");
             return true;
         } else {
-            LOGGER.error("Iphone is not added to cart");
+            LOGGER.error(product+" is not added to cart");
             return false;
         }
     }

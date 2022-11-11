@@ -32,8 +32,8 @@ public abstract class SearchResultPageScreen {
     }
 
 
-    public abstract SearchResultPageScreen isIphoneListVisible();
+    public abstract SearchResultPageScreen isProductListVisible();
 
-    public abstract boolean selectFirstIphone();
+    public abstract boolean selectFirstProduct();
 
 }

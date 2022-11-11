@@ -40,14 +40,14 @@ public class AmazonSteps {
 
     @And("I add the product in cart")
     public void iAddTheProductInCart() {
-        new IphoneDetailPageBL()
+        new ProductDetailPageBL()
                 .addToCart();
     }
 
-    @Then("iphone should be added to cart")
-    public void iphoneShouldBeAddedToCart() {
+    @Then("product should be added to cart")
+    public void productShouldBeAddedToCart() {
         new cartPageBL()
-                .validatingIphoneOnCart();
+                .validatingProductOnCart();
     }
 
 }

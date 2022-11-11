@@ -3,18 +3,22 @@ package com.znsio.sample.e2e.businessLayer.amazon;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.sample.e2e.screen.amazon.IphoneDetailPageScreen;
+import com.znsio.sample.e2e.screen.amazon.ProductDetailPageScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
-public class IphoneDetailPageBL {
+import java.util.Map;
 
-    private static final Logger LOGGER = Logger.getLogger(IphoneDetailPageBL.class.getName());
+public class ProductDetailPageBL {
+
+    private static final Logger LOGGER = Logger.getLogger(ProductDetailPageBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
+    Map<String, String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
+    String product = testData.get("item");
 
 
-    public IphoneDetailPageBL(String userPersona, Platform forPlatform) {
+    public ProductDetailPageBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -22,7 +26,7 @@ public class IphoneDetailPageBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public IphoneDetailPageBL() {
+    public ProductDetailPageBL() {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -30,12 +34,12 @@ public class IphoneDetailPageBL {
     }
 
 
-    public IphoneDetailPageBL addToCart() {
-        LOGGER.info("Validating iphone detail page opened:-");
-        boolean isIphoneAddedToCart = IphoneDetailPageScreen
+    public ProductDetailPageBL addToCart() {
+        LOGGER.info("Validating "+product+" detail page opened:-");
+        boolean isProductAddedToCart = ProductDetailPageScreen
                 .get()
-                .addIphoneToCart();
-        softly.assertThat(isIphoneAddedToCart).isTrue();
+                .addProductToCart();
+        softly.assertThat(isProductAddedToCart).isTrue();
         return this;
     }
 }

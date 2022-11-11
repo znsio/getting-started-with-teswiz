@@ -28,13 +28,13 @@ public class HomePageBL {
     }
 
 
-    public IphoneDetailPageBL searchForProduct() {
+    public ProductDetailPageBL searchForProduct() {
         LOGGER.info("Validating is Search Result Page opened");
         boolean isProductDetailPageOpened = AmazonHomePageScreen.get()
                 .searchForProduct()
                 .isProductListVisible()
                 .selectFirstProduct();
         softly.assertThat(isProductDetailPageOpened).isTrue();
-        return new IphoneDetailPageBL();
+        return new ProductDetailPageBL();
     }
 }

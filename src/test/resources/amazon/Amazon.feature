@@ -6,4 +6,4 @@ Feature: Scenario for amazon cart functionality
     Given I logged in with valid credentials
     When I search for product
     And I add the product in cart
-    Then iphone should be added to cart
+    Then product should be added to cart

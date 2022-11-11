@@ -34,5 +34,5 @@ public abstract class AmazonCartScreen {
     }
 
 
-    public abstract boolean iphone13IsDisplayedOnCart();
+    public abstract boolean productIsDisplayedOnCart();
 }

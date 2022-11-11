@@ -37,7 +37,7 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
     }
 
     @Override
-    public boolean iphone13IsDisplayedOnCart() {
+    public boolean productIsDisplayedOnCart() {
         driver.waitTillElementIsPresent(byCartButtonid);
         driver.waitForClickabilityOf(byCartButtonid).click();
         driver.waitTillElementIsPresent(byCartPageId);

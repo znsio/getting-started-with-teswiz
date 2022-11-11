@@ -7,11 +7,16 @@ import com.znsio.sample.e2e.screen.amazon.AmazonCartScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import java.util.Map;
+
 public class cartPageBL {
 
     private static final Logger LOGGER = Logger.getLogger(cartPageBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
+    Map<String, String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
+    String product = testData.get("item");
+
 
 
     public cartPageBL(String userPersona, Platform forPlatform) {
@@ -30,10 +35,10 @@ public class cartPageBL {
     }
 
 
-    public cartPageBL validatingIphoneOnCart() {
-        LOGGER.info("Validating is iphone added to cart");
-        boolean isIphoneAddedToCart = AmazonCartScreen.get().iphone13IsDisplayedOnCart();
-        softly.assertThat(isIphoneAddedToCart).isTrue();
+    public cartPageBL validatingProductOnCart() {
+        LOGGER.info("Validating is "+product+" added to cart");
+        boolean isProductAddedToCart = AmazonCartScreen.get().productIsDisplayedOnCart();
+        softly.assertThat(isProductAddedToCart).isTrue();
         return this;
     }
 }

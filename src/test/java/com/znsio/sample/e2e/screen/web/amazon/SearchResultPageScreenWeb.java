@@ -8,7 +8,6 @@ import com.znsio.sample.e2e.screen.amazon.SearchResultPageScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import java.util.Map;
 
 public class SearchResultPageScreenWeb extends SearchResultPageScreen {
@@ -17,16 +16,13 @@ public class SearchResultPageScreenWeb extends SearchResultPageScreen {
     public static final By validatingDetailPageById = By.id("dp-container");
     public static final By byProductTitleId = By.id("productTitle");
 
-
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
     private static final String SCREEN_NAME = SearchResultPageScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final TestExecutionContext context;
-    Map<String,String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
-
-
+    Map<String, String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
 
 
     public SearchResultPageScreenWeb(Driver driver, Visual visually) {
@@ -41,13 +37,13 @@ public class SearchResultPageScreenWeb extends SearchResultPageScreen {
 
     @Override
     public SearchResultPageScreen isIphoneListVisible() {
-       int iphoneCountOnSRp =  driver.findElements(getIphoneCountByXpath).size();
-        visually.checkWindow(SCREEN_NAME,"Validating Amazon Search Result Page");
-        if (iphoneCountOnSRp>0) {
-           LOGGER.info("List of Iphone on SRP page:- " +iphoneCountOnSRp);
-       } else {
-           LOGGER.error("Iphone list not visible");
-       }
+        int iphoneCountOnSRp = driver.findElements(getIphoneCountByXpath).size();
+        visually.checkWindow(SCREEN_NAME, "Validating Amazon Search Result Page");
+        if (iphoneCountOnSRp > 0) {
+            LOGGER.info("List of Iphone on SRP page:- " + iphoneCountOnSRp);
+        } else {
+            LOGGER.error("Iphone list not visible");
+        }
         return this;
     }
 
@@ -55,8 +51,8 @@ public class SearchResultPageScreenWeb extends SearchResultPageScreen {
     public boolean selectFirstIphone() {
         driver.findElement(clickOnFirstIphone13).click();
         driver.switchToNextTab();
-        driver.waitTillElementIsPresent(validatingDetailPageById,20);
-        visually.checkWindow(SCREEN_NAME,"Validating Iphone Detail page");
+        driver.waitTillElementIsPresent(validatingDetailPageById, 20);
+        visually.checkWindow(SCREEN_NAME, "Validating Iphone Detail page");
         String validateProductTitle = driver.findElement(byProductTitleId).getText();
         if (validateProductTitle.contains(testData.get("item"))) {
             LOGGER.info("Successfully opened the Iphone Detail Page");

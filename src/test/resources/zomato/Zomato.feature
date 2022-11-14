@@ -32,11 +32,11 @@ Feature: Scenario for zomato resturant search
   Scenario: User should be able to search dish on zomato for delivery
     Given I am on the zomato homepage
     And I should be able to select location - "Meerut"
-    When I search for a dish - "Chilli Panner" for "Delivery"
+    When I search for a dish "Chilli Panner" for "Delivery"
     Then I can see the resturant details which deliver "Chilli Panner"
 
   Scenario: User should be able to search dish on zomato for dineout
     Given I am on the zomato homepage
     And I should be able to select location - "Meerut"
-    When I search for a dish - "Chilli Panner" for "Dine-out"
-    Then I can see the resturant details which deliver "Chilli Panner"
+    When I search for a dish "Chilli Panner" for "Dine-out"
+    Then I can see the resturant details where I can dineout "Chilli Panner"

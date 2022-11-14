@@ -4,6 +4,9 @@ import com.context.SessionContext;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Drivers;
+import com.znsio.sample.e2e.businessLayer.ZomatoCityPageBL;
+import com.znsio.sample.e2e.businessLayer.ZomatoHomePageBL;
+import com.znsio.sample.e2e.businessLayer.ZomatoResturantPageBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import io.cucumber.java.en.*;
 import org.apache.log4j.Logger;
@@ -14,8 +17,7 @@ public class ZomatoSteps {
     private final Drivers allDrivers;
 
     public ZomatoSteps() {
-        context = SessionContext.getTestExecutionContext(Thread.currentThread()
-                .getId());
+        context = SessionContext.getTestExecutionContext(Thread.currentThread().getId());
         LOGGER.info("context: " + context.getTestName());
         allDrivers = (Drivers) context.getTestState(SAMPLE_TEST_CONTEXT.ALL_DRIVERS);
         LOGGER.info("allDrivers: " + (null == allDrivers));
@@ -24,6 +26,7 @@ public class ZomatoSteps {
     @Given("I am on the zomato homepage")
     public void iAmOnTheZomatoHomepage() {
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
+        LOGGER.info("Validating Zomato Homepage");
         new ZomatoHomePageBL().validateHomepage();
     }
 
@@ -39,7 +42,7 @@ public class ZomatoSteps {
 
     @Then("I can see that resturant details")
     public void iCanSeeThatResturantDetails() {
-        new ZomatoResturantPageBl().validateResturantPage();
+        new ZomatoResturantPageBL().validateResturantPage();
     }
 
     @And("I should be able to select my location by using detect current location")
@@ -69,23 +72,31 @@ public class ZomatoSteps {
 
     @Then("It should not appear on the list")
     public void itShouldNotAppearOnTheList() {
-//        new ZomatoCityPageBL().
+        new ZomatoCityPageBL().validateResturantSearch();
     }
 
     @Then("I can see the location error message")
     public void iCanSeeTheLocationErrorMessage() {
+        new ZomatoHomePageBL().validateLocationErrorMessage();
     }
 
-    @When("I search for a dish - {string} for {string}")
-    public void iSearchForADishFor(String arg0, String arg1) {
+    @When("I search for a dish {string} for {string}")
+    public void iSearchForADishFor(String dish, String foodStatus) {
+        new ZomatoCityPageBL().validateDishStatus(dish, foodStatus);
     }
 
     @Then("I can see the resturant details which deliver {string}")
-    public void iCanSeeTheResturantDetailsWhichDeliver(String arg0) {
+    public void iCanSeeTheResturantDetailsWhichDeliver(String dish) {
+        new ZomatoDishPageBL().validateResturantDetails(dish);
     }
 
-    @When("I search for a dish - {string} for {string}")
-    public void iSearchForADishFor(String arg0, String arg1) {
+    @When("I search for a dish {string} for {string}")
+    public void iSearchForADishFor(String dish, String foodStatus) {
+        new ZomatoCityPageBL().validateDishStatus(dish, foodStatus);
     }
 
+    @Then("I can see the resturant details where I can dineout {string}")
+    public void iCanSeeTheResturantDetailsWhereICanDineout(String dish) {
+        new ZomatoDishPageBL().validateResturantDetails(dish);
+    }
 }

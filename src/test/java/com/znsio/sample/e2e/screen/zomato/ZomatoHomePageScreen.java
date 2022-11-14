@@ -1,22 +1,22 @@
-package com.znsio.sample.e2e.screen.amazon;
+package com.znsio.sample.e2e.screen.zomato;
 
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.web.SearchResultPageScreenWeb;
+import com.znsio.sample.e2e.screen.web.ZomatoHomePageScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
-public abstract class SearchResultPageScreen {
+public abstract class ZomatoHomePageScreen {
 
-    private static final String SCREEN_NAME = SearchResultPageScreen.class.getSimpleName();
+    private static final String SCREEN_NAME = ZomatoHomePageScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public static SearchResultPageScreen get() {
+    public static ZomatoHomePageScreen get() {
         Driver driver = fetchDriver(Thread.currentThread()
                 .getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread()
@@ -27,14 +27,13 @@ public abstract class SearchResultPageScreen {
 
         switch(platform) {
             case web:
-                return new SearchResultPageScreenWeb(driver, visually);
+                return new ZomatoHomePageScreenWeb(driver, visually) {
+                };
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
+    public abstract boolean isHomepageVisible();
 
-    public abstract SearchResultPageScreen isIphoneListVisible();
-
-    public abstract boolean selectFirstIphone();
-
+    public abstract boolean selectLocationFromDropDown(String location);
 }

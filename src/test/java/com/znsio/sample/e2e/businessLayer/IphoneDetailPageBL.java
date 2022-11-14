@@ -1,4 +1,4 @@
-package com.znsio.sample.e2e.businessLayer.amazon;
+package com.znsio.sample.e2e.businessLayer;
 
 import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;

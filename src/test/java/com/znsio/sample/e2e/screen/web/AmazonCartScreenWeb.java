@@ -1,4 +1,4 @@
-package com.znsio.sample.e2e.screen.web.amazon;
+package com.znsio.sample.e2e.screen.web;
 
 import com.context.TestExecutionContext;
 import com.znsio.e2e.runner.Runner;

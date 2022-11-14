@@ -33,9 +33,11 @@ public class ProductPageBL {
     }
 
     public ProductPageBL verifyAndAddProductToCart() {
+        LOGGER.info("I am on product page");
         String checkForProductName = ProductPageScreen.get().verifyProductName();
         assertThat(checkForProductName).containsIgnoringCase("iphone 13");
         ProductPageScreen.get().clickAddToCart();
+        LOGGER.info("Have clicked add to cart button");
         return this;
     }
 
@@ -43,6 +45,7 @@ public class ProductPageBL {
         String successMessage = ProductPageScreen.get().checkSuccessMsgForAddToCart();
         assertThat(successMessage).containsIgnoringCase("Added to Cart");
         ProductPageScreen.get().moveToCart();
+        LOGGER.info("Product is added to the cart and have clicked on the cart button");
         return new AmazonCartBL();
     }
 }

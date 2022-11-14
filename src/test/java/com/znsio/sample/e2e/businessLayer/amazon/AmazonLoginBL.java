@@ -7,8 +7,6 @@ import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazon.AmazonLogInScreen;
 import org.apache.log4j.Logger;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class AmazonLoginBL {
     private static final Logger LOGGER = Logger.getLogger(AmazonLoginBL.class.getName());
     private final TestExecutionContext context;
@@ -33,6 +31,7 @@ public class AmazonLoginBL {
     }
 
     public AmazonHomePageBL LoginToAmazon() {
+        LOGGER.info("Trying to login to amazon");
         AmazonLogInScreen.get().isLoginToAmazonHomePage();
         return new AmazonHomePageBL();
     }

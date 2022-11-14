@@ -33,10 +33,13 @@ public class AmazonCartBL {
     public AmazonCartBL verifyAmIOnCartAndSameItemIsPresent() {
         String headingValue = AmazonCartScreen.get().AmIOnCartPage();
         assertThat(headingValue).containsIgnoringCase("Shopping Cart");
+        LOGGER.info("Shopping Cart text is present");
         String productName = AmazonCartScreen.get().verifySubTotalText();
         assertThat(productName).containsIgnoringCase("Subtotal");
+        LOGGER.info("Subtotal text is present");
         boolean isSameProductIsInTheCart = AmazonCartScreen.get().verifyThePresenceOfAddedProductInTheCart();
         assertThat(isSameProductIsInTheCart).isTrue();
+        LOGGER.info("iphone is present in the cart");
         return this;
     }
 }

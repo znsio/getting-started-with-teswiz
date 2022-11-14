@@ -34,14 +34,17 @@ public class SearchResultListPageBL {
     public SearchResultListPageBL validateIphoneResult() {
         boolean isPhoneNamePresent = SearchResultListPageScreen.get().verifyProductName();
         assertThat(isPhoneNamePresent).isTrue();
+        LOGGER.info("iphone name is present");
         boolean isIphoneListPresent = SearchResultListPageScreen.get().listCount();
         assertThat(isIphoneListPresent).isTrue();
         boolean isResultsTextPresent = SearchResultListPageScreen.get().verifyThePresenceOfResultsText();
         assertThat(isResultsTextPresent).isTrue();
+        LOGGER.info("Have received iphone results");
         return this;
     }
     public ProductPageBL clickOnFirstProduct() {
         SearchResultListPageScreen.get().clickOnIphone();
+        LOGGER.info("Have clicked on first iphone from the result");
         return new ProductPageBL();
     }
 }

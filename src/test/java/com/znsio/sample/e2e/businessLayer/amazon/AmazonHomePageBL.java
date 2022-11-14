@@ -34,7 +34,9 @@ public class AmazonHomePageBL {
     public SearchResultListPageBL VerifyAmazonHomePageAndSearchForIphone13() {
         boolean verifyAmazonLogo = AmazonHomeScreen.get().verifyAmazonHomePage();
         assertThat(verifyAmazonLogo).isTrue();
+        LOGGER.info("Have login to amazon Page");
         AmazonHomeScreen.get().searchIphone13();
+        LOGGER.info("Have searched Iphone 13");
         return new SearchResultListPageBL();
     }
 }

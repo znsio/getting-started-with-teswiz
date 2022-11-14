@@ -16,12 +16,12 @@ Feature: Scenario for zomato resturant search
     Given I am on the zomato homepage
     And I should be able to select location - "Meerut"
     When I search for the resturant with invalid name - "Bikaneeer"
-    Then I can see the error message
+    Then I can see the invalid resturant name error message
 
   Scenario: Validate other Meerut restuarant in Delhi location
     Given I am on the zomato homepage
     And I should be able to select location - "Delhi"
-    When I search for the resturant of other location - "Flavours"
+    When I search for the resturant of other location - "Flavours" "Meerut"
     Then It should not appear on the list
 
   Scenario: Validate error message when detect current location in disabled within system

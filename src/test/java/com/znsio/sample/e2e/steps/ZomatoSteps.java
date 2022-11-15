@@ -40,9 +40,9 @@ public class ZomatoSteps {
         new ZomatoCityPageBL().selectResturant(resturant);
     }
 
-    @Then("I can see that resturant details")
-    public void iCanSeeThatResturantDetails() {
-        new ZomatoResturantPageBL().validateResturantPage();
+    @Then("I can see that resturant details - {string}")
+    public void iCanSeeThatResturantDetails(String resturant) {
+        new ZomatoResturantPageBL().validateResturantPage(resturant);
     }
 
     @And("I should be able to select my location by using detect current location")
@@ -99,4 +99,5 @@ public class ZomatoSteps {
     public void iCanSeeTheResturantDetailsWhereICanDineout(String dish) {
         new ZomatoDishPageBL().validateResturantDetails(dish);
     }
+
 }

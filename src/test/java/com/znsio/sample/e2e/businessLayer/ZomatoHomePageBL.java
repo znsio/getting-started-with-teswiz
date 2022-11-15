@@ -42,8 +42,18 @@ public class ZomatoHomePageBL {
     }
 
     public ZomatoCityPageBL selectLocation(String location) {
-        boolean isLocationSelected = ZomatoHomePageScreen.get().selectLocationFromDropDown(location);
+        boolean isLocationSelected = ZomatoHomePageScreen.get()
+                .selectLocationFromDropDown(location)
+                .validateLocation(location);
         softly.assertThat(isLocationSelected).isTrue();
+        return new ZomatoCityPageBL();
+    }
+
+    public ZomatoCityPageBL selectFromDetectLocation() {
+        boolean isDetectLocationSelected = ZomatoHomePageScreen.get()
+                .selectDetectLocation()
+                .validateDetectLocation();
+        softly.assertThat(isDetectLocationSelected).isTrue();
         return new ZomatoCityPageBL();
     }
 }

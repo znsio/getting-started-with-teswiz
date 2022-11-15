@@ -6,11 +6,11 @@ Feature: Scenario for zomato resturant search
     When I search for the nearby resturant - "Flavours"
     Then I can see that resturant details
 
-  Scenario: User should be able to search resturant on zomato by detect location
+  Scenario: Search resturant on zomato by using detect location
     Given I am on the zomato homepage
     And I should be able to select my location by using detect current location
     When I search for the "Hira Sweets" resturant
-    Then I can see that resturant details
+    Then I can see that resturant details - "Hira Sweets"
 
   Scenario: Verify error message when we enter wrong resturant name
     Given I am on the zomato homepage

@@ -4,6 +4,7 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.sample.e2e.screen.zomato.ZomatoCityPageScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -33,6 +34,11 @@ public class ZomatoCityPageBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public void selectResturant(String resturant) {
+    public ZomatoResturantPageBL selectResturant(String resturant) {
+        boolean isResturantSelected = ZomatoCityPageScreen.get()
+                .selectResturantFromDropdown(resturant)
+                .validateResturant(resturant);
+        softly.assertThat(isResturantSelected).isTrue();
+        return new ZomatoResturantPageBL();
     }
 }

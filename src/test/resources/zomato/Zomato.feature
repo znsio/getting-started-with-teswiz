@@ -1,7 +1,7 @@
 Feature: Search functionality
 
-  Scenario: Search Flavours resturant on zomato as guest user
-    Given I as a "guest user" on zomato homepage and select "Meerut" location
+  Scenario: Search resturant on zomato as guest user
+    Given I,a "guest user" on zomato homepage and select "Meerut" location
     When I search for "Flavours" resturant
     Then I should see resturant details
 
@@ -11,7 +11,7 @@ Feature: Search functionality
     Then I should see resturant details
 
   Scenario: Search Meerut restuarant in Delhi location as guest user
-    Given I as a "guest user" on zomato homepage and select "Delhi" location
+    Given I,a "guest user" on zomato homepage and select "Delhi" location
     When I search for "Meerut" resturant
     Then I should see querry warning
 
@@ -20,7 +20,7 @@ Feature: Search functionality
     Then I should see location disbaled message
 
   Scenario: Search chilli panner on zomato for dineout and delivery as guest user
-    Given I as a "guest user" on zomato homepage and select "Meerut" location
+    Given I,a "guest user" on zomato homepage and select "Meerut" location
     When I select "Chilli Panner" for "Dine-out"
     And I select "Chilli Panner" for "Delivery"
     Then I should see resturant list

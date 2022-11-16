@@ -39,5 +39,5 @@ public abstract class ZomatoHomePageScreen {
 
     public abstract ZomatoCityPageScreen selectDetectLocation();
 
-    public abstract String getLocationInfoMessage();
+    public abstract String getLocationErrorMessage();
 }

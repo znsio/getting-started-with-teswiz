@@ -21,13 +21,13 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
     public static final By byZomatoDropdown = By.xpath("//div[@class='searchContainer']//p");
     public static final By byDetectLocationXpath = By.xpath("//p[contains(text(),'Detect')]");
     public static final By byCityPageId = By.id("root");
-    public static final By byLocationInfoMessageXpath = By.xpath("//div[@class='sc-aewfc itTtbE']");
+    public static final By byLocationDisabledMsgXpath = By.xpath("//div[@type='error']");
 
 
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
-    private static final String SCREEN_NAME = AmazonCartScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = ZomatoHomePageScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final TestExecutionContext context;
 
@@ -87,9 +87,10 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
     }
 
     @Override
-    public String getLocationInfoMessage() {
-        String getMessage = driver.findElement(byLocationInfoMessageXpath).getText().trim();
-        LOGGER.info("Validating location info message" +getMessage);
+    public String getLocationErrorMessage() {
+        driver.waitTillElementIsPresent(byLocationDisabledMsgXpath,10);
+        String getMessage = driver.findElement(byLocationDisabledMsgXpath).getText().trim();
+        LOGGER.info("Validating location error message" +getMessage);
         return getMessage;
     }
 }

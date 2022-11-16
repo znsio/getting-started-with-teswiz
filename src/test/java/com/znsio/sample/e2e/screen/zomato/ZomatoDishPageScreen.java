@@ -4,19 +4,19 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.web.ZomatoCityPageScreenWeb;
+import com.znsio.sample.e2e.screen.web.ZomatoDishPageScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
-public abstract class ZomatoCityPageScreen {
+public abstract class ZomatoDishPageScreen {
 
-    private static final String SCREEN_NAME = ZomatoCityPageScreen.class.getSimpleName();
+    private static final String SCREEN_NAME = ZomatoDishPageScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public static ZomatoCityPageScreen get() {
+    public static ZomatoDishPageScreen get() {
         Driver driver = fetchDriver(Thread.currentThread()
                 .getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread()
@@ -27,19 +27,14 @@ public abstract class ZomatoCityPageScreen {
 
         switch(platform) {
             case web:
-                return new ZomatoCityPageScreenWeb(driver, visually) {
+                return new ZomatoDishPageScreenWeb(driver, visually) {
                 };
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract boolean validateLocation(String location);
 
-    public abstract ZomatoResturantPageScreen selectResturantFromDropdown(String resturant);
+    public abstract boolean validateDish(String dish, String foodStatus);
 
-    public abstract boolean validateDetectLocation();
-
-    public abstract String getQuerryWarning();
-
-    public abstract ZomatoDishPageScreen selectDish(String dish, String foodStatus);
+    public abstract int getResturantcount();
 }

@@ -43,11 +43,18 @@ public class ZomatoCityPageBL {
     }
 
     public ZomatoDishPageBL validateDishStatus(String dish, String foodStatus) {
-
-
+        boolean isDishSelected = ZomatoCityPageScreen.get()
+                .selectDish(dish, foodStatus)
+                .validateDish(dish, foodStatus);
+        softly.assertThat(isDishSelected).isTrue();
         return new ZomatoDishPageBL();
     }
 
-    public void validateResturantSearch() {
+
+    public ZomatoCityPageBL validateResturantWarning() {
+        String getLocationWarning = ZomatoCityPageScreen.get()
+                .getQuerryWarning();
+        softly.assertThat(getLocationWarning).isEqualTo("We could not understand what you mean, try rephrasing the query.");
+        return this;
     }
 }

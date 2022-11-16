@@ -5,6 +5,7 @@ import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.zomato.ZomatoCityPageScreen;
+import com.znsio.sample.e2e.screen.zomato.ZomatoDishPageScreen;
 import com.znsio.sample.e2e.screen.zomato.ZomatoResturantPageScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -16,6 +17,8 @@ import java.util.List;
 public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
     public static final By byClickingOnResturantSearchBoxXpath = By.xpath("//input[@placeholder='Search for restaurant, cuisine or a dish']");
     public static final By byResturantDropdownDataXpath = By.xpath("//input[@placeholder='Search for restaurant, cuisine or a dish']/parent::div//p");
+    public static final By byLocationInfoMessageXpath = By.xpath("//div[@class='sc-aewfc itTtbE']");
+
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -66,5 +69,29 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
     public boolean validateDetectLocation() {
 
         return false;
+    }
+
+    @Override
+    public String getQuerryWarning() {
+        String getMessage = driver.findElement(byLocationInfoMessageXpath).getText().trim();
+        LOGGER.info("Validating location info message" +getMessage);
+        return getMessage;
+    }
+
+    @Override
+    public ZomatoDishPageScreen selectDish(String dish, String foodStatus) {
+        driver.findElement(byClickingOnResturantSearchBoxXpath).click();
+        driver.findElement(byClickingOnResturantSearchBoxXpath).sendKeys(dish);
+        driver.waitTillElementIsVisible(String.valueOf(byClickingOnResturantSearchBoxXpath),10);
+        LOGGER.info("Validating"+dish+ "for" +foodStatus);
+        List<WebElement> dishDropDownContent =driver.findElements(byResturantDropdownDataXpath);
+        for (WebElement dishDropdown : dishDropDownContent) {
+            if(dishDropdown.getText().trim().equalsIgnoreCase(dish+" - "+foodStatus)) {
+                dishDropdown.click();
+                LOGGER.info("Dish selected:-" +dishDropdown.getText().trim());
+                break;
+            }
+        }
+        return ZomatoDishPageScreen.get();
     }
 }

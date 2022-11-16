@@ -52,10 +52,10 @@ public class ZomatoHomePageBL {
         return new ZomatoCityPageBL();
     }
 
-    public ZomatoHomePageBL validateLocationMessage() {
+    public ZomatoHomePageBL validateLocationDisabledMessage() {
         String getLocationMessage = ZomatoHomePageScreen.get()
-                .getLocationInfoMessage();
-        softly.assertThat(getLocationMessage).isEqualTo("We could not understand what you mean, try rephrasing the query.");
+                .getLocationErrorMessage();
+        softly.assertThat(getLocationMessage).isEqualTo("Please enable location permission from settings and try again!");
         return this;
     }
 }

@@ -45,13 +45,13 @@ public class ZomatoSteps {
     }
 
     @Then("I should see querry warning")
-    public void itShouldNotAppearOnTheList() {
-        new ZomatoCityPageBL().validateResturantSearch();
+    public void iShouldSeeWarning() {
+        new ZomatoCityPageBL().validateResturantWarning();
     }
 
     @Then("I should see location disbaled message")
-    public void iCanSeeTheLocationMessage() {
-        new ZomatoHomePageBL().validateLocationMessage();
+    public void iCanSeeTheLocationDisabledMessage() {
+        new ZomatoHomePageBL().validateLocationDisabledMessage();
     }
 
     @When("I select {string} for {string}")
@@ -64,7 +64,7 @@ public class ZomatoSteps {
         new ZomatoDishPageBL().validateResturantList();
     }
 
-    @Given("I as a {string} on zomato homepage and select {string} location")
+    @Given("I,a {string} on zomato homepage and select {string} location")
     public void iAsAOnZomatoHomepageAndSelectLocation(String arg0, String location) {
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
         LOGGER.info("Validating Zomato Homepage");

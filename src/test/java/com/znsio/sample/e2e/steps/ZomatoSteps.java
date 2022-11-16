@@ -5,6 +5,7 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Drivers;
 import com.znsio.sample.e2e.businessLayer.ZomatoCityPageBL;
+import com.znsio.sample.e2e.businessLayer.ZomatoDishPageBL;
 import com.znsio.sample.e2e.businessLayer.ZomatoHomePageBL;
 import com.znsio.sample.e2e.businessLayer.ZomatoResturantPageBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
@@ -23,18 +24,6 @@ public class ZomatoSteps {
         LOGGER.info("allDrivers: " + (null == allDrivers));
     }
 
-    @Given("I am on the zomato homepage")
-    public void iAmOnTheZomatoHomepage() {
-        allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
-        LOGGER.info("Validating Zomato Homepage");
-        new ZomatoHomePageBL().validateHomepage();
-    }
-
-    @And("I select {string} location")
-    public void iShouldBeAbleToSelectLocation(String location) {
-        new ZomatoHomePageBL().selectLocation(location);
-    }
-
     @When("I search for the nearby resturant - {string}")
     public void iSearchForTheNearbyResturant(String resturant) {
         new ZomatoCityPageBL().selectResturant(resturant);
@@ -51,13 +40,8 @@ public class ZomatoSteps {
     }
 
     @When("I search for {string} resturant")
-    public void iSearchForTheResturant(String resturant) {
+    public void iSearchForResturant(String resturant) {
         new ZomatoCityPageBL().selectResturant(resturant);
-    }
-
-    @Then("I can see the invalid resturant name error message")
-    public void iCanSeeTheInvalidResturantErrorMessage() {
-        new ZomatoCityPageBL().validateInvalidResturantErrorMessage;
     }
 
     @Then("I should see querry warning")
@@ -66,8 +50,8 @@ public class ZomatoSteps {
     }
 
     @Then("I should see location disbaled message")
-    public void iCanSeeTheLocationErrorMessage() {
-        new ZomatoHomePageBL().validateLocationErrorMessage();
+    public void iCanSeeTheLocationMessage() {
+        new ZomatoHomePageBL().validateLocationMessage();
     }
 
     @When("I select {string} for {string}")
@@ -75,14 +59,22 @@ public class ZomatoSteps {
         new ZomatoCityPageBL().validateDishStatus(dish, foodStatus);
     }
 
-    @Then("I can see the resturant details which deliver {string}")
-    public void iCanSeeTheResturantDetailsWhichDeliver(String dish) {
-        new ZomatoDishPageBL().validateResturantDetails(dish);
-    }
-
     @Then("I should see resturant list")
     public void iCanSeeTheResturantDetailsWhereICanDineout() {
-        new ZomatoDishPageBL().validateResturantList(dish);
+        new ZomatoDishPageBL().validateResturantList();
     }
 
+    @Given("I as a {string} on zomato homepage and select {string} location")
+    public void iAsAOnZomatoHomepageAndSelectLocation(String arg0, String location) {
+        allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
+        LOGGER.info("Validating Zomato Homepage");
+        new ZomatoHomePageBL().selectLocation(location);
+    }
+
+    @Given("I as a {string} on zomato homepage and select detect current location")
+    public void iAsAOnZomatoHomepageAndSelectDetectCurrentLocation(String arg0) {
+        allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
+        LOGGER.info("Validating Zomato Homepage");
+        new ZomatoHomePageBL().selectFromDetectLocation();
+    }
 }

@@ -34,15 +34,9 @@ public class ZomatoHomePageBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public ZomatoHomePageBL validateHomepage() {
-        boolean isZomatoHomepageDisplayed = ZomatoHomePageScreen.get()
-                .isHomepageVisible();
-        softly.assertThat(isZomatoHomepageDisplayed).isTrue();
-        return this;
-    }
-
     public ZomatoCityPageBL selectLocation(String location) {
         boolean isLocationSelected = ZomatoHomePageScreen.get()
+                .isHomepageVisible()
                 .selectLocationFromDropDown(location)
                 .validateLocation(location);
         softly.assertThat(isLocationSelected).isTrue();
@@ -51,9 +45,17 @@ public class ZomatoHomePageBL {
 
     public ZomatoCityPageBL selectFromDetectLocation() {
         boolean isDetectLocationSelected = ZomatoHomePageScreen.get()
+                .isHomepageVisible()
                 .selectDetectLocation()
                 .validateDetectLocation();
         softly.assertThat(isDetectLocationSelected).isTrue();
         return new ZomatoCityPageBL();
+    }
+
+    public ZomatoHomePageBL validateLocationMessage() {
+        String getLocationMessage = ZomatoHomePageScreen.get()
+                .getLocationInfoMessage();
+        softly.assertThat(getLocationMessage).isEqualTo("We could not understand what you mean, try rephrasing the query.");
+        return this;
     }
 }

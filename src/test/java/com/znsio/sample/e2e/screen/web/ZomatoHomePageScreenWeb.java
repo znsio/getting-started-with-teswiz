@@ -19,6 +19,9 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
     public static final By byZomatoHeaderXpath = By.xpath("//div[@class='contents-wrapper']");
     public static final By byClickingOnDropdown = By.xpath("(//div[@class='searchContainer']//input)[1]");
     public static final By byZomatoDropdown = By.xpath("//div[@class='searchContainer']//p");
+    public static final By byDetectLocationXpath = By.xpath("//p[contains(text(),'Detect')]");
+    public static final By byCityPageId = By.id("root");
+    public static final By byLocationInfoMessageXpath = By.xpath("//div[@class='sc-aewfc itTtbE']");
 
 
     private final Driver driver;
@@ -38,7 +41,7 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
     }
 
     @Override
-    public boolean isHomepageVisible() {
+    public ZomatoHomePageScreen isHomepageVisible() {
         String homePageUrl = driver.getInnerDriver().getCurrentUrl();
         boolean isZomatoHomepageVisble = driver.findElement(byZomatoHeaderXpath).isDisplayed();
         visually.checkWindow(SCREEN_NAME, "On Zomato Homepage Screen");
@@ -47,14 +50,14 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
         } else {
             LOGGER.error("Zomato Homepage is not visible:-" + homePageUrl);
         }
-        return false;
+        return ZomatoHomePageScreen.get();
     }
 
     @Override
     public ZomatoCityPageScreen selectLocationFromDropDown(String location) {
         driver.findElement(byClickingOnDropdown).click();
         driver.findElement(byClickingOnDropdown).sendKeys(location);
-        driver.waitTillElementIsVisible(String.valueOf(byZomatoDropdown),10);
+        driver.waitTillElementIsPresent((byZomatoDropdown),10);
         LOGGER.info("Selecting city from Dropdown");
         List<WebElement> dropDownContent =driver.findElements(byZomatoDropdown);
         for (WebElement zomatoDropDownlist : dropDownContent) {
@@ -69,8 +72,24 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
 
     @Override
     public ZomatoCityPageScreen selectDetectLocation() {
+        LOGGER.info("Selecting city using Detect location");
         driver.findElement(byClickingOnDropdown).click();
+        driver.waitTillElementIsPresent(byDetectLocationXpath,10);
+        driver.findElement(byDetectLocationXpath).click();
+        driver.waitTillElementIsPresent(byCityPageId,10);
+        boolean isDetectLocationcliked = driver.findElement(byCityPageId).isDisplayed();
+        if (isDetectLocationcliked) {
+            LOGGER.info("City page opened" +isDetectLocationcliked);
+        } else {
+            LOGGER.error("City page opened" +isDetectLocationcliked);
+        }
+        return ZomatoCityPageScreen.get();
+    }
 
-        return null;
+    @Override
+    public String getLocationInfoMessage() {
+        String getMessage = driver.findElement(byLocationInfoMessageXpath).getText().trim();
+        LOGGER.info("Validating location info message" +getMessage);
+        return getMessage;
     }
 }

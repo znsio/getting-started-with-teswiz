@@ -59,6 +59,12 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
                 break;
             }
         }
-        return new ZomatoResturantPageScreen();
+        return ZomatoResturantPageScreen.get();
+    }
+
+    @Override
+    public boolean validateDetectLocation() {
+
+        return false;
     }
 }

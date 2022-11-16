@@ -40,6 +40,7 @@ public class ZomatoResturantPageScreenWeb extends ZomatoResturantPageScreen {
             return true;
         } else {
             LOGGER.error("Expected resturant to be"+resturant+ "but getting"+getResturantUrl);
+            return false;
         }
     }
 }

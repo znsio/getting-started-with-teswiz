@@ -41,4 +41,13 @@ public class ZomatoCityPageBL {
         softly.assertThat(isResturantSelected).isTrue();
         return new ZomatoResturantPageBL();
     }
+
+    public ZomatoDishPageBL validateDishStatus(String dish, String foodStatus) {
+
+
+        return new ZomatoDishPageBL();
+    }
+
+    public void validateResturantSearch() {
+    }
 }

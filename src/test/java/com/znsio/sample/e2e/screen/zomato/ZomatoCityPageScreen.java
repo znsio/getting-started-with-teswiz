@@ -36,4 +36,6 @@ public abstract class ZomatoCityPageScreen {
     public abstract boolean validateLocation(String location);
 
     public abstract ZomatoResturantPageScreen selectResturantFromDropdown(String resturant);
+
+    public abstract boolean validateDetectLocation();
 }

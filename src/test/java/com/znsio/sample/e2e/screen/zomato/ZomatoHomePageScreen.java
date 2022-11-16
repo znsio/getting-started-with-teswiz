@@ -33,9 +33,11 @@ public abstract class ZomatoHomePageScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract boolean isHomepageVisible();
+    public abstract ZomatoHomePageScreen isHomepageVisible();
 
     public abstract ZomatoCityPageScreen selectLocationFromDropDown(String location);
 
     public abstract ZomatoCityPageScreen selectDetectLocation();
+
+    public abstract String getLocationInfoMessage();
 }

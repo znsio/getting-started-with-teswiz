@@ -5,7 +5,8 @@
       "password" : "Hello123@",
       "item" : "iPhone 13",
       "to": "Delhi",
-      "from": "Abu Dhabi (AUH)"
+      "from": "Abu Dhabi (AUH)",
+      "resturant": "Hira Sweets"
     }
   }
 }

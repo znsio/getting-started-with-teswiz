@@ -37,7 +37,7 @@ public class ZomatoCityPageBL {
     public ZomatoResturantPageBL selectResturant(String resturant) {
         boolean isResturantSelected = ZomatoCityPageScreen.get()
                 .selectResturantFromDropdown(resturant)
-                .validateResturant(resturant);
+                .validateResturant();
         softly.assertThat(isResturantSelected).isTrue();
         return new ZomatoResturantPageBL();
     }

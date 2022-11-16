@@ -32,5 +32,5 @@ public abstract class ZomatoResturantPageScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract boolean validateResturant(String resturant);
+    public abstract boolean validateResturant();
 }

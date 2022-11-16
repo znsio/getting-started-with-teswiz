@@ -1,42 +1,37 @@
 Feature: Scenario for zomato resturant search
 
-  Scenario: User should be able to search resturant on zomato
+  Scenario: Search Flavours resturant on zomato
     Given I am on the zomato homepage
-    And I should be able to select location - "Meerut"
-    When I search for the nearby resturant - "Flavours"
-    Then I can see that resturant details
+    And I select "Meerut" location
+    When I search for "Flavours" resturant
+    Then I should see resturant details
 
-  Scenario: Search resturant on zomato by using detect location
+  Scenario: Search resturant on zomato by detect location
     Given I am on the zomato homepage
-    And I should be able to select my location by using detect current location
-    When I search for the "Hira Sweets" resturant
-    Then I can see that resturant details - "Hira Sweets"
+    And I select location by using detect current location
+    When I search for "Hira Sweets" resturant
+    Then I should see resturant details
 
-  Scenario: Verify error message when we enter wrong resturant name
+  Scenario: Search Meerut restuarant in Delhi location
     Given I am on the zomato homepage
-    And I should be able to select location - "Meerut"
-    When I search for the resturant with invalid name - "Bikaneeer"
-    Then I can see the invalid resturant name error message
+    And I select "Delhi" location
+    When I search for "Meerut" resturant
+    Then I should see querry warning
 
-  Scenario: Validate other Meerut restuarant in Delhi location
+  Scenario: Detect current location disabled within system
     Given I am on the zomato homepage
-    And I should be able to select location - "Delhi"
-    When I search for the resturant of other location - "Flavours" "Meerut"
-    Then It should not appear on the list
+    When I select location by using detect current location
+    Then I should see location disbaled message
 
-  Scenario: Validate error message when detect current location in disabled within system
+  Scenario: Search chilli panner on zomato for dineout and delivery
     Given I am on the zomato homepage
-    When I should be able to select my location by using detect current location
-    Then I can see the location error message
+    And I select "Meerut" location
+    When I select "Chilli Panner" for "Dine-out"
+    And I select "Chilli Panner" for "Delivery"
+    Then I should see resturant list
 
-  Scenario: User should be able to search dish on zomato for delivery
-    Given I am on the zomato homepage
-    And I should be able to select location - "Meerut"
-    When I search for a dish "Chilli Panner" for "Delivery"
-    Then I can see the resturant details which deliver "Chilli Panner"
-
-  Scenario: User should be able to search dish on zomato for dineout
-    Given I am on the zomato homepage
-    And I should be able to select location - "Meerut"
-    When I search for a dish "Chilli Panner" for "Dine-out"
-    Then I can see the resturant details where I can dineout "Chilli Panner"
+    #  Scenario: Search invalid resturant on Zomato
+#    Given I am on the zomato homepage
+#    And I select "Meerut" location
+ #   When I search for the "Bikaneeer" resturant
+  #  Then I should see

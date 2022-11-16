@@ -30,7 +30,7 @@ public class ZomatoSteps {
         new ZomatoHomePageBL().validateHomepage();
     }
 
-    @And("I should be able to select location - {string}")
+    @And("I select {string} location")
     public void iShouldBeAbleToSelectLocation(String location) {
         new ZomatoHomePageBL().selectLocation(location);
     }
@@ -40,24 +40,19 @@ public class ZomatoSteps {
         new ZomatoCityPageBL().selectResturant(resturant);
     }
 
-    @Then("I can see that resturant details - {string}")
-    public void iCanSeeThatResturantDetails(String resturant) {
-        new ZomatoResturantPageBL().validateResturantPage(resturant);
+    @Then("I should see resturant details")
+    public void iCanSeeThatResturantDetails() {
+        new ZomatoResturantPageBL().validateResturantPage();
     }
 
-    @And("I should be able to select my location by using detect current location")
+    @And("I select location by using detect current location")
     public void iShouldBeAbleToSelectMyLocationByUsingDetectCurrentLocation() {
         new ZomatoHomePageBL().selectFromDetectLocation();
     }
 
-    @When("I search for the {string} resturant")
+    @When("I search for {string} resturant")
     public void iSearchForTheResturant(String resturant) {
         new ZomatoCityPageBL().selectResturant(resturant);
-    }
-
-    @When("I search for the resturant with invalid name - {string}")
-    public void iSearchForTheResturantWithInvalidName(String invalidResturantName) {
-        new ZomatoCityPageBL().validateInvalidResturantName(invalidResturantName);
     }
 
     @Then("I can see the invalid resturant name error message")
@@ -65,22 +60,17 @@ public class ZomatoSteps {
         new ZomatoCityPageBL().validateInvalidResturantErrorMessage;
     }
 
-    @When("I search for the resturant of other location - {string} {string}")
-    public void iSearchForTheResturantOfOtherLocation(String otherLocationResturant, String currentLocation) {
-        new ZomatoCityPageBL().searchForOtherLocationResturant(currentLocation, otherLocationResturant);
-    }
-
-    @Then("It should not appear on the list")
+    @Then("I should see querry warning")
     public void itShouldNotAppearOnTheList() {
         new ZomatoCityPageBL().validateResturantSearch();
     }
 
-    @Then("I can see the location error message")
+    @Then("I should see location disbaled message")
     public void iCanSeeTheLocationErrorMessage() {
         new ZomatoHomePageBL().validateLocationErrorMessage();
     }
 
-    @When("I search for a dish {string} for {string}")
+    @When("I select {string} for {string}")
     public void iSearchForADishFor(String dish, String foodStatus) {
         new ZomatoCityPageBL().validateDishStatus(dish, foodStatus);
     }
@@ -90,14 +80,9 @@ public class ZomatoSteps {
         new ZomatoDishPageBL().validateResturantDetails(dish);
     }
 
-    @When("I search for a dish {string} for {string}")
-    public void iSearchForADishFor(String dish, String foodStatus) {
-        new ZomatoCityPageBL().validateDishStatus(dish, foodStatus);
-    }
-
-    @Then("I can see the resturant details where I can dineout {string}")
-    public void iCanSeeTheResturantDetailsWhereICanDineout(String dish) {
-        new ZomatoDishPageBL().validateResturantDetails(dish);
+    @Then("I should see resturant list")
+    public void iCanSeeTheResturantDetailsWhereICanDineout() {
+        new ZomatoDishPageBL().validateResturantList(dish);
     }
 
 }

@@ -35,8 +35,8 @@ public class ZomatoResturantPageBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public boolean validateResturantPage(String resturant) {
-        boolean isResturantPageOpened = ZomatoResturantPageScreen.get().validateResturant(resturant);
+    public boolean validateResturantPage() {
+        boolean isResturantPageOpened = ZomatoResturantPageScreen.get().validateResturant();
         softly.assertThat(isResturantPageOpened).isTrue();
         return isResturantPageOpened;
     }

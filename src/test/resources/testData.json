@@ -1,7 +1,8 @@
 {
   "prod": {
     "raghav.garg" : {
-      "resturant": "Flavour"
+      "resturant": "Flavour",
+      "place": "Meerut"
     }
   }
 }

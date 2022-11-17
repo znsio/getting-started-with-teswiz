@@ -42,4 +42,7 @@ public abstract class ZomatoCityPageScreen {
     public abstract String getQuerryWarning();
 
     public abstract ZomatoDishPageScreen selectDish(String dish, String foodStatus);
+
+    public abstract boolean validateEmptyDropdown(String location);
+
 }

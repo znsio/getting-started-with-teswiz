@@ -31,16 +31,19 @@ public class ZomatoDishPageScreenWeb extends ZomatoDishPageScreen {
 
     @Override
     public boolean validateDish(String dish, String foodStatus) {
+        driver.waitTillElementIsPresent(byFoodStatusXpath,10);
         String getFoodstatus = driver.findElement(byFoodStatusXpath).getText().trim();
+        driver.waitTillElementIsPresent(byDishXpath,10);
         String getDish = driver.findElement(byDishXpath).getText().trim();
 
         if (dish.equalsIgnoreCase(getDish) && (foodStatus.equalsIgnoreCase(getFoodstatus))) {
             LOGGER.info("Successfully selected" +dish+ "for" +foodStatus);
+            return true;
         } else {
             LOGGER.error("Expected dish is"+dish+ "for" +foodStatus);
             LOGGER.error("But getting as" +getDish+ "for" +getFoodstatus);
+            return false;
         }
-        return false;
     }
 
     @Override

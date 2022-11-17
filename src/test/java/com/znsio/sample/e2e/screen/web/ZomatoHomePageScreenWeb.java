@@ -91,12 +91,12 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
         driver.findElement(byClickingOnDropdown).click();
         driver.waitTillElementIsPresent(byDetectLocationXpath,10);
         driver.findElement(byDetectLocationXpath).click();
-        driver.waitTillElementIsPresent(byCityPageId,10);
+  //      driver.waitTillElementIsPresent(byCityPageId,10);
         boolean isDetectLocationcliked = driver.findElement(byCityPageId).isDisplayed();
         if (isDetectLocationcliked) {
             LOGGER.info("City page opened" +isDetectLocationcliked);
         } else {
-            LOGGER.error("City page opened" +isDetectLocationcliked);
+            LOGGER.info("City page opened" +isDetectLocationcliked);
         }
         return ZomatoCityPageScreen.get();
     }

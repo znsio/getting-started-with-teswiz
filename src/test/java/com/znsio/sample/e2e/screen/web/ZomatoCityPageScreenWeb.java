@@ -14,12 +14,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.Map;
 
 public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
     public static final By byClickingOnResturantSearchBoxXpath = By.xpath("//input[@placeholder='Search for restaurant, cuisine or a dish']");
     public static final By byResturantDropdownDataXpath = By.xpath("(//p[@class='sc-1hez2tp-0 sc-hkbPbT fpZVCC'])[1]");
     public static final By byLocationInfoMessageXpath = By.xpath("//div[@class='sc-aewfc itTtbE']");
     public static final By validadtingCityPage = By.xpath("(//section[@role='tablist'])[1]");
+    public static final By validatingInfoMsg = By.xpath("//div[@class='sc-hvvHee ldTYpO']");
+
 
     private final Driver driver;
     private final Visual visually;
@@ -27,6 +30,8 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
     private static final String SCREEN_NAME = ZomatoCityPageScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final TestExecutionContext context;
+    Map<String,String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
+    String place = testData.get("place");
 
     public ZomatoCityPageScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -76,13 +81,20 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
 
     @Override
     public boolean validateDetectLocation() {
-
-        return false;
+        driver.waitTillElementIsPresent(validadtingCityPage,20);
+        String getCityUrl = driver.getInnerDriver().getCurrentUrl();
+        if (getCityUrl.contains(place.toLowerCase())) {
+            LOGGER.info("Successfully validated detect location");
+            return true;
+        } else {
+            LOGGER.error("Error in detect location");
+            return false;
+        }
     }
 
     @Override
     public String getQuerryWarning() {
-        String getMessage = driver.findElement(byLocationInfoMessageXpath).getText().trim();
+        String getMessage = driver.findElement(validatingInfoMsg).getText().trim();
         LOGGER.info("Validating location info message" +getMessage);
         return getMessage;
     }
@@ -90,18 +102,32 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
     @Override
     public ZomatoDishPageScreen selectDish(String dish, String foodStatus) {
         driver.findElement(byClickingOnResturantSearchBoxXpath).click();
-        driver.findElement(byClickingOnResturantSearchBoxXpath).sendKeys(dish);
-        driver.waitTillElementIsVisible(String.valueOf(byClickingOnResturantSearchBoxXpath),10);
+        driver.findElement(byClickingOnResturantSearchBoxXpath).sendKeys(dish+" - "+foodStatus);
+        wait(4);
         LOGGER.info("Validating"+dish+ "for" +foodStatus);
-        List<WebElement> dishDropDownContent =driver.findElements(byResturantDropdownDataXpath);
+  /*      List<WebElement> dishDropDownContent =driver.findElements(byResturantDropdownDataXpath);
         for (WebElement dishDropdown : dishDropDownContent) {
             if(dishDropdown.getText().trim().equalsIgnoreCase(dish+" - "+foodStatus)) {
                 dishDropdown.click();
                 LOGGER.info("Dish selected:-" +dishDropdown.getText().trim());
                 break;
             }
-        }
+        }*/
+        driver.findElement(byClickingOnResturantSearchBoxXpath).sendKeys(" ", Keys.ARROW_DOWN, Keys.ENTER);
         return ZomatoDishPageScreen.get();
+    }
+
+    @Override
+    public boolean validateEmptyDropdown(String location) {
+        driver.findElement(byClickingOnResturantSearchBoxXpath).click();
+        driver.findElement(byClickingOnResturantSearchBoxXpath).sendKeys(location);
+        wait(2);
+        boolean isDropdownVisible = driver.findElement(validatingInfoMsg).isDisplayed();
+        if (isDropdownVisible) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void wait(int value) {

@@ -77,4 +77,10 @@ public class ZomatoSteps {
         LOGGER.info("Validating Zomato Homepage");
         new ZomatoHomePageBL().selectFromDetectLocation();
     }
+
+    @When("I search for resturant")
+    public void iSearchForResturant() {
+        LOGGER.info("Validating info message");
+        new ZomatoCityPageBL().generateLocationInfoMessage();
+    }
 }

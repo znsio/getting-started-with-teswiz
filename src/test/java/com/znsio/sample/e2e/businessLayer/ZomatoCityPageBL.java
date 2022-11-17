@@ -5,6 +5,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.zomato.ZomatoCityPageScreen;
+import com.znsio.sample.e2e.screen.zomato.ZomatoHomePageScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -54,7 +55,14 @@ public class ZomatoCityPageBL {
     public ZomatoCityPageBL validateResturantWarning() {
         String getLocationWarning = ZomatoCityPageScreen.get()
                 .getQuerryWarning();
-        softly.assertThat(getLocationWarning).isEqualTo("We could not understand what you mean, try rephrasing the query.");
+        LOGGER.info("Location info message:-"+getLocationWarning );
+        return this;
+    }
+
+    public ZomatoCityPageBL generateLocationInfoMessage() {
+        boolean isLocationDropdownEmpty = ZomatoCityPageScreen.get()
+                .validateEmptyDropdown("d");
+        softly.assertThat(isLocationDropdownEmpty).isTrue();
         return this;
     }
 }

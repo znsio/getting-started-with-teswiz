@@ -49,7 +49,7 @@ public class ZomatoSteps {
         new ZomatoCityPageBL().validateResturantWarning();
     }
 
-    @Then("I should see location disbaled message")
+    @Then("I should see location disabled message")
     public void iCanSeeTheLocationDisabledMessage() {
         new ZomatoHomePageBL().validateLocationDisabledMessage();
     }
@@ -71,7 +71,7 @@ public class ZomatoSteps {
         new ZomatoHomePageBL().selectLocation(location);
     }
 
-    @Given("I as a {string} on zomato homepage and select detect current location")
+    @Given("I, a {string} on zomato homepage and select detect current location")
     public void iAsAOnZomatoHomepageAndSelectDetectCurrentLocation(String arg0) {
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
         LOGGER.info("Validating Zomato Homepage");

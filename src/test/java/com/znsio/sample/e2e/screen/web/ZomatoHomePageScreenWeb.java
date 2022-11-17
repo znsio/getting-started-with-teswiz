@@ -59,18 +59,24 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
     public ZomatoCityPageScreen selectLocationFromDropDown(String location) {
         driver.findElement(byClickingOnDropdown).click();
         driver.findElement(byClickingOnDropdown).sendKeys(location);
-        wait(4);
-        LOGGER.info("Selecting city from Dropdown");
-        driver.findElement(byClickingOnDropdown).sendKeys(" ",Keys.ARROW_DOWN,Keys.ENTER);
-        LOGGER.info("Selecting selected from Dropdown");
-        driver.waitTillElementIsPresent(validadtingCityPage,10);
+    //    wait(4);
+    //    LOGGER.info("Selecting city from Dropdown");
+    //    driver.findElement(byClickingOnDropdown).sendKeys(" ",Keys.ARROW_DOWN,Keys.ENTER);
+     //      LOGGER.info("Selecting selected from Dropdown");
+    //    driver.waitTillElementIsPresent(validadtingCityPage,10);
 
-/*        List<WebElement> dropDownContent =driver.findElements(byZomatoDropdown);
-        wait(3);
+        driver.waitTillPresenceOfAllElements(byZomatoDropdown);
+        List<WebElement> dropDownContent =driver.findElements(byZomatoDropdown);
+    //    wait(3);
+        driver.waitTillPresenceOfAllElements(byZomatoDropdown);
+
         for (WebElement zomatoDropDownlist : dropDownContent) {
-            wait(2);
+    //        wait(2);
+            driver.waitTillPresenceOfAllElements(byZomatoDropdown);
             String cityData = zomatoDropDownlist.getText();
-            wait(2);
+            //        wait(2);
+            driver.waitTillPresenceOfAllElements(byZomatoDropdown);
+
             if (cityData.equalsIgnoreCase(location)) {
                 driver.waitTillElementIsPresent((By)zomatoDropDownlist,10);
                 wait(3);
@@ -81,7 +87,7 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
             } else {
                 LOGGER.error("City not selected");
             }
-        }*/
+        }
         return ZomatoCityPageScreen.get();
     }
 
@@ -91,7 +97,7 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
         driver.findElement(byClickingOnDropdown).click();
         driver.waitTillElementIsPresent(byDetectLocationXpath,10);
         driver.findElement(byDetectLocationXpath).click();
-  //      driver.waitTillElementIsPresent(byCityPageId,10);
+        driver.waitTillElementIsPresent(byCityPageId,10);
         boolean isDetectLocationcliked = driver.findElement(byCityPageId).isDisplayed();
         if (isDetectLocationcliked) {
             LOGGER.info("City page opened" +isDetectLocationcliked);

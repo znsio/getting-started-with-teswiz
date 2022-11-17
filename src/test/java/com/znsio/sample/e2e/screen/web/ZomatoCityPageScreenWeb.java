@@ -9,6 +9,7 @@ import com.znsio.sample.e2e.screen.zomato.ZomatoDishPageScreen;
 import com.znsio.sample.e2e.screen.zomato.ZomatoResturantPageScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -16,8 +17,9 @@ import java.util.List;
 
 public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
     public static final By byClickingOnResturantSearchBoxXpath = By.xpath("//input[@placeholder='Search for restaurant, cuisine or a dish']");
-    public static final By byResturantDropdownDataXpath = By.xpath("//input[@placeholder='Search for restaurant, cuisine or a dish']/parent::div//p");
+    public static final By byResturantDropdownDataXpath = By.xpath("(//p[@class='sc-1hez2tp-0 sc-hkbPbT fpZVCC'])[1]");
     public static final By byLocationInfoMessageXpath = By.xpath("//div[@class='sc-aewfc itTtbE']");
+    public static final By validadtingCityPage = By.xpath("(//section[@role='tablist'])[1]");
 
     private final Driver driver;
     private final Visual visually;
@@ -39,7 +41,7 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
     public boolean validateLocation(String location) {
         String cityPageHeader = driver.getInnerDriver().getCurrentUrl();
         visually.checkWindow(SCREEN_NAME, "On Zomato City Page Screen");
-        if(cityPageHeader.contains(location)) {
+        if(cityPageHeader.contains(location.toLowerCase())) {
             LOGGER.info("Zomato city page opened" +location);
             return true;
         } else {
@@ -50,18 +52,25 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
 
     @Override
     public ZomatoResturantPageScreen selectResturantFromDropdown(String resturant) {
+        driver.waitTillElementIsPresent(validadtingCityPage,10);
         driver.findElement(byClickingOnResturantSearchBoxXpath).click();
         driver.findElement(byClickingOnResturantSearchBoxXpath).sendKeys(resturant);
-        driver.waitTillElementIsVisible(String.valueOf(byClickingOnResturantSearchBoxXpath),10);
-        LOGGER.info("Select Resturant from dropdown");
-        List<WebElement> resturantDropDownContent =driver.findElements(byResturantDropdownDataXpath);
+        wait(4);
+        driver.waitTillElementIsPresent((byClickingOnResturantSearchBoxXpath),10);
+        LOGGER.info("Selecting resturant from dropdown");
+     //   driver.findElement(byResturantDropdownDataXpath).sendKeys(" ", Keys.ARROW_DOWN,Keys.ENTER);
+        driver.findElement(byResturantDropdownDataXpath).click();
+        LOGGER.info("Resturant selected from dropdown");
+/*        List<WebElement> resturantDropDownContent =driver.findElements(byResturantDropdownDataXpath);
         for (WebElement resturantDropdown : resturantDropDownContent) {
             if(resturantDropdown.getText().equalsIgnoreCase(resturant)) {
                 resturantDropdown.click();
                 LOGGER.info("Resturant selected:-" +resturantDropdown.getText().trim());
                 break;
+            } else {
+                LOGGER.info("Resturant not selected");
             }
-        }
+        }*/
         return ZomatoResturantPageScreen.get();
     }
 
@@ -93,5 +102,13 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
             }
         }
         return ZomatoDishPageScreen.get();
+    }
+
+    public void wait(int value) {
+        try {
+            Thread.sleep(value *1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

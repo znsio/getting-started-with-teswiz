@@ -8,6 +8,7 @@ import com.znsio.sample.e2e.screen.zomato.ZomatoCityPageScreen;
 import com.znsio.sample.e2e.screen.zomato.ZomatoHomePageScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -18,10 +19,11 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
 
     public static final By byZomatoHeaderXpath = By.xpath("//div[@class='contents-wrapper']");
     public static final By byClickingOnDropdown = By.xpath("(//div[@class='searchContainer']//input)[1]");
-    public static final By byZomatoDropdown = By.xpath("//div[@class='searchContainer']//p");
+    public static final By byZomatoDropdown = By.xpath("//div[@class='sc-geAPOV sc-bJTOcE brXqlb']//p[1]");
     public static final By byDetectLocationXpath = By.xpath("//p[contains(text(),'Detect')]");
     public static final By byCityPageId = By.id("root");
     public static final By byLocationDisabledMsgXpath = By.xpath("//div[@type='error']");
+    public static final By validadtingCityPage = By.xpath("(//section[@role='tablist'])[1]");
 
 
     private final Driver driver;
@@ -57,16 +59,29 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
     public ZomatoCityPageScreen selectLocationFromDropDown(String location) {
         driver.findElement(byClickingOnDropdown).click();
         driver.findElement(byClickingOnDropdown).sendKeys(location);
-        driver.waitTillElementIsPresent((byZomatoDropdown),10);
+        wait(4);
         LOGGER.info("Selecting city from Dropdown");
-        List<WebElement> dropDownContent =driver.findElements(byZomatoDropdown);
+        driver.findElement(byClickingOnDropdown).sendKeys(" ",Keys.ARROW_DOWN,Keys.ENTER);
+        LOGGER.info("Selecting selected from Dropdown");
+        driver.waitTillElementIsPresent(validadtingCityPage,10);
+
+/*        List<WebElement> dropDownContent =driver.findElements(byZomatoDropdown);
+        wait(3);
         for (WebElement zomatoDropDownlist : dropDownContent) {
-            if (zomatoDropDownlist.getText().equalsIgnoreCase(location)) {
+            wait(2);
+            String cityData = zomatoDropDownlist.getText();
+            wait(2);
+            if (cityData.equalsIgnoreCase(location)) {
+                driver.waitTillElementIsPresent((By)zomatoDropDownlist,10);
+                wait(3);
                 zomatoDropDownlist.click();
-                LOGGER.info("City selected:-" +zomatoDropDownlist.getText().trim());
+                driver.waitTillElementIsPresent(validadtingCityPage,10);
+                LOGGER.info("City selected:-" +location);
                 break;
+            } else {
+                LOGGER.error("City not selected");
             }
-        }
+        }*/
         return ZomatoCityPageScreen.get();
     }
 
@@ -92,5 +107,13 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
         String getMessage = driver.findElement(byLocationDisabledMsgXpath).getText().trim();
         LOGGER.info("Validating location error message" +getMessage);
         return getMessage;
+    }
+
+    public void wait(int value) {
+        try {
+            Thread.sleep(value *1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

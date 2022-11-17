@@ -35,7 +35,7 @@ public class ZomatoResturantPageScreenWeb extends ZomatoResturantPageScreen {
     public boolean validateResturant() {
         String getResturantUrl = driver.getInnerDriver().getCurrentUrl();
         visually.checkWindow(SCREEN_NAME, "On Zomato Resturant Pages");
-        if (getResturantUrl.contains(resturant)) {
+        if (getResturantUrl.contains(resturant.toLowerCase())) {
             LOGGER.info("Successfully opened resturant page" +resturant);
             return true;
         } else {

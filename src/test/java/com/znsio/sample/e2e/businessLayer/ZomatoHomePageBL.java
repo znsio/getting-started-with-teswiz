@@ -51,4 +51,11 @@ public class ZomatoHomePageBL {
         softly.assertThat(getLocationMessage).isEqualTo("Please enable location permission from settings and try again!");
         return this;
     }
+
+    public ZomatoHomePageBL selectDetectLocation() {
+        ZomatoHomePageScreen.get()
+                .isHomepageVisible()
+                .selectFromDetectLocation();
+        return new ZomatoHomePageBL();
+    }
 }

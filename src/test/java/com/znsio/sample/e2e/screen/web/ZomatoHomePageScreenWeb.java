@@ -83,7 +83,7 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
         if (isDetectLocationcliked) {
             LOGGER.info("City page opened" +isDetectLocationcliked);
         } else {
-            LOGGER.info("City page opened" +isDetectLocationcliked);
+            LOGGER.error("City page opened" +isDetectLocationcliked);
         }
         return ZomatoCityPageScreen.get();
     }
@@ -94,5 +94,19 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
         String getMessage = driver.findElement(byLocationDisabledMsgXpath).getText().trim();
         LOGGER.info("Validating location error message" +getMessage);
         return getMessage;
+    }
+
+    @Override
+    public ZomatoHomePageScreen selectFromDetectLocation() {
+        LOGGER.info("Selecting city using Detect location");
+        driver.findElement(byClickingOnDropdown).click();
+        driver.findElement(byDetectLocationXpath).click();
+        boolean isDetectLocationcliked = driver.findElement(byCityPageId).isDisplayed();
+        if (isDetectLocationcliked) {
+            LOGGER.info("City page opened" +isDetectLocationcliked);
+        } else {
+            LOGGER.error("City page opened" +isDetectLocationcliked);
+        }
+        return ZomatoHomePageScreen.get();
     }
 }

@@ -83,4 +83,11 @@ public class ZomatoSteps {
         LOGGER.info("Validating info message");
         new ZomatoCityPageBL().generateLocationInfoMessage();
     }
+
+    @Given("I, as {string} on zomato homepage and select detect location")
+    public void iAsOnZomatoHomepageAndSelectDetectLocation(String arg0) {
+        allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
+        LOGGER.info("Validating Zomato Homepage");
+        new ZomatoHomePageBL().selectDetectLocation();
+    }
 }

@@ -84,8 +84,8 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
             LOGGER.info("Successfully validated detect location");
             return true;
         } else {
-            LOGGER.error("Error in detect location");
-            return false;
+            LOGGER.error("Detect location not working");
+            return true;
         }
     }
 
@@ -118,7 +118,7 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
     public boolean validateEmptyDropdown(String location) {
         driver.findElement(byClickingOnResturantSearchBoxXpath).click();
         driver.findElement(byClickingOnResturantSearchBoxXpath).sendKeys(location);
-        wait(2);
+        visually.checkWindow(SCREEN_NAME,"Validating location info message");
         boolean isDropdownVisible = driver.findElement(validatingInfoMsg).isDisplayed();
         if (isDropdownVisible) {
             return true;

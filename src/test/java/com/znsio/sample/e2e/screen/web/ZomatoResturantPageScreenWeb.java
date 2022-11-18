@@ -7,7 +7,6 @@ import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.zomato.ZomatoResturantPageScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-
 import java.util.Map;
 
 public class ZomatoResturantPageScreenWeb extends ZomatoResturantPageScreen {

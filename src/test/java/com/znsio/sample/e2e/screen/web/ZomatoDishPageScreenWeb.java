@@ -35,7 +35,9 @@ public class ZomatoDishPageScreenWeb extends ZomatoDishPageScreen {
         String getFoodstatus = driver.findElement(byFoodStatusXpath).getText().trim();
         driver.waitTillElementIsPresent(byDishXpath,10);
         String getDish = driver.findElement(byDishXpath).getText().trim();
-
+        if (foodStatus.equalsIgnoreCase("Dine-out")) {
+            foodStatus =  "Dining Out";
+        }
         if (dish.equalsIgnoreCase(getDish) && (foodStatus.equalsIgnoreCase(getFoodstatus))) {
             LOGGER.info("Successfully selected" +dish+ "for" +foodStatus);
             return true;

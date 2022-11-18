@@ -2,7 +2,9 @@
   "prod": {
     "raghav.garg" : {
       "resturant": "Flavour",
-      "place": "Meerut"
+      "place": "Meerut",
+      "invalid_location": "d",
+      "location_msg": "Please enable location permission from settings and try again!"
     }
   }
 }

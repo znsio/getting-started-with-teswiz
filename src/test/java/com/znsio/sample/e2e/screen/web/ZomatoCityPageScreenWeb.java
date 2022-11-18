@@ -9,17 +9,14 @@ import com.znsio.sample.e2e.screen.zomato.ZomatoDishPageScreen;
 import com.znsio.sample.e2e.screen.zomato.ZomatoResturantPageScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.List;
 import java.util.Map;
 
 public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
     public static final By byClickingOnResturantSearchBoxXpath = By.xpath("//input[@placeholder='Search for restaurant, cuisine or a dish']");
-    public static final By byResturantDropdownDataXpath = By.xpath("(//p[@class='sc-1hez2tp-0 sc-hkbPbT fpZVCC'])[1]");
-    public static final By byLocationInfoMessageXpath = By.xpath("//div[@class='sc-aewfc itTtbE']");
+    public static final By byResturantDropdownDataXpath = By.xpath("//input[@placeholder='Search for restaurant, cuisine or a dish']/parent::div//p");
     public static final By validadtingCityPage = By.xpath("(//section[@role='tablist'])[1]");
     public static final By validatingInfoMsg = By.xpath("//div[@class='sc-hvvHee ldTYpO']");
 
@@ -99,18 +96,18 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
     @Override
     public ZomatoDishPageScreen selectDish(String dish, String foodStatus) {
         driver.findElement(byClickingOnResturantSearchBoxXpath).click();
-        driver.findElement(byClickingOnResturantSearchBoxXpath).sendKeys(dish+" - "+foodStatus);
-        wait(4);
-        LOGGER.info("Validating"+dish+ "for" +foodStatus);
-  /*      List<WebElement> dishDropDownContent =driver.findElements(byResturantDropdownDataXpath);
+        driver.findElement(byClickingOnResturantSearchBoxXpath).sendKeys(dish);
+        visually.checkWindow(SCREEN_NAME, "Validating Dish Dropdown");
+        LOGGER.info("Validating "+dish+ "for " +foodStatus);
+        List<WebElement> dishDropDownContent =driver.findElements(byResturantDropdownDataXpath);
         for (WebElement dishDropdown : dishDropDownContent) {
-            if(dishDropdown.getText().trim().equalsIgnoreCase(dish+" - "+foodStatus)) {
+            String foodItem = dishDropdown.getText().trim();
+            if(foodItem.equalsIgnoreCase(dish+" - "+foodStatus)) {
                 dishDropdown.click();
-                LOGGER.info("Dish selected:-" +dishDropdown.getText().trim());
+                LOGGER.info("Dish selected:-" +dish+ " for " +foodStatus);
                 break;
             }
-        }*/
-        driver.findElement(byClickingOnResturantSearchBoxXpath).sendKeys(" ", Keys.ARROW_DOWN, Keys.ENTER);
+        }
         return ZomatoDishPageScreen.get();
     }
 
@@ -124,14 +121,6 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
             return true;
         } else {
             return false;
-        }
-    }
-
-    public void wait(int value) {
-        try {
-            Thread.sleep(value *1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 }

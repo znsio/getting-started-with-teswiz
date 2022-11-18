@@ -7,10 +7,14 @@ import com.znsio.sample.e2e.screen.zomato.ZomatoHomePageScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import java.util.Map;
+
 public class ZomatoHomePageBL {
     private static final Logger LOGGER = Logger.getLogger(ZomatoHomePageBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
+    Map<String,String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
+
 
     public ZomatoHomePageBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread()
@@ -48,7 +52,7 @@ public class ZomatoHomePageBL {
     public ZomatoHomePageBL validateLocationDisabledMessage() {
         String getLocationMessage = ZomatoHomePageScreen.get()
                 .getLocationErrorMessage();
-        softly.assertThat(getLocationMessage).isEqualTo("Please enable location permission from settings and try again!");
+        softly.assertThat(getLocationMessage).isEqualTo(testData.get("location_msg"));
         return this;
     }
 

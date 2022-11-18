@@ -30,7 +30,8 @@ public class ZomatoResturantPageBL {
     }
 
     public boolean validateResturantPage() {
-        boolean isResturantPageOpened = ZomatoResturantPageScreen.get().validateResturant();
+        boolean isResturantPageOpened = ZomatoResturantPageScreen.get()
+                .validateResturant();
         softly.assertThat(isResturantPageOpened).isTrue();
         return isResturantPageOpened;
     }

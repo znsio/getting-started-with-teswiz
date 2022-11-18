@@ -8,11 +8,8 @@ import com.znsio.sample.e2e.screen.zomato.ZomatoCityPageScreen;
 import com.znsio.sample.e2e.screen.zomato.ZomatoHomePageScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
@@ -24,7 +21,6 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
     public static final By byCityPageId = By.id("root");
     public static final By byLocationDisabledMsgXpath = By.xpath("//div[@type='error']");
     public static final By validadtingCityPage = By.xpath("(//section[@role='tablist'])[1]");
-
 
     private final Driver driver;
     private final Visual visually;
@@ -59,27 +55,12 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
     public ZomatoCityPageScreen selectLocationFromDropDown(String location) {
         driver.findElement(byClickingOnDropdown).click();
         driver.findElement(byClickingOnDropdown).sendKeys(location);
-    //    wait(4);
-    //    LOGGER.info("Selecting city from Dropdown");
-    //    driver.findElement(byClickingOnDropdown).sendKeys(" ",Keys.ARROW_DOWN,Keys.ENTER);
-     //      LOGGER.info("Selecting selected from Dropdown");
-    //    driver.waitTillElementIsPresent(validadtingCityPage,10);
-
-        driver.waitTillPresenceOfAllElements(byZomatoDropdown);
+        LOGGER.info("Selecting city from Dropdown");
+        visually.checkWindow(SCREEN_NAME, "Validating Zomato Dropdown");
         List<WebElement> dropDownContent =driver.findElements(byZomatoDropdown);
-    //    wait(3);
-        driver.waitTillPresenceOfAllElements(byZomatoDropdown);
-
         for (WebElement zomatoDropDownlist : dropDownContent) {
-    //        wait(2);
-            driver.waitTillPresenceOfAllElements(byZomatoDropdown);
             String cityData = zomatoDropDownlist.getText();
-            //        wait(2);
-            driver.waitTillPresenceOfAllElements(byZomatoDropdown);
-
             if (cityData.equalsIgnoreCase(location)) {
-                driver.waitTillElementIsPresent((By)zomatoDropDownlist,10);
-                wait(3);
                 zomatoDropDownlist.click();
                 driver.waitTillElementIsPresent(validadtingCityPage,10);
                 LOGGER.info("City selected:-" +location);
@@ -113,13 +94,5 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
         String getMessage = driver.findElement(byLocationDisabledMsgXpath).getText().trim();
         LOGGER.info("Validating location error message" +getMessage);
         return getMessage;
-    }
-
-    public void wait(int value) {
-        try {
-            Thread.sleep(value *1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

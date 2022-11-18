@@ -1,6 +1,7 @@
 Feature: Search functionality
 
       #CONFIG=./configs/zomato_config.properties TAG="@zomato and @web" PLATFORM=web  ./gradlew run
+
   @zomato @web
   Scenario: Search resturant on zomato as guest user
     Given I,a "guest user" on zomato homepage and select "Meerut" location

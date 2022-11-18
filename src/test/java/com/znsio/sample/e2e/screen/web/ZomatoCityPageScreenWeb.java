@@ -47,7 +47,7 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
         String cityPageHeader = driver.getInnerDriver().getCurrentUrl();
         visually.checkWindow(SCREEN_NAME, "On Zomato City Page Screen");
         if(cityPageHeader.contains(location.toLowerCase())) {
-            LOGGER.info("Zomato city page opened" +location);
+            LOGGER.info("Zomato city page opened " +location);
             return true;
         } else {
             LOGGER.info(location+ "city page not opened");
@@ -57,25 +57,22 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
 
     @Override
     public ZomatoResturantPageScreen selectResturantFromDropdown(String resturant) {
-        driver.waitTillElementIsPresent(validadtingCityPage,10);
         driver.findElement(byClickingOnResturantSearchBoxXpath).click();
         driver.findElement(byClickingOnResturantSearchBoxXpath).sendKeys(resturant);
-        wait(4);
-        driver.waitTillElementIsPresent((byClickingOnResturantSearchBoxXpath),10);
+        visually.checkWindow(SCREEN_NAME, "Validating Resturant Dropdown");
+        visually.checkWindow(SCREEN_NAME,"");
         LOGGER.info("Selecting resturant from dropdown");
-     //   driver.findElement(byResturantDropdownDataXpath).sendKeys(" ", Keys.ARROW_DOWN,Keys.ENTER);
-        driver.findElement(byResturantDropdownDataXpath).click();
-        LOGGER.info("Resturant selected from dropdown");
-/*        List<WebElement> resturantDropDownContent =driver.findElements(byResturantDropdownDataXpath);
+        List<WebElement> resturantDropDownContent =driver.findElements(byResturantDropdownDataXpath);
         for (WebElement resturantDropdown : resturantDropDownContent) {
-            if(resturantDropdown.getText().equalsIgnoreCase(resturant)) {
+            String resturantData = resturantDropdown.getText();
+            if(resturantData.contains(resturant)) {
                 resturantDropdown.click();
-                LOGGER.info("Resturant selected:-" +resturantDropdown.getText().trim());
+                LOGGER.info("Resturant selected:- " +resturant);
                 break;
             } else {
                 LOGGER.info("Resturant not selected");
             }
-        }*/
+        }
         return ZomatoResturantPageScreen.get();
     }
 

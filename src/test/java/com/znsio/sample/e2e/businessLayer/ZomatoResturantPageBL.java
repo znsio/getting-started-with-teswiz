@@ -13,16 +13,12 @@ public class ZomatoResturantPageBL {
     private static final Logger LOGGER = Logger.getLogger(ZomatoResturantPageBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
-    private final String currentUserPersona;
-    private final Platform currentPlatform;
 
     public ZomatoResturantPageBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
-        this.currentUserPersona = userPersona;
-        this.currentPlatform = forPlatform;
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
@@ -31,8 +27,6 @@ public class ZomatoResturantPageBL {
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
-        this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
-        this.currentPlatform = Runner.platform;
     }
 
     public boolean validateResturantPage() {

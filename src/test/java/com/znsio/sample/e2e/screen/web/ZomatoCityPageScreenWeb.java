@@ -57,7 +57,7 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
         driver.findElement(byClickingOnResturantSearchBoxXpath).click();
         driver.findElement(byClickingOnResturantSearchBoxXpath).sendKeys(resturant);
         visually.checkWindow(SCREEN_NAME, "Validating Resturant Dropdown");
-        visually.checkWindow(SCREEN_NAME,"");
+        visually.takeScreenshot(SCREEN_NAME,"Taking dropdown screenshot");
         LOGGER.info("Selecting resturant from dropdown");
         List<WebElement> resturantDropDownContent =driver.findElements(byResturantDropdownDataXpath);
         for (WebElement resturantDropdown : resturantDropDownContent) {
@@ -118,8 +118,10 @@ public class ZomatoCityPageScreenWeb extends ZomatoCityPageScreen {
         visually.checkWindow(SCREEN_NAME,"Validating location info message");
         boolean isDropdownVisible = driver.findElement(validatingInfoMsg).isDisplayed();
         if (isDropdownVisible) {
+            LOGGER.info("Resturant dropdown is empty" +isDropdownVisible);
             return true;
         } else {
+            LOGGER.error("Resturant dropdown is empty" +isDropdownVisible);
             return false;
         }
     }

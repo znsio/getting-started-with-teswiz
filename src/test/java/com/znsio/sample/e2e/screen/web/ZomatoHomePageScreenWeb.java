@@ -97,16 +97,17 @@ public class ZomatoHomePageScreenWeb extends ZomatoHomePageScreen {
     }
 
     @Override
-    public ZomatoHomePageScreen selectFromDetectLocation() {
+    public boolean selectFromDetectLocation() {
         LOGGER.info("Selecting city using Detect location");
         driver.findElement(byClickingOnDropdown).click();
         driver.findElement(byDetectLocationXpath).click();
         boolean isDetectLocationcliked = driver.findElement(byCityPageId).isDisplayed();
         if (isDetectLocationcliked) {
             LOGGER.info("City page opened" +isDetectLocationcliked);
+            return true;
         } else {
             LOGGER.error("City page opened" +isDetectLocationcliked);
+            return false;
         }
-        return ZomatoHomePageScreen.get();
     }
 }

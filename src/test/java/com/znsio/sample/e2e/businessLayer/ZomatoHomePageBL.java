@@ -57,9 +57,10 @@ public class ZomatoHomePageBL {
     }
 
     public ZomatoHomePageBL selectDetectLocation() {
-        ZomatoHomePageScreen.get()
+        boolean isDetectLocationClicked = ZomatoHomePageScreen.get()
                 .isHomepageVisible()
                 .selectFromDetectLocation();
+        softly.assertThat(isDetectLocationClicked).isTrue();
         return new ZomatoHomePageBL();
     }
 }

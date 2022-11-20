@@ -1,8 +1,19 @@
 {
   "prod": {
-    "ishant.gupta" : {
-      "username" : "raghav.gargril291900@gmail.com",
-      "password" : "Hello123@"
+    "ishant.gupta": {
+      "username1": "ishantaug75gmail.com",
+      "password1": "Muks@123",
+      "document_title": "Sample Document 1 Title!!",
+      "text_on_post_for_document": "Sample Document 1 !!",
+      "text_on_post_for_video": "It is a video!!",
+      "question_in_poll": "Sample Question 1 !!",
+      "option1": "Option1",
+      "option2": "Option2",
+      "post1": "Sample Post 1!!",
+      "post2": "Sample Post 2!!",
+      "username2": "ishant20aug@gmail.com",
+      "password2": "20Aug1997#",
+      "search_username": "Ishant Gupta ITC"
     }
   }
 }

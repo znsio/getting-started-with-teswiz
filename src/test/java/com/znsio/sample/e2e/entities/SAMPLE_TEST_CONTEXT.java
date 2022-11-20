@@ -5,4 +5,5 @@ import com.znsio.e2e.entities.TEST_CONTEXT;
 public class SAMPLE_TEST_CONTEXT
         extends TEST_CONTEXT {
     public static final String ME = "me";
+    public static final String ME2 = "me2";
 }

@@ -1,5 +1,5 @@
 {
   "prod": {
-    "AMAZON_BASE_URL": "https://www.amazon.in/"
+    "LINKEDIN_BASE_URL": "https://www.linkedin.com/"
   }
 }

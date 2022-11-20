@@ -160,7 +160,7 @@ public class TimeLineWeb extends TimeLineScreen {
         robot.keyRelease(KeyEvent.VK_ENTER);
         robot.delay(500);
         driver.waitForClickabilityOf(byDeletePostButton);
-        LOGGER.info("click on the delete option");
+        LOGGER.info("click on the delete option dialog box");
         driver.findElement(byDeletePostButton).click();
         LOGGER.info("successfully clicked on the delete option");
         return this;

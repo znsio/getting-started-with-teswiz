@@ -139,9 +139,9 @@ public class TimeLineWeb extends TimeLineScreen {
     }
 
     public TimeLineScreen deletePost() throws AWTException {
+        LOGGER.info("click on the dots for deleting the post");
         driver.waitForClickabilityOf(byDeletePostDropDownButton);
         visually.checkWindow(SCREEN_NAME, "Validating linkedin delete post");
-        LOGGER.info("click on the dots for deleting the post");
         driver.findElement(byDeletePostDropDownButton).click();
 
         Robot robot = new Robot();
@@ -158,6 +158,7 @@ public class TimeLineWeb extends TimeLineScreen {
         robot.delay(1000);
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
+        robot.delay(500);
         driver.waitForClickabilityOf(byDeletePostButton);
         LOGGER.info("click on the delete option");
         driver.findElement(byDeletePostButton).click();

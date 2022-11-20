@@ -17,7 +17,7 @@ public class PostSubmitWeb extends PostSubmitScreen {
     public PostSubmitWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
-        visually.checkWindow(SCREEN_NAME, "post screen");
+        visually.checkWindow(SCREEN_NAME, "post submit screen");
     }
 
     public TimeLineScreen clickPostButton() {

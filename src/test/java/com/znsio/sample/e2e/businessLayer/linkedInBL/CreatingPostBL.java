@@ -35,7 +35,6 @@ public class CreatingPostBL {
 
     public PostSubmitBL createPostContainingTextAndDocument() throws AWTException {
         String getProfileName = CreatingPostScreen.get().isLoginToLinkedInForUser1();
-        System.out.println("getUserProfileName:" + getProfileName);
         assertThat(getProfileName).containsIgnoringCase("Welcome, Ishant");
         LOGGER.info("login verified for user1 for creating post containing text and document");
         boolean isTextAndDocumentSet = CreatingPostScreen.get().isTextAndDocumentPresentBeforePosting();

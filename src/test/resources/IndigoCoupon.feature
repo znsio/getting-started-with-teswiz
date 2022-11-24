@@ -1,10 +1,11 @@
-@indigo @web
-Feature: Customizing Indigo voucher
 
-  Scenario: Validating error message with invalid promo code
-    Given I, as a guest user select "Gift Voucher" on homepage
-    When I proceed by selecting "5000" denomination and "2" quantity on voucher page
-    Then On entering invalid "0000" code, I see error message
+Feature: Personalizing Indigo voucher
+
+  @indigo @web
+  Scenario: Validating error message with invalid promo code and proceed to paymemnt page
+    Given I, as a guest user personalise gift voucher with denomination as "5000" and quanity as "2"
+    When I provide promo code as "000",invalid promo code error appears and no discount provided
+    Then On providing receiver and sender details, I proceed to payment page
 
 
 

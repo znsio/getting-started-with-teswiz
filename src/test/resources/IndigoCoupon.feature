@@ -1,11 +1,18 @@
 
+#Personalization and preview an Indigo gift voucher with invalid Promo code
+
 Feature: Personalizing Indigo voucher
 
   @indigo @web
-  Scenario: Validating error message with invalid promo code and proceed to paymemnt page
-    Given I, as a guest user personalise gift voucher with denomination as "5000" and quanity as "2"
-    When I provide promo code as "000",invalid promo code error appears and no discount provided
-    Then On providing receiver and sender details, I proceed to payment page
+  Scenario: Guest user enter invalid promo code on voucher page and proceeds to payment page
+    Given I, as a guest user personalise gift voucher and proceeds with single quantity
+    When I applies invalid promo code, and proceeds to payment page
+    Then I should complete the payment and receive payment confirmation
+
+
+
+    #able not use
+
 
 
 

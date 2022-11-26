@@ -11,9 +11,11 @@ Feature: Search functionality
     Given I, a "guest user" from "Meerut" city select "4+ Ratings"
     Then I see resturants having 4+ ratings
 
+
   Scenario: Search Resturants in current location having Outdoor seating as a guest user
     Given I, a "guest user" using current location selects "Outdoor Seating" in "Dinning out"
     Then I see resturants near me
+
 
   Scenario: Search Burger Cusine for Delivery in Meerut city as guest user
     Given I, as logged in user from "Meerut" city select "Burger" cusine

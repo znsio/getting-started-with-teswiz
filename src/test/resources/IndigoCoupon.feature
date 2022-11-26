@@ -1,11 +1,8 @@
 #Personalization and preview an Indigo gift voucher with invalid Promo code
 
-Feature: Personalizing Indigo voucher
+Feature: As a guest user, I can purchase gift vouchers
 
-  Scenario: Guest user enter invalid promo code on voucher page and proceeds to payment page
-    Given I, as a guest user personalise and preview gift voucher with any amount and quanity
-    When I apply invalid promo code, and proceeds to payment page
-    Then I should complete the payment with non discounted rate and receive payment confirmation
-
-
-
+  Scenario: Guest user can personalise a gift voucher and proceed to pay at original amount with invalid promo code
+    Given I, a guest user, personalise and preview a gift voucher with any amount and quantity
+    When I apply invalid promo code
+    Then I can purchase the gift voucher at the original amount

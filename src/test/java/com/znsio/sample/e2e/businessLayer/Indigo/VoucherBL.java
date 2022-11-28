@@ -17,8 +17,7 @@ public class VoucherBL {
     private String giftVoucherOption = testData.get("value"); // Start with private
     String denomination = testData.get("denomination");
     String quantity = testData.get("quantity");
-    String dear_tag = testData.get("dear");
-    String message = testData.get("message");
+
 
 
 
@@ -41,9 +40,9 @@ public class VoucherBL {
         IndigoLandingScreen.get()
                 .selectGiftVoucher()
                 .selectDenomination(testData.get("denomination"))
-                .selectQuantity(quantity)
-                .personalizeVoucher(dear_tag,message);
-
+                .selectQuantity(quantity);
+   //             .personalizeVoucher(dear_tag,message);
+    //    .previewVoucher();
         return new PromoCodeBL();
     }
 }

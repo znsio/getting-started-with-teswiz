@@ -36,6 +36,7 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     public IndigoVoucherScreen selectDenomination(String denomination) {
         driver.findElement(byDenominationDropdownId).click();
         driver.findElement(By.xpath("//option[@value='3000']")).click();
+        LOGGER.info("Denomination selected for voucher");
         return this;
     }
 
@@ -43,6 +44,7 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     public IndigoVoucherScreen selectQuantity(String quantity) {
         driver.findElement(By.id("SelectedVoucherQuantity")).click();
         driver.findElement(By.xpath("")).click();
+        LOGGER.info("Quantity selected for voucher");
         return this;
     }
 

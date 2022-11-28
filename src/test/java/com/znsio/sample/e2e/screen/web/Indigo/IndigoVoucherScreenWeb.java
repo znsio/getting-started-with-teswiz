@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 
 public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
 
-    public static final By byDenominationDropdownId = By.id("SelectedVoucherValue");
+    public static final By byDenominationDropdownId = By.id("SelectedVoucherValue"); //private locator
     public static final By byDearTextBoxId = By.id("Per_Fname");
     public static final By byMessageTextBoxId = By.id("Message");
     public static final By byPreviewBtnClass = By.className("preview-btn");
@@ -36,14 +36,14 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     public IndigoVoucherScreen selectDenomination(String denomination) {
         driver.findElement(byDenominationDropdownId).click();
         driver.findElement(By.xpath("//option[@value='3000']")).click();
-        return IndigoVoucherScreen.get();
+        return this;
     }
 
     @Override
     public IndigoVoucherScreen selectQuantity(String quantity) {
         driver.findElement(By.id("SelectedVoucherQuantity")).click();
         driver.findElement(By.xpath("")).click();
-        return IndigoVoucherScreen.get();
+        return this;
     }
 
     @Override
@@ -51,6 +51,6 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
         driver.findElement(byDearTextBoxId).sendKeys(name);
         driver.findElement(byMessageTextBoxId).sendKeys(message);
         driver.findElement(byPreviewBtnClass).click();
-        return
+        return this;
     }
 }

@@ -35,5 +35,5 @@ public abstract class IndigoLandingScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract IndigoVoucherScreen selectGiftVoucher(String option);
+    public abstract IndigoVoucherScreen selectGiftVoucher();
 }

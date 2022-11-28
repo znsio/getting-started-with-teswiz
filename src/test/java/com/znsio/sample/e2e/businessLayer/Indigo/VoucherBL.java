@@ -13,8 +13,8 @@ public class VoucherBL {
     private static final Logger LOGGER = Logger.getLogger(VoucherBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
-    Map<String, String> testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
-    String giftVoucherOption = testData.get("value");
+    Map<String, String> testData = Runner.getTestDataAsMap(System.getProperty("user.name")); // put in cukes
+    private String giftVoucherOption = testData.get("value"); // Start with private
     String denomination = testData.get("denomination");
     String quantity = testData.get("quantity");
     String dear_tag = testData.get("dear");
@@ -39,8 +39,8 @@ public class VoucherBL {
 
     public PromoCodeBL personaliseAndPreviewGiftVoucher() {
         IndigoLandingScreen.get()
-                .selectGiftVoucher(giftVoucherOption)
-                .selectDenomination(denomination)
+                .selectGiftVoucher()
+                .selectDenomination(testData.get("denomination"))
                 .selectQuantity(quantity)
                 .personalizeVoucher(dear_tag,message);
 

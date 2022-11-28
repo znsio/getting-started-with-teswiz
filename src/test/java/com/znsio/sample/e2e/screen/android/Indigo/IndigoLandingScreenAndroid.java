@@ -18,7 +18,7 @@ public class IndigoLandingScreenAndroid extends IndigoLandingScreen {
     }
 
     @Override
-    public IndigoVoucherScreen selectGiftVoucher(String option) {
+    public IndigoVoucherScreen selectGiftVoucher() {
         return null;
     }
 }

@@ -2,6 +2,7 @@
 
 Feature: As a guest user, I can purchase gift vouchers
 
+  @web @indigo
   Scenario: Guest user can personalise a gift voucher and proceed to pay at original amount with invalid promo code
     Given I, a guest user, personalise and preview a gift voucher with any amount and quantity
     When I apply invalid promo code

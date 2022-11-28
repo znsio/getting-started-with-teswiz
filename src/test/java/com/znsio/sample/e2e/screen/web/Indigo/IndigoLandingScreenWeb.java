@@ -10,14 +10,12 @@ import com.znsio.sample.e2e.screen.web.ZomatoCityPageScreenWeb;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-import java.util.List;
 
 public class IndigoLandingScreenWeb extends IndigoLandingScreen {
 
-    public static final By byBookXpath = By.xpath("//a[@title='Book']");
-    public static final By byBookDropdownXpath = By.xpath("//div[@class='col-nav-info']//div");
+    private static final By byBookXpath = By.xpath("//a[@title='Book']");
+    private static final By byGiftVoucherXpath = By.xpath("//div[contains(text,'Gift')]");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -36,20 +34,11 @@ public class IndigoLandingScreenWeb extends IndigoLandingScreen {
     }
 
     @Override
-    public IndigoVoucherScreen selectGiftVoucher(String giftVoucherOption) {
+    public IndigoVoucherScreen selectGiftVoucher() {
         driver.findElement(byBookXpath).click();
-        visually.checkWindow(SCREEN_NAME, "Book dropdown");
-        List<WebElement> bookDropdown =driver.findElements(byBookDropdownXpath);
-        for (WebElement bookDropDownlist : bookDropdown) {
-            String bookData = bookDropDownlist.getText();
-            if (bookData.equalsIgnoreCase(giftVoucherOption)) {
-                bookDropDownlist.click();
-                LOGGER.info(giftVoucherOption+ "clicked successfully");
-                break;
-            } else {
-                LOGGER.error(giftVoucherOption+ "not available");
-            }
-        }
+        driver.waitTillPresenceOfAllElements(byGiftVoucherXpath);
+        driver.findElement(byGiftVoucherXpath).click();
+        LOGGER.info("Gift voucher option selected successflly");
         return IndigoVoucherScreen.get();
     }
 }

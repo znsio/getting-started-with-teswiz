@@ -14,8 +14,8 @@ import org.openqa.selenium.WebDriver;
 
 public class IndigoLandingScreenWeb extends IndigoLandingScreen {
 
-    private static final By byBookXpath = By.xpath("//a[@title='Book']");
-    private static final By byGiftVoucherXpath = By.xpath("//div[contains(text,'Gift')]");
+    private static final By byBookXpathDropdown = By.xpath("//a[@title='Book']");
+    private static final By byGiftVoucherXpath = By.xpath("//div[@class='nav-inner-items']//a[contains(@href,\"giftvoucher\")]");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -35,9 +35,10 @@ public class IndigoLandingScreenWeb extends IndigoLandingScreen {
 
     @Override
     public IndigoVoucherScreen selectGiftVoucher() {
-        driver.findElement(byBookXpath).click();
-        driver.waitTillPresenceOfAllElements(byGiftVoucherXpath);
-        driver.findElement(byGiftVoucherXpath).click();
+        driver.findElement(byBookXpathDropdown).click();
+        LOGGER.info("Indigo site opened");
+        visually.checkWindow(SCREEN_NAME, "Book dropdown clicked");
+        driver.waitTillElementIsPresent(byGiftVoucherXpath,10).click();
         LOGGER.info("Gift voucher option selected successflly");
         return IndigoVoucherScreen.get();
     }

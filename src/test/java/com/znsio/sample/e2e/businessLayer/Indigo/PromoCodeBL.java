@@ -3,6 +3,7 @@ package com.znsio.sample.e2e.businessLayer.Indigo;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
+import com.znsio.sample.e2e.screen.Indigo.IndigoPromoCodeScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -27,6 +28,9 @@ public class PromoCodeBL {
         softly = Runner.getSoftAssertion(threadId);
     }
 
-    public void applyInvalidPromoCode() {
+    public PurchaseVoucherBL applyInvalidPromoCode() {
+        IndigoPromoCodeScreen.get()
+                .enterInvalidPromoCode();
+        return new PurchaseVoucherBL();
     }
 }

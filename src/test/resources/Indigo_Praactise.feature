@@ -8,7 +8,6 @@ Feature: Personalizing Indigo voucher
     When I apply invalid promo code, and proceeds to payment page
     Then I should complete the payment with non discounted rate and receive payment confirmation
 
-Feature: Personalizing Indigo voucher
 
   Scenario: Guest user completes personalised voucher purchase with invalid promo code
     Given I, as a guest user personalise gift voucher and proceeds to cart page    When I apply invalid promo code, and proceeds to payment page

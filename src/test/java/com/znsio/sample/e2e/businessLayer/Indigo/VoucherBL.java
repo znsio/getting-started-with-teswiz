@@ -14,12 +14,6 @@ public class VoucherBL {
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     Map<String, String> testData = Runner.getTestDataAsMap(System.getProperty("user.name")); // put in cukes
-    private String giftVoucherOption = testData.get("value"); // Start with private
-    String denomination = testData.get("denomination");
-    String quantity = testData.get("quantity");
-
-
-
 
     public VoucherBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread()
@@ -37,12 +31,12 @@ public class VoucherBL {
     }
 
     public PromoCodeBL personaliseAndPreviewGiftVoucher() {
-        IndigoLandingScreen.get()
+            IndigoLandingScreen.get()
                 .selectGiftVoucher()
                 .selectDenomination(testData.get("denomination"))
-                .selectQuantity(quantity);
-   //             .personalizeVoucher(dear_tag,message);
-    //    .previewVoucher();
+                .selectQuantity(testData.get("quantity"))
+                .personalizeVoucher(System.getProperty("user.name"),"dkcnenckenwkcnwkc")
+                .previewVoucher();
         return new PromoCodeBL();
     }
 }

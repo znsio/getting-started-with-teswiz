@@ -1,23 +1,23 @@
 package com.znsio.sample.e2e.screen.Indigo;
 
-import com.znsio.sample.e2e.screen.android.Indigo.IndigoVoucherScreenAndroid;
-import com.znsio.sample.e2e.screen.web.Indigo.IndigoVoucherScreenWeb;
-import org.apache.log4j.Logger;
+import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.e2e.entities.Platform;
+import com.znsio.sample.e2e.screen.android.Indigo.IndigoPreviewVoucherScreenAndroid;
+import com.znsio.sample.e2e.screen.web.Indigo.IndigoPreviewVoucherScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
+import org.apache.log4j.Logger;
 
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
-public abstract class IndigoVoucherScreen {
+public abstract class IndigoPreviewVoucherScreen {
 
-    private static final String SCREEN_NAME = IndigoVoucherScreen.class.getSimpleName();
+    private static final String SCREEN_NAME = IndigoPreviewVoucherScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public static IndigoVoucherScreen get() {
+    public static IndigoPreviewVoucherScreen get() {
         Driver driver = fetchDriver(Thread.currentThread()
                 .getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread()
@@ -28,16 +28,12 @@ public abstract class IndigoVoucherScreen {
 
         switch(platform) {
             case android:
-                return new IndigoVoucherScreenAndroid(driver, visually);
+                return new IndigoPreviewVoucherScreenAndroid(driver, visually);
             case web:
-                return new IndigoVoucherScreenWeb(driver, visually);
+                return new IndigoPreviewVoucherScreenWeb(driver, visually);
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract IndigoVoucherScreen selectDenomination(String denomination);
-
-    public abstract IndigoVoucherScreen selectQuantity(String quantity);
-
-    public abstract IndigoPreviewVoucherScreen  personalizeVoucher(String dear, String meesage);
+    public abstract IndigoPromoCodeScreen previewVoucher();
 }

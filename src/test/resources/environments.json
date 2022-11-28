@@ -1,5 +1,5 @@
 {
   "prod": {
-    "ZOMATO_BASE_URL": "https://www.zomato.com/"
+    "INDIGO_BASE_URL": "https://www.goindigo.in/"
   }
 }

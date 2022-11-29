@@ -2,24 +2,24 @@ package com.znsio.sample.e2e.screen.android.Indigo;
 
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.Indigo.IndigoPromoCodeScreen;
+import com.znsio.sample.e2e.screen.Indigo.IndigoDeliveryScreen;
 import org.apache.log4j.Logger;
 
-public class IndigoPromoCodeScreenAndroid extends IndigoPromoCodeScreen {
+public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
 
 
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = IndigoPromoCodeScreenAndroid.class.getSimpleName();
+    private static final String SCREEN_NAME = IndigoDeliveryScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public IndigoPromoCodeScreenAndroid(Driver driver, Visual visually) {
+    public IndigoDeliveryScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
     }
 
     @Override
-    public IndigoPromoCodeScreen enterInvalidPromoCode() {
+    public IndigoDeliveryScreen enterInvalidPromoCode() {
         return null;
     }
 
@@ -34,17 +34,17 @@ public class IndigoPromoCodeScreenAndroid extends IndigoPromoCodeScreen {
     }
 
     @Override
-    public IndigoPromoCodeScreen enterReceiverDetail(String name, String lastName, String email, String phone) {
+    public IndigoDeliveryScreen enterReceiverDetail(String name, String lastName, String email, String phone) {
         return null;
     }
 
     @Override
-    public IndigoPromoCodeScreen enterSenderDetails(String senderFirstName, String senderLastName, String senderrMail, String senderPhone) {
+    public IndigoDeliveryScreen enterSenderDetails(String senderFirstName, String senderLastName, String senderrMail, String senderPhone) {
         return null;
     }
 
     @Override
-    public IndigoPromoCodeScreen selectTermsAndConditions() {
+    public IndigoDeliveryScreen selectTermsAndConditions() {
         return null;
     }
 

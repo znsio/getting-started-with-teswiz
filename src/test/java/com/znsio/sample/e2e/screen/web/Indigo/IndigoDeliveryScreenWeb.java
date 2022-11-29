@@ -4,12 +4,12 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.Indigo.IndigoPromoCodeScreen;
+import com.znsio.sample.e2e.screen.Indigo.IndigoDeliveryScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class IndigoPromoCodeScreenWeb extends IndigoPromoCodeScreen {
+public class IndigoDeliveryScreenWeb extends IndigoDeliveryScreen {
 
     public static final By byPromoCodeTextBoxId = By.id("PromoCode");
     public static final By byPromoCodeApplyBtnXpath = By.xpath("//div[@class='row price-section']//input[@id='btnApplyPromoCode']");
@@ -26,11 +26,11 @@ public class IndigoPromoCodeScreenWeb extends IndigoPromoCodeScreen {
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
-    private static final String SCREEN_NAME = IndigoPromoCodeScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = IndigoDeliveryScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final TestExecutionContext context;
 
-    public IndigoPromoCodeScreenWeb(Driver driver, Visual visually) {
+    public IndigoDeliveryScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
         this.innerDriver = this.driver.getInnerDriver();
@@ -40,7 +40,7 @@ public class IndigoPromoCodeScreenWeb extends IndigoPromoCodeScreen {
     }
 
     @Override
-    public IndigoPromoCodeScreen enterInvalidPromoCode() {
+    public IndigoDeliveryScreen enterInvalidPromoCode() {
         driver.findElement(byPromoCodeTextBoxId).sendKeys("00000");
         LOGGER.info("Invalid Promo code entered in Delivery option page");
         visually.checkWindow(SCREEN_NAME, "Invalid Promo code entered");
@@ -64,7 +64,7 @@ public class IndigoPromoCodeScreenWeb extends IndigoPromoCodeScreen {
     }
 
     @Override
-    public IndigoPromoCodeScreen enterReceiverDetail(String receiverFirstName, String receiverLastName, String receiverMail, String receiverPhone) {
+    public IndigoDeliveryScreen enterReceiverDetail(String receiverFirstName, String receiverLastName, String receiverMail, String receiverPhone) {
         driver.findElement(byReceiverNameId).sendKeys(receiverFirstName);
         driver.findElement(byReceiverLastNameId).sendKeys(receiverLastName);
         driver.findElement(byReceiverMailId).sendKeys(receiverMail);
@@ -75,7 +75,7 @@ public class IndigoPromoCodeScreenWeb extends IndigoPromoCodeScreen {
     }
 
     @Override
-    public IndigoPromoCodeScreen enterSenderDetails(String senderFirstName, String senderLastName, String senderrMail, String senderPhone) {
+    public IndigoDeliveryScreen enterSenderDetails(String senderFirstName, String senderLastName, String senderrMail, String senderPhone) {
         driver.findElement(bySenderNameId).sendKeys(senderFirstName);
         driver.findElement(bySenderLastNameId).sendKeys(senderLastName);
         driver.findElement(bySenderMailId).sendKeys(senderrMail);
@@ -86,7 +86,7 @@ public class IndigoPromoCodeScreenWeb extends IndigoPromoCodeScreen {
     }
 
     @Override
-    public IndigoPromoCodeScreen selectTermsAndConditions() {
+    public IndigoDeliveryScreen selectTermsAndConditions() {
         driver.findElement(By.id("chkTnC")).click();
         LOGGER.info("Terms and Condition CheckBox selected");
         return this;

@@ -4,7 +4,7 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.screen.Indigo.IndigoPaymentScreen;
-import com.znsio.sample.e2e.screen.Indigo.IndigoPromoCodeScreen;
+import com.znsio.sample.e2e.screen.Indigo.IndigoDeliveryScreen;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
@@ -39,7 +39,7 @@ public class PurchaseVoucherBL {
         String senderLastName = RandomStringUtils.random(6,true,false);
         String senderrMail = RandomStringUtils.random(5,true,false)+"@gmail.com";
         String senderPhone = RandomStringUtils.randomNumeric(10);
-        String paymnetPage = IndigoPromoCodeScreen.get()
+        String paymnetPage = IndigoDeliveryScreen.get()
                 .enterReceiverDetail(receiverFirstName,recoverLastName,receiverMail,receiverPhone)
                 .enterSenderDetails(senderFirstName,senderLastName,senderrMail,senderPhone)
                 .selectTermsAndConditions()

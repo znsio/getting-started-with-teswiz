@@ -15,14 +15,14 @@ public class IndigoPromoCodeScreenWeb extends IndigoPromoCodeScreen {
     public static final By byPromoCodeApplyBtnXpath = By.xpath("//div[@class='row price-section']//input[@id='btnApplyPromoCode']");
     public static final By byErrorMessageXpath = By.xpath("//div[contains(text(),'Invali')]");
     public static final By byFinalAmountXpath = By.xpath("//label[contains(text(),'Payment')]/following-sibling::span");
-    public static final By bySenderNameId = By.id("Rec_Fname");
-    public static final By bySenderLastNameId = By.id("Rec_Lname");
+    public static final By bySenderNameId = By.id("Per_Fname");
+    public static final By bySenderLastNameId = By.id("Per_Lname");
     public static final By byReceiverNameId = By.id("Rec_Fname");
     public static final By byReceiverLastNameId = By.id("Rec_Lname");
     public static final By byReceiverMailId = By.id("Rec_EmailID");
     public static final By byReceiverPhoneId = By.id("Rec_Phone");
-    public static final By bySenderMailId = By.id("Rec_EmailID");
-    public static final By bySenderPhone = By.id("Rec_Phone");
+    public static final By bySenderMailId = By.id("Per_EmailID");
+    public static final By bySenderPhone = By.id("Per_Phone");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -57,8 +57,9 @@ public class IndigoPromoCodeScreenWeb extends IndigoPromoCodeScreen {
 
     @Override
     public String getFinalAmount() {
-        String finalAmountAfterPromoCode = driver.findElement(byFinalAmountXpath).getText();
-        LOGGER.info("Final amount after applying Promo Code " +finalAmountAfterPromoCode);
+        String amount = driver.findElement(byFinalAmountXpath).getText();
+        LOGGER.info("Final amount after applying Promo Code " +amount);
+        String finalAmountAfterPromoCode = amount.substring(1).trim();
         return finalAmountAfterPromoCode;
     }
 
@@ -79,7 +80,7 @@ public class IndigoPromoCodeScreenWeb extends IndigoPromoCodeScreen {
         driver.findElement(bySenderLastNameId).sendKeys(senderLastName);
         driver.findElement(bySenderMailId).sendKeys(senderrMail);
         driver.findElement(bySenderPhone).sendKeys(senderPhone);
-        LOGGER.info("Reciever Details entered " +senderFirstName+" "+senderLastName+ " "+senderrMail+" "+senderPhone);
+        LOGGER.info("Sender Details entered " +senderFirstName+" "+senderLastName+ " "+senderrMail+" "+senderPhone);
         visually.checkWindow(SCREEN_NAME, "Sender details entered");
         return this;
     }

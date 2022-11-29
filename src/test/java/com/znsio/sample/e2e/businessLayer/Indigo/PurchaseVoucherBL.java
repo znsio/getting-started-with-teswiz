@@ -5,7 +5,6 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.screen.Indigo.IndigoPaymentScreen;
 import com.znsio.sample.e2e.screen.Indigo.IndigoPromoCodeScreen;
-import com.znsio.sample.e2e.screen.Indigo.IndigoVoucherScreen;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
@@ -45,6 +44,7 @@ public class PurchaseVoucherBL {
                 .enterSenderDetails(senderFirstName,senderLastName,senderrMail,senderPhone)
                 .selectTermsAndConditions()
                 .clickOnProceedBtn();
+        softly.assertThat(paymnetPage).contains("transaction");
         return  IndigoPaymentScreen.get();
     }
 }

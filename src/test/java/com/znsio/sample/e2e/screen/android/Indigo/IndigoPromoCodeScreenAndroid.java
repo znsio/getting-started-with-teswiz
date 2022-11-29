@@ -47,4 +47,9 @@ public class IndigoPromoCodeScreenAndroid extends IndigoPromoCodeScreen {
     public IndigoPromoCodeScreen selectTermsAndConditions() {
         return null;
     }
+
+    @Override
+    public String clickOnProceedBtn() {
+        return null;
+    }
 }

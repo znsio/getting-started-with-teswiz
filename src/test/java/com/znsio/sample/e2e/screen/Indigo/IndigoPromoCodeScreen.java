@@ -42,6 +42,9 @@ public abstract class IndigoPromoCodeScreen {
     public abstract String getFinalAmount();
 
     public abstract IndigoPromoCodeScreen enterReceiverDetail(String receiverFirstName, String recoverLastName, String receiverMail, String receiverPhone);
-    public abstract IndigoPromoCodeScreen enterSenderDetails(String senderFirstName, String senderLastName, String senderrMail, String senderPhone);
 
+    public abstract IndigoPromoCodeScreen enterSenderDetails(String senderFirstName, String senderLastName, String senderrMail, String senderPhone);
+    public abstract IndigoPromoCodeScreen selectTermsAndConditions();
+
+    public abstract String clickOnProceedBtn();
 }

@@ -4,7 +4,6 @@ import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.Indigo.IndigoPromoCodeScreen;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 
 public class IndigoPromoCodeScreenAndroid extends IndigoPromoCodeScreen {
 
@@ -36,6 +35,16 @@ public class IndigoPromoCodeScreenAndroid extends IndigoPromoCodeScreen {
 
     @Override
     public IndigoPromoCodeScreen enterReceiverDetail(String name, String lastName, String email, String phone) {
+        return null;
+    }
+
+    @Override
+    public IndigoPromoCodeScreen enterSenderDetails(String senderFirstName, String senderLastName, String senderrMail, String senderPhone) {
+        return null;
+    }
+
+    @Override
+    public IndigoPromoCodeScreen selectTermsAndConditions() {
         return null;
     }
 }

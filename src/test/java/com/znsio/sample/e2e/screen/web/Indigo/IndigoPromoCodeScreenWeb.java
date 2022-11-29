@@ -15,6 +15,14 @@ public class IndigoPromoCodeScreenWeb extends IndigoPromoCodeScreen {
     public static final By byPromoCodeApplyBtnXpath = By.xpath("//div[@class='row price-section']//input[@id='btnApplyPromoCode']");
     public static final By byErrorMessageXpath = By.xpath("//div[contains(text(),'Invali')]");
     public static final By byFinalAmountXpath = By.xpath("//label[contains(text(),'Payment')]/following-sibling::span");
+    public static final By bySenderNameId = By.id("Rec_Fname");
+    public static final By bySenderLastNameId = By.id("Rec_Lname");
+    public static final By byReceiverNameId = By.id("Rec_Fname");
+    public static final By byReceiverLastNameId = By.id("Rec_Lname");
+    public static final By byReceiverMailId = By.id("Rec_EmailID");
+    public static final By byReceiverPhoneId = By.id("Rec_Phone");
+    public static final By bySenderMailId = By.id("Rec_EmailID");
+    public static final By bySenderPhone = By.id("Rec_Phone");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -56,10 +64,10 @@ public class IndigoPromoCodeScreenWeb extends IndigoPromoCodeScreen {
 
     @Override
     public IndigoPromoCodeScreen enterReceiverDetail(String receiverFirstName, String receiverLastName, String receiverMail, String receiverPhone) {
-        driver.findElement(By.id("Rec_Fname")).sendKeys(receiverFirstName);
-        driver.findElement(By.id("Rec_Lname")).sendKeys(receiverLastName);
-        driver.findElement(By.id("Rec_EmailID")).sendKeys(receiverMail);
-        driver.findElement(By.id("Rec_Phone")).sendKeys(receiverPhone);
+        driver.findElement(byReceiverNameId).sendKeys(receiverFirstName);
+        driver.findElement(byReceiverLastNameId).sendKeys(receiverLastName);
+        driver.findElement(byReceiverMailId).sendKeys(receiverMail);
+        driver.findElement(byReceiverPhoneId).sendKeys(receiverPhone);
         LOGGER.info("Reciever Details entered " +receiverFirstName+" "+receiverLastName+ " "+receiverMail+" "+receiverPhone);
         visually.checkWindow(SCREEN_NAME, "Reciver details entered");
         return this;
@@ -67,12 +75,29 @@ public class IndigoPromoCodeScreenWeb extends IndigoPromoCodeScreen {
 
     @Override
     public IndigoPromoCodeScreen enterSenderDetails(String senderFirstName, String senderLastName, String senderrMail, String senderPhone) {
-        driver.findElement(By.id("Rec_Fname")).sendKeys(senderFirstName);
-        driver.findElement(By.id("Rec_Lname")).sendKeys(senderLastName);
-        driver.findElement(By.id("Rec_EmailID")).sendKeys(senderrMail);
-        driver.findElement(By.id("Rec_Phone")).sendKeys(senderPhone);
+        driver.findElement(bySenderNameId).sendKeys(senderFirstName);
+        driver.findElement(bySenderLastNameId).sendKeys(senderLastName);
+        driver.findElement(bySenderMailId).sendKeys(senderrMail);
+        driver.findElement(bySenderPhone).sendKeys(senderPhone);
         LOGGER.info("Reciever Details entered " +senderFirstName+" "+senderLastName+ " "+senderrMail+" "+senderPhone);
-        visually.checkWindow(SCREEN_NAME, "Reciver details entered");
+        visually.checkWindow(SCREEN_NAME, "Sender details entered");
         return this;
+    }
+
+    @Override
+    public IndigoPromoCodeScreen selectTermsAndConditions() {
+        driver.findElement(By.id("chkTnC")).click();
+        LOGGER.info("Terms and Condition CheckBox selected");
+        return this;
+    }
+
+    @Override
+    public String clickOnProceedBtn() {
+        driver.findElement(By.xpath("//input[@value='Pay Now']")).click();
+        driver.waitTillElementIsPresent(By.id("paymentinformation"),10);
+        String paymentPageUrl = driver.getInnerDriver().getCurrentUrl();
+        LOGGER.info("Payment page url" +paymentPageUrl);
+        visually.checkWindow(SCREEN_NAME, "Payment Page");
+        return paymentPageUrl;
     }
 }

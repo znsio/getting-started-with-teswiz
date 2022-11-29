@@ -29,8 +29,8 @@ public class PromoCodeBL {
     }
 
     public PurchaseVoucherBL applyInvalidPromoCode() {
-        IndigoPromoCodeScreen.get()
-                .enterInvalidPromoCode();
+  //      IndigoPromoCodeScreen.get()
+   //             .enterInvalidPromoCode();
         return new PurchaseVoucherBL();
     }
 }

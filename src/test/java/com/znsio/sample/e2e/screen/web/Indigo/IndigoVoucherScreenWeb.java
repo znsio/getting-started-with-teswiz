@@ -19,6 +19,7 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     public static final By byMessageTextBoxId = By.id("Message");
     public static final By byPreviewBtnClass = By.className("preview-btn");
     public static final By byQuatityDropdownId = By.id("SelectedVoucherQuantity");
+    public static final By byPersonalCheckBoxID = By.id("chkPersonal");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -37,8 +38,7 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
 
     @Override
     public IndigoVoucherScreen selectDenomination(String denomination) {
-        driver.findElement(byDenominationDropdownId).click();
-        WebElement denominationDropdownWebElement = driver.waitTillElementIsPresent(byDenominationDropdownId);
+        WebElement denominationDropdownWebElement = driver.findElement(byDenominationDropdownId);
         Select denominatorDropdown = new Select (denominationDropdownWebElement);
         denominatorDropdown.selectByValue(denomination);
         LOGGER.info("Denomination selected for voucher " +denomination);
@@ -47,8 +47,7 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
 
     @Override
     public IndigoVoucherScreen selectQuantity(String quantity) {
-        driver.findElement(byQuatityDropdownId).click();
-        WebElement quantityDropdownWebElement = driver.waitTillElementIsPresent(byQuatityDropdownId);
+        WebElement quantityDropdownWebElement = driver.findElement(byQuatityDropdownId);
         Select quantityDropdown = new Select (quantityDropdownWebElement);
         quantityDropdown.selectByValue(quantity);
         LOGGER.info("Quantity selected for voucher " +quantity);
@@ -57,11 +56,17 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
 
     @Override
     public IndigoPreviewVoucherScreen personalizeVoucher(String name, String message) {
-        driver.findElement(byDearTextBoxId).sendKeys(name);
-        LOGGER.info("Data entered in Dear textbox" +name);
-        driver.findElement(byMessageTextBoxId).sendKeys(message);
-        LOGGER.info("Data entered in Message textbox" +message);
-        driver.findElement(byPreviewBtnClass).click();
+        driver.findElement(byPersonalCheckBoxID).click();
+        if(driver.findElement(byPersonalCheckBoxID).isSelected()) {
+            driver.findElement(byDearTextBoxId).sendKeys(name);
+            LOGGER.info("Data entered in Dear textbox" +name);
+            driver.findElement(byMessageTextBoxId).sendKeys(message);
+            LOGGER.info("Data entered in Message textbox" +message);
+            visually.checkWindow(SCREEN_NAME, "Indigo Voucher successfully personalised");
+            driver.findElement(byPreviewBtnClass).submit();
+        } else {
+            LOGGER.error("Personalised checkbox not selected");
+        }
         return IndigoPreviewVoucherScreen.get();
     }
 }

@@ -31,7 +31,7 @@ public class IndigoPreviewVoucherScreenWeb extends IndigoPreviewVoucherScreen {
 
     @Override
     public IndigoPromoCodeScreen previewVoucher() {
-        driver.findElement(byProceedBtnXpath).click();
+        driver.findElement(byProceedBtnXpath).submit();
         LOGGER.info("Proceed Button clicked on Preview page");
         return IndigoPromoCodeScreen.get();
     }

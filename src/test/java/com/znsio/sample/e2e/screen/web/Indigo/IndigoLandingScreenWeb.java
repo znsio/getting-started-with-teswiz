@@ -6,7 +6,6 @@ import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.Indigo.IndigoLandingScreen;
 import com.znsio.sample.e2e.screen.Indigo.IndigoVoucherScreen;
-import com.znsio.sample.e2e.screen.web.ZomatoCityPageScreenWeb;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +18,7 @@ public class IndigoLandingScreenWeb extends IndigoLandingScreen {
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
-    private static final String SCREEN_NAME = ZomatoCityPageScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = IndigoLandingScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final TestExecutionContext context;
 
@@ -37,9 +36,9 @@ public class IndigoLandingScreenWeb extends IndigoLandingScreen {
     public IndigoVoucherScreen selectGiftVoucher() {
         driver.findElement(byBookXpathDropdown).click();
         LOGGER.info("Indigo site opened");
-        visually.checkWindow(SCREEN_NAME, "Book dropdown clicked");
+        visually.checkWindow(SCREEN_NAME, "Book dropdown clicked successfully");
         driver.waitTillElementIsPresent(byGiftVoucherXpath,10).click();
-        LOGGER.info("Gift voucher option selected successflly");
+        LOGGER.info("Gift voucher option selected");
         return IndigoVoucherScreen.get();
     }
 }

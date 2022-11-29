@@ -29,7 +29,8 @@ public class IndigoSteps {
     @Given("I, a guest user, personalise and preview a gift voucher with any amount and quantity")
     public void iAGuestUserPersonaliseAndPreviewAGiftVoucherWithAnyAmountAndQuantity() {
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
-        new VoucherBL().personaliseAndPreviewGiftVoucher();
+        LOGGER.info(System.out.printf("iAGuestUserPersonaliseAndPreviewAGiftVoucherWithAnyAmountAndQuantity - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, Runner.platform));
+        new VoucherBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).personaliseAndPreviewGiftVoucher();
     }
 
     @When("I apply invalid promo code")

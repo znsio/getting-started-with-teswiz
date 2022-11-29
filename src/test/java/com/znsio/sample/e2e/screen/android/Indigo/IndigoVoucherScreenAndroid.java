@@ -18,12 +18,12 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
     }
 
     @Override
-    public IndigoVoucherScreen selectDenomination(String denomination) {
+    public IndigoVoucherScreen selectDenomination() {
         return null;
     }
 
     @Override
-    public IndigoVoucherScreen selectQuantity(String quantity) {
+    public String selectQuantity() {
         return null;
     }
 

@@ -4,6 +4,7 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.entities.INDIGO_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.Indigo.IndigoPreviewVoucherScreen;
 import com.znsio.sample.e2e.screen.Indigo.IndigoVoucherScreen;
 import org.apache.log4j.Logger;
@@ -20,6 +21,7 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     public static final By byPreviewBtnClass = By.className("preview-btn");
     public static final By byQuatityDropdownId = By.id("SelectedVoucherQuantity");
     public static final By byPersonalCheckBoxID = By.id("chkPersonal");
+    public static final By byTotalAmountId = By.id("lblTotal");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -37,21 +39,26 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     }
 
     @Override
-    public IndigoVoucherScreen selectDenomination(String denomination) {
+    public IndigoVoucherScreen selectDenomination() {
         WebElement denominationDropdownWebElement = driver.findElement(byDenominationDropdownId);
         Select denominatorDropdown = new Select (denominationDropdownWebElement);
-        denominatorDropdown.selectByValue(denomination);
-        LOGGER.info("Denomination selected for voucher " +denomination);
+        denominatorDropdown.selectByIndex(0);
+        String getDenominationValue = driver.findElement(byDenominationDropdownId).getText();
+        context.addTestState(INDIGO_TEST_CONTEXT.DENOMINATION,getDenominationValue);
+        LOGGER.info("Denomination selected for voucher " +getDenominationValue);
         return this;
     }
 
     @Override
-    public IndigoVoucherScreen selectQuantity(String quantity) {
+    public String selectQuantity() {
         WebElement quantityDropdownWebElement = driver.findElement(byQuatityDropdownId);
         Select quantityDropdown = new Select (quantityDropdownWebElement);
-        quantityDropdown.selectByValue(quantity);
-        LOGGER.info("Quantity selected for voucher " +quantity);
-        return this;
+        quantityDropdown.selectByIndex(0);
+        String getQuantityValue = driver.findElement(byQuatityDropdownId).getText();
+        context.addTestState(INDIGO_TEST_CONTEXT.QUANTITY,getQuantityValue);
+        LOGGER.info("Quantity selected for voucher " +getQuantityValue);
+        String getTotalAmount = driver.findElement(byTotalAmountId).getText();
+        return getTotalAmount;
     }
 
     @Override

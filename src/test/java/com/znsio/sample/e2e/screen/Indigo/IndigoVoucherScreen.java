@@ -35,9 +35,9 @@ public abstract class IndigoVoucherScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract IndigoVoucherScreen selectDenomination(String denomination);
+    public abstract IndigoVoucherScreen selectDenomination();
 
-    public abstract IndigoVoucherScreen selectQuantity(String quantity);
+    public abstract String selectQuantity();
 
     public abstract IndigoPreviewVoucherScreen  personalizeVoucher(String dear, String meesage);
 }

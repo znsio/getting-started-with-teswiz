@@ -42,8 +42,8 @@ public class IndigoDeliveryScreenWeb extends IndigoDeliveryScreen {
     }
 
     @Override
-    public IndigoDeliveryScreen enterInvalidPromoCode() {
-        driver.findElement(byPromoCodeTextBoxId).sendKeys("00000");
+    public IndigoDeliveryScreen enterInvalidPromoCode(String promoCode) {
+        driver.findElement(byPromoCodeTextBoxId).sendKeys(promoCode);
         LOGGER.info("Invalid Promo code entered in Delivery option page");
         visually.checkWindow(SCREEN_NAME, "Invalid Promo code entered");
         driver.findElement(byPromoCodeApplyBtnXpath).click();

@@ -32,7 +32,7 @@ public abstract class IndigoDeliveryScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract IndigoDeliveryScreen enterInvalidPromoCode();
+    public abstract IndigoDeliveryScreen enterInvalidPromoCode(String promoCode);
 
     public abstract String getErrorMessage();
 

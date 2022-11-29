@@ -19,7 +19,7 @@ public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
     }
 
     @Override
-    public IndigoDeliveryScreen enterInvalidPromoCode() {
+    public IndigoDeliveryScreen enterInvalidPromoCode(String promoCode) {
         return null;
     }
 

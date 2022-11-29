@@ -5,6 +5,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.INDIGO_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.Indigo.IndigoDeliveryScreen;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -30,8 +31,9 @@ public class PromoCodeBL {
     }
 
     public PurchaseVoucherBL applyInvalidPromoCode() {
+        String promoCode = RandomStringUtils.randomAlphanumeric(10);
         String isErrorMessageAppeared =  IndigoDeliveryScreen.get()
-                .enterInvalidPromoCode()
+                .enterInvalidPromoCode(promoCode)
                 .getErrorMessage();
         softly.assertThat(isErrorMessageAppeared).isEqualTo("Invalid Promo Code.");
         String paymentAmountAfterPromoCode = IndigoDeliveryScreen.get()

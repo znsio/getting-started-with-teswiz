@@ -18,15 +18,12 @@ public abstract class IndigoDeliveryScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     public static IndigoDeliveryScreen get() {
-        Driver driver = fetchDriver(Thread.currentThread()
-                .getId());
-        Platform platform = Runner.fetchPlatform(Thread.currentThread()
-                .getId());
+        Driver driver = fetchDriver(Thread.currentThread().getId());
+        Platform platform = Runner.fetchPlatform(Thread.currentThread().getId());
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
-        Visual visually = fetchEyes(Thread.currentThread()
-                .getId());
+        Visual visually = fetchEyes(Thread.currentThread().getId());
 
-        switch(platform) {
+        switch (platform) {
             case android:
                 return new IndigoDeliveryScreenAndroid(driver, visually);
             case web:
@@ -44,6 +41,7 @@ public abstract class IndigoDeliveryScreen {
     public abstract IndigoDeliveryScreen enterReceiverDetail(String receiverFirstName, String recoverLastName, String receiverMail, String receiverPhone);
 
     public abstract IndigoDeliveryScreen enterSenderDetails(String senderFirstName, String senderLastName, String senderrMail, String senderPhone);
+
     public abstract IndigoDeliveryScreen selectTermsAndConditions();
 
     public abstract String clickOnProceedBtn();

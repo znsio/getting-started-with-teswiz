@@ -44,8 +44,8 @@ public class VoucherBL {
         String TotalSum = TotalAmount.substring(1).trim();
         softly.assertThat(Integer.parseInt(TotalSum)).isEqualTo(totalSumExpected);
         context.addTestState(INDIGO_TEST_CONTEXT.TOTALAMOUNT, TotalSum);
-        String randomString = RandomStringUtils.random(10, true, false);
-        String voucherDetails = IndigoVoucherScreen.get().personalizeVoucher(System.getProperty("user.name"), randomString)
+        String randomMessage = RandomStringUtils.randomAlphabetic(20);
+        String voucherDetails = IndigoVoucherScreen.get().personalizeVoucher(System.getProperty("user.name"), randomMessage)
                 .previewVoucher();
         String messageExpected = context.getTestState(INDIGO_TEST_CONTEXT.DEAR).toString().trim() + ", " + context.getTestState(INDIGO_TEST_CONTEXT.MESSAGE).toString().trim();
         softly.assertThat(voucherDetails).isEqualTo(messageExpected);

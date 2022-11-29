@@ -31,20 +31,20 @@ public class PurchaseVoucherBL {
     }
 
     public IndigoPaymentScreen purchaseGiftVoucher() {
-        String receiverFirstName = RandomStringUtils.random(6,true,false);
-        String recoverLastName = RandomStringUtils.random(6,true,false);
-        String receiverMail = RandomStringUtils.random(5,true,false)+"@gmail.com";
+        String receiverFirstName = RandomStringUtils.randomAlphabetic(6);
+        String recoverLastName = RandomStringUtils.randomAlphabetic(6);
+        String receiverMail = RandomStringUtils.randomAlphabetic(5) + "@gmail.com";
         String receiverPhone = RandomStringUtils.randomNumeric(10);
-        String senderFirstName = RandomStringUtils.random(6,true,false);
-        String senderLastName = RandomStringUtils.random(6,true,false);
-        String senderrMail = RandomStringUtils.random(5,true,false)+"@gmail.com";
+        String senderFirstName = RandomStringUtils.randomAlphabetic(6);
+        String senderLastName = RandomStringUtils.randomAlphabetic(6);
+        String senderrMail = RandomStringUtils.randomAlphabetic(5) + "@gmail.com";
         String senderPhone = RandomStringUtils.randomNumeric(10);
         String paymnetPage = IndigoDeliveryScreen.get()
-                .enterReceiverDetail(receiverFirstName,recoverLastName,receiverMail,receiverPhone)
-                .enterSenderDetails(senderFirstName,senderLastName,senderrMail,senderPhone)
+                .enterReceiverDetail(receiverFirstName, recoverLastName, receiverMail, receiverPhone)
+                .enterSenderDetails(senderFirstName, senderLastName, senderrMail, senderPhone)
                 .selectTermsAndConditions()
                 .clickOnProceedBtn();
         softly.assertThat(paymnetPage).contains("transaction");
-        return  IndigoPaymentScreen.get();
+        return IndigoPaymentScreen.get();
     }
 }

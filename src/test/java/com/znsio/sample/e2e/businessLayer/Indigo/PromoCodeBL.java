@@ -29,8 +29,10 @@ public class PromoCodeBL {
     }
 
     public PurchaseVoucherBL applyInvalidPromoCode() {
-  //      IndigoPromoCodeScreen.get()
-   //             .enterInvalidPromoCode();
+        String isErrorMessageAppeared =  IndigoPromoCodeScreen.get()
+                .enterInvalidPromoCode()
+                .getErrorMessage();
+        softly.assertThat(isErrorMessageAppeared).isEqualTo("Invalid Promo Code.");
         return new PurchaseVoucherBL();
     }
 }

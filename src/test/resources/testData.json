@@ -2,18 +2,7 @@
   "prod": {
     "raghav.garg" : {
       "denomination": "3000",
-      "quantity": "2",
-      "dear": "Raghav",
-      "message": "Hi, I am giving you this git voucher on the occassion of your birthday",
-      "promo_code": "0000",
-      "receiver_first_name": "Raghav",
-      "reciver_last_name": "Garg",
-      "reciver_email": "raghavgarg291900@gmail.com",
-      "receiver_phone": "9090454567",
-      "sender_first_name": "Raghav",
-      "sender_last_name": "Garg",
-      "sender_email": "gargraghav291900@gmail.com",
-      "sender_phone": "9080454589"
+      "quantity": "2"
     }
   }
 }

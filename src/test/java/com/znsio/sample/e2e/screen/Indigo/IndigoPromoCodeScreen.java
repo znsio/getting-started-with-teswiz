@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
-public class IndigoPromoCodeScreen {
+public abstract class IndigoPromoCodeScreen {
 
     private static final String SCREEN_NAME = IndigoPromoCodeScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
@@ -34,4 +34,8 @@ public class IndigoPromoCodeScreen {
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
+
+    public abstract IndigoPromoCodeScreen enterInvalidPromoCode();
+
+    public abstract String getErrorMessage();
 }

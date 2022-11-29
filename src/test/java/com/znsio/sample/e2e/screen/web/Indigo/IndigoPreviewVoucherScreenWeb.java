@@ -11,9 +11,9 @@ import org.openqa.selenium.WebDriver;
 
 public class IndigoPreviewVoucherScreenWeb extends IndigoPreviewVoucherScreen {
 
-    public static final By byProceedBtnXpath = By.xpath("//input[@value='Proceed']");
-    public static final By byDearTextBoxxpath = By.xpath("//div[@class='title-name']");
-    public static final By byMessageTextBoxxpath = By.xpath("//div[@class='doted-line']/preceding-sibling::p");
+    private static final By byProceedBtnXpath = By.xpath("//input[@value='Proceed']");
+    private static final By byDearTextBoxxpath = By.xpath("//div[@class='title-name']");
+    private static final By byMessageTextBoxxpath = By.xpath("//div[@class='doted-line']/preceding-sibling::p");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -25,8 +25,7 @@ public class IndigoPreviewVoucherScreenWeb extends IndigoPreviewVoucherScreen {
         this.driver = driver;
         this.visually = visually;
         this.innerDriver = this.driver.getInnerDriver();
-        long threadId = Thread.currentThread()
-                .getId();
+        long threadId = Thread.currentThread().getId();
         context = Runner.getTestExecutionContext(threadId);
     }
 
@@ -37,6 +36,6 @@ public class IndigoPreviewVoucherScreenWeb extends IndigoPreviewVoucherScreen {
         visually.checkWindow(SCREEN_NAME, "Indigo Voucher Preview");
         driver.findElement(byProceedBtnXpath).click();
         LOGGER.info("Proceed Button clicked on Preview page");
-        return dearText +" " +message;
+        return dearText + " " + message;
     }
 }

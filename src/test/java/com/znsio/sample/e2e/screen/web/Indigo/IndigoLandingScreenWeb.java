@@ -27,8 +27,7 @@ public class IndigoLandingScreenWeb extends IndigoLandingScreen {
         this.driver = driver;
         this.visually = visually;
         this.innerDriver = this.driver.getInnerDriver();
-        long threadId = Thread.currentThread()
-                .getId();
+        long threadId = Thread.currentThread().getId();
         context = Runner.getTestExecutionContext(threadId);
     }
 
@@ -37,7 +36,7 @@ public class IndigoLandingScreenWeb extends IndigoLandingScreen {
         driver.findElement(byBookXpathDropdown).click();
         LOGGER.info("Indigo site opened");
         visually.checkWindow(SCREEN_NAME, "Book dropdown clicked successfully");
-        driver.waitTillElementIsPresent(byGiftVoucherXpath,10).click();
+        driver.waitTillElementIsPresent(byGiftVoucherXpath, 10).click();
         LOGGER.info("Gift voucher option selected");
         return IndigoVoucherScreen.get();
     }

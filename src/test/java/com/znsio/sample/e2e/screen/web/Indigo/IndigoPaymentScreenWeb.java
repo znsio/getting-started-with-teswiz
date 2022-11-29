@@ -20,8 +20,7 @@ public class IndigoPaymentScreenWeb extends IndigoPaymentScreen {
         this.driver = driver;
         this.visually = visually;
         this.innerDriver = this.driver.getInnerDriver();
-        long threadId = Thread.currentThread()
-                .getId();
+        long threadId = Thread.currentThread().getId();
         context = Runner.getTestExecutionContext(threadId);
     }
 }

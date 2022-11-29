@@ -40,14 +40,14 @@ public class VoucherBL {
         int denominationVal = Integer.parseInt(context.getTestState(INDIGO_TEST_CONTEXT.DENOMINATION).toString());
         int quantityVal = Integer.parseInt(context.getTestState(INDIGO_TEST_CONTEXT.QUANTITY).toString());
         int totalSumExpected = denominationVal * quantityVal;
-        LOGGER.info("Total sum in Voucher Page " +TotalAmount);
+        LOGGER.info("Total sum in Voucher Page " + TotalAmount);
         String TotalSum = TotalAmount.substring(1).trim();
         softly.assertThat(Integer.parseInt(TotalSum)).isEqualTo(totalSumExpected);
-        context.addTestState(INDIGO_TEST_CONTEXT.TOTALAMOUNT,TotalSum);
-        String randomString = RandomStringUtils.random(10,true,false);
-        String voucherDetails = IndigoVoucherScreen.get().personalizeVoucher(System.getProperty("user.name"),randomString)
+        context.addTestState(INDIGO_TEST_CONTEXT.TOTALAMOUNT, TotalSum);
+        String randomString = RandomStringUtils.random(10, true, false);
+        String voucherDetails = IndigoVoucherScreen.get().personalizeVoucher(System.getProperty("user.name"), randomString)
                 .previewVoucher();
-        String messageExpected = context.getTestState(INDIGO_TEST_CONTEXT.DEAR).toString().trim() + ", "+context.getTestState(INDIGO_TEST_CONTEXT.MESSAGE).toString().trim();
+        String messageExpected = context.getTestState(INDIGO_TEST_CONTEXT.DEAR).toString().trim() + ", " + context.getTestState(INDIGO_TEST_CONTEXT.MESSAGE).toString().trim();
         softly.assertThat(voucherDetails).isEqualTo(messageExpected);
         return new PromoCodeBL();
     }

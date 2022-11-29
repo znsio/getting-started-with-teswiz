@@ -15,15 +15,15 @@ import org.openqa.selenium.support.ui.Select;
 
 public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
 
-    public static final By byDenominationDropdownId = By.id("SelectedVoucherValue"); //private locator
-    public static final By byDearTextBoxId = By.id("Per_Fname");
-    public static final By byMessageTextBoxId = By.id("Message");
-    public static final By byPreviewBtnClass = By.className("preview-btn");
-    public static final By byQuatityDropdownId = By.id("SelectedVoucherQuantity");
-    public static final By byPersonalCheckBoxID = By.id("chkPersonal");
-    public static final By byTotalAmountId = By.id("lblTotal");
-    public static final By byDenominatorTextXpath = By.xpath("(//span[@class='holder'])[1]");
-    public static final By byQuantityTextXpath = By.xpath("(//span[@class='holder'])[2]");
+    private static final By byDenominationDropdownId = By.id("SelectedVoucherValue");
+    private static final By byDearTextBoxId = By.id("Per_Fname");
+    private static final By byMessageTextBoxId = By.id("Message");
+    private static final By byPreviewBtnClass = By.className("preview-btn");
+    private static final By byQuatityDropdownId = By.id("SelectedVoucherQuantity");
+    private static final By byPersonalCheckBoxID = By.id("chkPersonal");
+    private static final By byTotalAmountId = By.id("lblTotal");
+    private static final By byDenominatorTextXpath = By.xpath("(//span[@class='holder'])[1]");
+    private static final By byQuantityTextXpath = By.xpath("(//span[@class='holder'])[2]");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -35,30 +35,29 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
         this.driver = driver;
         this.visually = visually;
         this.innerDriver = this.driver.getInnerDriver();
-        long threadId = Thread.currentThread()
-                .getId();
+        long threadId = Thread.currentThread().getId();
         context = Runner.getTestExecutionContext(threadId);
     }
 
     @Override
     public IndigoVoucherScreen selectDenomination() {
         WebElement denominationDropdownWebElement = driver.findElement(byDenominationDropdownId);
-        Select denominatorDropdown = new Select (denominationDropdownWebElement);
+        Select denominatorDropdown = new Select(denominationDropdownWebElement);
         denominatorDropdown.selectByIndex(1);
         String getDenominationValue = driver.findElement(byDenominatorTextXpath).getText();
-        context.addTestState(INDIGO_TEST_CONTEXT.DENOMINATION,getDenominationValue);
-        LOGGER.info("Denomination selected for voucher " +getDenominationValue);
+        context.addTestState(INDIGO_TEST_CONTEXT.DENOMINATION, getDenominationValue);
+        LOGGER.info("Denomination selected for voucher " + getDenominationValue);
         return this;
     }
 
     @Override
     public String selectQuantity() {
         WebElement quantityDropdownWebElement = driver.findElement(byQuatityDropdownId);
-        Select quantityDropdown = new Select (quantityDropdownWebElement);
+        Select quantityDropdown = new Select(quantityDropdownWebElement);
         quantityDropdown.selectByIndex(1);
         String getQuantityValue = driver.findElement(byQuantityTextXpath).getText();
-        context.addTestState(INDIGO_TEST_CONTEXT.QUANTITY,getQuantityValue);
-        LOGGER.info("Quantity selected for voucher " +getQuantityValue);
+        context.addTestState(INDIGO_TEST_CONTEXT.QUANTITY, getQuantityValue);
+        LOGGER.info("Quantity selected for voucher " + getQuantityValue);
         String getTotalAmount = driver.findElement(byTotalAmountId).getText();
         return getTotalAmount;
     }
@@ -66,13 +65,13 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     @Override
     public IndigoPreviewVoucherScreen personalizeVoucher(String name, String message) {
         driver.findElement(byPersonalCheckBoxID).click();
-        if(driver.findElement(byPersonalCheckBoxID).isSelected()) {
+        if (driver.findElement(byPersonalCheckBoxID).isSelected()) {
             driver.findElement(byDearTextBoxId).sendKeys(name);
-            context.addTestState(INDIGO_TEST_CONTEXT.DEAR,name);
-            LOGGER.info("Data entered in Dear textbox" +name);
+            context.addTestState(INDIGO_TEST_CONTEXT.DEAR, name);
+            LOGGER.info("Data entered in Dear textbox" + name);
             driver.findElement(byMessageTextBoxId).sendKeys(message);
-            context.addTestState(INDIGO_TEST_CONTEXT.MESSAGE,message);
-            LOGGER.info("Data entered in Message textbox" +message);
+            context.addTestState(INDIGO_TEST_CONTEXT.MESSAGE, message);
+            LOGGER.info("Data entered in Message textbox" + message);
             visually.checkWindow(SCREEN_NAME, "Indigo Voucher successfully personalised");
             driver.findElement(byPreviewBtnClass).submit();
         } else {

@@ -6,10 +6,10 @@ import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.INDIGO_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.Indigo.IndigoLandingScreen;
 import com.znsio.sample.e2e.screen.Indigo.IndigoVoucherScreen;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
-import java.util.Map;
 
 public class VoucherBL {
     private static final Logger LOGGER = Logger.getLogger(VoucherBL.class.getName());
@@ -37,12 +37,18 @@ public class VoucherBL {
                 .selectGiftVoucher()
                 .selectDenomination()
                 .selectQuantity();
-        int denominationVal = (int) context.getTestState(INDIGO_TEST_CONTEXT.DENOMINATION);
-        int quantityVal = (int) context.getTestState(INDIGO_TEST_CONTEXT.QUANTITY);
+        int denominationVal = Integer.parseInt(context.getTestState(INDIGO_TEST_CONTEXT.DENOMINATION).toString());
+        int quantityVal = Integer.parseInt(context.getTestState(INDIGO_TEST_CONTEXT.QUANTITY).toString());
         int totalSumExpected = denominationVal * quantityVal;
-        softly.assertThat(Integer.parseInt(TotalAmount)).isEqualTo(totalSumExpected);
-        IndigoVoucherScreen.get().personalizeVoucher(System.getProperty("user.name"), "dkcnenckenwkcnwkc")
+        LOGGER.info("Total sum in Voucher Page " +TotalAmount);
+        String TotalSum = TotalAmount.substring(1).trim();
+        softly.assertThat(Integer.parseInt(TotalSum)).isEqualTo(totalSumExpected);
+        context.addTestState(INDIGO_TEST_CONTEXT.TOTALAMOUNT,TotalSum);
+        String randomString = RandomStringUtils.random(10,true,false);
+        String voucherDetails = IndigoVoucherScreen.get().personalizeVoucher(System.getProperty("user.name"),randomString)
                 .previewVoucher();
+        String messageExpected = context.getTestState(INDIGO_TEST_CONTEXT.DEAR).toString().trim() + ", "+context.getTestState(INDIGO_TEST_CONTEXT.MESSAGE).toString().trim();
+        softly.assertThat(voucherDetails).isEqualTo(messageExpected);
         return new PromoCodeBL();
     }
 }

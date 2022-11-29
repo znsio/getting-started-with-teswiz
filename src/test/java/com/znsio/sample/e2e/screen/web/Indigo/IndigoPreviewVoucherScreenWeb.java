@@ -5,7 +5,6 @@ import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.Indigo.IndigoPreviewVoucherScreen;
-import com.znsio.sample.e2e.screen.Indigo.IndigoPromoCodeScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +12,8 @@ import org.openqa.selenium.WebDriver;
 public class IndigoPreviewVoucherScreenWeb extends IndigoPreviewVoucherScreen {
 
     public static final By byProceedBtnXpath = By.xpath("//input[@value='Proceed']");
+    public static final By byDearTextBoxxpath = By.xpath("//div[@class='title-name']");
+    public static final By byMessageTextBoxxpath = By.xpath("//div[@class='doted-line']/preceding-sibling::p");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -30,9 +31,12 @@ public class IndigoPreviewVoucherScreenWeb extends IndigoPreviewVoucherScreen {
     }
 
     @Override
-    public IndigoPromoCodeScreen previewVoucher() {
-        driver.findElement(byProceedBtnXpath).submit();
+    public String previewVoucher() {
+        String dearText = driver.findElement(byDearTextBoxxpath).getText().trim();
+        String message = driver.findElement(byMessageTextBoxxpath).getText().trim();
+        visually.checkWindow(SCREEN_NAME, "Indigo Voucher Preview");
+        driver.findElement(byProceedBtnXpath).click();
         LOGGER.info("Proceed Button clicked on Preview page");
-        return IndigoPromoCodeScreen.get();
+        return dearText +" " +message;
     }
 }

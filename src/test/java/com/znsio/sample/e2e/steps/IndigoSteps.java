@@ -40,6 +40,6 @@ public class IndigoSteps {
 
     @Then("I can purchase the gift voucher at the original amount")
     public void iCanPurchaseTheGiftVoucherAtTheOriginalAmount() {
-  //      new PurchaseVoucherBL().purchaseGiftVoucher();
+        new PurchaseVoucherBL().purchaseGiftVoucher();
     }
 }

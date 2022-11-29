@@ -22,6 +22,8 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     public static final By byQuatityDropdownId = By.id("SelectedVoucherQuantity");
     public static final By byPersonalCheckBoxID = By.id("chkPersonal");
     public static final By byTotalAmountId = By.id("lblTotal");
+    public static final By byDenominatorTextXpath = By.xpath("(//span[@class='holder'])[1]");
+    public static final By byQuantityTextXpath = By.xpath("(//span[@class='holder'])[2]");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -42,8 +44,8 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     public IndigoVoucherScreen selectDenomination() {
         WebElement denominationDropdownWebElement = driver.findElement(byDenominationDropdownId);
         Select denominatorDropdown = new Select (denominationDropdownWebElement);
-        denominatorDropdown.selectByIndex(0);
-        String getDenominationValue = driver.findElement(byDenominationDropdownId).getText();
+        denominatorDropdown.selectByIndex(1);
+        String getDenominationValue = driver.findElement(byDenominatorTextXpath).getText();
         context.addTestState(INDIGO_TEST_CONTEXT.DENOMINATION,getDenominationValue);
         LOGGER.info("Denomination selected for voucher " +getDenominationValue);
         return this;
@@ -53,8 +55,8 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     public String selectQuantity() {
         WebElement quantityDropdownWebElement = driver.findElement(byQuatityDropdownId);
         Select quantityDropdown = new Select (quantityDropdownWebElement);
-        quantityDropdown.selectByIndex(0);
-        String getQuantityValue = driver.findElement(byQuatityDropdownId).getText();
+        quantityDropdown.selectByIndex(1);
+        String getQuantityValue = driver.findElement(byQuantityTextXpath).getText();
         context.addTestState(INDIGO_TEST_CONTEXT.QUANTITY,getQuantityValue);
         LOGGER.info("Quantity selected for voucher " +getQuantityValue);
         String getTotalAmount = driver.findElement(byTotalAmountId).getText();
@@ -66,8 +68,10 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
         driver.findElement(byPersonalCheckBoxID).click();
         if(driver.findElement(byPersonalCheckBoxID).isSelected()) {
             driver.findElement(byDearTextBoxId).sendKeys(name);
+            context.addTestState(INDIGO_TEST_CONTEXT.DEAR,name);
             LOGGER.info("Data entered in Dear textbox" +name);
             driver.findElement(byMessageTextBoxId).sendKeys(message);
+            context.addTestState(INDIGO_TEST_CONTEXT.MESSAGE,message);
             LOGGER.info("Data entered in Message textbox" +message);
             visually.checkWindow(SCREEN_NAME, "Indigo Voucher successfully personalised");
             driver.findElement(byPreviewBtnClass).submit();

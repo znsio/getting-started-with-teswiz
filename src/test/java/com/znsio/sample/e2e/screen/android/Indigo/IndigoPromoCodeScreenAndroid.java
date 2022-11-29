@@ -28,4 +28,14 @@ public class IndigoPromoCodeScreenAndroid extends IndigoPromoCodeScreen {
     public String getErrorMessage() {
         return null;
     }
+
+    @Override
+    public String getFinalAmount() {
+        return null;
+    }
+
+    @Override
+    public IndigoPromoCodeScreen enterReceiverDetail(String name, String lastName, String email, String phone) {
+        return null;
+    }
 }

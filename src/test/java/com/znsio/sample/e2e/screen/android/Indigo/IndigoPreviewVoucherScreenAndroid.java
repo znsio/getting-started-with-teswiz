@@ -3,7 +3,6 @@ package com.znsio.sample.e2e.screen.android.Indigo;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.Indigo.IndigoPreviewVoucherScreen;
-import com.znsio.sample.e2e.screen.Indigo.IndigoPromoCodeScreen;
 import org.apache.log4j.Logger;
 
 public class IndigoPreviewVoucherScreenAndroid extends IndigoPreviewVoucherScreen {
@@ -18,7 +17,7 @@ public class IndigoPreviewVoucherScreenAndroid extends IndigoPreviewVoucherScree
     }
 
     @Override
-    public IndigoPromoCodeScreen previewVoucher() {
+    public String previewVoucher() {
         return null;
     }
 }

@@ -8,4 +8,7 @@ public class INDIGO_TEST_CONTEXT
 
     public static final String DENOMINATION = "denomination";
     public static final String QUANTITY = "quantity";
+    public static final String DEAR = "dear";
+    public static final String MESSAGE = "message";
+    public static final String TOTALAMOUNT = "totalamount";
 }

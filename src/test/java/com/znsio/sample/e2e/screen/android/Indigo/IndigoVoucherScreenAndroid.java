@@ -23,12 +23,17 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
     }
 
     @Override
-    public String selectQuantity() {
+    public IndigoVoucherScreen selectQuantity() {
         return null;
     }
 
     @Override
     public IndigoPreviewVoucherScreen personalizeVoucher(String dear, String meesage) {
+        return null;
+    }
+
+    @Override
+    public String getTotalAmount() {
         return null;
     }
 }

@@ -34,7 +34,9 @@ public abstract class IndigoVoucherScreen {
 
     public abstract IndigoVoucherScreen selectDenomination();
 
-    public abstract String selectQuantity();
+    public abstract IndigoVoucherScreen selectQuantity();
 
     public abstract IndigoPreviewVoucherScreen personalizeVoucher(String dear, String meesage);
+
+    public abstract String getTotalAmount();
 }

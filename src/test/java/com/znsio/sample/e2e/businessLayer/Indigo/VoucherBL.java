@@ -36,7 +36,8 @@ public class VoucherBL {
         String TotalAmount = IndigoLandingScreen.get()
                 .selectGiftVoucher()
                 .selectDenomination()
-                .selectQuantity();
+                .selectQuantity()
+                .getTotalAmount();
         int denominationVal = Integer.parseInt(context.getTestState(INDIGO_TEST_CONTEXT.DENOMINATION).toString());
         int quantityVal = Integer.parseInt(context.getTestState(INDIGO_TEST_CONTEXT.QUANTITY).toString());
         int totalSumExpected = denominationVal * quantityVal;

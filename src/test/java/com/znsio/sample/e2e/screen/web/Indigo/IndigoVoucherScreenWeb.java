@@ -51,15 +51,14 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     }
 
     @Override
-    public String selectQuantity() {
+    public IndigoVoucherScreen selectQuantity() {
         WebElement quantityDropdownWebElement = driver.findElement(byQuatityDropdownId);
         Select quantityDropdown = new Select(quantityDropdownWebElement);
         quantityDropdown.selectByIndex(1);
         String getQuantityValue = driver.findElement(byQuantityTextXpath).getText();
         context.addTestState(INDIGO_TEST_CONTEXT.QUANTITY, getQuantityValue);
         LOGGER.info("Quantity selected for voucher " + getQuantityValue);
-        String getTotalAmount = driver.findElement(byTotalAmountId).getText();
-        return getTotalAmount;
+        return this;
     }
 
     @Override
@@ -78,5 +77,12 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
             LOGGER.error("Personalised checkbox not selected");
         }
         return IndigoPreviewVoucherScreen.get();
+    }
+
+    @Override
+    public String getTotalAmount() {
+        String getTotalAmount = driver.findElement(byTotalAmountId).getText();
+        LOGGER.info("Total amount after selecting Denominator and quantity" +getTotalAmount);
+        return getTotalAmount;
     }
 }

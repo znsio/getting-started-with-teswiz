@@ -8,4 +8,10 @@ public class SAMPLE_TEST_CONTEXT
     public static final String MEETING_ID = "meetingId";
     public static final String MEETING_PASSWORD = "meetingPassword";
     public static final String INVITATION_LINK = "invitationLink";
+
+    public static final String TOTAL_AMOUNT = "totalAmount";
+    public static final String NAME = "NAME";
+    public static final String MESSAGE = "MESSAGE";
+
+
 }

@@ -7,6 +7,11 @@
       "password": "eotTesting@0",
       "firstName": "Eot",
       "lastName": "Testing"
+    },
+    "gaurav.rai": {
+      "denomination": "3000",
+      "quantity": "3",
+      "invalidpromocodemessage": "Invalid Promo Code."
     }
   }
 }

@@ -58,6 +58,4 @@ public class RunTestCukes
                 .getId()));
         new Hooks().afterScenario(scenario);
     }
-
-
 }

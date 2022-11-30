@@ -40,10 +40,10 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     }
 
     @Override
-    public IndigoVoucherScreen selectDenomination() {
+    public IndigoVoucherScreen selectDenomination(int denomination) {
         WebElement denominationDropdownWebElement = driver.findElement(byDenominationDropdownId);
         Select denominatorDropdown = new Select(denominationDropdownWebElement);
-        denominatorDropdown.selectByIndex(1);
+        denominatorDropdown.selectByIndex(denomination);
         String getDenominationValue = driver.findElement(byDenominatorTextXpath).getText();
         context.addTestState(INDIGO_TEST_CONTEXT.DENOMINATION, getDenominationValue);
         LOGGER.info("Denomination selected for voucher " + getDenominationValue);
@@ -51,10 +51,10 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     }
 
     @Override
-    public IndigoVoucherScreen selectQuantity() {
+    public IndigoVoucherScreen selectQuantity(int quantity) {
         WebElement quantityDropdownWebElement = driver.findElement(byQuatityDropdownId);
         Select quantityDropdown = new Select(quantityDropdownWebElement);
-        quantityDropdown.selectByIndex(1);
+        quantityDropdown.selectByIndex(quantity);
         String getQuantityValue = driver.findElement(byQuantityTextXpath).getText();
         context.addTestState(INDIGO_TEST_CONTEXT.QUANTITY, getQuantityValue);
         LOGGER.info("Quantity selected for voucher " + getQuantityValue);
@@ -65,9 +65,11 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     public IndigoPreviewVoucherScreen personalizeVoucher(String name, String message) {
         driver.findElement(byPersonalCheckBoxID).click();
         if (driver.findElement(byPersonalCheckBoxID).isSelected()) {
+            driver.findElement(byDearTextBoxId).clear();
             driver.findElement(byDearTextBoxId).sendKeys(name);
             context.addTestState(INDIGO_TEST_CONTEXT.DEAR, name);
             LOGGER.info("Data entered in Dear textbox" + name);
+            driver.findElement(byMessageTextBoxId).clear();
             driver.findElement(byMessageTextBoxId).sendKeys(message);
             context.addTestState(INDIGO_TEST_CONTEXT.MESSAGE, message);
             LOGGER.info("Data entered in Message textbox" + message);

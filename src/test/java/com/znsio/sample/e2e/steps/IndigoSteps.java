@@ -35,11 +35,13 @@ public class IndigoSteps {
 
     @When("I apply invalid promo code")
     public void iApplyInvalidPromoCode() {
+        LOGGER.info(System.out.printf("iApplyInvalidPromoCode - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, Runner.platform));
         new PromoCodeBL().applyInvalidPromoCode();
     }
 
     @Then("I can purchase the gift voucher at the original amount")
     public void iCanPurchaseTheGiftVoucherAtTheOriginalAmount() {
+        LOGGER.info(System.out.printf("iCanPurchaseTheGiftVoucherAtTheOriginalAmount - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, Runner.platform));
         new PurchaseVoucherBL().purchaseGiftVoucher();
     }
 }

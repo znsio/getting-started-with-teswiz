@@ -13,6 +13,8 @@ public class IndigoLandingScreenAndroid extends IndigoLandingScreen {
     private final Visual visually;
     private static final String SCREEN_NAME = IndigoLandingScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
+    private static final String NOT_YET_IMPLEMENTED = "not yet implemented";
+
 
     public IndigoLandingScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;

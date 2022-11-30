@@ -3,6 +3,7 @@ package com.znsio.sample.e2e.screen.android.Indigo;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.Indigo.IndigoDeliveryScreen;
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
 public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
@@ -12,6 +13,7 @@ public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
     private final Visual visually;
     private static final String SCREEN_NAME = IndigoDeliveryScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
+    public static final String NOT_YET_IMPLEMENTED = "not yet implemented";
 
     public IndigoDeliveryScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -25,31 +27,31 @@ public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
 
     @Override
     public String getErrorMessage() {
-        return null;
+        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
     }
 
     @Override
     public String getFinalAmount() {
-        return null;
+        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
     }
 
     @Override
     public IndigoDeliveryScreen enterReceiverDetail(String name, String lastName, String email, String phone) {
-        return null;
+        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
     }
 
     @Override
     public IndigoDeliveryScreen enterSenderDetails(String senderFirstName, String senderLastName, String senderrMail, String senderPhone) {
-        return null;
+        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
     }
 
     @Override
     public IndigoDeliveryScreen selectTermsAndConditions() {
-        return null;
+        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
     }
 
     @Override
     public String clickOnProceedBtn() {
-        return null;
+        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
     }
 }

@@ -75,7 +75,7 @@ public class GiftVoucherBL {
         }
         GiftVoucherScreen.get().applyPromoCode(promo);
 
-        assertThat(GiftVoucherScreen.get().getPromoCodeMessage())
+        softly.assertThat(GiftVoucherScreen.get().getPromoCodeMessage())
                 .as("Promo code message should be equal to expected message")
                 .isEqualTo((String) testData.get("invalidMessage"));
 
@@ -99,7 +99,8 @@ public class GiftVoucherBL {
                         .clickPayNow();
 
         assertThat("" + PaymentScreen.get().getPaymentAmount())
-                .as("Payment screen should be equal to total payment").isEqualTo(totalAmount);
+                .as("Payment screen should be equal to total payment")
+                .isEqualTo(totalAmount);
 
         return this;
     }

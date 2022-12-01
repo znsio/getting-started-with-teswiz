@@ -89,8 +89,9 @@ public class GiftVoucherScreenWeb extends GiftVoucherScreen {
 
         LOGGER.info("Personalise gift voucher with details "+senderDetails.toString());
         WebElement makeItPersonalWebElement = driver.waitTillElementIsPresent(byMakeItPersonalId);
-        if(!makeItPersonalWebElement.isSelected())
+        if(!makeItPersonalWebElement.isSelected()) {
             makeItPersonalWebElement.click();
+        }
 
         driver.waitTillElementIsPresent(byPersonalNameId).sendKeys((CharSequence) senderDetails.get(GIFT_VOUCHER_TEST_CONTEXT.FIRST_NAME));
 

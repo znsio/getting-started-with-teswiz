@@ -9,6 +9,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class PurchaseVoucherBL {
 
     private static final Logger LOGGER = Logger.getLogger(PurchaseVoucherBL.class.getName());
@@ -39,12 +41,13 @@ public class PurchaseVoucherBL {
         String senderLastName = RandomStringUtils.randomAlphabetic(6);
         String senderrMail = RandomStringUtils.randomAlphabetic(5) + "@gmail.com";
         String senderPhone = RandomStringUtils.randomNumeric(10);
-        String paymnetPage = IndigoDeliveryScreen.get()
+        boolean isPaymentPageVisible = IndigoDeliveryScreen.get()
                 .enterReceiverDetail(receiverFirstName, recoverLastName, receiverMail, receiverPhone)
                 .enterSenderDetails(senderFirstName, senderLastName, senderrMail, senderPhone)
                 .selectTermsAndConditions()
-                .clickOnProceedBtn();
-        softly.assertThat(paymnetPage).contains("transaction");
+                .clickOnProceedBtn()
+                .validatePaymentScreen();
+        assertThat(isPaymentPageVisible).as("On Payment PAge").isTrue();
         return IndigoPaymentScreen.get();
     }
 }

@@ -9,6 +9,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class PromoCodeBL {
 
     private static final Logger LOGGER = Logger.getLogger(PromoCodeBL.class.getName());
@@ -32,13 +34,14 @@ public class PromoCodeBL {
 
     public PurchaseVoucherBL applyInvalidPromoCode() {
         String promoCode = RandomStringUtils.randomAlphanumeric(10);
-        String isErrorMessageAppeared =  IndigoDeliveryScreen.get()
+        IndigoDeliveryScreen indigoDeliveryScreen = IndigoDeliveryScreen.get();
+        String isErrorMessageAppeared =  indigoDeliveryScreen
                 .enterInvalidPromoCode(promoCode)
                 .getErrorMessage();
-        softly.assertThat(isErrorMessageAppeared).isEqualTo("Invalid Promo Code.");
-        int paymentAmountAfterPromoCode = IndigoDeliveryScreen.get()
+        softly.assertThat(isErrorMessageAppeared).as("PromoCode error message on Delivery Screen").isEqualTo("Invalid Promo Code.");
+        int paymentAmountAfterPromoCode = indigoDeliveryScreen
                 .getFinalAmount();
-        softly.assertThat(paymentAmountAfterPromoCode).isEqualTo(Integer.parseInt(context.getTestState(INDIGO_TEST_CONTEXT.TOTALAMOUNT).toString()));
+        assertThat(paymentAmountAfterPromoCode).as("Price of Gift Voucher after applying PromoCode").isEqualTo((context.getTestState(INDIGO_TEST_CONTEXT.TOTALAMOUNT)));
         return new PurchaseVoucherBL();
     }
 }

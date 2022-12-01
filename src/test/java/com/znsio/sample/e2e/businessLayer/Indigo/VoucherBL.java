@@ -9,6 +9,8 @@ import com.znsio.sample.e2e.screen.Indigo.IndigoVoucherScreen;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 
 public class VoucherBL {
@@ -33,7 +35,7 @@ public class VoucherBL {
     }
 
     public PromoCodeBL personaliseAndPreviewGiftVoucher() {
-        String TotalAmount = IndigoLandingScreen.get()
+        int totalSum = IndigoLandingScreen.get()
                 .selectGiftVoucher()
                 .selectDenomination(1)
                 .selectQuantity(1)
@@ -41,15 +43,15 @@ public class VoucherBL {
         int denominationVal = Integer.parseInt(context.getTestState(INDIGO_TEST_CONTEXT.DENOMINATION).toString());
         int quantityVal = Integer.parseInt(context.getTestState(INDIGO_TEST_CONTEXT.QUANTITY).toString());
         int totalSumExpected = denominationVal * quantityVal;
-        LOGGER.info("Total sum in Voucher Page " + TotalAmount);
-        String TotalSum = TotalAmount.substring(1).trim();
-        softly.assertThat(Integer.parseInt(TotalSum)).isEqualTo(totalSumExpected);
-        context.addTestState(INDIGO_TEST_CONTEXT.TOTALAMOUNT, TotalSum);
+        LOGGER.info("Total sum in Voucher Page " + totalSum);
+        assertThat(totalSum).isEqualTo(totalSumExpected);
+        context.addTestState(INDIGO_TEST_CONTEXT.TOTALAMOUNT, totalSum);
         String randomMessage = RandomStringUtils.randomAlphabetic(20);
-        String voucherDetails = IndigoVoucherScreen.get().personalizeVoucher(System.getProperty("user.name"), randomMessage)
+        String voucherDetails = IndigoVoucherScreen.get()
+                .personalizeVoucher(System.getProperty("user.name"), randomMessage)
                 .previewVoucher();
         String messageExpected = context.getTestState(INDIGO_TEST_CONTEXT.DEAR).toString().trim() + ", " + context.getTestState(INDIGO_TEST_CONTEXT.MESSAGE).toString().trim();
-        softly.assertThat(voucherDetails).isEqualTo(messageExpected);
+        softly.assertThat(voucherDetails).as("Comapring Gift Voucher details on Preview Voucher screen").isEqualTo(messageExpected);
         return new PromoCodeBL();
     }
 }

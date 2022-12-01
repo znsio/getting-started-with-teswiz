@@ -15,4 +15,9 @@ public class IndigoPaymentScreenAndroid extends IndigoPaymentScreen {
         this.driver = driver;
         this.visually = visually;
     }
+
+    @Override
+    public boolean validatePaymentScreen() {
+        return false;
+    }
 }

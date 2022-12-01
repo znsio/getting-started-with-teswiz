@@ -23,4 +23,11 @@ public class IndigoPaymentScreenWeb extends IndigoPaymentScreen {
         long threadId = Thread.currentThread().getId();
         context = Runner.getTestExecutionContext(threadId);
     }
+
+    @Override
+    public boolean validatePaymentScreen() {
+        String paymentPageUrl = driver.getInnerDriver().getCurrentUrl();
+        visually.checkWindow(SCREEN_NAME, "On Payment Page");
+        return (paymentPageUrl.contains("transaction"));
+    }
 }

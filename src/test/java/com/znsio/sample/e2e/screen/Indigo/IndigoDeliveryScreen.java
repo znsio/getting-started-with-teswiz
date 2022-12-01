@@ -44,5 +44,5 @@ public abstract class IndigoDeliveryScreen {
 
     public abstract IndigoDeliveryScreen selectTermsAndConditions();
 
-    public abstract String clickOnProceedBtn();
+    public abstract IndigoPaymentScreen clickOnProceedBtn();
 }

@@ -38,5 +38,5 @@ public abstract class IndigoVoucherScreen {
 
     public abstract IndigoPreviewVoucherScreen personalizeVoucher(String dear, String meesage);
 
-    public abstract String getTotalAmount();
+    public abstract int getTotalAmount();
 }

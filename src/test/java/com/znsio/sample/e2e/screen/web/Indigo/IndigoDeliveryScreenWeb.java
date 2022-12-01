@@ -5,6 +5,7 @@ import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.Indigo.IndigoDeliveryScreen;
+import com.znsio.sample.e2e.screen.Indigo.IndigoPaymentScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +23,7 @@ public class IndigoDeliveryScreenWeb extends IndigoDeliveryScreen {
     private static final By byReceiverMailId = By.id("Rec_EmailID");
     private static final By byReceiverPhoneId = By.id("Rec_Phone");
     private static final By bySenderMailId = By.id("Per_EmailID");
-    private static final By bySenderPhone = By.id("Per_Phone");
+    private static final By bySenderPhoneId = By.id("Per_Phone");
     private static final By byTermsConditionChkBoxId = By.id("chkTnC");
     private static final By byPayNowBtnXpath = By.xpath("//input[@value='Pay Now']");
     private static final By byPaymentDetailsId = By.id("paymentinformation");
@@ -89,8 +90,8 @@ public class IndigoDeliveryScreenWeb extends IndigoDeliveryScreen {
         driver.findElement(bySenderLastNameId).sendKeys(senderLastName);
         driver.findElement(bySenderMailId).clear();
         driver.findElement(bySenderMailId).sendKeys(senderrMail);
-        driver.findElement(bySenderPhone).clear();
-        driver.findElement(bySenderPhone).sendKeys(senderPhone);
+        driver.findElement(bySenderPhoneId).clear();
+        driver.findElement(bySenderPhoneId).sendKeys(senderPhone);
         LOGGER.info("Sender Details entered " + senderFirstName + " " + senderLastName + " " + senderrMail + " " + senderPhone);
         visually.checkWindow(SCREEN_NAME, "Sender details entered");
         return this;
@@ -104,12 +105,10 @@ public class IndigoDeliveryScreenWeb extends IndigoDeliveryScreen {
     }
 
     @Override
-    public String clickOnProceedBtn() {
+    public IndigoPaymentScreen clickOnProceedBtn() {
         driver.findElement(byPayNowBtnXpath).click();
+        LOGGER.info("Procced Btn Clicked succesfully on Delivery Page");
         driver.waitTillElementIsPresent(byPaymentDetailsId, 3);
-        String paymentPageUrl = driver.getInnerDriver().getCurrentUrl();
-        LOGGER.info("Payment page url" + paymentPageUrl);
-        visually.checkWindow(SCREEN_NAME, "Payment Page");
-        return paymentPageUrl;
+        return IndigoPaymentScreen.get();
     }
 }

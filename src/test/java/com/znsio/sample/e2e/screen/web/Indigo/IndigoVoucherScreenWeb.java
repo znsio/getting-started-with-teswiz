@@ -20,7 +20,7 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     private static final By byMessageTextBoxId = By.id("Message");
     private static final By byPreviewBtnClass = By.className("preview-btn");
     private static final By byQuatityDropdownId = By.id("SelectedVoucherQuantity");
-    private static final By byPersonalCheckBoxID = By.id("chkPersonal");
+    private static final By byPersonalCheckBoxId = By.id("chkPersonal");
     private static final By byTotalAmountId = By.id("lblTotal");
     private static final By byDenominatorTextXpath = By.xpath("(//span[@class='holder'])[1]");
     private static final By byQuantityTextXpath = By.xpath("(//span[@class='holder'])[2]");
@@ -63,8 +63,8 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
 
     @Override
     public IndigoPreviewVoucherScreen personalizeVoucher(String name, String message) {
-        driver.findElement(byPersonalCheckBoxID).click();
-        if (driver.findElement(byPersonalCheckBoxID).isSelected()) {
+        driver.findElement(byPersonalCheckBoxId).click();
+        if (driver.findElement(byPersonalCheckBoxId).isSelected()) {
             driver.findElement(byDearTextBoxId).clear();
             driver.findElement(byDearTextBoxId).sendKeys(name);
             context.addTestState(INDIGO_TEST_CONTEXT.DEAR, name);
@@ -82,9 +82,11 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
     }
 
     @Override
-    public String getTotalAmount() {
-        String getTotalAmount = driver.findElement(byTotalAmountId).getText();
-        LOGGER.info("Total amount after selecting Denominator and quantity" +getTotalAmount);
+    public int getTotalAmount() {
+        String totalAmount = driver.findElement(byTotalAmountId).getText();
+        String totalSum = totalAmount.substring(1).trim();
+        LOGGER.info("Total amount after selecting Denominator and quantity" +totalSum);
+        int getTotalAmount = Integer.parseInt(totalSum);
         return getTotalAmount;
     }
 }

@@ -7,12 +7,9 @@ import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.entities.INDIGO_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.Indigo.IndigoPreviewVoucherScreen;
 import com.znsio.sample.e2e.screen.Indigo.IndigoVoucherScreen;
-import io.appium.java_client.MobileElement;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-
-import java.util.List;
 
 public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
     public static final By byDenominatorDropdownXpath = By.xpath("//android.view.View[@resource-id='SelectedVoucherValue']");
@@ -68,8 +65,8 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
     }
 
     @Override
-    public String getTotalAmount() {
+    public int getTotalAmount() {
         driver.scrollDownByScreenSize();
-        return "hello";
+        return 1;
     }
 }

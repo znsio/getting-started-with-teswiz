@@ -3,6 +3,7 @@ package com.znsio.sample.e2e.screen.android.Indigo;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.Indigo.IndigoDeliveryScreen;
+import com.znsio.sample.e2e.screen.Indigo.IndigoPaymentScreen;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
@@ -51,7 +52,7 @@ public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
     }
 
     @Override
-    public String clickOnProceedBtn() {
+    public IndigoPaymentScreen clickOnProceedBtn() {
         throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
     }
 }

@@ -14,14 +14,12 @@ import org.openqa.selenium.interactions.Actions;
 
 public class HomeScreenWeb extends HomeScreen {
 
-    private static final Logger LOGGER = Logger.getLogger(HomeScreen.class.getName());
-
+    private static final String SCREEN_NAME = HomeScreenWeb.class.getSimpleName();
+    private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
-
     private final By byBookDropdownXpath = By.xpath("//a[@title='Book']");
-
     private final By byGiftVoucherXpath = By.xpath("//div[@class='nav-inner-items']//a[contains(@href,\"giftvoucher\")]");
 
     public HomeScreenWeb(Driver driver, Visual visually) {
@@ -34,6 +32,7 @@ public class HomeScreenWeb extends HomeScreen {
     public GiftVoucherScreen navigateToGiftVouchers() {
 
         LOGGER.info("Navigate to Gift Voucher screen");
+        visually.checkWindow(SCREEN_NAME, "Book dropdown clicked successfully");
         Actions action = new Actions(innerDriver);
         action.moveToElement(driver.findElement(byBookDropdownXpath)).build().perform();
 

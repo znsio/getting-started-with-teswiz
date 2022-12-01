@@ -16,7 +16,8 @@ import java.util.Map;
 
 public class GiftVoucherScreenWeb extends GiftVoucherScreen {
 
-    private static final Logger LOGGER = Logger.getLogger(GiftVoucherScreen.class.getName());
+    private static final String SCREEN_NAME = GiftVoucherScreenWeb.class.getSimpleName();
+    private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     private final Driver driver;
     private final Visual visually;
@@ -97,6 +98,8 @@ public class GiftVoucherScreenWeb extends GiftVoucherScreen {
 
         driver.waitTillElementIsPresent(byPersonalMessageId).sendKeys((CharSequence) senderDetails.get(GIFT_VOUCHER_TEST_CONTEXT.MESSAGE));
 
+        visually.checkWindow(SCREEN_NAME, "Indigo Voucher successfully personalised");
+
         return this;
     }
 
@@ -105,6 +108,8 @@ public class GiftVoucherScreenWeb extends GiftVoucherScreen {
 
         LOGGER.info("Click Preview and Proceed ");
         driver.waitTillElementIsPresent(byPreviewXpath).submit();
+
+        visually.checkWindow(SCREEN_NAME, "Indigo Voucher Preview");
 
         driver.waitTillElementIsPresent(byProceedXpath).click();
 
@@ -152,6 +157,8 @@ public class GiftVoucherScreenWeb extends GiftVoucherScreen {
         driver.findElement(byLastNameId).sendKeys((CharSequence) sendersDetails.get(GIFT_VOUCHER_TEST_CONTEXT.LAST_NAME));
         driver.findElement(byPhoneId).sendKeys((CharSequence) sendersDetails.get(GIFT_VOUCHER_TEST_CONTEXT.PHONE));
         driver.findElement(byEmailAddId).sendKeys((CharSequence) sendersDetails.get(GIFT_VOUCHER_TEST_CONTEXT.EMAIL));
+
+        visually.checkWindow(SCREEN_NAME, "Sender details entered");
 
         return this;
     }

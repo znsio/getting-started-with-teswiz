@@ -10,7 +10,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class PaymentScreenWeb extends PaymentScreen {
-    private static final Logger LOGGER = Logger.getLogger(GiftVoucherScreen.class.getName());
+
+    private static final String SCREEN_NAME = PaymentScreenWeb.class.getSimpleName();
+    private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;

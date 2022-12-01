@@ -36,9 +36,9 @@ public class PromoCodeBL {
                 .enterInvalidPromoCode(promoCode)
                 .getErrorMessage();
         softly.assertThat(isErrorMessageAppeared).isEqualTo("Invalid Promo Code.");
-        String paymentAmountAfterPromoCode = IndigoDeliveryScreen.get()
+        int paymentAmountAfterPromoCode = IndigoDeliveryScreen.get()
                 .getFinalAmount();
-        softly.assertThat(paymentAmountAfterPromoCode).isEqualTo(context.getTestState(INDIGO_TEST_CONTEXT.TOTALAMOUNT).toString());
+        softly.assertThat(paymentAmountAfterPromoCode).isEqualTo(Integer.parseInt(context.getTestState(INDIGO_TEST_CONTEXT.TOTALAMOUNT).toString()));
         return new PurchaseVoucherBL();
     }
 }

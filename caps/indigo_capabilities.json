@@ -5,7 +5,7 @@
   "local":"/Users/raghav.garg/Documents/Cucumber_workspace/getting-started-with-teswiz/src/test/resources/Apps/IndiGoFlight-App_5.0.85.apk"
 },
 "appPackage": "in.goindigo.android",
-"appActivity": "in.goindigo.android.ui.modules.home.HomeActivity",
+"appActivity": "in.goindigo.android.ui.modules.splash.SplashActivity",
 "appWaitDuration": 45000,
 "automationName": "UiAutomator2",
 "autoGrantPermissions": true,

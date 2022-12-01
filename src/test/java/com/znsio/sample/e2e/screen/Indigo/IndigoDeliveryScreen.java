@@ -36,7 +36,7 @@ public abstract class IndigoDeliveryScreen {
 
     public abstract String getErrorMessage();
 
-    public abstract String getFinalAmount();
+    public abstract int getFinalAmount();
 
     public abstract IndigoDeliveryScreen enterReceiverDetail(String receiverFirstName, String recoverLastName, String receiverMail, String receiverPhone);
 

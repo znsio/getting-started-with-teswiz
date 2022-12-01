@@ -6,8 +6,10 @@ import com.znsio.sample.e2e.screen.Indigo.IndigoPreviewVoucherScreen;
 import com.znsio.sample.e2e.screen.Indigo.IndigoVoucherScreen;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 
 public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
+    public static final By byDenominatorDropdownXpath = By.xpath("//android.view.View[@resource-id='SelectedVoucherValue']");
     private final Driver driver;
     private final Visual visually;
     private static final String SCREEN_NAME = IndigoVoucherScreenAndroid.class.getSimpleName();
@@ -22,7 +24,9 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
 
     @Override
     public IndigoVoucherScreen selectDenomination(int denomination) {
-        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
+        driver.waitTillElementIsVisible(byDenominatorDropdownXpath,25);
+        driver.findElement(byDenominatorDropdownXpath).click();
+        return this;
     }
 
     @Override

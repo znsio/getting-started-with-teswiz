@@ -25,13 +25,6 @@ public class IndigoFlightSteps {
         LOGGER.info("allDrivers: " + (null == allDrivers));
     }
 
-    @Then("I should able to purchase the ticket of {string} rupees")
-    public void iShouldAbleToPurchaseTheTicketOfRupees(String amount) {
-
-        LOGGER.info("Process Payment");
-        new GiftVoucherBL().processPayment(amount);
-    }
-
     @Given("I as a guest user, preview and personalise {string} gift vouchers of {string} rupees")
     public void iAsAGuestUserPreviewAndPersonaliseTheGiftVouchersOfRupees(String quantity, String denominations) {
         LOGGER.info("Preview and Personalise Gift Voucher");
@@ -42,6 +35,12 @@ public class IndigoFlightSteps {
     @When("I apply a {string} promo code")
     public void iApplyAPromoCode(String promoCode) {
         LOGGER.info("Apply Promo code with delivery details");
-        new GiftVoucherBL().applyAPromoCode(promoCode).withDeliveryOptions();
+        new GiftVoucherBL().applyAPromoCode(promoCode);
+    }
+
+    @Then("I should be able to purchase the gift voucher at the original price")
+    public void iShouldBeAbleToPurchaseTheGiftVoucherAtTheOriginalPrice() {
+        LOGGER.info("Process Payment");
+        new GiftVoucherBL().purchaseGiftVoucher();
     }
 }

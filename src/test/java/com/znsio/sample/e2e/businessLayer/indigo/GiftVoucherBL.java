@@ -86,27 +86,20 @@ public class GiftVoucherBL {
         return this;
     }
 
-    public GiftVoucherBL withDeliveryOptions(){
+    public GiftVoucherBL purchaseGiftVoucher() {
+
+        LOGGER.info("Purchase Gift Voucher");
 
         String deliveryOption = (String) testData.get(GIFT_VOUCHER_TEST_CONTEXT.DELIVERY_OPTION);
-
         LOGGER.info("Select delivery options - "+deliveryOption);
 
         GiftVoucherScreen.get().selectDeliveryOption(deliveryOption)
-                .enterSenderDetails(details)
-                .checkTermsAndConditions(true);
-
-        return this;
-    }
-
-    public GiftVoucherBL processPayment(String amount) {
-
-        LOGGER.info("Process Payment");
-
-        GiftVoucherScreen.get().clickPayNow();
+                        .enterSenderDetails(details)
+                        .checkTermsAndConditions(true)
+                        .clickPayNow();
 
         assertThat("" + PaymentScreen.get().getPaymentAmount())
-                .as("Payment screen should be equal to total payment").isEqualTo(amount);
+                .as("Payment screen should be equal to total payment").isEqualTo(totalAmount);
 
         return this;
     }

@@ -65,7 +65,6 @@ public class GiftVoucherBL {
 
     public GiftVoucherBL applyAPromoCode(String promoCode) {
 
-        LOGGER.info("Apply a "+promoCode+" promo code");
         String promo = "";
         if(promoCode.equals("invalid")){
             promo = Randomizer.randomizeAlphaNumericString(8);
@@ -73,6 +72,7 @@ public class GiftVoucherBL {
         else{
             promo = promoCode;
         }
+        LOGGER.info("Apply a "+promoCode+" promo code");
         GiftVoucherScreen.get().applyPromoCode(promo);
 
         softly.assertThat(GiftVoucherScreen.get().getPromoCodeMessage())

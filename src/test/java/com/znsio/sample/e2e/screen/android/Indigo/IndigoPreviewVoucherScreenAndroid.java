@@ -5,6 +5,7 @@ import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.Indigo.IndigoPreviewVoucherScreen;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 
 public class IndigoPreviewVoucherScreenAndroid extends IndigoPreviewVoucherScreen {
     private final Driver driver;
@@ -21,6 +22,10 @@ public class IndigoPreviewVoucherScreenAndroid extends IndigoPreviewVoucherScree
 
     @Override
     public String previewVoucher() {
-        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
-    }
+        String dearText = driver.findElement(By.xpath("//android.view.View[@resource-id='body']//android.view.View[2]//android.view.View[4]")).getText().trim();
+        String message = driver.findElement(By.xpath("//android.view.View[@resource-id='body']//android.view.View[2]//android.view.View[5]")).getText().trim();
+        driver.scrollDownByScreenSize();
+        driver.findElement(By.xpath("//android.widget.Button[2]\\n"));
+        return  dearText;
+        }
 }

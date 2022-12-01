@@ -7,7 +7,6 @@ import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.entities.INDIGO_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.Indigo.IndigoPreviewVoucherScreen;
 import com.znsio.sample.e2e.screen.Indigo.IndigoVoucherScreen;
-import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
@@ -16,13 +15,16 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
     public static final By byDenominationValueIndexXpath = By.xpath("//android.widget.CheckedTextView[@resource-id='android:id/text1']");
     public static final By byQuantityDropdownXpath = By.xpath("//android.view.View[@resource-id='SelectedVoucherQuantity']");
     public static final By byQuantityValueIndexXpath = By.xpath("//android.widget.CheckedTextView[@resource-id='android:id/text1']");
+    public static final By byTotalAmountXpath = By.xpath("//android.view.View[@resource-id='lblTotal']");
+    public static final By byPersonalCheckBoxXpath = By.xpath("//android.widget.CheckBox[@resource-id='chkPersonal']");
+    public static final By byDearTextBoxXpath = By.xpath("//android.widget.EditText[@resource-id='Per_Fname']");
+    public static final By byMessageTextBoxXpath = By.xpath("//android.widget.EditText[@resource-id='Message']");
     private final Driver driver;
     private final Visual visually;
     private static final String SCREEN_NAME = IndigoVoucherScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = "not yet implemented";
     private final TestExecutionContext context;
-
 
 
     public IndigoVoucherScreenAndroid(Driver driver, Visual visually) {
@@ -35,9 +37,9 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
 
     @Override
     public IndigoVoucherScreen selectDenomination(int denomination) {
-        driver.waitTillElementIsVisible(byDenominatorDropdownXpath,25);
+        driver.waitTillElementIsVisible(byDenominatorDropdownXpath, 25);
         driver.findElement(byDenominatorDropdownXpath).click();
-        driver.waitTillElementIsVisible(byDenominationValueIndexXpath,10);
+        driver.waitTillElementIsVisible(byDenominationValueIndexXpath, 10);
         (driver.findElements(byDenominationValueIndexXpath)).get(denomination).click();
         String denominationValue = driver.findElement(byDenominatorDropdownXpath).getText();
         int getDenominationValue = Integer.parseInt(denominationValue);
@@ -48,9 +50,9 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
 
     @Override
     public IndigoVoucherScreen selectQuantity(int quantity) {
-        driver.waitTillElementIsVisible(byQuantityDropdownXpath,25);
+        driver.waitTillElementIsVisible(byQuantityDropdownXpath, 25);
         driver.findElement(byQuantityDropdownXpath).click();
-        driver.waitTillElementIsVisible(byQuantityValueIndexXpath,10);
+        driver.waitTillElementIsVisible(byQuantityValueIndexXpath, 10);
         (driver.findElements(byQuantityValueIndexXpath)).get(quantity).click();
         String denominationValue = driver.findElement(byQuantityDropdownXpath).getText();
         int getQuantityValue = Integer.parseInt(denominationValue);
@@ -60,13 +62,29 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
     }
 
     @Override
-    public IndigoPreviewVoucherScreen personalizeVoucher(String dear, String meesage) {
-        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
+    public IndigoPreviewVoucherScreen personalizeVoucher(String name, String message) {
+        driver.findElement(byPersonalCheckBoxXpath).click();
+        driver.findElement(byDearTextBoxXpath).clear();
+        driver.findElement(byDearTextBoxXpath).sendKeys(name);
+        context.addTestState(INDIGO_TEST_CONTEXT.DEAR, name);
+        LOGGER.info("Data entered in Dear textbox" + name);
+        driver.scrollDownByScreenSize();
+        driver.findElement(byMessageTextBoxXpath).clear();
+        driver.findElement(byMessageTextBoxXpath).sendKeys(message);
+        context.addTestState(INDIGO_TEST_CONTEXT.MESSAGE, message);
+        LOGGER.info("Data entered in Message textbox" + message);
+        visually.checkWindow(SCREEN_NAME, "Indigo Voucher successfully personalised");
+        driver.findElement(By.xpath("//android.widget.Button")).submit();
+        return IndigoPreviewVoucherScreen.get();
     }
 
     @Override
     public int getTotalAmount() {
         driver.scrollDownByScreenSize();
-        return 1;
+        String totalAmount = driver.findElement(byTotalAmountXpath).getText();
+        String totalSum = totalAmount.substring(1).trim();
+        LOGGER.info("Total amount after selecting Denominator and quantity" + totalSum);
+        int getTotalAmount = Integer.parseInt(totalSum);
+        return getTotalAmount;
     }
 }

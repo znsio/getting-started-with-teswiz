@@ -23,7 +23,7 @@ public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
 
     @Override
     public IndigoDeliveryScreen enterInvalidPromoCode(String promoCode) {
-        return null;
+        throw new NotImplementedException(SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
     }
 
     @Override

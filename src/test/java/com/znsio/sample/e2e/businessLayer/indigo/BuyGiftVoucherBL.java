@@ -5,10 +5,10 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.indigo.GiftVoucherScreen;
-import com.znsio.sample.e2e.screen.indigo.PaymentScreen;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BuyGiftVoucherBL {
     private static final Logger LOGGER = Logger.getLogger(IndigoGiftVoucherBL.class.getName());
@@ -40,8 +40,8 @@ public class BuyGiftVoucherBL {
     }
     public void selectDeliveryOptionsAndPay() {
         LOGGER.info("Select Delivery Info");
-        GiftVoucherScreen.get().giveDeliveryOptionsAndProceed();
-        softly.assertThat(PaymentScreen.get().landOnPaymentPage()).isTrue();
+        boolean landedOnPaymentScreen = GiftVoucherScreen.get().giveDeliveryOptionsAndProceed().landOnPaymentPage();
+        assertThat(landedOnPaymentScreen).as("Verifying Navigation to Payment page").isTrue();
     }
 }
 

@@ -62,6 +62,7 @@ public class GiftVoucherScreenWeb extends GiftVoucherScreen {
         driver.waitForClickabilityOf(byMessageInputXpath).sendKeys(message);
         driver.scrollTillElementIntoView(byPreviewButtonXpath);
         driver.waitForClickabilityOf(byPreviewButtonXpath).click();
+        visually.checkWindow(SCREEN_NAME,"Preview for voucher");
         return this;
     }
     @Override
@@ -70,6 +71,7 @@ public class GiftVoucherScreenWeb extends GiftVoucherScreen {
         String previewTitle = driver.findElement(byPreviewTitleXpath).getText();
         String previewMessage = driver.findElement(byPreviewMessageXpath).getText();
         driver.findElement(byProceedButtonXpath).click();
+        visually.checkWindow(SCREEN_NAME,"moved to Buy gift voucher section");
         return title.equals(previewTitle.replace(",","")) && message.equals(previewMessage);
     }
     @Override
@@ -93,6 +95,7 @@ public class GiftVoucherScreenWeb extends GiftVoucherScreen {
         driver.findElement(bySenderPhoneNumberXpath).sendKeys(RandomStringUtils.randomNumeric(10));
         driver.findElement(byTermsAndConditionsCheckboxXpath).click();
         driver.findElement(byPayNowButtonXpath).click();
+        visually.checkWindow(SCREEN_NAME,"Moved to Payment Screen");
         return PaymentScreen.get();
     }
 }

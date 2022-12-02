@@ -25,6 +25,7 @@ public class IndigoHomeScreenWeb extends IndigoHomeScreen {
         LOGGER.info("Navigating to Gift Voucher page");
         driver.waitForClickabilityOf(bookDropdownXpath).click();
         driver.findElement(giftVoucherOptionXpath).click();
+        visually.checkWindow(SCREEN_NAME,"Moved to GiftVoucher Section");
         return GiftVoucherScreen.get();
     }
 }

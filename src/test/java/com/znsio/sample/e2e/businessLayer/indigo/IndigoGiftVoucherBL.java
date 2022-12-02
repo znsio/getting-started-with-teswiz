@@ -4,7 +4,6 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.indigo.GiftVoucherScreen;
 import com.znsio.sample.e2e.screen.indigo.IndigoHomeScreen;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
@@ -38,8 +37,11 @@ public class IndigoGiftVoucherBL {
         String message = RandomStringUtils.randomAlphabetic(20);
         String titleName = RandomStringUtils.randomAlphabetic(5);
         LOGGER.info("Personalising Gift Voucher");
-        IndigoHomeScreen.get().goToGiftVoucherSection().addDenominationAndQuantity(denomination, quantity).personaliseGiftVoucher(titleName, message);
-        softly.assertThat(GiftVoucherScreen.get().previewVoucherAndProceed(titleName, message)).isTrue();
+        boolean verifyPreviewVoucher = IndigoHomeScreen.get().goToGiftVoucherSection().
+                addDenominationAndQuantity(denomination, quantity).
+                personaliseGiftVoucher(titleName, message).
+                previewVoucherAndProceed(titleName, message);
+        softly.assertThat(verifyPreviewVoucher).as("Verifying Title and message as given in personalisation").isTrue();
         return new BuyGiftVoucherBL();
 
     }

@@ -32,8 +32,8 @@ public class IndigoGiftVoucherSteps {
         allDrivers = (Drivers) context.getTestState(SAMPLE_TEST_CONTEXT.ALL_DRIVERS);
         LOGGER.info("allDrivers: " + (null == allDrivers));
     }
-    @Given("I personalise and preview a gift voucher of denomination {string} and quantity {string}")
-    public void iPersonaliseAndPreviewAGiftVoucherWithDenominationAndQuantity(String denomination, String quantity) {
+    @Given("I, as a Guest user, personalize and preview {string} gift vouchers of price {string}")
+    public void iPersonaliseAndPreviewAGiftVoucherWithDenominationAndQuantity(String quantity, String denomination) {
         LOGGER.info("Setting up Driver");
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
         new IndigoGiftVoucherBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).personaliseAndPreviewVoucher(denomination, quantity);
@@ -41,11 +41,11 @@ public class IndigoGiftVoucherSteps {
     @When("I apply invalid promo code")
     public void iApplyInvalidPromoCode() {
         LOGGER.info("Applying Promocode");
-        new BuyGiftVoucherBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).applyInvalidPromoCode();
+        new BuyGiftVoucherBL().applyInvalidPromoCode();
     }
     @Then("I can proceed for the payment at the original amount")
     public void iCanPurchaseTheGiftVoucherAtTheOriginalAmount() {
         LOGGER.info("Proceeding to Payment");
-        new BuyGiftVoucherBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).selectDeliveryOptionsAndPay();
+        new BuyGiftVoucherBL().selectDeliveryOptionsAndPay();
     }
 }

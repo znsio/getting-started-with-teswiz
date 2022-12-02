@@ -33,7 +33,7 @@ public abstract  class GiftVoucherScreen {
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
-    public abstract GiftVoucherScreen addDenominationAndQuantity(String denomination, String quantity); // all the methods should return the next object which can be used in next method
+    public abstract GiftVoucherScreen addDenominationAndQuantity(String denomination, String quantity);
     public abstract GiftVoucherScreen personaliseGiftVoucher(String titleName, String message);
     public abstract boolean previewVoucherAndProceed(String denomination, String quantity);
     public abstract boolean applyPromoCode(String promoCode);

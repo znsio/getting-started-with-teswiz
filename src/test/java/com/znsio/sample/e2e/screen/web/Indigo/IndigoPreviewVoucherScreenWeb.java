@@ -34,7 +34,7 @@ public class IndigoPreviewVoucherScreenWeb extends IndigoPreviewVoucherScreen {
         String dearText = driver.findElement(byDearTextBoxxpath).getText().trim();
         String message = driver.findElement(byMessageTextBoxxpath).getText().trim();
         visually.checkWindow(SCREEN_NAME, "Indigo Voucher Preview");
-        driver.findElement(byProceedBtnXpath).click();
+        driver.waitTillElementIsPresent(byProceedBtnXpath).click();
         LOGGER.info("Proceed Button clicked on Preview page");
         return dearText + " " + message;
     }

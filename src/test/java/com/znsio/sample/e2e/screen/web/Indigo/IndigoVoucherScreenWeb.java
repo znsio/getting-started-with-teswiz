@@ -41,7 +41,7 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
 
     @Override
     public IndigoVoucherScreen selectDenomination(int denomination) {
-        WebElement denominationDropdownWebElement = driver.findElement(byDenominationDropdownId);
+        WebElement denominationDropdownWebElement = driver.waitTillElementIsVisible(byDenominationDropdownId);
         Select denominatorDropdown = new Select(denominationDropdownWebElement);
         denominatorDropdown.selectByIndex(denomination);
         String getDenominationValue = driver.findElement(byDenominatorTextXpath).getText();
@@ -52,7 +52,7 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
 
     @Override
     public IndigoVoucherScreen selectQuantity(int quantity) {
-        WebElement quantityDropdownWebElement = driver.findElement(byQuatityDropdownId);
+        WebElement quantityDropdownWebElement = driver.waitTillElementIsVisible(byQuatityDropdownId);
         Select quantityDropdown = new Select(quantityDropdownWebElement);
         quantityDropdown.selectByIndex(quantity);
         String getQuantityValue = driver.findElement(byQuantityTextXpath).getText();
@@ -63,13 +63,13 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
 
     @Override
     public IndigoPreviewVoucherScreen personalizeVoucher(String name, String message) {
-        driver.findElement(byPersonalCheckBoxId).click();
+        driver.waitTillElementIsVisible(byPersonalCheckBoxId).click();
         if (driver.findElement(byPersonalCheckBoxId).isSelected()) {
-            driver.findElement(byDearTextBoxId).clear();
+            driver.waitTillElementIsVisible(byDearTextBoxId).clear();
             driver.findElement(byDearTextBoxId).sendKeys(name);
             context.addTestState(INDIGO_TEST_CONTEXT.DEAR, name);
             LOGGER.info("Data entered in Dear textbox" + name);
-            driver.findElement(byMessageTextBoxId).clear();
+            driver.waitTillElementIsVisible(byMessageTextBoxId).clear();
             driver.findElement(byMessageTextBoxId).sendKeys(message);
             context.addTestState(INDIGO_TEST_CONTEXT.MESSAGE, message);
             LOGGER.info("Data entered in Message textbox" + message);
@@ -83,7 +83,7 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
 
     @Override
     public int getTotalAmount() {
-        String totalAmount = driver.findElement(byTotalAmountId).getText();
+        String totalAmount = driver.waitTillElementIsPresent(byTotalAmountId).getText();
         String totalSum = totalAmount.substring(1).trim();
         LOGGER.info("Total amount after selecting Denominator and quantity" +totalSum);
         int getTotalAmount = Integer.parseInt(totalSum);

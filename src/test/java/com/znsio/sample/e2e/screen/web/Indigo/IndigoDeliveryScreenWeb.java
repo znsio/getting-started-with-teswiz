@@ -44,7 +44,7 @@ public class IndigoDeliveryScreenWeb extends IndigoDeliveryScreen {
 
     @Override
     public IndigoDeliveryScreen enterInvalidPromoCode(String promoCode) {
-        driver.findElement(byPromoCodeTextBoxId).clear();
+        driver.waitTillElementIsPresent(byPromoCodeTextBoxId).clear();
         driver.findElement(byPromoCodeTextBoxId).sendKeys(promoCode);
         LOGGER.info("Invalid Promo code entered in Delivery option page");
         driver.findElement(byPromoCodeApplyBtnXpath).click();
@@ -61,7 +61,7 @@ public class IndigoDeliveryScreenWeb extends IndigoDeliveryScreen {
 
     @Override
     public int getFinalAmount() {
-        String amount = driver.findElement(byFinalAmountXpath).getText().substring(1).trim();
+        String amount = driver.waitTillElementIsPresent(byFinalAmountXpath).getText().substring(1).trim();
         LOGGER.info("Final amount after applying Promo Code " + amount);
         int finalAmountAfterPromoCode = Integer.parseInt(amount);
         return finalAmountAfterPromoCode;
@@ -69,13 +69,13 @@ public class IndigoDeliveryScreenWeb extends IndigoDeliveryScreen {
 
     @Override
     public IndigoDeliveryScreen enterReceiverDetail(String receiverFirstName, String receiverLastName, String receiverMail, String receiverPhone) {
-        driver.findElement(byReceiverNameId).clear();
+        driver.waitTillElementIsPresent(byReceiverNameId).clear();
         driver.findElement(byReceiverNameId).sendKeys(receiverFirstName);
-        driver.findElement(byReceiverLastNameId).clear();
+        driver.waitTillElementIsPresent(byReceiverLastNameId).clear();
         driver.findElement(byReceiverLastNameId).sendKeys(receiverLastName);
-        driver.findElement(byReceiverMailId).clear();
+        driver.waitTillElementIsPresent(byReceiverMailId).clear();
         driver.findElement(byReceiverMailId).sendKeys(receiverMail);
-        driver.findElement(byReceiverPhoneId).clear();
+        driver.waitTillElementIsPresent(byReceiverPhoneId).clear();
         driver.findElement(byReceiverPhoneId).sendKeys(receiverPhone);
         LOGGER.info("Reciever Details entered " + receiverFirstName + " " + receiverLastName + " " + receiverMail + " " + receiverPhone);
         visually.checkWindow(SCREEN_NAME, "Reciver details entered");
@@ -84,13 +84,13 @@ public class IndigoDeliveryScreenWeb extends IndigoDeliveryScreen {
 
     @Override
     public IndigoDeliveryScreen enterSenderDetails(String senderFirstName, String senderLastName, String senderrMail, String senderPhone) {
-        driver.findElement(bySenderNameId).clear();
+        driver.waitTillElementIsPresent(bySenderNameId).clear();
         driver.findElement(bySenderNameId).sendKeys(senderFirstName);
-        driver.findElement(bySenderLastNameId).clear();
+        driver.waitTillElementIsPresent(bySenderLastNameId).clear();
         driver.findElement(bySenderLastNameId).sendKeys(senderLastName);
-        driver.findElement(bySenderMailId).clear();
+        driver.waitTillElementIsPresent(bySenderMailId).clear();
         driver.findElement(bySenderMailId).sendKeys(senderrMail);
-        driver.findElement(bySenderPhoneId).clear();
+        driver.waitTillElementIsPresent(bySenderPhoneId).clear();
         driver.findElement(bySenderPhoneId).sendKeys(senderPhone);
         LOGGER.info("Sender Details entered " + senderFirstName + " " + senderLastName + " " + senderrMail + " " + senderPhone);
         visually.checkWindow(SCREEN_NAME, "Sender details entered");

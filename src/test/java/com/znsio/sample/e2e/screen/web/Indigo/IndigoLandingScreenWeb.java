@@ -36,7 +36,7 @@ public class IndigoLandingScreenWeb extends IndigoLandingScreen {
         driver.findElement(byBookXpathDropdown).click();
         LOGGER.info("Indigo site opened");
         visually.checkWindow(SCREEN_NAME, "Book dropdown clicked successfully");
-        driver.waitTillElementIsPresent(byGiftVoucherXpath, 10).click();
+        driver.waitTillElementIsPresent(byGiftVoucherXpath).click();
         LOGGER.info("Gift voucher option selected");
         return IndigoVoucherScreen.get();
     }

@@ -22,6 +22,7 @@ public class IndigoPaymentScreenAndroid extends IndigoPaymentScreen {
     public boolean validatePaymentScreen() {
         String getPaymentPageDetails =  driver.waitTillElementIsPresent(byPaymentPageDetailsXpath,5).getText();
         visually.checkWindow(SCREEN_NAME, "On Payment Page");
+        LOGGER.info("On Payment Page");
         return (getPaymentPageDetails.contains("Payment"));
     }
 }

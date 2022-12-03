@@ -86,7 +86,6 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
         String totalAmount = driver.waitTillElementIsPresent(byTotalAmountId).getText();
         String totalSum = totalAmount.substring(1).trim();
         LOGGER.info("Total amount after selecting Denominator and quantity" +totalSum);
-        int getTotalAmount = Integer.parseInt(totalSum);
-        return getTotalAmount;
+        return Integer.parseInt(totalSum);
     }
 }

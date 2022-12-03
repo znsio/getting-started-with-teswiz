@@ -28,7 +28,6 @@ public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
     private final Visual visually;
     private static final String SCREEN_NAME = IndigoDeliveryScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-    public static final String NOT_YET_IMPLEMENTED = "not yet implemented";
 
     public IndigoDeliveryScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -59,8 +58,7 @@ public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
         driver.scrollDownByScreenSize();
         String amount = driver.waitTillElementIsPresent(byFinalAmountXpath).getText().substring(1).trim();
         LOGGER.info("Final amount after applying Promo Code " + amount);
-        int finalAmountAfterPromoCode = Integer.parseInt(amount);
-        return finalAmountAfterPromoCode;
+        return Integer.parseInt(amount);
     }
 
     @Override

@@ -63,8 +63,7 @@ public class IndigoDeliveryScreenWeb extends IndigoDeliveryScreen {
     public int getFinalAmount() {
         String amount = driver.waitTillElementIsPresent(byFinalAmountXpath).getText().substring(1).trim();
         LOGGER.info("Final amount after applying Promo Code " + amount);
-        int finalAmountAfterPromoCode = Integer.parseInt(amount);
-        return finalAmountAfterPromoCode;
+        return Integer.parseInt(amount);
     }
 
     @Override

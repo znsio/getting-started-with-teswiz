@@ -24,7 +24,6 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
     private final Visual visually;
     private static final String SCREEN_NAME = IndigoVoucherScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-    private static final String NOT_YET_IMPLEMENTED = "not yet implemented";
     private final TestExecutionContext context;
 
 

@@ -2,7 +2,7 @@
 "android": {
 "adbExecTimeout": 45000,
 "app": {
-  "local":"/Users/raghav.garg/Documents/Cucumber_workspace/getting-started-with-teswiz/src/test/resources/Apps/IndiGoFlight-App_5.0.85.apk"
+  "local":"https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/main/IndiGoFlight-App_5.0.85.apk"
 },
 "appPackage": "in.goindigo.android",
 "appActivity": "in.goindigo.android.ui.modules.splash.SplashActivity",

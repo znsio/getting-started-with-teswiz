@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
 public class IndigoLandingScreenAndroid extends IndigoLandingScreen {
-    private static final By byGiftVoucherXpath = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[6]/android.widget.ImageView");
+    private static final By byGiftVoucherXpath = By.xpath("//android.widget.TextView[contains(@text, 'Gift voucher')]/..");
     private static final By byClickOnGuestUserId = By.id("button_as_guest");
     private final Driver driver;
     private final Visual visually;

@@ -4,23 +4,26 @@ import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.Indigo.IndigoDeliveryScreen;
 import com.znsio.sample.e2e.screen.Indigo.IndigoPaymentScreen;
-import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
 public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
 
 
-    public static final By byPromoCodeTextboxXpath = By.xpath("//android.widget.EditText[@resource-id='PromoCode']");
-    public static final By byPromoCodeApplyBtnXpath = By.xpath("//android.widget.Button[@resource-id='btnApplyPromoCode']");
-    public static final By byReceiverNameXpath = By.xpath("//android.widget.EditText[@resource-id='Rec_Fname']");
-    public static final By byReceiverLastNameXpath = By.xpath("//android.widget.EditText[@resource-id='Rec_Lname']");
-    public static final By byReceiverMailXpath = By.xpath("//android.widget.EditText[@resource-id='Rec_EmailID']");
-    public static final By byReceiverPhoneXpath = By.xpath("//android.widget.EditText[@resource-id='Rec_Phone");
-    public static final By bySenderNameXpath = By.xpath("//android.widget.EditText[@resource-id='Per_Fname']");
-    public static final By bySenderLastNameXpath = By.xpath("//android.widget.EditText[@resource-id='Per_Lname']");
-    public static final By bySenderEmailXpath = By.xpath("//android.widget.EditText[@resource-id='Per_EmailID']");
-    public static final By bySenderPhoneXpath = By.xpath("//android.widget.EditText[@resource-id='Per_Phone']");
+    private static final By byPromoCodeTextboxXpath = By.xpath("//android.widget.EditText[@resource-id='PromoCode']");
+    private static final By byPromoCodeApplyBtnXpath = By.xpath("//android.widget.Button[@resource-id='btnApplyPromoCode']");
+    private static final By byReceiverNameXpath = By.xpath("//android.widget.EditText[@resource-id='Rec_Fname']");
+    private static final By byReceiverLastNameXpath = By.xpath("//android.widget.EditText[@resource-id='Rec_Lname']");
+    private static final By byReceiverMailXpath = By.xpath("//android.widget.EditText[@resource-id='Rec_EmailID']");
+    private static final By byReceiverPhoneXpath = By.xpath("//android.widget.EditText[@resource-id='Rec_Phone']");
+    private static final By bySenderNameXpath = By.xpath("//android.widget.EditText[@resource-id='Per_Fname']");
+    private static final By bySenderLastNameXpath = By.xpath("//android.widget.EditText[@resource-id='Per_Lname']");
+    private static final By bySenderEmailXpath = By.xpath("//android.widget.EditText[@resource-id='Per_EmailID']");
+    private static final By bySenderPhoneXpath = By.xpath("//android.widget.EditText[@resource-id='Per_Phone']");
+    private static final By byPayNowBtnXpath = By.xpath("//android.widget.Button[contains(@text,'Pay Now')]");
+    private static final By byTermsConditionChkBoxXpath = By.xpath("//android.widget.CheckBox[@resource-id='chkTnC']");
+    private static final By byErrorMessageXpath = By.xpath("//android.view.View[contains(@text, 'Invalid')]");
+    private static final By byFinalAmountXpath = By.xpath("//android.view.View[@resource-id='lblTotal']");
     private final Driver driver;
     private final Visual visually;
     private static final String SCREEN_NAME = IndigoDeliveryScreenAndroid.class.getSimpleName();
@@ -46,7 +49,7 @@ public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
 
     @Override
     public String getErrorMessage() {
-        String errorMessage =  driver.findElement(By.xpath("//android.view.View[contains(@text, 'Invalid')]")).getText();
+        String errorMessage =  driver.findElement(byErrorMessageXpath).getText();
         LOGGER.info("Invalid Promo Code error message " + errorMessage);
         return errorMessage;
     }
@@ -54,7 +57,7 @@ public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
     @Override
     public int getFinalAmount() {
         driver.scrollDownByScreenSize();
-        String amount = driver.findElement(By.xpath("//android.view.View[@resource-id='lblTotal']")).getText().substring(1).trim();
+        String amount = driver.findElement(byFinalAmountXpath).getText().substring(1).trim();
         LOGGER.info("Final amount after applying Promo Code " + amount);
         int finalAmountAfterPromoCode = Integer.parseInt(amount);
         return finalAmountAfterPromoCode;
@@ -93,15 +96,16 @@ public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
 
     @Override
     public IndigoDeliveryScreen selectTermsAndConditions() {
-        driver.findElement(By.xpath("//android.widget.CheckBox[@resource-id='chkTnC']")).click();
+        driver.waitTillElementIsPresent(byTermsConditionChkBoxXpath).click();
         LOGGER.info("Terms and Condition CheckBox selected");
         return this;
     }
 
     @Override
     public IndigoPaymentScreen clickOnProceedBtn() {
-        driver.findElement(By.xpath("//android.widget.Button[contains(@text, 'Pay Now')]")).click();
-
+        driver.scrollDownByScreenSize();
+        driver.waitTillElementIsPresent(byPayNowBtnXpath).click();
+        LOGGER.info("Procced Btn Clicked succesfully on Delivery Page");
         return IndigoPaymentScreen.get();
     }
 }

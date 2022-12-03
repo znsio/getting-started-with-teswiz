@@ -99,14 +99,14 @@ public class IndigoDeliveryScreenWeb extends IndigoDeliveryScreen {
 
     @Override
     public IndigoDeliveryScreen selectTermsAndConditions() {
-        driver.findElement(byTermsConditionChkBoxId).click();
+        driver.waitTillElementIsPresent(byTermsConditionChkBoxId).click();
         LOGGER.info("Terms and Condition CheckBox selected");
         return this;
     }
 
     @Override
     public IndigoPaymentScreen clickOnProceedBtn() {
-        driver.findElement(byPayNowBtnXpath).click();
+        driver.waitTillElementIsPresent(byPayNowBtnXpath).click();
         LOGGER.info("Procced Btn Clicked succesfully on Delivery Page");
         driver.waitTillElementIsPresent(byPaymentDetailsId, 3);
         return IndigoPaymentScreen.get();

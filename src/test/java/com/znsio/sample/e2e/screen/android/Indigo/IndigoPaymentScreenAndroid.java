@@ -4,8 +4,10 @@ import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.Indigo.IndigoPaymentScreen;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 
 public class IndigoPaymentScreenAndroid extends IndigoPaymentScreen {
+    private static final By byPaymentPageDetailsXpath = By.xpath("//android.view.View[@resource-id='sectionheading']");
     private final Driver driver;
     private final Visual visually;
     private static final String SCREEN_NAME = IndigoPaymentScreenAndroid.class.getSimpleName();
@@ -18,6 +20,9 @@ public class IndigoPaymentScreenAndroid extends IndigoPaymentScreen {
 
     @Override
     public boolean validatePaymentScreen() {
-        return false;
+        driver.waitTillElementIsPresent(byPaymentPageDetailsXpath,5);
+        String getPaymentPageDetails = driver.findElement(byPaymentPageDetailsXpath).getText();
+        visually.checkWindow(SCREEN_NAME, "On Payment Page");
+        return (getPaymentPageDetails.contains("Payment"));
     }
 }

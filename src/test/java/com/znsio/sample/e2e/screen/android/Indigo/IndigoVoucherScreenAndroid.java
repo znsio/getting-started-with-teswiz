@@ -11,14 +11,14 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
 public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
-    public static final By byDenominatorDropdownXpath = By.xpath("//android.view.View[@resource-id='SelectedVoucherValue']");
-    public static final By byDenominationValueIndexXpath = By.xpath("//android.widget.CheckedTextView[@resource-id='android:id/text1']");
-    public static final By byQuantityDropdownXpath = By.xpath("//android.view.View[@resource-id='SelectedVoucherQuantity']");
-    public static final By byQuantityValueIndexXpath = By.xpath("//android.widget.CheckedTextView[@resource-id='android:id/text1']");
-    public static final By byTotalAmountXpath = By.xpath("//android.view.View[@resource-id='lblTotal']");
-    public static final By byPersonalCheckBoxXpath = By.xpath("//android.widget.CheckBox[@resource-id='chkPersonal']");
-    public static final By byDearTextBoxXpath = By.xpath("//android.widget.EditText[@resource-id='Per_Fname']");
-    public static final By byMessageTextBoxXpath = By.xpath("//android.widget.EditText[@resource-id='Message']");
+    private static final By byDenominatorDropdownXpath = By.xpath("//android.view.View[@resource-id='SelectedVoucherValue']");
+    private static final By byDenominationValueIndexXpath = By.xpath("//android.widget.CheckedTextView[@resource-id='android:id/text1']");
+    private static final By byQuantityDropdownXpath = By.xpath("//android.view.View[@resource-id='SelectedVoucherQuantity']");
+    private static final By byQuantityValueIndexXpath = By.xpath("//android.widget.CheckedTextView[@resource-id='android:id/text1']");
+    private static final By byTotalAmountXpath = By.xpath("//android.view.View[@resource-id='lblTotal']");
+    private static final By byPersonalCheckBoxXpath = By.xpath("//android.widget.CheckBox[@resource-id='chkPersonal']");
+    private static final By byDearTextBoxXpath = By.xpath("//android.widget.EditText[@resource-id='Per_Fname']");
+    private static final By byMessageTextBoxXpath = By.xpath("//android.widget.EditText[@resource-id='Message']");
     private final Driver driver;
     private final Visual visually;
     private static final String SCREEN_NAME = IndigoVoucherScreenAndroid.class.getSimpleName();
@@ -63,7 +63,7 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
 
     @Override
     public IndigoPreviewVoucherScreen personalizeVoucher(String name, String message) {
-        driver.findElement(byPersonalCheckBoxXpath).submit();
+        driver.findElement(byPersonalCheckBoxXpath).click();
         visually.checkWindow(SCREEN_NAME, "Personalise check box");
         driver.findElement(byDearTextBoxXpath).clear();
         driver.findElement(byDearTextBoxXpath).sendKeys(name);

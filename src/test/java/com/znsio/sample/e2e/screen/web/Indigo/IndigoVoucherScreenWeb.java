@@ -41,7 +41,7 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
 
     @Override
     public IndigoVoucherScreen selectDenomination(int denomination) {
-        WebElement denominationDropdownWebElement = driver.waitTillElementIsVisible(byDenominationDropdownId);
+        WebElement denominationDropdownWebElement = driver.findElement(byDenominationDropdownId);
         Select denominatorDropdown = new Select(denominationDropdownWebElement);
         denominatorDropdown.selectByIndex(denomination);
         String getDenominationValue = driver.findElement(byDenominatorTextXpath).getText();
@@ -52,7 +52,7 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
 
     @Override
     public IndigoVoucherScreen selectQuantity(int quantity) {
-        WebElement quantityDropdownWebElement = driver.waitTillElementIsVisible(byQuatityDropdownId);
+        WebElement quantityDropdownWebElement = driver.findElement(byQuatityDropdownId);
         Select quantityDropdown = new Select(quantityDropdownWebElement);
         quantityDropdown.selectByIndex(quantity);
         String getQuantityValue = driver.findElement(byQuantityTextXpath).getText();
@@ -63,7 +63,7 @@ public class IndigoVoucherScreenWeb extends IndigoVoucherScreen {
 
     @Override
     public IndigoPreviewVoucherScreen personalizeVoucher(String name, String message) {
-        driver.waitTillElementIsVisible(byPersonalCheckBoxId).click();
+        driver.findElement(byPersonalCheckBoxId).click();
         if (driver.findElement(byPersonalCheckBoxId).isSelected()) {
             driver.waitTillElementIsVisible(byDearTextBoxId).clear();
             driver.findElement(byDearTextBoxId).sendKeys(name);

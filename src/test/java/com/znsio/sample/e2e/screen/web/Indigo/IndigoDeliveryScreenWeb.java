@@ -71,11 +71,11 @@ public class IndigoDeliveryScreenWeb extends IndigoDeliveryScreen {
     public IndigoDeliveryScreen enterReceiverDetail(String receiverFirstName, String receiverLastName, String receiverMail, String receiverPhone) {
         driver.waitTillElementIsPresent(byReceiverNameId).clear();
         driver.findElement(byReceiverNameId).sendKeys(receiverFirstName);
-        driver.waitTillElementIsPresent(byReceiverLastNameId).clear();
+        driver.findElement(byReceiverLastNameId).clear();
         driver.findElement(byReceiverLastNameId).sendKeys(receiverLastName);
-        driver.waitTillElementIsPresent(byReceiverMailId).clear();
+        driver.findElement(byReceiverMailId).clear();
         driver.findElement(byReceiverMailId).sendKeys(receiverMail);
-        driver.waitTillElementIsPresent(byReceiverPhoneId).clear();
+        driver.findElement(byReceiverPhoneId).clear();
         driver.findElement(byReceiverPhoneId).sendKeys(receiverPhone);
         LOGGER.info("Reciever Details entered " + receiverFirstName + " " + receiverLastName + " " + receiverMail + " " + receiverPhone);
         visually.checkWindow(SCREEN_NAME, "Reciver details entered");
@@ -86,11 +86,11 @@ public class IndigoDeliveryScreenWeb extends IndigoDeliveryScreen {
     public IndigoDeliveryScreen enterSenderDetails(String senderFirstName, String senderLastName, String senderrMail, String senderPhone) {
         driver.waitTillElementIsPresent(bySenderNameId).clear();
         driver.findElement(bySenderNameId).sendKeys(senderFirstName);
-        driver.waitTillElementIsPresent(bySenderLastNameId).clear();
+        driver.findElement(bySenderLastNameId).clear();
         driver.findElement(bySenderLastNameId).sendKeys(senderLastName);
-        driver.waitTillElementIsPresent(bySenderMailId).clear();
+        driver.findElement(bySenderMailId).clear();
         driver.findElement(bySenderMailId).sendKeys(senderrMail);
-        driver.waitTillElementIsPresent(bySenderPhoneId).clear();
+        driver.findElement(bySenderPhoneId).clear();
         driver.findElement(bySenderPhoneId).sendKeys(senderPhone);
         LOGGER.info("Sender Details entered " + senderFirstName + " " + senderLastName + " " + senderrMail + " " + senderPhone);
         visually.checkWindow(SCREEN_NAME, "Sender details entered");
@@ -99,14 +99,14 @@ public class IndigoDeliveryScreenWeb extends IndigoDeliveryScreen {
 
     @Override
     public IndigoDeliveryScreen selectTermsAndConditions() {
-        driver.waitTillElementIsPresent(byTermsConditionChkBoxId).click();
+        driver.findElement(byTermsConditionChkBoxId).click();
         LOGGER.info("Terms and Condition CheckBox selected");
         return this;
     }
 
     @Override
     public IndigoPaymentScreen clickOnProceedBtn() {
-        driver.waitTillElementIsPresent(byPayNowBtnXpath).click();
+        driver.findElement(byPayNowBtnXpath).click();
         LOGGER.info("Procced Btn Clicked succesfully on Delivery Page");
         driver.waitTillElementIsPresent(byPaymentDetailsId, 3);
         return IndigoPaymentScreen.get();

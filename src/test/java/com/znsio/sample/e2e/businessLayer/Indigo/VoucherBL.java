@@ -9,8 +9,8 @@ import com.znsio.sample.e2e.screen.Indigo.IndigoVoucherScreen;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
-import static org.assertj.core.api.Assertions.assertThat;
 
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class VoucherBL {
@@ -35,8 +35,9 @@ public class VoucherBL {
     }
 
     public PromoCodeBL personaliseAndPreviewGiftVoucher() {
-        int totalSum = IndigoLandingScreen.get()
-                .selectGiftVoucher()
+        IndigoVoucherScreen indigoVoucherScreen = IndigoLandingScreen.get()
+                .selectGiftVoucher();
+        int totalSum = indigoVoucherScreen
                 .selectDenomination(1)
                 .selectQuantity(1)
                 .getTotalAmount();
@@ -47,11 +48,11 @@ public class VoucherBL {
         assertThat(totalSum).isEqualTo(totalSumExpected);
         context.addTestState(INDIGO_TEST_CONTEXT.TOTALAMOUNT, totalSum);
         String randomMessage = RandomStringUtils.randomAlphabetic(20);
-        String voucherDetails = IndigoVoucherScreen.get()
+        String voucherDetails = indigoVoucherScreen
                 .personalizeVoucher(System.getProperty("user.name"), randomMessage)
                 .previewVoucher();
         String messageExpected = context.getTestState(INDIGO_TEST_CONTEXT.DEAR).toString().trim() + ", " + context.getTestState(INDIGO_TEST_CONTEXT.MESSAGE).toString().trim();
-        softly.assertThat(voucherDetails).as("Comapring Gift Voucher details on Preview Voucher screen").isEqualTo(messageExpected);
+        softly.assertThat(voucherDetails).as("Gift Voucher details on Preview Voucher screen").isEqualTo(messageExpected);
         return new PromoCodeBL();
     }
 }

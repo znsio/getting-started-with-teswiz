@@ -28,6 +28,7 @@ public class IndigoLandingScreenAndroid extends IndigoLandingScreen {
         visually.checkWindow(SCREEN_NAME, "Indigo Landing Screen");
         driver.findElement(byGiftVoucherXpath).click();
         LOGGER.info("Gift voucher option selected successfully");
+        visually.checkWindow(SCREEN_NAME, "Indigo Gift Voucher Selection Screen");
         return IndigoVoucherScreen.get();
     }
 }

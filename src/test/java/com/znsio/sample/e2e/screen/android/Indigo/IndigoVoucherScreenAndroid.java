@@ -63,7 +63,8 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
 
     @Override
     public IndigoPreviewVoucherScreen personalizeVoucher(String name, String message) {
-        driver.findElement(byPersonalCheckBoxXpath).click();
+        driver.findElement(byPersonalCheckBoxXpath).submit();
+        visually.checkWindow(SCREEN_NAME, "Personalise check box");
         driver.findElement(byDearTextBoxXpath).clear();
         driver.findElement(byDearTextBoxXpath).sendKeys(name);
         context.addTestState(INDIGO_TEST_CONTEXT.DEAR, name);
@@ -74,7 +75,7 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
         context.addTestState(INDIGO_TEST_CONTEXT.MESSAGE, message);
         LOGGER.info("Data entered in Message textbox" + message);
         visually.checkWindow(SCREEN_NAME, "Indigo Voucher successfully personalised");
-        driver.findElement(By.xpath("//android.widget.Button")).submit();
+        driver.findElement(By.xpath("//android.widget.Button[contains(@text, 'Preview')]")).click();
         return IndigoPreviewVoucherScreen.get();
     }
 

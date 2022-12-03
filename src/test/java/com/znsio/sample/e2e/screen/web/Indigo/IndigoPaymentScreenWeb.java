@@ -28,6 +28,7 @@ public class IndigoPaymentScreenWeb extends IndigoPaymentScreen {
     public boolean validatePaymentScreen() {
         String paymentPageUrl = driver.getInnerDriver().getCurrentUrl();
         visually.checkWindow(SCREEN_NAME, "On Payment Page");
+        LOGGER.info("On Payment Page");
         return (paymentPageUrl.contains("transaction"));
     }
 }

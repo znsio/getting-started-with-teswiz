@@ -30,7 +30,7 @@ public class IndigoPreviewVoucherScreenWeb extends IndigoPreviewVoucherScreen {
     }
 
     @Override
-    public String previewVoucher() {
+    public String getPreviewVoucherDetails() {
         String dearText = driver.findElement(byDearTextBoxxpath).getText().trim();
         String message = driver.findElement(byMessageTextBoxxpath).getText().trim();
         visually.checkWindow(SCREEN_NAME, "Indigo Voucher Preview");

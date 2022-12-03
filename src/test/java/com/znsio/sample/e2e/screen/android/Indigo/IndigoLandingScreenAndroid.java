@@ -23,10 +23,9 @@ public class IndigoLandingScreenAndroid extends IndigoLandingScreen {
     @Override
     public IndigoVoucherScreen selectGiftVoucher() {
         LOGGER.info("Indigo Site opened");
-        driver.waitTillElementIsVisible(byClickOnGuestUserId,10);
-        driver.findElement(byClickOnGuestUserId).click();
+        driver.waitTillElementIsVisible(byClickOnGuestUserId).click();
         visually.checkWindow(SCREEN_NAME, "Indigo Landing Screen");
-        driver.findElement(byGiftVoucherXpath).click();
+        driver.waitTillElementIsPresent(byGiftVoucherXpath).click();
         LOGGER.info("Gift voucher option selected successfully");
         visually.checkWindow(SCREEN_NAME, "Indigo Gift Voucher Selection Screen");
         return IndigoVoucherScreen.get();

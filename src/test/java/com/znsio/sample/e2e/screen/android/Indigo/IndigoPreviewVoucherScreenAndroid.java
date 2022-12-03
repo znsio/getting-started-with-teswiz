@@ -21,12 +21,12 @@ public class IndigoPreviewVoucherScreenAndroid extends IndigoPreviewVoucherScree
     }
 
     @Override
-    public String previewVoucher() {
+    public String getPreviewVoucherDetails() {
         String dearText = driver.findElement(byDearTextBoxXpath).getText().trim();
         String message = driver.findElement(byMessageTextBoxXpath).getText().trim();
         visually.checkWindow(SCREEN_NAME, "Indigo Voucher Preview");
         driver.scrollDownByScreenSize();
-        driver.findElement(byProceedBtnXpath).click();
+        driver.waitTillElementIsPresent(byProceedBtnXpath).click();
         LOGGER.info("Proceed Button clicked on Preview page");
         return dearText + " " + message;
     }

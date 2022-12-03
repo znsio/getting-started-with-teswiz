@@ -47,7 +47,7 @@ public class PurchaseVoucherBL {
                 .selectTermsAndConditions()
                 .clickOnProceedBtn()
                 .validatePaymentScreen();
-        assertThat(isPaymentPageVisible).as("On Payment PAge").isTrue();
+        assertThat(isPaymentPageVisible).as("Payment Page is not Visisble").isTrue();
         return IndigoPaymentScreen.get();
     }
 }

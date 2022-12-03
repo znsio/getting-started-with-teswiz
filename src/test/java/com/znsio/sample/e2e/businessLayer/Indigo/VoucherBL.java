@@ -45,14 +45,14 @@ public class VoucherBL {
         int quantityVal = Integer.parseInt(context.getTestState(INDIGO_TEST_CONTEXT.QUANTITY).toString());
         int totalSumExpected = denominationVal * quantityVal;
         LOGGER.info("Total sum in Voucher Page " + totalSum);
-        assertThat(totalSum).isEqualTo(totalSumExpected);
+        assertThat(totalSum).as("Total Sum visible on Voucher Screen is wrong").isEqualTo(totalSumExpected);
         context.addTestState(INDIGO_TEST_CONTEXT.TOTALAMOUNT, totalSum);
         String randomMessage = RandomStringUtils.randomAlphabetic(20);
         String voucherDetails = indigoVoucherScreen
                 .personalizeVoucher(System.getProperty("user.name"), randomMessage)
-                .previewVoucher();
+                .getPreviewVoucherDetails();
         String messageExpected = context.getTestState(INDIGO_TEST_CONTEXT.DEAR).toString().trim() + ", " + context.getTestState(INDIGO_TEST_CONTEXT.MESSAGE).toString().trim();
-        softly.assertThat(voucherDetails).as("Gift Voucher details on Preview Voucher screen").isEqualTo(messageExpected);
+        softly.assertThat(voucherDetails).as("Gift Voucher details are different on Preview Voucher screen").isEqualTo(messageExpected);
         return new PromoCodeBL();
     }
 }

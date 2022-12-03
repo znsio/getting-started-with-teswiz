@@ -38,7 +38,7 @@ public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
     @Override
     public IndigoDeliveryScreen enterInvalidPromoCode(String promoCode) {
         driver.scrollDownByScreenSize();
-        driver.findElement(byPromoCodeTextboxXpath).clear();
+        driver.waitTillElementIsPresent(byPromoCodeTextboxXpath).clear();
         driver.findElement(byPromoCodeTextboxXpath).sendKeys(promoCode);
         LOGGER.info("Invalid Promo code entered in Delivery option page");
         driver.findElement(byPromoCodeApplyBtnXpath).click();
@@ -49,7 +49,7 @@ public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
 
     @Override
     public String getErrorMessage() {
-        String errorMessage =  driver.findElement(byErrorMessageXpath).getText();
+        String errorMessage =  driver.waitTillElementIsPresent(byErrorMessageXpath).getText();
         LOGGER.info("Invalid Promo Code error message " + errorMessage);
         return errorMessage;
     }
@@ -57,7 +57,7 @@ public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
     @Override
     public int getFinalAmount() {
         driver.scrollDownByScreenSize();
-        String amount = driver.findElement(byFinalAmountXpath).getText().substring(1).trim();
+        String amount = driver.waitTillElementIsPresent(byFinalAmountXpath).getText().substring(1).trim();
         LOGGER.info("Final amount after applying Promo Code " + amount);
         int finalAmountAfterPromoCode = Integer.parseInt(amount);
         return finalAmountAfterPromoCode;
@@ -65,13 +65,13 @@ public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
 
     @Override
     public IndigoDeliveryScreen enterReceiverDetail(String receiverFirstName, String receiverLastName, String receiverMail, String receiverPhone) {
-        driver.findElement(byReceiverNameXpath).clear();
+        driver.waitTillElementIsPresent(byReceiverNameXpath).clear();
         driver.findElement(byReceiverNameXpath).sendKeys(receiverFirstName);
-        driver.findElement(byReceiverLastNameXpath).clear();
+        driver.waitTillElementIsPresent(byReceiverLastNameXpath).clear();
         driver.findElement(byReceiverLastNameXpath).sendKeys(receiverLastName);
-        driver.findElement(byReceiverMailXpath).clear();
+        driver.waitTillElementIsPresent(byReceiverMailXpath).clear();
         driver.findElement(byReceiverMailXpath).sendKeys(receiverMail);
-        driver.findElement(byReceiverPhoneXpath).clear();
+        driver.waitTillElementIsPresent(byReceiverPhoneXpath).clear();
         driver.findElement(byReceiverPhoneXpath).sendKeys(receiverPhone);
         LOGGER.info("Reciever Details entered " + receiverFirstName + " " + receiverLastName + " " + receiverMail + " " + receiverPhone);
         visually.checkWindow(SCREEN_NAME, "Reciver details entered");
@@ -81,13 +81,13 @@ public class IndigoDeliveryScreenAndroid extends IndigoDeliveryScreen {
     @Override
     public IndigoDeliveryScreen enterSenderDetails(String senderFirstName, String senderLastName, String senderrMail, String senderPhone) {
         driver.scrollDownByScreenSize();
-        driver.findElement(bySenderNameXpath).clear();
+        driver.waitTillElementIsPresent(bySenderNameXpath).clear();
         driver.findElement(bySenderNameXpath).sendKeys(senderFirstName);
-        driver.findElement(bySenderLastNameXpath).clear();
+        driver.waitTillElementIsPresent(bySenderLastNameXpath).clear();
         driver.findElement(bySenderLastNameXpath).sendKeys(senderLastName);
-        driver.findElement(bySenderEmailXpath).clear();
+        driver.waitTillElementIsPresent(bySenderEmailXpath).clear();
         driver.findElement(bySenderEmailXpath).sendKeys(senderrMail);
-        driver.findElement(bySenderPhoneXpath).clear();
+        driver.waitTillElementIsPresent(bySenderPhoneXpath).clear();
         driver.findElement(bySenderPhoneXpath).sendKeys(senderPhone);
         LOGGER.info("Sender Details entered " + senderFirstName + " " + senderLastName + " " + senderrMail + " " + senderPhone);
         visually.checkWindow(SCREEN_NAME, "Sender details entered");

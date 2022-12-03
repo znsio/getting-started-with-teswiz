@@ -32,5 +32,5 @@ public abstract class IndigoPreviewVoucherScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract String previewVoucher();
+    public abstract String getPreviewVoucherDetails();
 }

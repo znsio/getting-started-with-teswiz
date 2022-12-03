@@ -38,10 +38,10 @@ public class PromoCodeBL {
         String isErrorMessageAppeared =  indigoDeliveryScreen
                 .enterInvalidPromoCode(promoCode)
                 .getErrorMessage();
-        softly.assertThat(isErrorMessageAppeared).as("PromoCode error message on Delivery Screen").isEqualTo("Invalid Promo Code.");
+        softly.assertThat(isErrorMessageAppeared).as("PromoCode error message not appears on Delivery Screen").isEqualTo("Invalid Promo Code.");
         int paymentAmountAfterPromoCode = indigoDeliveryScreen
                 .getFinalAmount();
-        assertThat(paymentAmountAfterPromoCode).as("Price of Gift Voucher after applying PromoCode").isEqualTo((context.getTestState(INDIGO_TEST_CONTEXT.TOTALAMOUNT)));
+        assertThat(paymentAmountAfterPromoCode).as("Price of Gift Voucher after applying PromoCode is different").isEqualTo((context.getTestState(INDIGO_TEST_CONTEXT.TOTALAMOUNT)));
         return new PurchaseVoucherBL();
     }
 }

@@ -19,6 +19,7 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
     private static final By byPersonalCheckBoxXpath = By.xpath("//android.widget.CheckBox[@resource-id='chkPersonal']");
     private static final By byDearTextBoxXpath = By.xpath("//android.widget.EditText[@resource-id='Per_Fname']");
     private static final By byMessageTextBoxXpath = By.xpath("//android.widget.EditText[@resource-id='Message']");
+    public static final By byPreviewBtnXpath = By.xpath("//android.widget.Button[contains(@text, 'Preview')]");
     private final Driver driver;
     private final Visual visually;
     private static final String SCREEN_NAME = IndigoVoucherScreenAndroid.class.getSimpleName();
@@ -37,9 +38,8 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
 
     @Override
     public IndigoVoucherScreen selectDenomination(int denomination) {
-        driver.waitTillElementIsVisible(byDenominatorDropdownXpath, 25);
-        driver.findElement(byDenominatorDropdownXpath).click();
-        driver.waitTillElementIsVisible(byDenominationValueIndexXpath, 10);
+        driver.waitTillElementIsVisible(byDenominatorDropdownXpath, 25).click();
+        driver.waitTillElementIsVisible(byDenominationValueIndexXpath,5);
         (driver.findElements(byDenominationValueIndexXpath)).get(denomination).click();
         String denominationValue = driver.findElement(byDenominatorDropdownXpath).getText();
         int getDenominationValue = Integer.parseInt(denominationValue);
@@ -50,9 +50,8 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
 
     @Override
     public IndigoVoucherScreen selectQuantity(int quantity) {
-        driver.waitTillElementIsVisible(byQuantityDropdownXpath, 25);
-        driver.findElement(byQuantityDropdownXpath).click();
-        driver.waitTillElementIsVisible(byQuantityValueIndexXpath, 10);
+        driver.waitTillElementIsVisible(byQuantityDropdownXpath, 5).click();
+        driver.waitTillElementIsVisible(byQuantityValueIndexXpath, 5);
         (driver.findElements(byQuantityValueIndexXpath)).get(quantity).click();
         String denominationValue = driver.findElement(byQuantityDropdownXpath).getText();
         int getQuantityValue = Integer.parseInt(denominationValue);
@@ -63,26 +62,26 @@ public class IndigoVoucherScreenAndroid extends IndigoVoucherScreen {
 
     @Override
     public IndigoPreviewVoucherScreen personalizeVoucher(String name, String message) {
-        driver.findElement(byPersonalCheckBoxXpath).click();
+        driver.waitTillElementIsPresent(byPersonalCheckBoxXpath).click();
         visually.checkWindow(SCREEN_NAME, "Personalise check box");
-        driver.findElement(byDearTextBoxXpath).clear();
+        driver.waitTillElementIsPresent(byDearTextBoxXpath).clear();
         driver.findElement(byDearTextBoxXpath).sendKeys(name);
         context.addTestState(INDIGO_TEST_CONTEXT.DEAR, name);
         LOGGER.info("Data entered in Dear textbox" + name);
         driver.scrollDownByScreenSize();
-        driver.findElement(byMessageTextBoxXpath).clear();
+        driver.waitTillElementIsPresent(byMessageTextBoxXpath).clear();
         driver.findElement(byMessageTextBoxXpath).sendKeys(message);
         context.addTestState(INDIGO_TEST_CONTEXT.MESSAGE, message);
         LOGGER.info("Data entered in Message textbox" + message);
         visually.checkWindow(SCREEN_NAME, "Indigo Voucher successfully personalised");
-        driver.findElement(By.xpath("//android.widget.Button[contains(@text, 'Preview')]")).click();
+        driver.findElement(byPreviewBtnXpath).click();
         return IndigoPreviewVoucherScreen.get();
     }
 
     @Override
     public int getTotalAmount() {
         driver.scrollDownByScreenSize();
-        String totalAmount = driver.findElement(byTotalAmountXpath).getText();
+        String totalAmount = driver.waitTillElementIsPresent(byTotalAmountXpath).getText();
         String totalSum = totalAmount.substring(1).trim();
         LOGGER.info("Total amount after selecting Denominator and quantity" + totalSum);
         int getTotalAmount = Integer.parseInt(totalSum);

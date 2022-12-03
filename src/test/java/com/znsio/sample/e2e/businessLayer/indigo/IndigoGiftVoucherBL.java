@@ -4,10 +4,13 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.sample.e2e.screen.indigo.GiftVoucherScreen;
 import com.znsio.sample.e2e.screen.indigo.IndigoHomeScreen;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 
 public class IndigoGiftVoucherBL {
@@ -36,12 +39,16 @@ public class IndigoGiftVoucherBL {
     public BuyGiftVoucherBL personaliseAndPreviewVoucher(String denomination, String quantity) {
         String message = RandomStringUtils.randomAlphabetic(20);
         String titleName = RandomStringUtils.randomAlphabetic(5);
+        int voucherPrice = Integer.parseInt(denomination)*Integer.parseInt(quantity);
         LOGGER.info("Personalising Gift Voucher");
         boolean verifyPreviewVoucher = IndigoHomeScreen.get().goToGiftVoucherSection().
                 addDenominationAndQuantity(denomination, quantity).
                 personaliseGiftVoucher(titleName, message).
-                previewVoucherAndProceed(titleName, message);
-        softly.assertThat(verifyPreviewVoucher).as("Verifying Title and message as given in personalisation").isTrue();
+                previewVoucher().
+                verifyVoucherDetails(titleName,message,voucherPrice);
+        assertThat(verifyPreviewVoucher).as("Voucher Details Incorrect in Preview").isTrue();
+        boolean verifyNavigationToPurchaseDetails = GiftVoucherScreen.get().proceedToBuy();
+        assertThat(verifyNavigationToPurchaseDetails).as("Failed to navigate to Purchase gift voucher page").isTrue();
         return new BuyGiftVoucherBL();
 
     }

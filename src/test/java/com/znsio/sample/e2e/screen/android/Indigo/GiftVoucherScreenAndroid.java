@@ -15,23 +15,32 @@ public class GiftVoucherScreenAndroid extends GiftVoucherScreen {
     public GiftVoucherScreen addDenominationAndQuantity(String denomination, String quantity) {
        return this;
     }
-
     @Override
     public GiftVoucherScreen personaliseGiftVoucher(String titleName,String message) {
         return this;
     }
     @Override
-
-    public boolean previewVoucherAndProceed(String title, String message) {
-        return true;
+    public GiftVoucherScreen previewVoucher() {
+        return this;
+    }
+    @Override
+    public boolean verifyVoucherDetails(String titleName, String message, int voucherPrice) {
+        return false;
+    }
+    @Override
+    public boolean proceedToBuy() {
+        return false;
     }
     @Override
     public boolean applyPromoCode(String promoCode) {
         return true;
     }
-
     @Override
-    public PaymentScreen giveDeliveryOptionsAndProceed() {
+    public GiftVoucherScreenAndroid giveDeliveryOptions() {
+        return this;
+    }
+    @Override
+    public PaymentScreen proceedToPaymentPage() {
         return PaymentScreen.get();
     }
 }

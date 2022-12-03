@@ -11,7 +11,7 @@ public class PaymentScreenWeb extends PaymentScreen {
     private final Visual visually;
     private static final String SCREEN_NAME = PaymentScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-    private final By byPaymentScreenXpath = By.xpath("//*[contains(text(),'Payment Information')]");
+    private static final By byPaymentScreenXpath = By.xpath("//span[contains(text(),'Payment Information')]");
     public PaymentScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
@@ -19,6 +19,7 @@ public class PaymentScreenWeb extends PaymentScreen {
     @Override
     public boolean landOnPaymentPage() {
         LOGGER.info("Landed on Payment Screen");
+        visually.checkWindow(SCREEN_NAME,"Moved to Payment Screen");
         return driver.findElements(byPaymentScreenXpath).size() > 0;
     }
 }

@@ -26,8 +26,8 @@ public abstract class PaymentScreen {
                 .getId());
 
         switch(platform) {
-            case android:
-                return new PaymentScreenAndroid(driver, visually);
+//            case android:
+//                return new PaymentScreenAndroid(driver, visually);
             case web:
                 return new PaymentScreenWeb(driver, visually);
         }

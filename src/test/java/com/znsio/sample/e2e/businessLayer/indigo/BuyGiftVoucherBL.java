@@ -35,13 +35,13 @@ public class BuyGiftVoucherBL {
     }
     public void applyInvalidPromoCode() {
         String promoCode = RandomStringUtils.randomAlphabetic(5);
-        LOGGER.info("Apply PromoCode");
+        LOGGER.info("Apply Invalid PromoCode");
         softly.assertThat(GiftVoucherScreen.get().applyPromoCode(promoCode)).isTrue();
     }
     public void selectDeliveryOptionsAndPay() {
         LOGGER.info("Select Delivery Info");
-        boolean landedOnPaymentScreen = GiftVoucherScreen.get().giveDeliveryOptionsAndProceed().landOnPaymentPage();
-        assertThat(landedOnPaymentScreen).as("Verifying Navigation to Payment page").isTrue();
+        boolean landedOnPaymentScreen = GiftVoucherScreen.get().giveDeliveryOptions().proceedToPaymentPage().landOnPaymentPage();
+        assertThat(landedOnPaymentScreen).as("Unable to navigate to Payment page").isTrue();
     }
 }
 

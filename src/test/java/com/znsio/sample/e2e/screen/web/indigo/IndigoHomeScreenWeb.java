@@ -12,6 +12,7 @@ public class IndigoHomeScreenWeb extends IndigoHomeScreen {
     private final Visual visually;
     private static final String SCREEN_NAME = IndigoHomeScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
+    //locator - static
     private final By bookDropdownXpath = By.xpath("//a[@title='Book']");
     private final By giftVoucherOptionXpath = By.xpath("//a[@class='text-decoration-none']//div[text()='Gift Voucher']");
 

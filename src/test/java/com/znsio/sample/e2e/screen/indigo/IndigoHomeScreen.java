@@ -26,8 +26,8 @@ public abstract class IndigoHomeScreen {
                 .getId());
 
         switch(platform) {
-            case android:
-                return new IndigoHomeScreenAndroid(driver, visually);
+//            case android:
+//                return new IndigoHomeScreenAndroid(driver, visually);
             case web:
                 return new IndigoHomeScreenWeb(driver, visually);
         }

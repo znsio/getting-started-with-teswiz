@@ -36,16 +36,17 @@ public class IndigoGiftVoucherSteps {
     public void iPersonaliseAndPreviewAGiftVoucherWithDenominationAndQuantity(String quantity, String denomination) {
         LOGGER.info("Setting up Driver");
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
+        LOGGER.info("Navigating to Gift Voucher Section, Personalize, Preview voucher");
         new IndigoGiftVoucherBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).personaliseAndPreviewVoucher(denomination, quantity);
     }
     @When("I apply invalid promo code")
     public void iApplyInvalidPromoCode() {
-        LOGGER.info("Applying Promocode");
+        LOGGER.info("Applying InvalidPromo code");
         new BuyGiftVoucherBL().applyInvalidPromoCode();
     }
     @Then("I can proceed for the payment at the original amount")
     public void iCanPurchaseTheGiftVoucherAtTheOriginalAmount() {
-        LOGGER.info("Proceeding to Payment");
+        LOGGER.info("Proceeding to Payment with original amount");
         new BuyGiftVoucherBL().selectDeliveryOptionsAndPay();
     }
 }

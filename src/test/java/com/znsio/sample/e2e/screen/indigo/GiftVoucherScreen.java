@@ -26,8 +26,8 @@ public abstract  class GiftVoucherScreen {
                 .getId());
 
         switch(platform) {
-            case android:
-                return new GiftVoucherScreenAndroid(driver, visually);
+//            case android:
+//                return new GiftVoucherScreenAndroid(driver, visually);
             case web:
                 return new GiftVoucherScreenWeb(driver, visually);
         }
@@ -35,7 +35,10 @@ public abstract  class GiftVoucherScreen {
     }
     public abstract GiftVoucherScreen addDenominationAndQuantity(String denomination, String quantity);
     public abstract GiftVoucherScreen personaliseGiftVoucher(String titleName, String message);
-    public abstract boolean previewVoucherAndProceed(String denomination, String quantity);
+    public abstract GiftVoucherScreen previewVoucher();
+    public abstract boolean verifyVoucherDetails(String titleName, String message, int voucherPrice);
+    public abstract boolean proceedToBuy();
     public abstract boolean applyPromoCode(String promoCode);
-    public abstract PaymentScreen giveDeliveryOptionsAndProceed();
+    public abstract GiftVoucherScreen giveDeliveryOptions();
+    public abstract PaymentScreen proceedToPaymentPage();
 }

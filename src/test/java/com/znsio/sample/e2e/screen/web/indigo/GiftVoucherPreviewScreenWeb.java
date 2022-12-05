@@ -17,44 +17,40 @@ import java.util.Map;
 
 public class GiftVoucherPreviewScreenWeb extends GiftVoucherPreviewScreen {
 
-    private static final Logger LOGGER = Logger.getLogger(HomeScreenWeb.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(GiftVoucherPreviewScreenWeb.class.getName());
     private final Driver driver;
     private final Visual visually;
+    private final String SCREEN_NAME = HomeScreenWeb.class.getSimpleName();
     private final WebDriver innerDriver;
     private final TestExecutionContext context;
+    private static final By bySelectDenominationDdXpath = By.id("SelectedVoucherValue");
+    private static final By bySelectQuantityDdXpath = By.id("SelectedVoucherQuantity");
+    private static final By byAmountTfXpath = By.id("lblTotal");
+    private static final By byPreviewBtnXpath = By.xpath("//input[@class='preview-btn']");
+    private static final By byProceedBtnXpath = By.xpath("//input[@value='Proceed']");
 
-    private final By bySelectDenominationDdXpath = By.xpath("//Select[@id='SelectedVoucherValue']");
-    private final By bySelectQuantityDdXpath = By.xpath("//Select[@id='SelectedVoucherQuantity']");
-    private final By byAmountTfXpath = By.xpath("//span[@id='lblTotal']");
-    private final By byPreviewBtnXpath = By.xpath("//input[@class='preview-btn']");
-    private final By byProceedBtnXpath = By.xpath("//input[@value='Proceed']");
+    private static final By byPromoCodeTfXpath = By.id("PromoCode");
 
-    private final By byPromoCodeTfXpath = By.xpath("//input[@id='PromoCode']");
-
-    private final By byApplyBtnXpath = By.xpath("//input[@id='btnApplyPromoCode']");
-    private final By byRecieverFirstNameTfXpath = By.xpath("//input[@id='Rec_Fname']");
-    private final By byRecieverLastNameTfXpath = By.xpath("//input[@id='Rec_Lname']");
-    private final By byRecieverEmailTfXpath = By.xpath("//input[@id='Rec_EmailID']");
-    private final By byRecieverPhoneTfXpath = By.xpath("//input[@id='Rec_Phone']");
-    private final By bySenderFirstNameTfXpath = By.xpath("//input[@id='Per_Fname']");
-    private final By bySenderLastNameTfXpath = By.xpath("//input[@id='Per_Lname']");
-    private final By bySenderEmailTfXpath = By.xpath("//input[@id='Per_EmailID']");
-    private final By bySenderPhoneTfXpath = By.xpath("//input[@id='Per_Phone']");
-    private final By byInvalidPromoCodeTxtXpath = By.xpath("//div[contains(text(),'Invalid Promo Code')]");
-    private final By byPayNowBtnXpath = By.xpath("//input[@class='preview-btn']");
-    private final By byTermsAndConditionsCbXpath = By.xpath("//input[@id='chkTnC']");
-    private final By byTotalAmountAfterPromoCodeXpath = By.xpath("//label[text()='Payment Amount']/following-sibling::span[@id='lblTotal']");
-    private final By byMakeItPersonalCbXpath = By.xpath("//input[@id='chkPersonal']");
-    private final By byDearTfXpath = By.xpath("//input[@id='Per_Fname']");
-    private final By byMessageTfXpath = By.xpath("//textarea[@id='Message']");
-    private final By byMessageTextXpath = By.xpath("//div[@class='doted-line']/preceding-sibling::p");
-    private final By byTitleTextXpath = By.xpath("//div[@class='title-name']/span");
-
+    private static final By byApplyBtnXpath = By.id("btnApplyPromoCode");
+    private static final By byRecieverFirstNameTfXpath = By.id("Rec_Fname");
+    private static final By byRecieverLastNameTfXpath = By.id("Rec_Lname");
+    private static final By byRecieverEmailTfXpath = By.id("Rec_EmailID");
+    private static final By byRecieverPhoneTfXpath = By.id("Rec_Phone");
+    private static final By bySenderFirstNameTfXpath = By.id("Per_Fname");
+    private static final By bySenderLastNameTfXpath = By.id("Per_Lname");
+    private static final By bySenderEmailTfXpath = By.id("Per_EmailID");
+    private static final By bySenderPhoneTfXpath = By.id("Per_Phone");
+    private static final By byInvalidPromoCodeTxtXpath = By.xpath("//div[contains(text(),'Invalid Promo Code')]");
+    private static final By byPayNowBtnXpath = By.xpath("//input[@class='preview-btn']");
+    private static final By byTermsAndConditionsCbXpath = By.id("chkTnC");
+    private static final By byTotalAmountAfterPromoCodeXpath = By.xpath("//label[text()='Payment Amount']/following-sibling::span[@id='lblTotal']");
+    private static final By byMakeItPersonalCbXpath = By.id("chkPersonal");
+    private static final By byDearTfXpath = By.id("Per_Fname");
+    private static final By byMessageTfXpath = By.id("Message");
+    private static final By byMessageTextXpath = By.xpath("//div[@class='doted-line']/preceding-sibling::p");
+    private static final By byTitleTextXpath = By.xpath("//div[@class='title-name']/span");
     private final Map userDetails;
     private final String userSuffix;
-
-
-
 
     public GiftVoucherPreviewScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -69,7 +65,7 @@ public class GiftVoucherPreviewScreenWeb extends GiftVoucherPreviewScreen {
 
     @Override
     public int setAndFetchTheAmountBasedOnDenominationAnQuantity(String denomination,String qnty) {
-
+        visually.takeScreenshot(SCREEN_NAME,"Gift Voucher Page");
         driver.waitTillElementIsPresent(bySelectDenominationDdXpath);
         Select sl = new Select(driver.findElement(bySelectDenominationDdXpath));
         sl.selectByValue(denomination);
@@ -114,14 +110,11 @@ public class GiftVoucherPreviewScreenWeb extends GiftVoucherPreviewScreen {
     }
 
     @Override
-    public boolean validatePersonalizationOfGiftVoucher() {
-
+    public boolean checkPersonalizationOfGiftVoucher() {
+        visually.takeScreenshot(SCREEN_NAME,"Gift Voucher Preview Page");
         String title=driver.waitTillElementIsVisible(byTitleTextXpath,3).getText().replace(",","");
         String message=driver.waitTillElementIsVisible(byMessageTextXpath,3).getText();
-        LOGGER.info(title);
-        LOGGER.info(String.valueOf(context.getTestState(SAMPLE_TEST_CONTEXT.NAME)));
-        LOGGER.info(message);
-        LOGGER.info(String.valueOf(context.getTestState(SAMPLE_TEST_CONTEXT.MESSAGE)));
+
         return (title.equalsIgnoreCase(String.valueOf(context.getTestState(SAMPLE_TEST_CONTEXT.NAME)))&&
                 message.equalsIgnoreCase(String.valueOf(context.getTestState(SAMPLE_TEST_CONTEXT.MESSAGE))));
     }
@@ -137,6 +130,7 @@ public class GiftVoucherPreviewScreenWeb extends GiftVoucherPreviewScreen {
     public GiftVoucherPreviewScreen applyInvalidPromocode() {
         String promoCode=RandomStringUtils.randomAlphanumeric(6);
         driver.waitForClickabilityOf(byPromoCodeTfXpath).click();
+        visually.takeScreenshot(SCREEN_NAME,"Apply promo code");
         driver.findElement(byPromoCodeTfXpath).clear();
         driver.findElement(byPromoCodeTfXpath).sendKeys(promoCode);
         driver.waitForClickabilityOf(byApplyBtnXpath).click();
@@ -157,6 +151,7 @@ public class GiftVoucherPreviewScreenWeb extends GiftVoucherPreviewScreen {
     @Override
     public GiftVoucherPreviewScreen setDeliveryOptions() {
 
+        visually.takeScreenshot(SCREEN_NAME,"Set delivery details");
         driver.waitForClickabilityOf(byRecieverFirstNameTfXpath).click();
 
         driver.waitTillElementIsVisible(byRecieverFirstNameTfXpath,2).clear();

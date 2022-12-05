@@ -6,6 +6,7 @@ import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+import org.testng.Assert;
 
 public class PayementDetailsBL {
 
@@ -34,7 +35,8 @@ public class PayementDetailsBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public boolean validatePaymentInformationForOriginalAmount(){
-     return new GiftVoucherPreviewBL().enterUserDetailsAndProceed().checkingUserPaymentInformationPage();
+    public void validatePaymentInformationForOriginalAmount(){
+     boolean paymentInfoStatus= new GiftVoucherPreviewBL().enterUserDetailsAndProceed().checkingUserPaymentInformation();
+     Assert.assertEquals(paymentInfoStatus,true,"User is not re-directed to payment gateway page with original amount");
     }
 }

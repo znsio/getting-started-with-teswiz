@@ -4,6 +4,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.screen.android.indigo.PaymentDetailsScreenAndroid;
 import com.znsio.sample.e2e.screen.web.indigo.PaymentDetailsScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
@@ -14,7 +15,7 @@ import static com.znsio.e2e.runner.Runner.fetchEyes;
 public abstract class PaymentDetailsScreen {
 
 
-    private static final String SCREEN_NAME = HomeScreen.class.getSimpleName();
+    private static final String SCREEN_NAME = PaymentDetailsScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     public static PaymentDetailsScreen get() {
@@ -27,12 +28,13 @@ public abstract class PaymentDetailsScreen {
                 .getId());
 
         switch(platform) {
-
+            case android:
+                return new PaymentDetailsScreenAndroid(driver, visually);
             case web:
                 return new PaymentDetailsScreenWeb(driver, visually);
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract boolean checkingUserPaymentInformationPage();
+    public abstract boolean checkingUserPaymentInformation();
 }

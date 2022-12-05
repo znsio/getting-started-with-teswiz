@@ -4,6 +4,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.screen.android.indigo.GiftVoucherPreviewScreenAndroid;
 import com.znsio.sample.e2e.screen.web.indigo.GiftVoucherPreviewScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
@@ -26,7 +27,8 @@ public abstract class GiftVoucherPreviewScreen {
                 .getId());
 
         switch(platform) {
-
+            case android:
+                 return new GiftVoucherPreviewScreenAndroid(driver, visually);
             case web:
                 return new GiftVoucherPreviewScreenWeb(driver, visually);
         }
@@ -36,18 +38,12 @@ public abstract class GiftVoucherPreviewScreen {
     public abstract int setAndFetchTheAmountBasedOnDenominationAnQuantity(String denomination,String qnty) ;
     public abstract GiftVoucherPreviewScreen personalizeGiftVoucher();
     public abstract GiftVoucherPreviewScreen clickOnPreview();
-    public abstract boolean validatePersonalizationOfGiftVoucher();
+    public abstract boolean checkPersonalizationOfGiftVoucher();
     public abstract GiftVoucherPreviewScreen clickOnProceed();
-
     public abstract GiftVoucherPreviewScreen applyInvalidPromocode();
-
     public abstract String fetchInvalidPromoCodeMessage();
-
     public abstract int fetchTotalAmountAfterApplyingThePromoCode();
     public abstract GiftVoucherPreviewScreen setDeliveryOptions();
-
     public abstract PaymentDetailsScreen clickOnPayNow();
-
-
 
 }

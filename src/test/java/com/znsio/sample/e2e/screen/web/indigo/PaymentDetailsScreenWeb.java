@@ -14,9 +14,9 @@ public class PaymentDetailsScreenWeb extends PaymentDetailsScreen {
     private static final Logger LOGGER = Logger.getLogger(PaymentDetailsScreenWeb.class.getName());
     private final Driver driver;
     private final Visual visually;
+    private final String SCREEN_NAME = HomeScreenWeb.class.getSimpleName();
     private final WebDriver innerDriver;
     private final TestExecutionContext context;
-
     private final By byPaymentInfoTextXpath = By.xpath("//div[@id='sectionheading']/span[text()='Payment Information']");
 
     public PaymentDetailsScreenWeb(Driver driver, Visual visually) {
@@ -28,10 +28,10 @@ public class PaymentDetailsScreenWeb extends PaymentDetailsScreen {
         context = Runner.getTestExecutionContext(threadId);
     }
 
-
     @Override
-    public boolean checkingUserPaymentInformationPage() {
+    public boolean checkingUserPaymentInformation() {
         driver.waitTillElementIsVisible(byPaymentInfoTextXpath,2);
+        visually.takeScreenshot(SCREEN_NAME,"Payment Information Page");
         return driver.findElement(byPaymentInfoTextXpath).isDisplayed();
     }
 }

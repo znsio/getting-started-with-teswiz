@@ -49,17 +49,18 @@ public class GiftVoucherPreviewBL {
     }
 
     public GiftVoucherPreviewBL personalizeAndPreviewTheTotalBasedOnGivenDenominationAndQuantity(String denomination,String qnty)  {
-        int totalAmount= HomeScreen.get().selectGiftVoucher().setAndFetchTheAmountBasedOnDenominationAnQuantity(denomination,qnty);
-        int expectedTotal= Integer.parseInt(denomination) * Integer.parseInt(qnty);
-        Assert.assertEquals(totalAmount,expectedTotal," Amount calculated for given denomination " +
+        GiftVoucherPreviewScreen giftVoucherPreviewScreen = HomeScreen.get().selectGiftVoucher();
+        int expectedGiftVoucherTotalAmount=giftVoucherPreviewScreen.setAndFetchTheAmountBasedOnDenominationAnQuantity(denomination,qnty);
+        int actualGiftVoucherTotalAmount= Integer.parseInt(denomination) * Integer.parseInt(qnty);
+        Assert.assertEquals(expectedGiftVoucherTotalAmount,actualGiftVoucherTotalAmount," Amount calculated for given denomination " +
                 "and quantity is wrong");
         LOGGER.info("Amount calculated is correct for given denomination and quantity");
-        boolean status=GiftVoucherPreviewScreen.get().personalizeGiftVoucher().clickOnPreview().validatePersonalizationOfGiftVoucher();
-        softly.assertThat(status).as("Personalization is not done for the user").isEqualTo(true);
+        boolean expectedStatus=giftVoucherPreviewScreen.personalizeGiftVoucher().clickOnPreview().checkPersonalizationOfGiftVoucher();
+        softly.assertThat(expectedStatus).as("Personalization is not done for the user").isEqualTo(true);
 
-        GiftVoucherPreviewScreen.get().clickOnProceed();
+        giftVoucherPreviewScreen.clickOnProceed();
 
-        context.addTestState(SAMPLE_TEST_CONTEXT.TOTAL_AMOUNT, totalAmount);
+        context.addTestState(SAMPLE_TEST_CONTEXT.TOTAL_AMOUNT, expectedGiftVoucherTotalAmount);
 
         return this;
     }

@@ -32,6 +32,6 @@ public class PaymentScreenWeb extends PaymentScreen {
         // Amount is in this format "INR 10000.00"
         String amount =  driver.waitTillElementIsPresent(byPaymentAmountXpath).getText();
         LOGGER.info("Payment Amount is "+amount);
-        return Integer.parseInt(amount.split(" ")[1]);
+        return Integer.parseInt(amount.substring(4, amount.length() - 3));
     }
 }

@@ -26,7 +26,7 @@ public class GiftVoucherBL {
     private final String currentUserPersona;
     private final Platform currentPlatform;
     private static int totalAmount = 0;
-    private Map testData = Runner.getTestDataAsMap(System.getProperty("user.name"));
+    private Map testData = Runner.getTestDataAsMap("indigoGiftVoucherDetails");
     private static final Map details = new LinkedHashMap();
 
     public GiftVoucherBL() {

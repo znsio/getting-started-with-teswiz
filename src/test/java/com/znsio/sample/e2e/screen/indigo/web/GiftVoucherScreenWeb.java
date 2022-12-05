@@ -22,40 +22,40 @@ public class GiftVoucherScreenWeb extends GiftVoucherScreen {
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
-    private final By byQuantityDropdownId = By.id("SelectedVoucherQuantity");
+    private static final By byQuantityDropdownId = By.id("SelectedVoucherQuantity");
 
-    private final By byDenominationDropdownId = By.id("SelectedVoucherValue");
+    private static final By byDenominationDropdownId = By.id("SelectedVoucherValue");
 
-    private final By byMakeItPersonalId = By.id("chkPersonal");
+    private static final By byMakeItPersonalId = By.id("chkPersonal");
 
-    private final By byPersonalNameId = By.id("Per_Fname");
+    private static final By byPersonalNameId = By.id("Per_Fname");
 
-    private final By byPersonalMessageId = By.id("Message");
+    private static final By byPersonalMessageId = By.id("Message");
 
-    private final By byPreviewXpath = By.xpath("//input[@value='Preview']");
+    private static final By byPreviewXpath = By.xpath("//input[@value='Preview']");
 
-    private final By byProceedXpath = By.xpath("//input[@value='Proceed']");
+    private static final By byProceedXpath = By.xpath("//input[@value='Proceed']");
 
-    private final By byPromoCodeId = By.id(("PromoCode"));
+    private static final By byPromoCodeId = By.id(("PromoCode"));
 
-    private final By byApplyPromoCodeId = By.id("btnApplyPromoCode");
+    private static final By byApplyPromoCodeId = By.id("btnApplyPromoCode");
 
-    private final By byPromoCodeMessageXpath = By.xpath("//input[@id=\"PromoCode\"]//following-sibling::div");
+    private static final By byPromoCodeMessageXpath = By.xpath("//input[@id=\"PromoCode\"]//following-sibling::div");
 
-    private final By byTotalAmountId = By.id("lblTotal");
+    private static final By byTotalAmountId = By.id("lblTotal");
 
 
-    private final By byFirstNameXpath = By.xpath("//div[@class=\"label-value\"]//input[@id='Per_Fname']");
+    private static final By byFirstNameXpath = By.xpath("//div[@class=\"label-value\"]//input[@id='Per_Fname']");
 
-    private final By byLastNameId = By.id("Per_Lname");
+    private static final By byLastNameId = By.id("Per_Lname");
 
-    private final By byEmailAddId = By.id("Per_EmailID");
+    private static final By byEmailAddId = By.id("Per_EmailID");
 
-    private final By byPhoneId = By.id("Per_Phone");
+    private static final By byPhoneId = By.id("Per_Phone");
 
-    private final By bySenderXpath = By.xpath("//label[@for=\"radio-2\"]");
-    private final By byTncId = By.id("chkTnC");
-    private final By byPayNowClass = By.className("preview-btn");
+    private static final By bySenderXpath = By.xpath("//label[@for=\"radio-2\"]");
+    private static final By byTncId = By.id("chkTnC");
+    private static final By byPayNowClass = By.className("preview-btn");
 
     public GiftVoucherScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;

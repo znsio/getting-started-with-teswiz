@@ -19,8 +19,8 @@ public class HomeScreenWeb extends HomeScreen {
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
-    private final By byBookDropdownXpath = By.xpath("//a[@title='Book']");
-    private final By byGiftVoucherXpath = By.xpath("//div[@class='nav-inner-items']//a[contains(@href,\"giftvoucher\")]");
+    private static final By byBookDropdownXpath = By.xpath("//a[@title='Book']");
+    private static final By byGiftVoucherXpath = By.xpath("//div[@class='nav-inner-items']//a[contains(@href,\"giftvoucher\")]");
 
     public HomeScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;

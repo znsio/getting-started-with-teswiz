@@ -36,15 +36,17 @@ public class IndigoStep {
     }
 
 
-    @Given("I as a guest user,personalize and preview the gift voucher of any amount and quantity")
+    @Given("I, as a guest user personalize and preview the gift voucher with amount and quantity")
     public void iAsAGuestUserPersonalizeAndPreviewTheGiftVoucherOfAnyAmountAndQuantity() {
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
+        LOGGER.info("Personalizing and previewing the gift voucher");
         new GiftVoucherPreviewBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).personalizeAndPreviewTheTotalBasedOnGivenDenominationAndQuantity(String.valueOf(userDetails.get("denomination")),
                 String.valueOf(userDetails.get("quantity")));
     }
 
     @When("I apply the invalid promo code to check the status of total amount")
     public void iApplyTheInvalidPromoCodeToCheckTheStatusOfTotalAmount() {
+        LOGGER.info("Set invalid promo code");
         new GiftVoucherPreviewBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).setInvalidPromoCode();
     }
 

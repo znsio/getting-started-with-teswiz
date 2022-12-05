@@ -20,7 +20,7 @@ public class GiftVoucherPreviewScreenWeb extends GiftVoucherPreviewScreen {
     private static final Logger LOGGER = Logger.getLogger(GiftVoucherPreviewScreenWeb.class.getName());
     private final Driver driver;
     private final Visual visually;
-    private final String SCREEN_NAME = HomeScreenWeb.class.getSimpleName();
+    private final String SCREEN_NAME = GiftVoucherPreviewScreenWeb.class.getSimpleName();
     private final WebDriver innerDriver;
     private final TestExecutionContext context;
     private static final By bySelectDenominationDdXpath = By.id("SelectedVoucherValue");
@@ -112,10 +112,10 @@ public class GiftVoucherPreviewScreenWeb extends GiftVoucherPreviewScreen {
     @Override
     public boolean checkPersonalizationOfGiftVoucher() {
         visually.takeScreenshot(SCREEN_NAME,"Gift Voucher Preview Page");
-        String title=driver.waitTillElementIsVisible(byTitleTextXpath,3).getText().replace(",","");
+        String name=driver.waitTillElementIsVisible(byTitleTextXpath,3).getText().replace(",","");
         String message=driver.waitTillElementIsVisible(byMessageTextXpath,3).getText();
 
-        return (title.equalsIgnoreCase(String.valueOf(context.getTestState(SAMPLE_TEST_CONTEXT.NAME)))&&
+        return (name.equalsIgnoreCase(String.valueOf(context.getTestState(SAMPLE_TEST_CONTEXT.NAME)))&&
                 message.equalsIgnoreCase(String.valueOf(context.getTestState(SAMPLE_TEST_CONTEXT.MESSAGE))));
     }
 

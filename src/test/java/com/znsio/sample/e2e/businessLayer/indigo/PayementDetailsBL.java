@@ -36,7 +36,7 @@ public class PayementDetailsBL {
     }
 
     public void validatePaymentInformationForOriginalAmount(){
-     boolean paymentInfoStatus= new GiftVoucherPreviewBL().enterUserDetailsAndProceed().checkingUserPaymentInformation();
+     boolean paymentInfoStatus= new GiftVoucherPreviewBL().enterReceiverAndSenderDetailsAndProceed().checkingUserPaymentInformation();
      Assert.assertEquals(paymentInfoStatus,true,"User is not re-directed to payment gateway page with original amount");
     }
 }

@@ -79,7 +79,7 @@ public class GiftVoucherPreviewBL {
 
 
 
-    public PaymentDetailsScreen enterUserDetailsAndProceed(){
+    public PaymentDetailsScreen enterReceiverAndSenderDetailsAndProceed(){
      return GiftVoucherPreviewScreen.get().setDeliveryOptions().clickOnPayNow();
     }
 }

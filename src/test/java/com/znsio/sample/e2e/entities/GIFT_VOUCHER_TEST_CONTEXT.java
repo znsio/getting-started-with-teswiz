@@ -4,6 +4,8 @@ import com.znsio.e2e.entities.TEST_CONTEXT;
 
 public class GIFT_VOUCHER_TEST_CONTEXT extends TEST_CONTEXT {
 
+   public static final String USER = "user";
+
    public static final String MESSAGE = "message";
 
    public static final String DELIVERY_OPTION = "deliveryOption";

@@ -6,5 +6,6 @@
     "BING_BASE_URL": "http://bing.com/images",
     "JIOMEET_BASE_URL": "https://jiomeetpro.jio.com/home",
     "INDIGO_BASE_URL": "https://www.goindigo.in/"
+    "AJIO_BASE_URL": "https://www.ajio.com"
   }
 }

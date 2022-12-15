@@ -2,11 +2,9 @@ package com.znsio.sample.e2e.screen.indigo.web;
 
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-
 import com.znsio.sample.e2e.screen.indigo.PaymentPageScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-
 public class PaymentPageScreenWeb
         extends PaymentPageScreen {
     private final Driver driver;
@@ -21,13 +19,10 @@ public class PaymentPageScreenWeb
         this.visually = visually;
         visually.checkWindow(SCREEN_NAME, "Home page");
     }
-
     @Override
     public Double getFinalAmount() {
-
         visually.checkWindow(SCREEN_NAME, "Payment Page");
         LOGGER.info("User is on payment page");
-
         return Double.parseDouble(driver.waitTillElementIsPresent(byTotalAmountSelector).getText().split(" ")[1]);
     }
 }

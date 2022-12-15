@@ -29,21 +29,15 @@ public class IndigoVoucherSteps {
     public void iAGuestUserPersonalizeAndPreviewGiftVouchersWithAnyDenominationAndQuantity() {
         allDrivers.createDriverFor(INDIGO_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
         LOGGER.info(System.out.printf("User Personalises Gift Voucher with - Persona:'%s', and Platform: '%s'", INDIGO_TEST_CONTEXT.GUEST_USER, Runner.platform));
-
         new GiftVoucherBL(INDIGO_TEST_CONTEXT.GUEST_USER, Runner.platform).personaliseAndPreviewGiftVoucher();
     }
-
     @When("I tried applying a promo code comes invalid")
     public void iTriedApplyingAPromoCodeComesInvalid() {
-
         LOGGER.info(System.out.printf("'%s' User is applying promo code", INDIGO_TEST_CONTEXT.GUEST_USER));
         new GiftVoucherBL(INDIGO_TEST_CONTEXT.GUEST_USER, Runner.platform).applyPromoCode(context.getTestState(INDIGO_TEST_CONTEXT.PROMO_CODES).toString());
-
     }
-
-    @Then("I should be able to proceed to payment page with original total amount")
-    public void iShouldBeAbleToProceedToPaymentPageWithOriginalTotalAmount() {
-
+    @Then("I should be able to proceed to payment page with original amount")
+    public void iShouldBeAbleToProceedToPaymentPageWithOriginalAmount() {
         LOGGER.info("User is on payment screen");
         new GiftVoucherBL(INDIGO_TEST_CONTEXT.GUEST_USER, Runner.platform).fillTheDetailsAndProceedToPayment();
     }

@@ -22,14 +22,11 @@ public class HomePageScreenWeb
         this.visually = visually;
         visually.checkWindow(SCREEN_NAME, "Home page");
     }
-
-
     @Override
     public GiftVoucherScreen navigateToGiftVoucherScreen() {
 
         LOGGER.info("User click on gift voucher from dropdown and navigating to gift voucher screen");
         visually.checkWindow(SCREEN_NAME, "Home Page Screen");
-
         driver.moveToElement(byBookDropdownXpath);
         driver.waitTillElementIsPresent(byGiftVoucherXpath).click();
         return GiftVoucherScreen.get();

@@ -22,11 +22,6 @@
           4,
           5
         ],
-        "promoCodes": [
-          "INVALID_PROMO1",
-          "INVALID_PROMO2",
-          "INVALID_PROMO3"
-        ],
         "errorMessage": "Invalid Promo Code."
       }
     }

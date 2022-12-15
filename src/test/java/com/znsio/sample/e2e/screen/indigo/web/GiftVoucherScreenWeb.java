@@ -5,19 +5,15 @@ import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.entities.INDIGO_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.indigo.GiftVoucherScreen;
-import com.znsio.sample.e2e.screen.indigo.HomePageScreen;
 import com.znsio.sample.e2e.screen.indigo.PaymentPageScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class GiftVoucherScreenWeb
-        extends GiftVoucherScreen {
+public class GiftVoucherScreenWeb extends GiftVoucherScreen {
     private final Driver driver;
     private final Visual visually;
     private static final String SCREEN_NAME = GiftVoucherScreenWeb.class.getSimpleName();
@@ -53,7 +49,7 @@ public class GiftVoucherScreenWeb
     @Override
     public GiftVoucherScreen selectQuantity(int quantity) {
 
-        LOGGER.info("User select the quantity from dropdown as : "+ quantity);
+        LOGGER.info("User select the quantity from dropdown as : " + quantity);
         Select selectQuantity = new Select(driver.waitTillElementIsPresent(byQuantityId, 20));
         selectQuantity.selectByValue(Integer.toString(quantity));
         visually.checkWindow(SCREEN_NAME, "Gift Voucher Screen after selecting denomination and quantity");
@@ -63,7 +59,7 @@ public class GiftVoucherScreenWeb
     @Override
     public GiftVoucherScreen selectDenomination(int denomination) {
 
-        LOGGER.info("User select the denomination from dropdown as : "+ denomination);
+        LOGGER.info("User select the denomination from dropdown as : " + denomination);
         visually.checkWindow(SCREEN_NAME, "Gift Voucher Screen");
 
         driver.waitTillElementIsVisible(byGiftVoucherPageClass, 20);
@@ -75,16 +71,13 @@ public class GiftVoucherScreenWeb
 
     @Override
     public Boolean previewGiftVoucher(String firstName, String message, int denomination) {
-
         driver.scrollToBottom();
         driver.waitTillElementIsPresent(byPreviewButtonClass).click();
 
         LOGGER.info("User clicked on preview button");
         visually.checkWindow(SCREEN_NAME, "preview gift voucher screen");
 
-        return driver.waitTillElementIsPresent(byFirstNameSelector, 20).getText().equalsIgnoreCase(firstName + ',')
-                && driver.waitTillElementIsPresent(byMessageSelector, 20).getText().equalsIgnoreCase(message)
-                && driver.waitTillElementIsPresent(byTotalAmountSelector, 20).getText().contains(Integer.toString(denomination));
+        return driver.waitTillElementIsPresent(byFirstNameSelector, 20).getText().equalsIgnoreCase(firstName + ',') && driver.waitTillElementIsPresent(byMessageSelector, 20).getText().equalsIgnoreCase(message) && driver.waitTillElementIsPresent(byTotalAmountSelector, 20).getText().contains(Integer.toString(denomination));
     }
 
     @Override
@@ -100,14 +93,12 @@ public class GiftVoucherScreenWeb
 
     @Override
     public int getTotalAmountOfGiftCard() {
-
         LOGGER.info("Users fetching the total amount on preview page");
         return Integer.parseInt(driver.waitTillElementIsPresent(byTotalAmountId, 20).getText().split(" ")[1]);
     }
 
     @Override
     public GiftVoucherScreen applyPromoCode(String promoCode) {
-
         driver.scrollToBottom();
         driver.waitTillElementIsPresent(byProceedButtonSelector, 20).click();
         driver.waitTillElementIsPresent(byPromoCodeTextFieldId, 20).sendKeys(promoCode);
@@ -130,7 +121,7 @@ public class GiftVoucherScreenWeb
     @Override
     public String getErrorMessage() {
         String message = driver.waitTillElementIsPresent(byErrorMessageXpath, 20).getText();
-        LOGGER.info("Error message for invalid applied coupon : "+ message);
+        LOGGER.info("Error message for invalid applied coupon : " + message);
         return message;
     }
 
@@ -144,7 +135,6 @@ public class GiftVoucherScreenWeb
         driver.waitTillElementIsPresent(byChcTncId, 20).click();
         LOGGER.info("User proceed to payment page filling all the sender details");
         visually.checkWindow(SCREEN_NAME, "Preview page post filling all the details");
-
         driver.waitTillElementIsPresent(byPreviewButtonClass, 20).click();
         return PaymentPageScreen.get();
     }

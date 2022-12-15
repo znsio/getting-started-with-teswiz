@@ -21,15 +21,11 @@ public abstract class GiftVoucherScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     public static GiftVoucherScreen get() {
-        Driver driver = fetchDriver(Thread.currentThread()
-                                          .getId());
-        Platform platform = Runner.fetchPlatform(Thread.currentThread()
-                                                       .getId());
+        Driver driver = fetchDriver(Thread.currentThread().getId());
+        Platform platform = Runner.fetchPlatform(Thread.currentThread().getId());
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
-        Visual visually = fetchEyes(Thread.currentThread()
-                                          .getId());
-
-        switch(platform) {
+        Visual visually = fetchEyes(Thread.currentThread().getId());
+        switch (platform) {
             case web:
                 return new GiftVoucherScreenWeb(driver, visually);
         }
@@ -37,11 +33,13 @@ public abstract class GiftVoucherScreen {
     }
 
     public abstract GiftVoucherScreen selectQuantity(int quantity);
+
     public abstract GiftVoucherScreen selectDenomination(int denomination);
 
     public abstract Boolean previewGiftVoucher(String firstName, String lastName, int denomination);
 
     public abstract GiftVoucherScreen personaliseMessage(String firstName, String lastName);
+
     public abstract int getTotalAmountOfGiftCard();
 
     public abstract GiftVoucherScreen applyPromoCode(String promoCode);

@@ -7,6 +7,28 @@
       "password": "eotTesting@0",
       "firstName": "Eot",
       "lastName": "Testing"
+    },
+    "Guest": {
+      "indigoGiftVoucher": {
+        "denominations": [
+          3000,
+          5000,
+          10000
+        ],
+        "quantities": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "promoCodes": [
+          "INVALID_PROMO1",
+          "INVALID_PROMO2",
+          "INVALID_PROMO3"
+        ],
+        "errorMessage": "Invalid Promo Code."
+      }
     }
   }
 }

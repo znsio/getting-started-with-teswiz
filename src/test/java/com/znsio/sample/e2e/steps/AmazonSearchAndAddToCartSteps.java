@@ -39,7 +39,7 @@ public class AmazonSearchAndAddToCartSteps {
         new AmazonSearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).clickOnFirstItem();
     }
 
-    @Then("I should see its product detail page")
+    @Then("I should see the product detail page")
     public void iShouldLandOnItsProductDetailPage() {
         new AmazonProductDetailsBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).verifyProductDetails();
     }
@@ -49,7 +49,7 @@ public class AmazonSearchAndAddToCartSteps {
         new AmazonProductDetailsBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).addToCart();
     }
 
-    @Then("I should be able to see it in the cart")
+    @Then("I should be able to see the product in the cart")
     public void iShouldBeAbleToSeeInTheCart() {
         new AmazonCartBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).verifyCartItem();
     }

@@ -32,8 +32,8 @@ public abstract class AmazonItemsDetailsScreen {
     public abstract String getScreenTitle ();
     public abstract String getItemsTitle ();
     public abstract AmazonItemsDetailsScreen selectAddToCart ();
-    public abstract String getAddedToCartText ();
+    public abstract String getCartCreationSuccessText ();
 
-    public abstract AmazonItemsDetailsScreen selectCart ();
+    public abstract AmazonCartScreen selectCart ();
 
 }

@@ -2,6 +2,7 @@ package com.znsio.sample.e2e.screen.web.Amazon;
 
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.screen.amazon.AmazonCartScreen;
 import com.znsio.sample.e2e.screen.amazon.AmazonItemsDetailsScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -50,15 +51,15 @@ public class AmazonItemsDetailsScreenWeb extends AmazonItemsDetailsScreen {
     }
 
     @Override
-    public String getAddedToCartText() {
+    public String getCartCreationSuccessText() {
         String addToCartConfirmationText = driver.waitForClickabilityOf(byAddedToCartTextXpath).getText();
         LOGGER.info(String.format("Add to Cart Confirmation Text: '%s'", addToCartConfirmationText));
         return addToCartConfirmationText;
     }
 
     @Override
-    public AmazonItemsDetailsScreenWeb selectCart() {
+    public AmazonCartScreen selectCart() {
         driver.waitForClickabilityOf(byCartButtonId).click();
-        return this;
+        return AmazonCartScreen.get();
     }
 }

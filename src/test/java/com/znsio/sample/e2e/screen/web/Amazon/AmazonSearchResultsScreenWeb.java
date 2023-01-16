@@ -6,7 +6,8 @@ import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.entities.OrdinalToNumber;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.amazon.AmazonItemsViewScreen;
+import com.znsio.sample.e2e.screen.amazon.AmazonItemsDetailsScreen;
+import com.znsio.sample.e2e.screen.amazon.AmazonSearchResultsScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,20 +15,20 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AmazonItemsViewScreenWeb extends AmazonItemsViewScreen {
+public class AmazonSearchResultsScreenWeb extends AmazonSearchResultsScreen {
 
     private final Driver driver;
     private final TestExecutionContext context;
 
     private final Visual visually;
-    private static final String SCREEN_NAME = AmazonItemsViewScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = AmazonSearchResultsScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private static final By bySearchStringXpath= By.xpath("//span[@class='a-color-state a-text-bold']");
     private static final By byProductsXpath = By.xpath("//span[contains(@class,'a-size-medium a-color-base a-text-normal')]");
 
-    public AmazonItemsViewScreenWeb(Driver driver, Visual visually) {
+    public AmazonSearchResultsScreenWeb(Driver driver, Visual visually) {
         long threadId = Thread.currentThread()
                 .getId();
         context = Runner.getTestExecutionContext(threadId);
@@ -36,7 +37,7 @@ public class AmazonItemsViewScreenWeb extends AmazonItemsViewScreen {
         visually.checkWindow(SCREEN_NAME, "Home page");
     }
     @Override
-    public String getSearchString() {
+    public String getSearchText() {
         String actualSearchString = driver.waitTillElementIsPresent(bySearchStringXpath).getText();
         LOGGER.info(String.format("Actual search was for: '%s'", actualSearchString));
         return actualSearchString;
@@ -47,11 +48,11 @@ public class AmazonItemsViewScreenWeb extends AmazonItemsViewScreen {
         return driver.findElements(byProductsXpath);
     }
     @Override
-    public AmazonItemsViewScreen clickOnItemByPosition(String itemPosition) {
+    public AmazonItemsDetailsScreen clickOnItemByPosition(String itemPosition) {
         int itemIndex = OrdinalToNumber.valueOf(itemPosition.toUpperCase()).ordinal();
         LOGGER.info(String.format("Clicking on Product title: '%s'", getItemText(itemPosition)));
         getItems().get(itemIndex).click();
-        return this.get();
+        return AmazonItemsDetailsScreen.get();
     }
 
     @Override

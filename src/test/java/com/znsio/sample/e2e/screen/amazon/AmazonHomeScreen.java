@@ -31,5 +31,7 @@ public abstract class AmazonHomeScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract AmazonItemsViewScreen enterItemNameInSearchbarAndPressEnter(String product);
+    public abstract AmazonHomeScreen enterItemNameInSearch(String product);
+
+    public abstract AmazonSearchResultsScreen pressEnter();
 }

@@ -21,7 +21,7 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
         visually.checkWindow(SCREEN_NAME, "Home page");
     }
     @Override
-    public String getItemAddedToCart() {
+    public String getCartItem() {
         String itemInCart =  driver.waitTillElementIsPresent(byItemStringClassName).getText();
         LOGGER.info(String.format("Item added in the cart is '%s'", itemInCart));
         return itemInCart;

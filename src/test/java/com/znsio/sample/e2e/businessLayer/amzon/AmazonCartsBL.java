@@ -26,8 +26,8 @@ public class AmazonCartsBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public AmazonCartsBL isItemAddedToCart(){
-        String actualItemTitle  = AmazonCartScreenWeb.get().getItemAddedToCart();
+    public AmazonCartsBL verifyItemAddedToCart(){
+        String actualItemTitle  = AmazonCartScreenWeb.get().getCartItem();
         LOGGER.info(String.format("Item added to cart is: '%s'",actualItemTitle));
         String expectedItemTitle = context.getTestStateAsString("itemTitle");
         Assertions.

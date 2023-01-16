@@ -5,7 +5,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.businessLayer.ajio.AjioSearchBL;
 import com.znsio.sample.e2e.screen.amazon.AmazonHomeScreen;
-import com.znsio.sample.e2e.screen.amazon.AmazonItemsViewScreen;
+import com.znsio.sample.e2e.screen.amazon.AmazonSearchResultsScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
@@ -29,12 +29,13 @@ public class AmazonHomeBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public AmazonHomeBL doItemSearch(String itemName) {
-        AmazonItemsViewScreen amazonItemsViewScreen = AmazonHomeScreen.get()
-                .enterItemNameInSearchbarAndPressEnter(itemName);
-        String actualSearchWasFor = amazonItemsViewScreen.getSearchString();
+    public AmazonHomeBL itemSearch(String itemName) {
+        AmazonSearchResultsScreen amazonItemsViewScreen = AmazonHomeScreen.get()
+                .enterItemNameInSearch(itemName)
+                .pressEnter();
+        String actualSearchedText = amazonItemsViewScreen.getSearchText();
         List<String> actualItemTitles = amazonItemsViewScreen.getItemTitles();
-        softly.assertThat(actualSearchWasFor).as(String.format("Expected search was for '%s' but found '%s'",itemName,actualSearchWasFor)).contains(itemName);
+        softly.assertThat(actualSearchedText).as(String.format("Expected search was for '%s' but found '%s'",itemName,actualSearchedText)).contains(itemName);
         Assertions.assertThat(actualItemTitles).as(String.format("Results are not displayed as per searched: '%s'",itemName))
                 .allMatch(actualItemTitle->actualItemTitle.contains(itemName));
         return this;

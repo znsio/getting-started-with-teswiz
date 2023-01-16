@@ -46,9 +46,10 @@ public class AmazonSearchBL {
         return this;
     }
 
-    public AmazonSearchBL clickOnFirstItem() {
-        AmazonSearchResultsScreen.get()
+    public AmazonSearchBL selectFirstItem() {
+        AmazonSearchResultsScreen amazonSearchResultsScreen = AmazonSearchResultsScreen.get()
                 .clickOnFirstItem();
+        assertThat(amazonSearchResultsScreen.getFirstItemName().contains(context.getTestStateAsString(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD))).as("First item is different from searched product").isTrue();
         return this;
     }
 }

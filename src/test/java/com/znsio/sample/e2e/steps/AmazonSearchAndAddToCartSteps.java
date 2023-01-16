@@ -37,7 +37,7 @@ public class AmazonSearchAndAddToCartSteps {
 
     @When("I select the first product from the search results")
     public void iSelectTheFirstItemFromTheSearchResults() {
-        new AmazonSearchBL().clickOnFirstItem();
+        new AmazonSearchBL().selectFirstItem();
     }
 
     @Then("I should see the product detail page")
@@ -47,7 +47,7 @@ public class AmazonSearchAndAddToCartSteps {
 
     @When("I add the product to my cart")
     public void iAddToTheCart() {
-        new AmazonProductDetailsBL().addToCart();
+        new AmazonProductDetailsBL().createCart();
     }
 
     @Then("I should be able to see the product in the cart")

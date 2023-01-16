@@ -49,13 +49,14 @@ public class AmazonProductDetailsBL {
 
         softly.assertThat(actualName).as("Product name on detail page is different").isEqualTo(expectedName);
         softly.assertThat(actualCost).as("Product cost on detail page is different").isEqualTo(expectedCost);
-        System.out.println("Searched String" + " " + context.getTestStateAsString(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD));
+
+        LOGGER.info(String.format("Searched Product Context '%s'",context.getTestStateAsString(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD)));
         assertThat(actualName.contains(context.getTestStateAsString(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD))).as("Product item is different from searched string").isTrue();
 
         return this;
     }
 
-    public AmazonProductDetailsBL addToCart(){
+    public AmazonProductDetailsBL createCart(){
 
         AmazonProductDetailsScreen amazonProductDetailsScreen = AmazonProductDetailsScreen.get();
         amazonProductDetailsScreen.addToCart();

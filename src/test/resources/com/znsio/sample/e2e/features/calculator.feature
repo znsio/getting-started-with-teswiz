@@ -2,7 +2,7 @@
 Feature: Calculator test
 
 #  CONFIG=./configs/calculator_local_config.properties PLATFORM=android TAG=calculator ./gradlew run
-  @android
+  @android @web
   Scenario: Calculations
     Given I start the calculator
     When I select "2"

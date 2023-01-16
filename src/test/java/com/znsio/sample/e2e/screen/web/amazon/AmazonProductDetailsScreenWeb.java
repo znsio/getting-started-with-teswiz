@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 public class AmazonProductDetailsScreenWeb extends AmazonProductDetailsScreen {
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = AmazonSearchResultsScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = AmazonProductDetailsScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private static final By byProductFoundNameId = By.id("productTitle");
@@ -26,6 +26,7 @@ public class AmazonProductDetailsScreenWeb extends AmazonProductDetailsScreen {
     public AmazonProductDetailsScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
+        visually.checkWindow(SCREEN_NAME, "Product Details screen");
     }
 
     @Override
@@ -50,18 +51,21 @@ public class AmazonProductDetailsScreenWeb extends AmazonProductDetailsScreen {
     }
 
     @Override
-    public void addToCart(){
+    public AmazonProductDetailsScreen addToCart(){
         driver.waitTillElementIsPresent(byaddToCartBtnId).click();
+        visually.checkWindow(SCREEN_NAME, "Item added to cart");
+        return this;
     }
 
     @Override
     public boolean isItemAddedToCartTextVisible(){
-        return driver.isElementPresent(byAddToCartTextXpath);
+        return driver.waitTillElementIsVisible(byAddToCartTextXpath).isDisplayed();
     }
 
     @Override
     public AmazonCartScreen goToCartPage(){
         driver.waitTillElementIsVisible(byGoToCartBtnId).click();
+        visually.checkWindow(SCREEN_NAME, "Go to cart page");
         return AmazonCartScreen.get();
     }
 }

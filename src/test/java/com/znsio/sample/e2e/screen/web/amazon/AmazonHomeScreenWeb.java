@@ -22,11 +22,11 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
     public AmazonHomeScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
-        visually.checkWindow(SCREEN_NAME, "Home page");
+        visually.checkWindow(SCREEN_NAME, "Home screen");
     }
 
     @Override
-    public AmazonSearchResultsScreen searchFor(String product) {
+    public AmazonSearchResultsScreen search(String product) {
         LOGGER.info(String.format("Search for '%s'", product));
         WebElement searchElement = driver.waitTillElementIsPresent(bySearchBoxId);
         searchElement.click();

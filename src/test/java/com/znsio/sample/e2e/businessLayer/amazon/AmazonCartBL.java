@@ -5,12 +5,10 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazon.AmazonCartScreen;
-import com.znsio.sample.e2e.screen.amazon.AmazonHomeScreen;
 import com.znsio.sample.e2e.screen.amazon.AmazonProductDetailsScreen;
-import com.znsio.sample.e2e.screen.amazon.AmazonSearchResultsScreen;
-import io.cucumber.java.bs.A;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AmazonCartBL {
     private static final Logger LOGGER = Logger.getLogger(AmazonCartBL.class.getName());
@@ -34,25 +32,22 @@ public class AmazonCartBL {
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
-        this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
+        this.currentUserPersona = SAMPLE_TEST_CONTEXT.GUEST_USER;
         this.currentPlatform = Runner.platform;
     }
 
-    public AmazonCartBL verifyCartItem(){
+    public AmazonCartBL verifyCartItem() {
         AmazonProductDetailsScreen amazonProductDetailsScreen = AmazonProductDetailsScreen.get();
-
         String actualName = amazonProductDetailsScreen.getActualItemName();
-        String actualCost = amazonProductDetailsScreen.getActualItemCost();
-
         AmazonCartScreen amazonCartScreen = amazonProductDetailsScreen.goToCartPage();
-
         softly.assertThat(amazonCartScreen.isCartHeadingVisible()).as("Shopping Cart heading is not visible");
 
         String cartItemName = amazonCartScreen.getCartItemName();
-//        String cartItemCost = amazonCartScreen.getCartItemCost();
+        softly.assertThat(actualName).as("Cart Item name is different from clicked item").isEqualTo(cartItemName);
 
-        softly.assertThat(actualName).as("Cart Item name is different").isEqualTo(cartItemName);
-//        softly.assertThat(actualCost).as("Cart Item cost is detail page is different").isEqualTo(cartItemCost);
+        String searchedString = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD);
+        System.out.println("Searched String" + " " + searchedString);
+        assertThat(cartItemName.contains(searchedString)).as("Cart item is different from searched string").isTrue();
 
         return this;
     }

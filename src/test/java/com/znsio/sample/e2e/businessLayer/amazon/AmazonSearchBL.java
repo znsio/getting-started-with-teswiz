@@ -5,7 +5,6 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazon.AmazonHomeScreen;
-import com.znsio.sample.e2e.screen.amazon.AmazonProductDetailsScreen;
 import com.znsio.sample.e2e.screen.amazon.AmazonSearchResultsScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
@@ -35,21 +34,21 @@ public class AmazonSearchBL {
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
-        this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
+        this.currentUserPersona = SAMPLE_TEST_CONTEXT.GUEST_USER;
         this.currentPlatform = Runner.platform;
     }
 
-    public AmazonSearchBL searchFor(String product) {
+    public AmazonSearchBL searchForProduct(String product) {
         AmazonSearchResultsScreen amazonSearchResultsScreen = AmazonHomeScreen.get()
-                .searchFor(product);
+                .search(product);
         String actualSearchWasFor = amazonSearchResultsScreen.getActualSearchString();
-        softly.assertThat(actualSearchWasFor).as("Search was for a different value").isEqualTo(product);
+        assertThat(actualSearchWasFor).as("Search results are different from searched product").isEqualTo(product);
         return this;
     }
 
-    public AmazonProductDetailsBL clickOnFirstItem() {
+    public AmazonSearchBL clickOnFirstItem() {
         AmazonSearchResultsScreen.get()
                 .clickOnFirstItem();
-        return new AmazonProductDetailsBL(currentUserPersona,currentPlatform);
+        return this;
     }
 }

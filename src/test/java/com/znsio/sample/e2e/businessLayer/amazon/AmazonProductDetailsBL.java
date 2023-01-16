@@ -4,11 +4,11 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.amazon.AmazonCartScreen;
 import com.znsio.sample.e2e.screen.amazon.AmazonProductDetailsScreen;
 import com.znsio.sample.e2e.screen.amazon.AmazonSearchResultsScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AmazonProductDetailsBL {
 
@@ -33,11 +33,11 @@ public class AmazonProductDetailsBL {
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
-        this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
+        this.currentUserPersona = SAMPLE_TEST_CONTEXT.GUEST_USER;
         this.currentPlatform = Runner.platform;
     }
 
-    public void verifyProductDetails(){
+    public AmazonProductDetailsBL verifyProductDetails(){
         AmazonSearchResultsScreen amazonSearchResultsScreen = AmazonSearchResultsScreen.get();
         String expectedName = amazonSearchResultsScreen.getFirstItemName();
         String expectedCost = amazonSearchResultsScreen.getFirstItemCost();
@@ -49,14 +49,18 @@ public class AmazonProductDetailsBL {
 
         softly.assertThat(actualName).as("Product name on detail page is different").isEqualTo(expectedName);
         softly.assertThat(actualCost).as("Product cost on detail page is different").isEqualTo(expectedCost);
+        System.out.println("Searched String" + " " + context.getTestStateAsString(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD));
+        assertThat(actualName.contains(context.getTestStateAsString(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD))).as("Product item is different from searched string").isTrue();
+
+        return this;
     }
 
-    public AmazonCartBL addToCart(){
+    public AmazonProductDetailsBL addToCart(){
 
         AmazonProductDetailsScreen amazonProductDetailsScreen = AmazonProductDetailsScreen.get();
         amazonProductDetailsScreen.addToCart();
-        softly.assertThat(amazonProductDetailsScreen.isItemAddedToCartTextVisible()).as("Add To Cart text is not visible");
+        assertThat(amazonProductDetailsScreen.isItemAddedToCartTextVisible()).as("Add To Cart text is not visible").isTrue();
 
-        return new AmazonCartBL(currentUserPersona,currentPlatform);
+        return this;
     }
 }

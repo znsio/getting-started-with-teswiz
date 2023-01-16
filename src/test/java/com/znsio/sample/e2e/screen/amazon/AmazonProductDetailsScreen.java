@@ -5,7 +5,6 @@ import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.web.amazon.AmazonProductDetailsScreenWeb;
-import com.znsio.sample.e2e.screen.web.amazon.AmazonSearchResultsScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
@@ -26,7 +25,7 @@ public abstract class AmazonProductDetailsScreen {
                 .getId());
 
         switch (platform) {
-            case android:
+//            case android:
 //                return new AjioHomeScreenAndroid(driver, visually);
             case web:
                 return new AmazonProductDetailsScreenWeb(driver, visually);
@@ -38,7 +37,7 @@ public abstract class AmazonProductDetailsScreen {
 
     public abstract String getActualItemCost();
 
-    public abstract void addToCart();
+    public abstract AmazonProductDetailsScreen addToCart();
 
     public abstract boolean isItemAddedToCartTextVisible();
 

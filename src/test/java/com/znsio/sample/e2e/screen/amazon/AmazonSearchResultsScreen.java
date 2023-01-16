@@ -26,19 +26,17 @@ public abstract class AmazonSearchResultsScreen {
                 .getId());
 
         switch (platform) {
-            case android:
-//                return new AjioHomeScreenAndroid(driver, visually);
+//            case android:
+//                throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
             case web:
                 return new AmazonSearchResultsScreenWeb(driver, visually);
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-//    public abstract int getNumberOfProductsFound();
-
     public abstract String getActualSearchString();
 
-    public abstract AmazonProductDetailsScreen clickOnFirstItem();
+    public abstract AmazonSearchResultsScreen clickOnFirstItem();
 
     public abstract String getFirstItemName();
 

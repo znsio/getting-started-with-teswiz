@@ -9,18 +9,17 @@ import org.openqa.selenium.By;
 public class AmazonCartScreenWeb extends AmazonCartScreen {
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = AmazonHomeScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = AmazonCartScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
 
     private static final By byCartHeadingTextXpath = By.xpath("//h1");
     private static final By byCartItemNameXpath = By.xpath("(//div[@class='sc-item-content-group'])/descendant::a/span/span/span[2]");
-    private static final By byCartItemCostXpath = By.xpath("(//div[@id=\"attachDisplayAddBaseAlert\"])/span");
 
     public AmazonCartScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
-        visually.checkWindow(SCREEN_NAME, "Home page");
+        visually.checkWindow(SCREEN_NAME, "Cart screen");
     }
 
     @Override
@@ -35,8 +34,4 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
         return cartItemName;
     }
 
-    @Override
-    public String getCartItemCost(){
-        return "";
-    }
 }

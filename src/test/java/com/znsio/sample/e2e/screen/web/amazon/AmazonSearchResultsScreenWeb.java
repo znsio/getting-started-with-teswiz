@@ -7,6 +7,11 @@ import com.znsio.sample.e2e.screen.amazon.AmazonSearchResultsScreen;
 import com.znsio.sample.e2e.screen.android.ajio.AjioSearchResultsScreenAndroid;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class AmazonSearchResultsScreenWeb extends AmazonSearchResultsScreen {
     private final Driver driver;
@@ -16,7 +21,7 @@ public class AmazonSearchResultsScreenWeb extends AmazonSearchResultsScreen {
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private final By bySearchStringXpath = By.xpath("//span[contains(text(),\"results\")]/following-sibling::span[2]");
 
-    private static final By byProductFoundXpath = By.xpath("(//span[contains(text(),'iPhone 13')])[3]");
+    private static final By byProductFoundCSSSelector = By.cssSelector(".a-size-mini span");
 
     private static final By byProductCostXpath = By.xpath("(//span[@class='a-price'])[1]/span");
 
@@ -24,17 +29,14 @@ public class AmazonSearchResultsScreenWeb extends AmazonSearchResultsScreen {
     public AmazonSearchResultsScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
+        visually.checkWindow(SCREEN_NAME, "Search results screen");
     }
 
-//    @Override
-//    public int getNumberOfProductsFound() {
-//        String numberOfProductsText = driver.findElementByXpath(byNumberOfProductsFoundText).getText();
-//
-//        String numberOfProducts = driver.waitTillElementIsPresent(byNumberOfProductsFoundId)
-//                .getText();
-//        LOGGER.info(String.format("Found '%s'", numberOfProducts));
-//        return Integer.parseInt(numberOfProducts.split(" ")[0]);
-//    }
+    private WebElement waitForProductListAndGetFirstProduct(){
+        WebDriverWait wait = new WebDriverWait(driver.getInnerDriver(),30);
+        List<WebElement> productTitleWebElements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(byProductFoundCSSSelector));
+        return productTitleWebElements.get(0);
+    }
 
     @Override
     public String getActualSearchString() {
@@ -42,21 +44,19 @@ public class AmazonSearchResultsScreenWeb extends AmazonSearchResultsScreen {
                 .getText();
         String actualSearchString = searchString.substring(1, searchString.length() - 1);
         LOGGER.info(String.format("Actual search was for: '%s'", actualSearchString));
-        visually.checkWindow(SCREEN_NAME, "Search results screen");
         return actualSearchString;
     }
 
     @Override
-    public AmazonProductDetailsScreen clickOnFirstItem(){
-
-        driver.waitTillElementIsPresent(byProductFoundXpath).click();
-        return AmazonProductDetailsScreen.get();
+    public AmazonSearchResultsScreen clickOnFirstItem(){
+        waitForProductListAndGetFirstProduct().click();
+        visually.checkWindow(SCREEN_NAME, "Clicked on first item");
+        return this;
     }
 
     @Override
     public String getFirstItemName(){
-        String itemName = driver.waitTillElementIsPresent(byProductFoundXpath)
-                .getText();
+        String itemName = waitForProductListAndGetFirstProduct().getText();
 
         LOGGER.info(String.format("Expected item name: '%s'", itemName));
         return itemName;

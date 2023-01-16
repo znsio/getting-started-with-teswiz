@@ -31,12 +31,13 @@ public class AmazonSearchAndAddToCartSteps {
     public void iAsAGuestUserSearchForProductOnAmazon(String product) {
         LOGGER.info(System.out.printf("iAGuestUserSearchForProducts - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
-        new AmazonSearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchFor(product);
+        context.addTestState(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD, product);
+        new AmazonSearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchForProduct(product);
     }
 
     @When("I select the first product from the search results")
     public void iSelectTheFirstItemFromTheSearchResults() {
-        new AmazonSearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).clickOnFirstItem();
+        new AmazonSearchBL().clickOnFirstItem();
     }
 
     @Then("I should see the product detail page")
@@ -46,7 +47,7 @@ public class AmazonSearchAndAddToCartSteps {
 
     @When("I add the product to my cart")
     public void iAddToTheCart() {
-        new AmazonProductDetailsBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).addToCart();
+        new AmazonProductDetailsBL().addToCart();
     }
 
     @Then("I should be able to see the product in the cart")

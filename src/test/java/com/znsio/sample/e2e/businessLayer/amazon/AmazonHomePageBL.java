@@ -29,7 +29,7 @@ public class AmazonHomePageBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
     public AmazonHomePageBL productSearch(String product) {
-        AmazonHomeScreen amazonSearchResultsScreen = AmazonHomeScreen.get().searchProduct(product);
+        AmazonHomeScreen amazonSearchResultsScreen = AmazonHomeScreen.get().searchProductFromSearchbar(product);
         String actualSearchOfProduct = amazonSearchResultsScreen.getActualSearchString();
         assertThat(actualSearchOfProduct).as("Search is for product: "+product)
                 .isEqualTo(product);

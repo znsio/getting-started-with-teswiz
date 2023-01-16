@@ -16,31 +16,31 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String product=SAMPLE_TEST_CONTEXT.PRODUCT;
 
-    private static final By byAddToCartButton=By.xpath("//input[@id='add-to-cart-button']");
-    private static final By byCartButton=By.xpath("//span[@id='attach-sidesheet-view-cart-button']//input");
+    private static final By byAddToCartButtonXpath=By.xpath("//input[@id='add-to-cart-button']");
+    private static final By byCartButtonXpath=By.xpath("//span[@id='attach-sidesheet-view-cart-button']//input");
 
-    private static final By byCartProduct=By.xpath("//span[@class='a-truncate-cut'][contains(text(),'iPhone 13')]");
-    private static final By byAddedToCartMsg=By.xpath("//span[contains(@class,'a-size-medium-plus a-color-base')]");
+    private static final By byCartProductXpath=By.xpath("//span[@class='a-truncate-cut'][contains(text(),'iPhone 13')]");
+    private static final By byAddedToCartMsgXpath=By.xpath("//span[contains(@class,'a-size-medium-plus a-color-base')]");
     public AmazonCartScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
     }
     @Override
     public AmazonCartScreen addingFirstProductToCart() {
-        WebElement addToCartButton=driver.waitTillElementIsVisible(byAddToCartButton);
+        WebElement addToCartButton=driver.waitTillElementIsVisible(byAddToCartButtonXpath);
         addToCartButton.click();
         return this;
     }
     @Override
-    public AmazonCartScreen moveToCart() {
-        WebElement cartButton=driver.waitTillElementIsVisible(byCartButton);
+    public AmazonCartScreen viewCart() {
+        WebElement cartButton=driver.waitTillElementIsVisible(byCartButtonXpath);
         cartButton.click();
         return this;
     }
     @Override
     public boolean isCartProductCorrect() {
         LOGGER.info(String.format("Selected product= '%s'", product));
-        WebElement cartProduct= driver.waitTillElementIsVisible(byCartProduct);
+        WebElement cartProduct= driver.waitTillElementIsVisible(byCartProductXpath);
 
         String productName=cartProduct.getText().trim();
         if(productName.contains(product)){
@@ -55,7 +55,7 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
     }
     @Override
     public boolean isCartReady() {
-        WebElement addedToCartMsg=driver.waitTillElementIsVisible(byAddedToCartMsg);
+        WebElement addedToCartMsg=driver.waitTillElementIsVisible(byAddedToCartMsgXpath);
         String expectedAddedToCartMsg=addedToCartMsg.getText().trim();
         if(expectedAddedToCartMsg.equals("Added to Cart")){
             visually.takeScreenshot(SCREEN_NAME, "Product added to cart message");

@@ -8,6 +8,7 @@ import com.znsio.sample.e2e.businessLayer.amazon.AmazonCartPageBL;
 import com.znsio.sample.e2e.businessLayer.amazon.AmazonHomePageBL;
 import com.znsio.sample.e2e.businessLayer.amazon.AmazonProductPageBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -45,9 +46,9 @@ public class AmazonSearchAddtocartSteps {
         LOGGER.info(System.out.printf("iShouldSeeTheProductDetailsPage - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
         new AmazonProductPageBL().verifyProductDetails();
     }
-    @When("I add the product to the cart and navigate to the cart")
-    public void iAddTheProductToTheCartAndNavigateToTheCart() {
-        LOGGER.info(System.out.printf("iAddTheProductToTheCartAndNavigateToTheCart - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
+    @When("I add the product to the cart")
+    public void iAddTheProductToTheCart() {
+        LOGGER.info(System.out.printf("iAddTheProductToTheCart - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
         new AmazonCartPageBL().makingCartReady();
     }
     @Then("I should see the product in the cart")
@@ -55,4 +56,7 @@ public class AmazonSearchAddtocartSteps {
         LOGGER.info(System.out.printf("iShouldSeeTheProductInTheCart - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
         new AmazonCartPageBL().verifyProductDetailsInCart();
     }
+
+
+
 }

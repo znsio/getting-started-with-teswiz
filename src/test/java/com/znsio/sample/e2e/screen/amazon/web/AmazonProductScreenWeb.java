@@ -15,7 +15,7 @@ public class AmazonProductScreenWeb extends AmazonProductScreen {
     private static final String SCREEN_NAME = AmazonHomeScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String product= SAMPLE_TEST_CONTEXT.PRODUCT;
-    private static final By byFirstProduct = By.xpath("//div[@class='a-section a-spacing-small a-spacing-top-small']//span[text()='Apple iPhone 13 (128GB) - Starlight']");
+    private static final By byFirstProduct = By.xpath("//div[@class='a-section a-spacing-small a-spacing-top-small']//span[text()='Apple iPhone 13 (256GB) - (Product) RED']");
     private static final By byProductTitle = By.xpath("//span[@id='productTitle']");
     public AmazonProductScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;

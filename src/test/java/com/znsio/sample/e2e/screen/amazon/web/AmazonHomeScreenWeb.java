@@ -25,7 +25,7 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
     }
 
     @Override
-    public AmazonHomeScreen searchProduct(String product) {
+    public AmazonHomeScreen searchProductFromSearchbar(String product) {
         LOGGER.info(String.format("Search for '%s'", product));
         WebElement searchBox=driver.waitTillElementIsVisible(bySearchBoxXpath);
         searchBox.sendKeys(product);

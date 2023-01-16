@@ -28,7 +28,7 @@ public class AmazonCartPageBL {
     }
     public AmazonCartPageBL verifyProductDetailsInCart() {
         LOGGER.info(String.format("Navigating to the cart"));
-        AmazonCartScreen.get().moveToCart();
+        AmazonCartScreen.get().viewCart();
         LOGGER.info(String.format("Verifying the correct product in cart"));
        boolean isProductCorrectInCart= AmazonCartScreen.get().isCartProductCorrect();
         assertThat(isProductCorrectInCart).as("Correct product is present in cart").isTrue();

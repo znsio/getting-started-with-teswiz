@@ -36,7 +36,7 @@ public abstract class AmazonCartScreen {
 
     public abstract AmazonCartScreen addingFirstProductToCart();
 
-    public abstract AmazonCartScreen moveToCart();
+    public abstract AmazonCartScreen viewCart();
 
     public abstract boolean isCartProductCorrect();
 

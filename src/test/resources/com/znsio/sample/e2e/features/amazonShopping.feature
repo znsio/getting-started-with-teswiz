@@ -8,7 +8,7 @@ Feature: Amazon Search
 
     Given I, a guest user, search for product "iphone 13" on amazon
     When I select the first product from the search results page
-    And I add the product from the product view page to the shopping cart
+    And I add the product to the shopping cart
     Then I should be able to see the product in the shopping cart
 
 

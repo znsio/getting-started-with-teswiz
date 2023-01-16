@@ -7,6 +7,7 @@ import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazon.AmazonShoppingCartScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -44,7 +45,8 @@ public class ShoppingCartBL {
                 break;
             }
         }
-        softly.assertThat(isProductPresent).as("Is product present in shopping cart ?").isEqualTo(true);
+        LOGGER.info(System.out.printf("Is product present in shopping cart ? : %b", isProductPresent));
+        Assert.assertTrue(isProductPresent, "The product is not present in shopping cart");
     }
 
 }

@@ -24,14 +24,14 @@ public class AmazonProductViewPageScreenWeb extends AmazonProductViewPageScreen 
     }
 
     @Override
-    public AmazonProductViewPageScreenWeb addToCart() {
+    public AmazonProductViewPageScreenWeb clickOnAddToCartButton() {
         WebElement addToCartButton = driver.waitTillElementIsPresent(addToCartButtonById);
         addToCartButton.click();
         return this;
     }
 
     @Override
-    public AmazonShoppingCartScreenWeb navigateToShoppingCart() {
+    public AmazonShoppingCartScreenWeb clickOnCartButton() {
 
         WebElement cartButton = driver.waitTillElementIsVisible(cartButtonById);
         cartButton.click();

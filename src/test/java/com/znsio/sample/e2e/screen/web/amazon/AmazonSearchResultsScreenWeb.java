@@ -41,7 +41,7 @@ public class AmazonSearchResultsScreenWeb extends AmazonSearchResultsScreen {
     }
 
     @Override
-    public AmazonProductViewPageScreenWeb selectFirstProductInSearchResultsList(){
+    public AmazonProductViewPageScreenWeb clickOnFirstProductInSearchResultsList(){
         WebElement firstProduct = driver.waitTillElementIsPresent(firstProductByXpath);
         firstProduct.click();
         driver.switchToNextTab();

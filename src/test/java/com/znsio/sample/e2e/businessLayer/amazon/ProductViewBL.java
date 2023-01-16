@@ -8,6 +8,7 @@ import com.znsio.sample.e2e.screen.amazon.AmazonProductViewPageScreen;
 import com.znsio.sample.e2e.screen.amazon.AmazonShoppingCartScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+import org.testng.Assert;
 
 public class ProductViewBL {
     private static final Logger LOGGER = Logger.getLogger(AmazonHomepageBL.class.getName());
@@ -33,24 +34,26 @@ public class ProductViewBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public ProductViewBL addToCart(){
-        AmazonProductViewPageScreen amazonProductViewPageScreen = AmazonProductViewPageScreen.get().addToCart();
+    public ProductViewBL addProductToCart(){
+        AmazonProductViewPageScreen amazonProductViewPageScreen = AmazonProductViewPageScreen.get().clickOnAddToCartButton();
 
-        String expectedSuccessMessage = "Added to Cart";
+        String expectedSuccessMessage = SAMPLE_TEST_CONTEXT.ADD_TO_CART_SUCCESS_MESSAGE;
         String actualSuccessMessage = amazonProductViewPageScreen.getAddToCartSuccessMessage();
+        LOGGER.info(System.out.printf("Add To Cart Success Message : %s", actualSuccessMessage));
 
-        softly.assertThat(actualSuccessMessage).as("Add to Cart Success Message").isEqualTo(expectedSuccessMessage);
+        Assert.assertEquals(expectedSuccessMessage, actualSuccessMessage, "The product is not successfully added to shopping cart");
         return this;
     }
 
-    public ShoppingCartBL navigateToShoppingCart(){
-        AmazonShoppingCartScreen amazonShoppingCartScreen = AmazonProductViewPageScreen.get().navigateToShoppingCart();
+    public ProductViewBL navigateToShoppingCart(){
+        AmazonShoppingCartScreen amazonShoppingCartScreen = AmazonProductViewPageScreen.get().clickOnCartButton();
 
-        String expectedSuccessMessage = "Shopping Cart";
-        String actualSuccessMessage = amazonShoppingCartScreen.getShoppingCartPageHeading();
+        String expectedPageHeading = SAMPLE_TEST_CONTEXT.SHOPPING_CART_PAGE_HEADING;
+        String actualPageHeading = amazonShoppingCartScreen.getShoppingCartPageHeading();
+        LOGGER.info(System.out.printf("Page Heading : %s", actualPageHeading));
 
-        softly.assertThat(actualSuccessMessage).as("Shopping Cart Page Heading").isEqualTo(expectedSuccessMessage);
-        return new ShoppingCartBL();
+        Assert.assertEquals(expectedPageHeading, actualPageHeading, "The user is not navigated to shopping cart");
+        return this;
     }
 
 }

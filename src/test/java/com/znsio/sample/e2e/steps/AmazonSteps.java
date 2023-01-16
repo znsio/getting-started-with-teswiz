@@ -27,25 +27,25 @@ public class AmazonSteps {
         context.addTestState(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD, product);
         LOGGER.info(System.out.printf("Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
-        new AmazonHomepageBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchFor(product);
+        new AmazonHomepageBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchForProduct(product);
     }
 
     @When("I select the first product from the search results page")
     public void iSelectTheFirstProductFromTheSearchResultsPage() {
         LOGGER.info(System.out.printf("Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
-        new AmazonHomepageBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).selectFirstProductInSearchResultsList();
+        new AmazonHomepageBL().selectFirstProductInSearchResultsList();
     }
 
-    @And("I add the product from the product view page to the shopping cart")
+    @And("I add the product to the shopping cart")
     public void iAddTheProductFromTheProductViewPageToTheShoppingCart() {
         LOGGER.info(System.out.printf("Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
-        new ProductViewBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).addToCart().navigateToShoppingCart();
+        new ProductViewBL().addProductToCart().navigateToShoppingCart();
     }
 
     @Then("I should be able to see the product in the shopping cart")
     public void iVerifyTheStringProductIsPresentInTheShoppingCart() {
         String product = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD);
         LOGGER.info(System.out.printf("Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
-        new ShoppingCartBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).verifyProductIsPresentInShoppingCart(product);
+        new ShoppingCartBL().verifyProductIsPresentInShoppingCart(product);
     }
 }

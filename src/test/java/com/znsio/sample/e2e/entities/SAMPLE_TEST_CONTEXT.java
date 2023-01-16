@@ -9,4 +9,6 @@ public class SAMPLE_TEST_CONTEXT extends TEST_CONTEXT {
     public static final String INVITATION_LINK = "invitationLink";
     public static final String GUEST_USER = "guestUser";
     public static final String SEARCH_KEYWORD = "searchKeyword";
+    public static final String ADD_TO_CART_SUCCESS_MESSAGE = "Added to Cart";
+    public static final String SHOPPING_CART_PAGE_HEADING = "Shopping Cart";
 }

@@ -33,8 +33,8 @@ public class AmazonHomepageBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public AmazonHomepageBL searchFor(String product) {
-        AmazonSearchResultsScreen amazonSearchResultsScreen = AmazonHomeScreen.get().searchFor(product);
+    public AmazonHomepageBL searchForProduct(String product) {
+        AmazonSearchResultsScreen amazonSearchResultsScreen = AmazonHomeScreen.get().searchProductUsingAmazonSearchBar(product);
 
         String actualSearchWasFor = amazonSearchResultsScreen.getActualSearchString();
         softly.assertThat(actualSearchWasFor).as("Search was for a different value").isEqualTo(product);
@@ -44,9 +44,10 @@ public class AmazonHomepageBL {
         return this;
     }
 
-    public ProductViewBL selectFirstProductInSearchResultsList() {
+    public AmazonHomepageBL selectFirstProductInSearchResultsList() {
         AmazonSearchResultsScreen amazonSearchResultsScreen = AmazonSearchResultsScreen.get();
-        amazonSearchResultsScreen.selectFirstProductInSearchResultsList();
-        return new ProductViewBL();
+        amazonSearchResultsScreen.clickOnFirstProductInSearchResultsList();
+        return this;
     }
+
 }

@@ -29,4 +29,6 @@ public class AjioSteps {
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
         new AjioSearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchFor(product);
     }
-}
+
+    }
+

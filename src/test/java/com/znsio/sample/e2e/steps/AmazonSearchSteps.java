@@ -52,7 +52,7 @@ public class AmazonSearchSteps {
     @When("I, add the product to the shopping cart")
     public void iAddTheProductToTheShoppingCart() {
         LOGGER.info(System.out.printf("iAddTheProductToTheShoppingCart - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER , Runner.platform));
-        new AmazonProductBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).clickOnAddToCartButton();
+        new AmazonProductBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).addToCart();
     }
 
     @Then("I, should be able to see the product in the cart")

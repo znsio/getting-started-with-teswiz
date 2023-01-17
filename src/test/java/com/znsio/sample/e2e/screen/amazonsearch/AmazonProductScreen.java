@@ -34,7 +34,7 @@ public abstract class AmazonProductScreen {
 
     public abstract AmazonProductScreen verifyProductDetails();
 
-    public abstract AmazonProductScreen addToCart();
+    public abstract AmazonProductScreen clickOnAddToCart();
 
     public abstract AmazonProductScreen changeToNewTab();
 }

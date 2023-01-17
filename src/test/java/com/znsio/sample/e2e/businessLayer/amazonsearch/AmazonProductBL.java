@@ -38,8 +38,8 @@ public class AmazonProductBL {
         return this;
     }
 
-    public AmazonProductBL clickOnAddToCartButton() {
-        AmazonProductScreen.get().addToCart();
+    public AmazonProductBL addToCart() {
+        AmazonProductScreen.get().clickOnAddToCart();
         return this;
     }
 }

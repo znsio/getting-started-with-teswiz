@@ -37,7 +37,7 @@ public class AmazonProductScreenWeb extends AmazonProductScreen {
     }
 
     @Override
-    public AmazonProductScreen addToCart() {
+    public AmazonProductScreen clickOnAddToCart() {
         LOGGER.info("in method to click on 'Add to cart' button");
         driver.findElement(byAddToCartButton).click();
         return AmazonProductScreen.get();

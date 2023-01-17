@@ -33,7 +33,7 @@ public abstract class AmazonShoppingCartScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract String getShoppingCartPageHeading();
+    public abstract String getShoppingCartPageTitle();
 
     public abstract List<String> getTitleOfAllProductsInShoppingCart();
 }

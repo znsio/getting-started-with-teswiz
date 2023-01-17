@@ -32,20 +32,17 @@ public class AmazonSteps {
 
     @When("I select the first product from the search results page")
     public void iSelectTheFirstProductFromTheSearchResultsPage() {
-        LOGGER.info(System.out.printf("Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
-        new AmazonHomepageBL().selectFirstProductInSearchResultsList();
+        new AmazonHomepageBL().selectFirstProduct();
     }
 
     @And("I add the product to the shopping cart")
     public void iAddTheProductFromTheProductViewPageToTheShoppingCart() {
-        LOGGER.info(System.out.printf("Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
-        new ProductViewBL().addProductToCart().navigateToShoppingCart();
+        new ProductViewBL().createShoppingCart();
     }
 
     @Then("I should be able to see the product in the shopping cart")
     public void iVerifyTheStringProductIsPresentInTheShoppingCart() {
         String product = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD);
-        LOGGER.info(System.out.printf("Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
         new ShoppingCartBL().verifyProductIsPresentInShoppingCart(product);
     }
 }

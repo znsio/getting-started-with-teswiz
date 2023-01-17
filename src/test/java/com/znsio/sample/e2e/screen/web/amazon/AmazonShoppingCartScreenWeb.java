@@ -28,10 +28,10 @@ public class AmazonShoppingCartScreenWeb extends AmazonShoppingCartScreen {
     }
 
     @Override
-    public String getShoppingCartPageHeading() {
-        String shoppingCartPageHeading = driver.waitTillElementIsPresent(shoppingCartPageHeadingByCSS).getText().trim();
-        LOGGER.info(String.format("Shopping Cart Page Heading : %s", shoppingCartPageHeading));
-        return shoppingCartPageHeading;
+    public String getShoppingCartPageTitle() {
+        String shoppingCartPageTitle = driver.waitTillElementIsPresent(shoppingCartPageHeadingByCSS).getText().trim();
+        LOGGER.info(String.format("Shopping Cart Page Title : %s", shoppingCartPageTitle));
+        return shoppingCartPageTitle;
     }
 
     @Override
@@ -39,11 +39,12 @@ public class AmazonShoppingCartScreenWeb extends AmazonShoppingCartScreen {
         WebDriverWait wait = new WebDriverWait(driver.getInnerDriver(),30);
         List<WebElement> productTitleWebElements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(shoppingCartProductTitlesByCSS));
 
+        LOGGER.info("Fetching titles of all products in the shopping cart");
+
         List<String> productTitles = new ArrayList<>();
         for(WebElement element: productTitleWebElements){
             String productTitle = element.getText().strip();
-            LOGGER.info(String.format("Shopping Cart Product Title : %s", productTitle));
-            productTitles.add(element.getText().strip());
+            productTitles.add(productTitle);
         }
         return productTitles;
     }

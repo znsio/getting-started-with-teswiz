@@ -34,25 +34,19 @@ public class ProductViewBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public ProductViewBL addProductToCart(){
-        AmazonProductViewPageScreen amazonProductViewPageScreen = AmazonProductViewPageScreen.get().clickOnAddToCartButton();
+    public ProductViewBL createShoppingCart(){
 
+        AmazonProductViewPageScreen amazonProductViewPageScreen = AmazonProductViewPageScreen.get().addProductToCart();
         String expectedSuccessMessage = SAMPLE_TEST_CONTEXT.ADD_TO_CART_SUCCESS_MESSAGE;
         String actualSuccessMessage = amazonProductViewPageScreen.getAddToCartSuccessMessage();
         LOGGER.info(System.out.printf("Add To Cart Success Message : %s", actualSuccessMessage));
-
         Assert.assertEquals(expectedSuccessMessage, actualSuccessMessage, "The product is not successfully added to shopping cart");
-        return this;
-    }
 
-    public ProductViewBL navigateToShoppingCart(){
-        AmazonShoppingCartScreen amazonShoppingCartScreen = AmazonProductViewPageScreen.get().clickOnCartButton();
-
-        String expectedPageHeading = SAMPLE_TEST_CONTEXT.SHOPPING_CART_PAGE_HEADING;
-        String actualPageHeading = amazonShoppingCartScreen.getShoppingCartPageHeading();
-        LOGGER.info(System.out.printf("Page Heading : %s", actualPageHeading));
-
-        Assert.assertEquals(expectedPageHeading, actualPageHeading, "The user is not navigated to shopping cart");
+        AmazonShoppingCartScreen amazonShoppingCartScreen = AmazonProductViewPageScreen.get().navigateToShoppingCart();
+        String expectedPageTitle = SAMPLE_TEST_CONTEXT.SHOPPING_CART_PAGE_HEADING;
+        String actualPageTitle = amazonShoppingCartScreen.getShoppingCartPageTitle();
+        LOGGER.info(System.out.printf("Page Title : %s", actualPageTitle));
+        Assert.assertEquals(expectedPageTitle, actualPageTitle, "The user is not navigated to shopping cart");
         return this;
     }
 

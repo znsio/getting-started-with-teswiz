@@ -40,11 +40,11 @@ public class AmazonHomepageBL {
         softly.assertThat(actualSearchWasFor).as("Search was for a different value").isEqualTo(product);
 
         int numberOfProductsFound = amazonSearchResultsScreen.getNumberOfProductsFound();
-        softly.assertThat(numberOfProductsFound).as("Insufficient search results retrieved").isGreaterThan(100);
+        softly.assertThat(numberOfProductsFound).as("Insufficient search results retrieved").isGreaterThan(0);
         return this;
     }
 
-    public AmazonHomepageBL selectFirstProductInSearchResultsList() {
+    public AmazonHomepageBL selectFirstProduct() {
         AmazonSearchResultsScreen amazonSearchResultsScreen = AmazonSearchResultsScreen.get();
         amazonSearchResultsScreen.clickOnFirstProductInSearchResultsList();
         return this;

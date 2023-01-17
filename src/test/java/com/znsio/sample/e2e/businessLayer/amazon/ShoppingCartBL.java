@@ -35,7 +35,7 @@ public class ShoppingCartBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public void verifyProductIsPresentInShoppingCart(String product){
+    public ShoppingCartBL verifyProductIsPresentInShoppingCart(String product){
         List<String> productTitles = AmazonShoppingCartScreen.get().getTitleOfAllProductsInShoppingCart();
         boolean isProductPresent = false;
 
@@ -45,8 +45,8 @@ public class ShoppingCartBL {
                 break;
             }
         }
-        LOGGER.info(System.out.printf("Is product present in shopping cart ? : %b", isProductPresent));
         Assert.assertTrue(isProductPresent, "The product is not present in shopping cart");
+        return this;
     }
 
 }

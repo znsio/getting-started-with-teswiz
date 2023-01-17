@@ -27,9 +27,9 @@ public abstract class AmazonProductViewPageScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract AmazonProductViewPageScreen clickOnAddToCartButton();
+    public abstract AmazonProductViewPageScreen addProductToCart();
 
-    public abstract AmazonShoppingCartScreen clickOnCartButton();
+    public abstract AmazonShoppingCartScreen navigateToShoppingCart();
 
     public abstract String getAddToCartSuccessMessage();
 

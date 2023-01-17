@@ -34,11 +34,9 @@ public abstract class AmazonProductViewScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract String firstProductName();
+    public abstract AmazonProductViewScreen selectFirstProduct();
 
-    public abstract AmazonProductViewScreen selectFirstItem();
+    public abstract boolean verifyCorrectProductDetails();
 
     public abstract AmazonProductViewScreen addProductToCart();
-
-    public abstract AmazonProductViewScreen closeSideBar();
 }

@@ -28,13 +28,15 @@ public class AmazonShoppingCartBL {
         LOGGER.info("AmazonSearchBL created");
     }
 
-    public AmazonShoppingCartBL openShoppingCart(){
-        LOGGER.info(String.format("User go into the shopping cart"));
-        AmazonShoppingCartScreen.get().openShoppingCart();
+    public AmazonShoppingCartBL navigateToTheShoppingCart(){
+        LOGGER.info(String.format("User navigate to the shopping cart"));
+        boolean shoppingCart = AmazonShoppingCartScreen.get().navigateToTheShoppingCart().verifyTheShoppingCart();
+        assertThat(shoppingCart).as("User Navigated to the shopping cart").isTrue();
         return this;
     }
-    public AmazonShoppingCartBL productIsVisibleInCart(String productName){
-        String getProductName = AmazonShoppingCartScreen.get().getProductName();
+    public AmazonShoppingCartBL VerifyTheProductIsVisibleInShoppingCart(String productName){
+        LOGGER.info(String.format("Verify the product has been successfully added to the shopping cart"));
+        String getProductName = AmazonShoppingCartScreen.get().verifyTheProductDetails();
         assertThat(getProductName).as("Verify the product is present in the shopping cart").containsIgnoringCase(productName);
         return this;
     }

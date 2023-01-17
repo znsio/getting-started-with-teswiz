@@ -31,8 +31,8 @@ public class AmazonHomeBL {
 
     public AmazonHomeBL searchProduct(String productName){
         LOGGER.info(String.format("User search product in search option '%s'", productName));
-        AmazonProductViewScreen amazonProductViewScreen = AmazonHomeScreen.get().searchProduct(productName);
-        String actualProductName = amazonProductViewScreen.get().firstProductName();
+        AmazonProductViewScreen amazonProductViewScreen = AmazonHomeScreen.get().searchProductInAmazonSearch(productName);
+        String actualProductName = AmazonHomeScreen.get().getActualSearchProduct();
         assertThat(actualProductName).as("The searched product name is present").containsIgnoringCase(productName);
         return this;
     }

@@ -16,6 +16,8 @@ public class AmazonShoppingCartWeb extends AmazonShoppingCartScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private static final By shoppingCartButton = By.id("nav-cart");
+
+    private static final By shoppingCartMessage = By.xpath("//h1[contains(text(),'Shopping Cart')]");
     private static final By firstProductInCart = By.xpath("(//div[@data-name='Active Items']//span[contains(@class, 'sc-product-title')]//span//span)[2]");
 
     public AmazonShoppingCartWeb(Driver driver, Visual visually) {
@@ -24,14 +26,29 @@ public class AmazonShoppingCartWeb extends AmazonShoppingCartScreen {
     }
 
     @Override
-    public AmazonShoppingCartScreen openShoppingCart(){
+    public AmazonShoppingCartScreen navigateToTheShoppingCart(){
         driver.waitTillElementIsPresent(shoppingCartButton).click();
-        return AmazonShoppingCartScreen.get();
+        return this;
     }
 
     @Override
-    public String getProductName(){
-        waitFor(2);
+    public boolean verifyTheShoppingCart(){
+        WebElement shoppingCartMsg = driver.waitTillElementIsVisible(shoppingCartMessage);
+        String expectedAddedToCartMsg = shoppingCartMsg.getText().trim();
+        if(expectedAddedToCartMsg.equals("Shopping Cart")){
+            visually.takeScreenshot(SCREEN_NAME, "User navigated to shopping cart");
+            LOGGER.info("Added to cart : Text: " + expectedAddedToCartMsg);
+            return true;
+        }
+        else{
+            visually.takeScreenshot(SCREEN_NAME, "User did not navigate to the shopping cart");
+            LOGGER.info("Added to Cart message is incorrect : Text: " + expectedAddedToCartMsg);
+            return false;
+        }
+    }
+
+    @Override
+    public String verifyTheProductDetails(){
         WebElement element = driver.waitTillElementIsPresent(firstProductInCart);
         return element.getText();
     }

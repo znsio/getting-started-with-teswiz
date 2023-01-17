@@ -30,6 +30,7 @@ public class AmazonSearchSteps {
 
     @Given("I, as a guest user, search for {string} in amazon search")
     public void iAsAGuestUserSearchForInAmazonSearchOption(String productName) {
+        context.addTestState(SAMPLE_TEST_CONTEXT.PRODUCT_NAME, productName);
         LOGGER.info(System.out.printf("iAsAGuestUserSearchForInAmazonSearchOption - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, Runner.platform));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
         new AmazonHomeBL().searchProduct(productName);
@@ -37,20 +38,18 @@ public class AmazonSearchSteps {
 
     @When("I select the first product from the result list")
     public void iSelectFirstProductFromTheList() {
-        LOGGER.info(System.out.printf("iSelectFirstProductFromTheList - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, Runner.platform));
-        new AmazonProductViewBL().selectFirstProduct();
+        new AmazonProductViewBL().selectFisrtProductFromTheResultList();
     }
 
     @And("I add the selected product to the shopping cart")
     public void iAddTheSelectedProductToTheShoppingCart() {
-        LOGGER.info(System.out.printf("iAddTheSelectedProductToTheShoppingCart - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, Runner.platform));
-        new AmazonProductViewBL().addProductToCart();
+        new AmazonProductViewBL().addProductToTheShoppingCart();
     }
 
-    @Then("I should be able to see {string} product in the cart")
-    public void iShouldBeAbleToSeeProductAddedInTheCart(String productName) {
-        LOGGER.info(System.out.printf("iShouldBeAbleToSeeProductAddedInTheCart - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, Runner.platform));
-        new AmazonShoppingCartBL().openShoppingCart().productIsVisibleInCart(productName);
+    @Then("I should be able to see the product in the shopping cart")
+    public void iShouldBeAbleToSeeProductAddedInTheCart() {
+        String productName = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_NAME);
+        new AmazonShoppingCartBL().navigateToTheShoppingCart().VerifyTheProductIsVisibleInShoppingCart(productName);
     }
 
 }

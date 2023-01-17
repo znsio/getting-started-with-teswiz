@@ -8,6 +8,8 @@ import com.znsio.sample.e2e.screen.amazonsearch.AmazonProductViewScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class AmazonProductViewBL {
 
     private static final Logger LOGGER = Logger.getLogger(AmazonProductViewBL.class.getName());
@@ -26,13 +28,15 @@ public class AmazonProductViewBL {
         LOGGER.info("AmazonSearchBL created");
     }
 
-    public AmazonProductViewBL selectFirstProduct(){
-        LOGGER.info(String.format("User select the first product"));
-        AmazonProductViewScreen.get().selectFirstItem();
+    public AmazonProductViewBL selectFisrtProductFromTheResultList(){
+        LOGGER.info(String.format("Select the first product"));
+        String productName = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_NAME);
+        Boolean correct_product = AmazonProductViewScreen.get().selectFirstProduct().verifyCorrectProductDetails();
+        assertThat(correct_product).as("The product details are displayed").isTrue();
         return this;
     }
-
-    public AmazonProductViewBL addProductToCart(){
+    
+    public AmazonProductViewBL addProductToTheShoppingCart(){
         LOGGER.info(String.format("User add product into the shopping cart"));
         AmazonProductViewScreen.get().addProductToCart();
         return this;

@@ -34,8 +34,9 @@ public abstract class AmazonShoppingCartScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
 
     }
+    public abstract AmazonShoppingCartScreen navigateToTheShoppingCart();
 
-    public abstract String getProductName();
+    public abstract boolean verifyTheShoppingCart();
 
-    public abstract AmazonShoppingCartScreen openShoppingCart();
+    public abstract String verifyTheProductDetails();
 }

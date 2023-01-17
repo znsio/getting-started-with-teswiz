@@ -19,6 +19,7 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private static final By bySearchBoxXpath = By.id("twotabsearchtextbox");
     private static final By bySearchIconClassName = By.cssSelector("[value='Go']");
+    private static final By firstProduct = By.xpath("//div[@data-index='4']//h2//span");
 
     public AmazonHomeScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -26,7 +27,7 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
     }
 
     @Override
-    public AmazonProductViewScreen searchProduct(String productName){
+    public AmazonProductViewScreen searchProductInAmazonSearch(String productName){
         LOGGER.info(String.format("Search for '%s'", productName));
         WebElement searchElement = driver.waitTillElementIsPresent(bySearchBoxXpath);
         searchElement.click();
@@ -35,5 +36,12 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
         visually.checkWindow(SCREEN_NAME, "Search string entered");
         driver.waitTillElementIsPresent(bySearchIconClassName).click();
         return AmazonProductViewScreen.get();
+    }
+
+    @Override
+    public String getActualSearchProduct(){
+        LOGGER.info(String.format("Getting actual searched product"));
+        WebElement searchElement = driver.waitTillElementIsPresent(firstProduct);
+        return searchElement.getText();
     }
 }

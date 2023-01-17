@@ -4,11 +4,10 @@ import com.context.SessionContext;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Drivers;
-import com.znsio.sample.e2e.businessLayer.amazon.AmazonCartPageBL;
-import com.znsio.sample.e2e.businessLayer.amazon.AmazonHomePageBL;
-import com.znsio.sample.e2e.businessLayer.amazon.AmazonProductPageBL;
+import com.znsio.sample.e2e.businessLayer.amazon.CartPageBL;
+import com.znsio.sample.e2e.businessLayer.amazon.HomePageBL;
+import com.znsio.sample.e2e.businessLayer.amazon.ProductPageBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -34,27 +33,27 @@ public class AmazonSearchAddtocartSteps {
     public void iSearchedForProductInAmazonSearchBar(String product) {
         LOGGER.info(System.out.printf("iAsAGuestUserSearchedForProductInSearchBarOfAmazon - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
-        new AmazonHomePageBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).productSearch(product);
+        new HomePageBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).productSearch(product);
     }
     @When("I view the first product from search list")
     public void iViewTheFirstProductFromSearchList() {
         LOGGER.info(System.out.printf("iViewTheFirstProduct - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
-        new AmazonProductPageBL().viewFirstProduct();
+        new ProductPageBL().viewFirstProduct();
     }
     @Then("I should see the product details page")
     public void iShouldSeeTheProductDetailsPage() {
         LOGGER.info(System.out.printf("iShouldSeeTheProductDetailsPage - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
-        new AmazonProductPageBL().verifyProductDetails();
+        new ProductPageBL().verifyProductDetails();
     }
     @When("I add the product to the cart")
     public void iAddTheProductToTheCart() {
         LOGGER.info(System.out.printf("iAddTheProductToTheCart - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
-        new AmazonCartPageBL().makingCartReady();
+        new CartPageBL().makingCartReady();
     }
     @Then("I should see the product in the cart")
     public void iShouldSeeTheProductInTheCart() {
         LOGGER.info(System.out.printf("iShouldSeeTheProductInTheCart - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
-        new AmazonCartPageBL().verifyProductDetailsInCart();
+        new CartPageBL().verifyProductDetailsInCart();
     }
 
 

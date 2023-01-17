@@ -1,7 +1,6 @@
 package com.znsio.sample.e2e.businessLayer.amazon;
 
 import com.context.TestExecutionContext;
-import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.screen.amazon.AmazonProductScreen;
 import org.apache.log4j.Logger;
@@ -9,25 +8,25 @@ import org.assertj.core.api.SoftAssertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AmazonProductPageBL {
+public class ProductPageBL {
 
-    private static final Logger LOGGER = Logger.getLogger(AmazonHomePageBL.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(HomePageBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
-    public AmazonProductPageBL() {
+    public ProductPageBL() {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
     }
-    public AmazonProductPageBL viewFirstProduct() {
+    public ProductPageBL viewFirstProduct() {
         LOGGER.info(String.format("Selecting the first product from search results"));
         AmazonProductScreen.get().viewProduct();
         return this;
     }
-    public AmazonProductPageBL verifyProductDetails() {
+    public ProductPageBL verifyProductDetails() {
         LOGGER.info(String.format("Verifying the correct product"));
-       boolean isProductDetailsCorrect= AmazonProductScreen.get().isCorrectProduct();
+       boolean isProductDetailsCorrect= AmazonProductScreen.get().isProductPresent();
         assertThat(isProductDetailsCorrect).as("Correct product is selected").isTrue();
         return this;
     }

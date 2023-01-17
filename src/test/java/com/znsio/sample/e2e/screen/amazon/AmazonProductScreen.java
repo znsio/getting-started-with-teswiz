@@ -33,6 +33,6 @@ public abstract class AmazonProductScreen {
 
     public abstract AmazonProductScreen viewProduct();
 
-    public abstract boolean isCorrectProduct();
+    public abstract boolean isProductPresent();
 
 }

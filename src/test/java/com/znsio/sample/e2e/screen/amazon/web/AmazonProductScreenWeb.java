@@ -29,7 +29,7 @@ public class AmazonProductScreenWeb extends AmazonProductScreen {
         return this;
     }
     @Override
-    public boolean isCorrectProduct() {
+    public boolean isProductPresent() {
         LOGGER.info(String.format("Verifying the selected product '%s'", product));
         driver.switchToNextTab();
         String titleOfProduct=driver.waitTillElementIsVisible(byProductTitle).getText().trim();

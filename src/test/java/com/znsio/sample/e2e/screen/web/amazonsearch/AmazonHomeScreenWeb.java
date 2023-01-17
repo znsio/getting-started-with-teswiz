@@ -29,7 +29,7 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen{
     public static final By bySearchButtonId = By.id("nav-search-submit-button");
     private static final By byFirstImageResultXpath = By.xpath("//img[@class='s-image']");
     @Override
-    public AmazonSearchResultsScreen searchFor(String productTitle) {
+    public AmazonSearchResultsScreen searchForProductInSearchBar(String productTitle) {
         LOGGER.info(String.format("Search for string '%s'", productTitle));
         driver.waitTillElementIsPresent(bySearchBoxXpath).click();
         WebElement searchBox = driver.findElement(bySearchBoxXpath);

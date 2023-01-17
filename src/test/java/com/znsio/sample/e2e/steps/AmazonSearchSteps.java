@@ -34,7 +34,7 @@ public class AmazonSearchSteps {
     public void iAGuestUserSearchForProducts(String productTitle) {
         LOGGER.info(System.out.printf("iAGuestUserSearchForProducts - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER , Runner.platform));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
-        new AmazonSearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchFor(productTitle);
+        new AmazonSearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchForProduct(productTitle);
     }
 
     @When("I, select first item from the list")

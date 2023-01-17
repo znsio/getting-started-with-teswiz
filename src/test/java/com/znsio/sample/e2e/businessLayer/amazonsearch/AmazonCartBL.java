@@ -5,7 +5,6 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazonsearch.AmazonCartScreen;
-import com.znsio.sample.e2e.screen.amazonsearch.AmazonProductScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -36,7 +35,7 @@ public class AmazonCartBL {
 
     public AmazonCartBL verifyProductAddedToCart(String ProductName) {
         AmazonCartScreen.get()
-                .openCartLandingPage()
+                .clickOnCartButton()
                 .verifyProductPresentInTheCart(ProductName);
         return this;
     }

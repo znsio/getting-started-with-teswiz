@@ -17,7 +17,7 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private static final By byAddedToCartXpath = By.xpath("//*[@id='attachDisplayAddBaseAlert']/span");
-    private static final By byAddToCartButton = By.xpath("//span[@class='a-button-inner']/child::span[contains(text(),'Cart')]/preceding-sibling::input[@class='a-button-input' and @type='submit']");
+    private static final By byCartButton = By.xpath("//span[@class='a-button-inner']/child::span[contains(text(),'Cart')]/preceding-sibling::input[@class='a-button-input' and @type='submit']");
     private static final By byproductTitleXpath = By.xpath("//span[@class='a-list-item']/descendant::span[@class='a-truncate-cut' and contains(text(), 'Apple iPhone 13')]");
 
     public AmazonCartScreenWeb(Driver driver, Visual visually) {
@@ -27,10 +27,10 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
     }
 
     @Override
-    public AmazonCartScreen openCartLandingPage() {
+    public AmazonCartScreen clickOnCartButton() {
         driver.waitTillElementIsVisible(byAddedToCartXpath);
         assertThat(driver.isElementPresent(byAddedToCartXpath)).as("Product not added to the cart").isTrue();
-        driver.findElement(byAddToCartButton).click();
+        driver.findElement(byCartButton).click();
         return AmazonCartScreen.get();
     }
 

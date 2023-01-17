@@ -36,9 +36,9 @@ public class AmazonSearchBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public AmazonSearchBL searchFor(String productTitle) {
+    public AmazonSearchBL searchForProduct(String productTitle) {
         int numberOfProductsFound = AmazonHomeScreen.get()
-                .searchFor(productTitle)
+                .searchForProductInSearchBar(productTitle)
                 .getNumberOfProductsFound();
         LOGGER.info(String.format("'%s' number of results displayed.", numberOfProductsFound));
         assertThat(numberOfProductsFound).as("Insufficient search results retrieved")

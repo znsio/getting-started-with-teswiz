@@ -32,7 +32,7 @@ public abstract class AmazonCartScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract AmazonCartScreen openCartLandingPage();
+    public abstract AmazonCartScreen clickOnCartButton();
 
     public abstract AmazonCartScreen verifyProductPresentInTheCart(String productName);
 }

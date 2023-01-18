@@ -38,7 +38,7 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
         return this;
     }
     @Override
-    public boolean isCartProductCorrect() {
+    public boolean isCartProductPresent() {
         LOGGER.info(String.format("Selected product= '%s'", product));
         WebElement cartProduct= driver.waitTillElementIsVisible(byCartProductXpath);
 
@@ -49,6 +49,8 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
             return true;
         }
         else {
+            visually.takeScreenshot(SCREEN_NAME, "Product Details");
+            LOGGER.info("Selected Product: Text: " + productName);
             return false;
         }
 

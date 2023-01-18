@@ -28,7 +28,7 @@ public class HomePageBL {
     }
     public HomePageBL productSearch(String product) {
         AmazonHomeScreen amazonSearchResultsScreen = AmazonHomeScreen.get().searchProductFromSearchbar(product);
-        String actualSearchOfProduct = amazonSearchResultsScreen.getActualSearchString();
+        String actualSearchOfProduct = amazonSearchResultsScreen.getActualSearchText();
         assertThat(actualSearchOfProduct).as("Search is for product: "+product)
                 .isEqualTo(product);
         return this;

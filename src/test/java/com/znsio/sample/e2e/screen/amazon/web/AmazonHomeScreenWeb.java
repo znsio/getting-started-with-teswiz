@@ -36,11 +36,11 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
     }
 
     @Override
-    public String getActualSearchString() {
+    public String getActualSearchText() {
         LOGGER.info(String.format("Getting actual search string"));
         WebElement actualSearchProduct= driver.waitTillElementIsVisible(byProductSearchedXpath);
-        String actualSearchProductString=actualSearchProduct.getText().replaceAll("\"","").trim();
-        return actualSearchProductString;
+        String actualSearchProductText=actualSearchProduct.getText().replaceAll("\"","").trim();
+        return actualSearchProductText;
     }
 
 }

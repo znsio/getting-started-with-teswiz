@@ -21,6 +21,8 @@ public class AmazonProductViewWeb extends AmazonProductViewScreen {
     private static final By productTitle = By.id("productTitle");
     private static final By sideBarCloseButton = By.id("attach-close_sideSheet-link");
 
+    private static final By addedToCartMsg = By.xpath("//div[@id='attachDisplayAddBaseAlert']/span");
+
     public AmazonProductViewWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
@@ -36,17 +38,24 @@ public class AmazonProductViewWeb extends AmazonProductViewScreen {
     }
 
     @Override
-    public boolean verifyCorrectProductDetails(){
+    public boolean getCorrectProductDetails(){
         driver.switchToNextTab();
         WebElement element = driver.findElement(productTitle);
         return element.isDisplayed();
     }
 
     @Override
-    public AmazonProductViewScreen addProductToCart(){
+    public AmazonProductViewScreen clickAddToCartButton(){
         LOGGER.info(String.format("Add product to the cart"));
         driver.waitForClickabilityOf(addCartButton).click();
-        driver.waitTillElementIsVisible(sideBarCloseButton).click();
         return this;
+    }
+
+    @Override
+    public String getAddedToCartMessage(){
+        LOGGER.info("Get the added to cart message");
+        String msg = driver.waitTillElementIsVisible(addedToCartMsg).getText();
+        driver.waitTillElementIsVisible(sideBarCloseButton).click();
+        return msg;
     }
 }

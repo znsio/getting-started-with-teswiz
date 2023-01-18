@@ -32,7 +32,7 @@ public class AmazonShoppingCartWeb extends AmazonShoppingCartScreen {
     }
 
     @Override
-    public boolean verifyTheShoppingCart(){
+    public boolean getTheShoppingCartTitle(){
         WebElement shoppingCartMsg = driver.waitTillElementIsVisible(shoppingCartMessage);
         String expectedAddedToCartMsg = shoppingCartMsg.getText().trim();
         if(expectedAddedToCartMsg.equals("Shopping Cart")){
@@ -48,7 +48,7 @@ public class AmazonShoppingCartWeb extends AmazonShoppingCartScreen {
     }
 
     @Override
-    public String verifyTheProductDetails(){
+    public String getShoppingCartProduct(){
         WebElement element = driver.waitTillElementIsPresent(firstProductInCart);
         return element.getText();
     }

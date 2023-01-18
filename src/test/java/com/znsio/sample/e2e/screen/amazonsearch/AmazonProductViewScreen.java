@@ -36,7 +36,9 @@ public abstract class AmazonProductViewScreen {
 
     public abstract AmazonProductViewScreen selectFirstProduct();
 
-    public abstract boolean verifyCorrectProductDetails();
+    public abstract boolean getCorrectProductDetails();
 
-    public abstract AmazonProductViewScreen addProductToCart();
+    public abstract AmazonProductViewScreen clickAddToCartButton();
+
+    public abstract String getAddedToCartMessage();
 }

@@ -30,10 +30,14 @@ public class AmazonHomeBL {
     }
 
     public AmazonHomeBL searchProduct(String productName){
+        context.addTestState(SAMPLE_TEST_CONTEXT.PRODUCT_NAME, productName);
         LOGGER.info(String.format("User search product in search option '%s'", productName));
-        AmazonProductViewScreen amazonProductViewScreen = AmazonHomeScreen.get().searchProductInAmazonSearch(productName);
-        String actualProductName = AmazonHomeScreen.get().getActualSearchProduct();
-        assertThat(actualProductName).as("The searched product name is present").containsIgnoringCase(productName);
+        String actualProductName = AmazonHomeScreen.get().searchProductInAmazonSearch(productName).getActualSearchProduct();
+        LOGGER.info(String.format("%s", actualProductName));
+        assertThat(actualProductName).as("The searched product name is present").isEqualToIgnoringCase(productName);
+        int productCount = AmazonHomeScreen.get().getproductCount();
+        LOGGER.info(String.format("%d", productCount));
+        assertThat(productCount).as("The searched product count is greater than 10").isGreaterThan(10);
         return this;
     }
 }

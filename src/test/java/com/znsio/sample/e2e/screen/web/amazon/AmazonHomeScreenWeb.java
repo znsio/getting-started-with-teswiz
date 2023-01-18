@@ -21,13 +21,17 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
     private static final By bySearchIconClassName = By.cssSelector("[value='Go']");
     private static final By firstProduct = By.xpath("//div[@data-index='4']//h2//span");
 
+    public static final By productNameHeading = By.xpath("//span[@class='a-color-state a-text-bold']");
+
+    public static final By productCount = By.xpath("//span[@class='rush-component' and @data-component-id='1']//span[contains(text(), 'results')]");
+
     public AmazonHomeScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
     }
 
     @Override
-    public AmazonProductViewScreen searchProductInAmazonSearch(String productName){
+    public AmazonHomeScreen searchProductInAmazonSearch(String productName){
         LOGGER.info(String.format("Search for '%s'", productName));
         WebElement searchElement = driver.waitTillElementIsPresent(bySearchBoxXpath);
         searchElement.click();
@@ -35,13 +39,21 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
         searchElement.sendKeys(productName);
         visually.checkWindow(SCREEN_NAME, "Search string entered");
         driver.waitTillElementIsPresent(bySearchIconClassName).click();
-        return AmazonProductViewScreen.get();
+        return this;
     }
 
     @Override
     public String getActualSearchProduct(){
         LOGGER.info(String.format("Getting actual searched product"));
-        WebElement searchElement = driver.waitTillElementIsPresent(firstProduct);
-        return searchElement.getText();
+        WebElement searchElement = driver.waitTillElementIsVisible(productNameHeading);
+        return searchElement.getText().replace("\"", "").trim();
+    }
+
+    @Override
+    public int getproductCount(){
+        LOGGER.info(String.format("Get total product count"));
+        WebElement searchProductCount = driver.waitTillElementIsPresent(productCount);
+        String count = searchProductCount.getText().trim().split("\\s")[2];
+        return Integer.parseInt(count);
     }
 }

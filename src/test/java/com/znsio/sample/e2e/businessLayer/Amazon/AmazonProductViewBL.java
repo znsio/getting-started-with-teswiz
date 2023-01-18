@@ -28,17 +28,19 @@ public class AmazonProductViewBL {
         LOGGER.info("AmazonSearchBL created");
     }
 
-    public AmazonProductViewBL selectFisrtProductFromTheResultList(){
+    public AmazonProductViewBL selectFirstProduct(){
         LOGGER.info(String.format("Select the first product"));
         String productName = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_NAME);
-        Boolean correct_product = AmazonProductViewScreen.get().selectFirstProduct().verifyCorrectProductDetails();
+        Boolean correct_product = AmazonProductViewScreen.get().selectFirstProduct().getCorrectProductDetails();
         assertThat(correct_product).as("The product details are displayed").isTrue();
         return this;
     }
     
-    public AmazonProductViewBL addProductToTheShoppingCart(){
+    public AmazonProductViewBL preparingShoppingCart(){
         LOGGER.info(String.format("User add product into the shopping cart"));
-        AmazonProductViewScreen.get().addProductToCart();
+        String expectedAddedToCartMessage = "Added to Cart";
+        String actualAddedToCartMessage = AmazonProductViewScreen.get().clickAddToCartButton().getAddedToCartMessage();
+        assertThat(actualAddedToCartMessage).as("Added to cart message is visible on the screen").isEqualToIgnoringCase(expectedAddedToCartMessage);
         return this;
     }
 }

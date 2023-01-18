@@ -4,10 +4,10 @@ import com.context.SessionContext;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Drivers;
-import com.znsio.sample.e2e.businessLayer.amzon.AmazonCartsBL;
-import com.znsio.sample.e2e.businessLayer.amzon.AmazonHomeBL;
-import com.znsio.sample.e2e.businessLayer.amzon.AmazonItemDetailsBL;
-import com.znsio.sample.e2e.businessLayer.amzon.AmazonSearchResultsBL;
+import com.znsio.sample.e2e.businessLayer.amzon.CartsBL;
+import com.znsio.sample.e2e.businessLayer.amzon.HomeBL;
+import com.znsio.sample.e2e.businessLayer.amzon.ItemDetailsBL;
+import com.znsio.sample.e2e.businessLayer.amzon.SearchResultsBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -32,21 +32,21 @@ public class AmazonSteps {
     public void iAGuestUserSearchForItemInSearchBar(String item) {
         LOGGER.info(System.out.printf("iSearchForProducts - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, Runner.platform));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
-        new AmazonHomeBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).itemSearch(item);
+        new HomeBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchItem(item);
     }
 
     @And("I select the {string} item from the search results")
     public void iSelectTheItemFromTheSearchResults(String position) {
-        new AmazonSearchResultsBL().viewItemByPosition(position);
+        new SearchResultsBL().selectItem(position);
     }
 
     @When("I add an item to the Cart")
     public void iAddAnItemToTheCart() {
-        new AmazonItemDetailsBL().placeItemInToCart();
+        new ItemDetailsBL().createCart();
     }
 
     @Then("item should be added to the Cart")
     public void itemShouldBeAddedToTheCart() {
-        new AmazonCartsBL().verifyItemAddedToCart();
+        new CartsBL().verifyCart();
     }
 }

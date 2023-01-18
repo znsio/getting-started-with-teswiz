@@ -4,42 +4,34 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.web.Amazon.AmazonSearchResultsScreenWeb;
+import com.znsio.sample.e2e.screen.web.Amazon.HomeScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
-
-import java.util.List;
 
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
-public abstract class AmazonSearchResultsScreen {
-    private static final String SCREEN_NAME = AmazonSearchResultsScreen.class.getSimpleName();
+
+public abstract class HomeScreen {
+    private static final String SCREEN_NAME = HomeScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-
-
-    public static AmazonSearchResultsScreen get() {
+    public static HomeScreen get() {
         Driver driver = fetchDriver(Thread.currentThread()
-                .getId());
+                                          .getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread()
-                .getId());
+                                                       .getId());
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
         switch(platform) {
             case web:
-                return new AmazonSearchResultsScreenWeb(driver,visually);
+                return new HomeScreenWeb(driver,visually);
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract String getSearchText();
+    public abstract HomeScreen enterItemNameInSearch(String product);
 
-
-    public abstract AmazonItemsDetailsScreen clickOnItemByPosition(String itemPosition);
-
-    public abstract String getItemText(String itemPosition);
-
-    public abstract List<String> getItemTitles();
+    public abstract SearchResultsScreen pressEnter();
 }

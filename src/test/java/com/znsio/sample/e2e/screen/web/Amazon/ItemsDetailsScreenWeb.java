@@ -2,17 +2,17 @@ package com.znsio.sample.e2e.screen.web.Amazon;
 
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.amazon.AmazonCartScreen;
-import com.znsio.sample.e2e.screen.amazon.AmazonItemsDetailsScreen;
+import com.znsio.sample.e2e.screen.amazon.CartScreen;
+import com.znsio.sample.e2e.screen.amazon.ItemsDetailsScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
-public class AmazonItemsDetailsScreenWeb extends AmazonItemsDetailsScreen {
+public class ItemsDetailsScreenWeb extends ItemsDetailsScreen {
 
     private final Driver driver;
 
     private final Visual visually;
-    private static final String SCREEN_NAME = AmazonItemsDetailsScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = ItemsDetailsScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
@@ -23,10 +23,10 @@ public class AmazonItemsDetailsScreenWeb extends AmazonItemsDetailsScreen {
     private static final By byCartButtonId= By.id("attach-sidesheet-view-cart-button");
 
 
-    public AmazonItemsDetailsScreenWeb(Driver driver, Visual visually) {
+    public ItemsDetailsScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
-        visually.checkWindow(SCREEN_NAME, "Home page");
+        visually.checkWindow(SCREEN_NAME, "Items Details Screen Web ");
         driver.switchToNextTab();
     }
 
@@ -45,7 +45,7 @@ public class AmazonItemsDetailsScreenWeb extends AmazonItemsDetailsScreen {
     }
 
     @Override
-    public AmazonItemsDetailsScreenWeb selectAddToCart() {
+    public ItemsDetailsScreenWeb selectAddToCart() {
         driver.waitForClickabilityOf(byAddToCartButtonXpath).click();
         return this;
     }
@@ -58,8 +58,8 @@ public class AmazonItemsDetailsScreenWeb extends AmazonItemsDetailsScreen {
     }
 
     @Override
-    public AmazonCartScreen selectCart() {
+    public CartScreen selectCart() {
         driver.waitForClickabilityOf(byCartButtonId).click();
-        return AmazonCartScreen.get();
+        return CartScreen.get();
     }
 }

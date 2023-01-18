@@ -3,23 +3,23 @@ package com.znsio.sample.e2e.businessLayer.amzon;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.sample.e2e.businessLayer.ajio.AjioSearchBL;
-import com.znsio.sample.e2e.screen.amazon.AmazonHomeScreen;
-import com.znsio.sample.e2e.screen.amazon.AmazonSearchResultsScreen;
+import com.znsio.sample.e2e.entities.AMAZON_TEST_CONTEXT;
+import com.znsio.sample.e2e.screen.amazon.HomeScreen;
+import com.znsio.sample.e2e.screen.amazon.SearchResultsScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
 
 import java.util.List;
 
-public class AmazonHomeBL {
-    private static final Logger LOGGER = Logger.getLogger(AjioSearchBL.class.getName());
+public class HomeBL {
+    private static final Logger LOGGER = Logger.getLogger(HomeBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
 
-    public AmazonHomeBL(String userPersona, Platform forPlatform) {
+    public HomeBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -29,14 +29,15 @@ public class AmazonHomeBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public AmazonHomeBL itemSearch(String itemName) {
-        AmazonSearchResultsScreen amazonItemsViewScreen = AmazonHomeScreen.get()
+    public HomeBL searchItem(String itemName) {
+        context.addTestState(AMAZON_TEST_CONTEXT.ITEM_NAME, itemName);
+        SearchResultsScreen searchResultScreen = HomeScreen.get()
                 .enterItemNameInSearch(itemName)
                 .pressEnter();
-        String actualSearchedText = amazonItemsViewScreen.getSearchText();
-        List<String> actualItemTitles = amazonItemsViewScreen.getItemTitles();
-        softly.assertThat(actualSearchedText).as(String.format("Expected search was for '%s' but found '%s'",itemName,actualSearchedText)).contains(itemName);
-        Assertions.assertThat(actualItemTitles).as(String.format("Results are not displayed as per searched: '%s'",itemName))
+        String actualSearchedText = searchResultScreen.getSearchText();
+        List<String> actualItemTitles = searchResultScreen.getItemTitles();
+        Assertions.assertThat(actualSearchedText).as(String.format("Expected search was for '%s' but found '%s'",itemName,actualSearchedText)).contains(itemName);
+        softly.assertThat(actualItemTitles).as(String.format("Results are not displayed as per searched: '%s'",itemName))
                 .allMatch(actualItemTitle->actualItemTitle.contains(itemName));
         return this;
     }

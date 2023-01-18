@@ -27,12 +27,13 @@ public class HomePageBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
     public HomePageBL productSearch(String product) {
+        LOGGER.info(String.format("User searched for a product: '%s'", product));
         AmazonHomeScreen amazonSearchResultsScreen = AmazonHomeScreen.get().searchProductFromSearchbar(product);
-        String actualSearchOfProduct = amazonSearchResultsScreen.getActualSearchText();
-        assertThat(actualSearchOfProduct).as("Search is for product: "+product)
+        String actualTextInSearchBar = amazonSearchResultsScreen.getActualSearchText();
+        LOGGER.info(String.format("Text present in searchbar: '%s'", actualTextInSearchBar));
+        assertThat(actualTextInSearchBar).as("Searched product name is present: "+product)
                 .isEqualTo(product);
         return this;
-
     }
 
 }

@@ -44,6 +44,7 @@ public class SearchResultsScreenWeb extends SearchResultsScreen {
     @Override
     public ItemsDetailsScreen clickOnItemByPosition(String itemPosition) {
         int itemIndex = OrdinalToNumber.valueOf(itemPosition.toUpperCase()).ordinal();
+        LOGGER.info(String.format("Selecting item at index: '%s'", itemIndex));
         getItems().get(itemIndex).click();
         return ItemsDetailsScreen.get();
     }
@@ -51,12 +52,15 @@ public class SearchResultsScreenWeb extends SearchResultsScreen {
     @Override
     public String getItemText(String itemPosition) {
         int itemIndex = OrdinalToNumber.valueOf(itemPosition.toUpperCase()).ordinal();
-        return getItems().get(itemIndex).getText();
+        String itemTitle = getItems().get(itemIndex).getText();
+        LOGGER.info(String.format("Fetching item title: '%s'", itemTitle));
+        return itemTitle;
     }
 
     @Override
     public List<String> getItemTitles() {
         List<WebElement> items = getItems();
+        LOGGER.info("Fetching item titles");
         return items.stream().map(item -> item.getText().toLowerCase()).collect(Collectors.toList());
     }
 }

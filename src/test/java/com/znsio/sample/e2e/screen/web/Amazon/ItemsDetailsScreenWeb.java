@@ -40,7 +40,7 @@ public class ItemsDetailsScreenWeb extends ItemsDetailsScreen {
     @Override
     public String getItemsTitle() {
         String itemTitle = driver.waitTillElementIsPresent(byProductTitleId).getText();
-        LOGGER.info(String.format("Item title is: '%s'", itemTitle));
+        LOGGER.info(String.format("Item title on Item details screen: '%s'", itemTitle));
         return itemTitle;
     }
 

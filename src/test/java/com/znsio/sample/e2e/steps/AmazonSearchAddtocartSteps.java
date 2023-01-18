@@ -37,25 +37,18 @@ public class AmazonSearchAddtocartSteps {
     }
     @When("I view the first product from search list")
     public void iViewTheFirstProductFromSearchList() {
-        LOGGER.info(System.out.printf("iViewTheFirstProduct - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
         new ProductPageBL().viewFirstProduct();
     }
     @Then("I should see the product details page")
     public void iShouldSeeTheProductDetailsPage() {
-        LOGGER.info(System.out.printf("iShouldSeeTheProductDetailsPage - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
         new ProductPageBL().verifyProductDetails();
     }
     @When("I add the product to the cart")
     public void iAddTheProductToTheCart() {
-        LOGGER.info(System.out.printf("iAddTheProductToTheCart - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
-        new CartPageBL().makingCartReady();
+        new CartPageBL().preparingShoppingCart();
     }
     @Then("I should see the product in the cart")
     public void iShouldSeeTheProductInTheCart() {
-        LOGGER.info(System.out.printf("iShouldSeeTheProductInTheCart - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
         new CartPageBL().verifyProductDetailsInCart();
     }
-
-
-
 }

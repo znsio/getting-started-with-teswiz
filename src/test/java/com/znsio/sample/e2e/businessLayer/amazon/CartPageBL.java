@@ -18,7 +18,7 @@ public class CartPageBL {
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
     }
-    public CartPageBL makingCartReady() {
+    public CartPageBL preparingShoppingCart() {
         LOGGER.info(String.format("Adding product to the cart"));
         AmazonCartScreen.get().addingFirstProductToCart();
         boolean isProductAddedToCart = AmazonCartScreen.get().isCartReady();

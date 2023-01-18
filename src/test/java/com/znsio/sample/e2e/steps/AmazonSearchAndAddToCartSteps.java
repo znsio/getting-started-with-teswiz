@@ -4,9 +4,9 @@ import com.context.SessionContext;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Drivers;
-import com.znsio.sample.e2e.businessLayer.amazon.AmazonCartBL;
-import com.znsio.sample.e2e.businessLayer.amazon.AmazonProductDetailsBL;
-import com.znsio.sample.e2e.businessLayer.amazon.AmazonSearchBL;
+import com.znsio.sample.e2e.businessLayer.amazon.CartBL;
+import com.znsio.sample.e2e.businessLayer.amazon.ProductDetailsBL;
+import com.znsio.sample.e2e.businessLayer.amazon.SearchBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -32,26 +32,26 @@ public class AmazonSearchAndAddToCartSteps {
         LOGGER.info(System.out.printf("iAGuestUserSearchForProducts - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
         context.addTestState(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD, product);
-        new AmazonSearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchForProduct(product);
+        new SearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchForProduct(product);
     }
 
     @When("I select the first product from the search results")
-    public void iSelectTheFirstItemFromTheSearchResults() {
-        new AmazonSearchBL().selectFirstItem();
+    public void iSelectTheFirstProductFromTheSearchResults() {
+        new SearchBL().selectFirstProduct();
     }
 
     @Then("I should see the product detail page")
     public void iShouldLandOnItsProductDetailPage() {
-        new AmazonProductDetailsBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).verifyProductDetails();
+        new ProductDetailsBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).verifyProductDetails();
     }
 
     @When("I add the product to my cart")
     public void iAddToTheCart() {
-        new AmazonProductDetailsBL().createCart();
+        new ProductDetailsBL().createCart();
     }
 
     @Then("I should be able to see the product in the cart")
     public void iShouldBeAbleToSeeInTheCart() {
-        new AmazonCartBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).verifyCartItem();
+        new CartBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).verifyCart();
     }
 }

@@ -2,15 +2,15 @@ package com.znsio.sample.e2e.screen.web.amazon;
 
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.amazon.AmazonCartScreen;
-import com.znsio.sample.e2e.screen.amazon.AmazonProductDetailsScreen;
+import com.znsio.sample.e2e.screen.amazon.CartScreen;
+import com.znsio.sample.e2e.screen.amazon.ProductDetailsScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
-public class AmazonProductDetailsScreenWeb extends AmazonProductDetailsScreen {
+public class ProductDetailsScreenWeb extends ProductDetailsScreen {
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = AmazonProductDetailsScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = ProductDetailsScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private static final By byProductFoundNameId = By.id("productTitle");
@@ -23,14 +23,14 @@ public class AmazonProductDetailsScreenWeb extends AmazonProductDetailsScreen {
 
     private static final By byAddToCartTextXpath = By.xpath("(//div[@id=\"attachDisplayAddBaseAlert\"])/span");
 
-    public AmazonProductDetailsScreenWeb(Driver driver, Visual visually) {
+    public ProductDetailsScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
         visually.checkWindow(SCREEN_NAME, "Product Details screen");
     }
 
     @Override
-    public String getActualItemName() {
+    public String getActualProductName() {
 
         driver.switchToNextTab();
         String itemName = driver.waitTillElementIsPresent(byProductFoundNameId)
@@ -41,7 +41,7 @@ public class AmazonProductDetailsScreenWeb extends AmazonProductDetailsScreen {
     }
 
     @Override
-    public String getActualItemCost() {
+    public String getActualProductCost() {
         String itemCost = driver.waitTillElementIsPresent(byProductFoundCostXpath)
                 .getText();
 
@@ -51,7 +51,7 @@ public class AmazonProductDetailsScreenWeb extends AmazonProductDetailsScreen {
     }
 
     @Override
-    public AmazonProductDetailsScreen addToCart(){
+    public ProductDetailsScreen addToCart(){
         driver.waitTillElementIsPresent(byaddToCartBtnId).click();
         visually.checkWindow(SCREEN_NAME, "Item added to cart");
         return this;
@@ -63,9 +63,9 @@ public class AmazonProductDetailsScreenWeb extends AmazonProductDetailsScreen {
     }
 
     @Override
-    public AmazonCartScreen goToCartPage(){
+    public CartScreen goToCartPage(){
         driver.waitTillElementIsVisible(byGoToCartBtnId).click();
         visually.checkWindow(SCREEN_NAME, "Go to cart page");
-        return AmazonCartScreen.get();
+        return CartScreen.get();
     }
 }

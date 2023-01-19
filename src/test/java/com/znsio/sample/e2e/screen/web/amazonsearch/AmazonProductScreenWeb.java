@@ -6,6 +6,7 @@ import com.znsio.sample.e2e.businessLayer.amazonsearch.AmazonProductBL;
 import com.znsio.sample.e2e.screen.amazonsearch.AmazonProductScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,8 +15,6 @@ public class AmazonProductScreenWeb extends AmazonProductScreen {
     private final Visual visually;
     private static final String SCREEN_NAME = AmazonProductScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-    private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
-
     private static final By byProductTitle = By.id("productTitle");
     private static final By byCustomerReviewsText = By.id("acrCustomerReviewText");
     private static final By byAddToCartButton = By.id("add-to-cart-button");
@@ -27,26 +26,34 @@ public class AmazonProductScreenWeb extends AmazonProductScreen {
     }
 
     @Override
-    public AmazonProductScreen verifyProductDetails() {
-        LOGGER.info("Verifying product details like Product Title, Price, Product Images, Product Description.");
+    public boolean verifyProductDetails() {
+        LOGGER.info("Verifying product details like Product Title, Customer reviews, Add to cart button.");
         driver.waitTillElementIsPresent(byProductTitle);
-        assertThat(driver.isElementPresent(byProductTitle)).as("Product Title not present").isTrue();
-        assertThat(driver.isElementPresent(byCustomerReviewsText)).as("Customer Reviews not present").isTrue();
-        assertThat(driver.isElementPresent(byAddToCartButton)).as("Add to cart Button not present").isTrue();
-        return AmazonProductScreen.get();
-    }
-
-    @Override
-    public AmazonProductScreen clickOnAddToCart() {
-        LOGGER.info("in method to click on 'Add to cart' button");
-        driver.findElement(byAddToCartButton).click();
-        return AmazonProductScreen.get();
+        boolean isProductTitle = driver.isElementPresent(byProductTitle);
+        boolean isCustomerReviewsText = driver.isElementPresent(byCustomerReviewsText);
+        boolean isAddToCart = driver.isElementPresent(byAddToCartButton);
+        visually.checkWindow(SCREEN_NAME, "Product information screen");
+        return isProductTitle && isCustomerReviewsText && isAddToCart;
     }
 
     @Override
     public AmazonProductScreen changeToNewTab() {
         LOGGER.info("Switching to next tab.");
         driver.switchToNextTab();
-        return AmazonProductScreen.get();
+        visually.checkWindow(SCREEN_NAME, "Shifted to next tab");
+        return this;
+    }
+
+    @Override
+    public boolean clickOnAddToCart() {
+        LOGGER.info("in method to click on 'clickAddToCart' button");
+        driver.waitTillElementIsPresent(byAddToCartButton);
+        try {
+            driver.findElement(byAddToCartButton).click();
+            visually.checkWindow(SCREEN_NAME, "Cart window");
+            return true;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

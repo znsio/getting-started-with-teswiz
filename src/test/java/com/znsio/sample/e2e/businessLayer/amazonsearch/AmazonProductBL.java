@@ -8,6 +8,8 @@ import com.znsio.sample.e2e.screen.amazonsearch.AmazonProductScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class AmazonProductBL {
     private static final Logger LOGGER = Logger.getLogger(AmazonProductBL.class.getName());
     private final TestExecutionContext context;
@@ -34,12 +36,18 @@ public class AmazonProductBL {
     }
 
     public AmazonProductBL verifyProductDetails() {
-        AmazonProductScreen.get().changeToNewTab().verifyProductDetails();
+        AmazonProductScreen amazonProductScreen = AmazonProductScreen.get();
+        LOGGER.info("Shifting to next tab as product window is opened in next tab");
+        amazonProductScreen.changeToNewTab();
+        LOGGER.info("Verifying if product details are present correctly.");
+        assertThat(amazonProductScreen.verifyProductDetails()).as("Product details are not present correctly").isTrue();
         return this;
     }
 
     public AmazonProductBL addToCart() {
-        AmazonProductScreen.get().clickOnAddToCart();
+        LOGGER.info("Add product to the shopping cart.");
+        AmazonProductScreen amazonProductScreen = AmazonProductScreen.get();
+        assertThat(amazonProductScreen.clickOnAddToCart()).as("Add to cart operation was not successful").isTrue();
         return this;
     }
 }

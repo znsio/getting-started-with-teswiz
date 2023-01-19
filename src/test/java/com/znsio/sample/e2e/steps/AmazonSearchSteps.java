@@ -39,25 +39,25 @@ public class AmazonSearchSteps {
 
     @When("I, select first item from the list")
     public void iSelectFirstItemFromTheList() {
-        LOGGER.info(System.out.printf("iSelectFirstItemFromTheList - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER , Runner.platform));
+        LOGGER.info("In iSelectFirstItemFromTheList");
         new AmazonSearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).selectFirstItem();
     }
 
-    @Then("I, should verify the product details")
-    public void iShouldVerifyTheProductDetails() {
-        LOGGER.info(System.out.printf("iShouldVerifyTheProductDetails - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER , Runner.platform));
+    @Then("I, should be able to see the product details")
+    public void iShouldBeAbleToSeeTheProductDetails() {
+        LOGGER.info("In iShouldVerifyTheProductDetails");
         new AmazonProductBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).verifyProductDetails();
     }
 
     @When("I, add the product to the shopping cart")
     public void iAddTheProductToTheShoppingCart() {
-        LOGGER.info(System.out.printf("iAddTheProductToTheShoppingCart - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER , Runner.platform));
+        LOGGER.info("In iAddTheProductToTheShoppingCart");
         new AmazonProductBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).addToCart();
     }
 
     @Then("I, should be able to see the product in the cart")
     public void iShouldBeAbleToSeeTheProductInTheCart() {
-        LOGGER.info(System.out.printf("iShouldBeAbleToSeeTheProductInTheCart - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER , Runner.platform));
+        LOGGER.info("iShouldBeAbleToSeeTheProductInTheCart");
         new AmazonCartBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).verifyProductAddedToCart(SAMPLE_TEST_CONTEXT.PRODUCT_NAME);
     }
 }

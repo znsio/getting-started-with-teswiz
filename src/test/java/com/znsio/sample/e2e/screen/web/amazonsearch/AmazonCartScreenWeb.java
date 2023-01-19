@@ -6,7 +6,6 @@ import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.amazonsearch.AmazonCartScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
@@ -14,8 +13,6 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
     private final Driver driver;
     private final Visual visually;
     private static final String SCREEN_NAME = AmazonCartScreenWeb.class.getSimpleName();
-    private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-    private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private static final By byAddedToCartXpath = By.xpath("//*[@id='attachDisplayAddBaseAlert']/span");
     private static final By byCartButton = By.xpath("//span[@class='a-button-inner']/child::span[contains(text(),'Cart')]/preceding-sibling::input[@class='a-button-input' and @type='submit']");
     private static final By byproductTitleXpath = By.xpath("//span[@class='a-list-item']/descendant::span[@class='a-truncate-cut' and contains(text(), 'Apple iPhone 13')]");
@@ -31,13 +28,14 @@ public class AmazonCartScreenWeb extends AmazonCartScreen {
         driver.waitTillElementIsVisible(byAddedToCartXpath);
         assertThat(driver.isElementPresent(byAddedToCartXpath)).as("Product not added to the cart").isTrue();
         driver.findElement(byCartButton).click();
-        return AmazonCartScreen.get();
+        return this;
     }
 
     @Override
-    public AmazonCartScreen verifyProductPresentInTheCart(String ProductName) {
+    public boolean verifyProductPresentInTheCart(String ProductName) {
         driver.waitTillElementIsPresent(byproductTitleXpath);
-        assertThat(driver.isElementPresent(byproductTitleXpath)).as("Product name not present").isTrue();
-        return AmazonCartScreen.get();
+        boolean isProductPresent = driver.isElementPresent(byproductTitleXpath);
+        visually.checkWindow(SCREEN_NAME, "Product list in cart");
+        return isProductPresent;
     }
 }

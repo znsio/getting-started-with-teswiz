@@ -8,6 +8,8 @@ import com.znsio.sample.e2e.screen.amazonsearch.AmazonCartScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class AmazonCartBL {
     private static final Logger LOGGER = Logger.getLogger(AmazonCartBL.class.getName());
     private final TestExecutionContext context;
@@ -34,9 +36,11 @@ public class AmazonCartBL {
     }
 
     public AmazonCartBL verifyProductAddedToCart(String ProductName) {
-        AmazonCartScreen.get()
-                .clickOnCartButton()
-                .verifyProductPresentInTheCart(ProductName);
+        AmazonCartScreen amazonCartScreen = AmazonCartScreen.get();
+        LOGGER.info("Moving to cart screen.");
+        amazonCartScreen.clickOnCartButton();
+        LOGGER.info("product should be added to the cart");
+        assertThat(amazonCartScreen.verifyProductPresentInTheCart(ProductName)).as("Product was not present in cart page").isTrue();
         return this;
     }
 }

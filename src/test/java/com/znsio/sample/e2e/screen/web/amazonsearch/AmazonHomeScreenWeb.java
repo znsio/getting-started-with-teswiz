@@ -16,7 +16,6 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen{
     private final Visual visually;
     private static final String SCREEN_NAME = AmazonHomeScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-    private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
 
     public AmazonHomeScreenWeb(Driver driver, Visual visually) {
         super();
@@ -41,10 +40,9 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen{
     }
 
     @Override
-    public AmazonSearchResultsScreen selectFirstItem() {
+    public boolean selectFirstItem() {
         LOGGER.info("Clicking the first result item");
-        driver.waitTillElementIsPresent(byFirstImageResultXpath);
         driver.findElement(byFirstImageResultXpath).click();
-        return AmazonSearchResultsScreen.get();
+        return driver.isElementPresent(byFirstImageResultXpath);
     }
 }

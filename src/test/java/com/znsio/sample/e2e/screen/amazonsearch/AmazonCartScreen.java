@@ -34,5 +34,5 @@ public abstract class AmazonCartScreen {
 
     public abstract AmazonCartScreen clickOnCartButton();
 
-    public abstract AmazonCartScreen verifyProductPresentInTheCart(String productName);
+    public abstract boolean verifyProductPresentInTheCart(String productName);
 }

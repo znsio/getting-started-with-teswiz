@@ -4,12 +4,9 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.android.ajio.AjioHomeScreenAndroid;
-import com.znsio.sample.e2e.screen.web.ajio.AjioHomeScreenWeb;
 import com.znsio.sample.e2e.screen.web.amazonsearch.AmazonHomeScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
@@ -37,5 +34,5 @@ public abstract class AmazonHomeScreen{
 
     public abstract AmazonSearchResultsScreen searchForProductInSearchBar(String productTitle);
 
-    public abstract AmazonSearchResultsScreen selectFirstItem();
+    public abstract boolean selectFirstItem();
 }

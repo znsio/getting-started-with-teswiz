@@ -39,15 +39,15 @@ public class CartBL {
     public CartBL verifyCart() {
         ProductDetailsScreen productDetailsScreen = ProductDetailsScreen.get();
         String actualName = productDetailsScreen.getActualProductName();
-        CartScreen cartScreen = productDetailsScreen.goToCartPage();
+        CartScreen cartScreen = productDetailsScreen.navigateToCartPage();
         softly.assertThat(cartScreen.isCartHeadingVisible()).as("Shopping Cart heading is not visible");
 
         String cartItemName = cartScreen.getCartProductName();
-        softly.assertThat(actualName).as("Cart Item name is different from clicked item").isEqualTo(cartItemName);
+        softly.assertThat(actualName).as("Cart Product name is different from clicked item").isEqualTo(cartItemName);
 
         String searchedString = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD);
         System.out.println("Searched String" + " " + searchedString);
-        assertThat(cartItemName.contains(searchedString)).as("Cart item is different from searched string").isTrue();
+        assertThat(cartItemName.contains(searchedString)).as("Cart product is different from searched string").isTrue();
 
         return this;
     }

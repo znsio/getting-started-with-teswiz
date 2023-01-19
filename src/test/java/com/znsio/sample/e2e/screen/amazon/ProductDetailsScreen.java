@@ -41,5 +41,5 @@ public abstract class ProductDetailsScreen {
 
     public abstract boolean isItemAddedToCartTextVisible();
 
-    public abstract CartScreen goToCartPage();
+    public abstract CartScreen navigateToCartPage();
 }

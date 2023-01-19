@@ -63,7 +63,7 @@ public class ProductDetailsScreenWeb extends ProductDetailsScreen {
     }
 
     @Override
-    public CartScreen goToCartPage(){
+    public CartScreen navigateToCartPage(){
         driver.waitTillElementIsVisible(byGoToCartBtnId).click();
         visually.checkWindow(SCREEN_NAME, "Go to cart page");
         return CartScreen.get();

@@ -31,7 +31,6 @@ public class AmazonSearchAndAddToCartSteps {
     public void iAsAGuestUserSearchForProductOnAmazon(String product) {
         LOGGER.info(System.out.printf("iAGuestUserSearchForProducts - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
-        context.addTestState(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD, product);
         new SearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchForProduct(product);
     }
 

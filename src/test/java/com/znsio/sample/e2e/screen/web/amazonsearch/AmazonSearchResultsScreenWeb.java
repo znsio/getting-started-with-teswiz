@@ -14,7 +14,6 @@ public class AmazonSearchResultsScreenWeb extends AmazonSearchResultsScreen {
     private final Visual visually;
     private static final String SCREEN_NAME = AmazonSearchResultsScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-    private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private static final By ByProductImage = By.xpath("//img[@class='s-image']");
 
     public AmazonSearchResultsScreenWeb(Driver driver, Visual visually) {

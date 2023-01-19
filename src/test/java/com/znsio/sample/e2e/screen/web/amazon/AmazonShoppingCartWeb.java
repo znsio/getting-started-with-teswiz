@@ -32,7 +32,7 @@ public class AmazonShoppingCartWeb extends AmazonShoppingCartScreen {
     }
 
     @Override
-    public boolean getTheShoppingCartTitle(){
+    public boolean checkShoppingCartMessage(){
         WebElement shoppingCartMsg = driver.waitTillElementIsVisible(shoppingCartMessage);
         String expectedAddedToCartMsg = shoppingCartMsg.getText().trim();
         if(expectedAddedToCartMsg.equals("Shopping Cart")){

@@ -36,7 +36,7 @@ public abstract class AmazonShoppingCartScreen {
     }
     public abstract AmazonShoppingCartScreen navigateToTheShoppingCart();
 
-    public abstract boolean getTheShoppingCartTitle();
+    public abstract boolean checkShoppingCartMessage();
 
     public abstract String getShoppingCartProduct();
 }

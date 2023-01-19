@@ -42,13 +42,13 @@ public class AmazonSearchSteps {
 
     @And("I add the selected product to the shopping cart")
     public void iAddTheSelectedProductToTheShoppingCart() {
-        new AmazonProductViewBL().preparingShoppingCart();
+        new AmazonProductViewBL().prepareShoppingCart();
     }
 
     @Then("I should be able to see the product in the shopping cart")
     public void iShouldBeAbleToSeeProductAddedInTheCart() {
         String productName = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_NAME);
-        new AmazonShoppingCartBL().VerifyTheProductIsVisibleInShoppingCart(productName);
+        new AmazonShoppingCartBL().verifyTheProduct(productName);
     }
 
 }

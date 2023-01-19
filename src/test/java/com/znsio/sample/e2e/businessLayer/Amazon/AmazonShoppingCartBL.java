@@ -28,9 +28,9 @@ public class AmazonShoppingCartBL {
         LOGGER.info("AmazonSearchBL created");
     }
 
-    public AmazonShoppingCartBL VerifyTheProductIsVisibleInShoppingCart(String productName){
+    public AmazonShoppingCartBL verifyTheProduct(String productName){
         LOGGER.info(String.format("User navigate to the shopping cart"));
-        boolean shoppingCart = AmazonShoppingCartScreen.get().navigateToTheShoppingCart().getTheShoppingCartTitle();
+        boolean shoppingCart = AmazonShoppingCartScreen.get().navigateToTheShoppingCart().checkShoppingCartMessage();
         assertThat(shoppingCart).as("User Navigated to the shopping cart").isTrue();
         LOGGER.info(String.format("Verify the product has been successfully added to the shopping cart"));
         String getProductName = AmazonShoppingCartScreen.get().getShoppingCartProduct();

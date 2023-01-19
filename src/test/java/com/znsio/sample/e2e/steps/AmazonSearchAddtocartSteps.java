@@ -45,7 +45,7 @@ public class AmazonSearchAddtocartSteps {
     }
     @When("I add the product to the cart")
     public void iAddTheProductToTheCart() {
-        new CartPageBL().preparingShoppingCart();
+        new CartPageBL().prepareCart();
     }
     @Then("I should see the product in the cart")
     public void iShouldSeeTheProductInTheCart() {

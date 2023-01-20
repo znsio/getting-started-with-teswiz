@@ -31,6 +31,7 @@ public class AmazonProductViewWeb extends AmazonProductViewScreen {
     @Override
     public AmazonProductViewScreen selectFirstProduct(){
         LOGGER.info(String.format("Select the first product"));
+        visually.checkWindow(SCREEN_NAME, "Search string entered");
         driver.scrollTillElementIntoView(firstProduct);
         WebElement selectProduct = driver.waitTillElementIsPresent(firstProduct);
         selectProduct.click();

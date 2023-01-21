@@ -26,7 +26,7 @@ public class RunTestCukes
                               .getId();
         LOGGER.info("RunTestCukes constructor: ThreadId: " + threadId);
         context = SessionContext.getTestExecutionContext(threadId);
-        System.setProperty(TEST_CONTEXT.TAGS_TO_EXCLUDE_FROM_CUCUMBER_REPORT, "@android,@web,@prod,@sit,@eat,@uat,@qa");
+        System.setProperty(TEST_CONTEXT.TAGS_TO_EXCLUDE_FROM_CUCUMBER_REPORT, "@android,@web,@prod,@sit,@eat,@uat,@qa,@amazonSearch");
     }
 
     @Override

@@ -33,8 +33,8 @@ public class AmazonSearchSteps {
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
         new AmazonSearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchProduct(productName);
     }
-    @And("I view the first product from the product list")
-    public void iViewTheFirstProductFromTheProductList()
+    @And("I view the first product from the results list")
+    public void iViewTheFirstProductFromTheResultsList()
     {
         new AmazonSearchBL().seeProductResults();
     }
@@ -47,6 +47,5 @@ public class AmazonSearchSteps {
     public void iShouldBeAbleToSeeTheProductInCart()
     {
         new AmazonProductBL().seeProductInCart();
-
     }
 }

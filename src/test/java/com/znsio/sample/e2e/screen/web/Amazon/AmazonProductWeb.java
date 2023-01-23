@@ -2,14 +2,14 @@ package com.znsio.sample.e2e.screen.web.Amazon;
 
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.amazon.AmazonProduct;
+import com.znsio.sample.e2e.screen.amazon.AmazonProductScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class AmazonProductWeb extends AmazonProduct {
+public class AmazonProductWeb extends AmazonProductScreen {
 
     private final Driver driver;
     private final WebDriver innerDriver;
@@ -29,9 +29,9 @@ public class AmazonProductWeb extends AmazonProduct {
         visually.checkWindow(SCREEN_NAME, "Product Detailed page");
     }
     @Override
-    public AmazonProductWeb verifyAddedProductToCart()
+    public AmazonProductWeb addToCart()
     {
-        visually.checkWindow(SCREEN_NAME, "Cart side screen");
+        visually.checkWindow(SCREEN_NAME, "Cart screen");
         driver.switchToNextTab();
         WebElement addCartElement=driver.waitTillElementIsPresent(byAddToCartId);
         addCartElement.click();
@@ -40,7 +40,7 @@ public class AmazonProductWeb extends AmazonProduct {
         return this;
     }
 
-    public boolean viewCart()
+    public boolean isAddedToCart()
     {
         LOGGER.info("Navigating from view cart");
         try {
@@ -53,24 +53,23 @@ public class AmazonProductWeb extends AmazonProduct {
         }
         catch (Exception e)
         {
-            LOGGER.info("exception in navigating from cart");
+            LOGGER.info("Exception in navigating from cart");
         }
         return false;
     }
 
     @Override
-    public boolean verifyProductInCart() {
-        visually.checkWindow(SCREEN_NAME, " Shopping cart items displayed");
+    public boolean isProductInCart() {
+        visually.checkWindow(SCREEN_NAME, " Shopping cart items");
         try {
             driver.waitTillElementIsPresent(byProductInCartXpath);
-            LOGGER.info("verifying the searched product in shopping cart");
+            LOGGER.info("Verifying the searched product in shopping cart");
             return true;
         }
         catch (Exception e)
         {
             LOGGER.info("Exception in verification of cart");
         }
-
         return false;
     }
 

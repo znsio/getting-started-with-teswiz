@@ -4,7 +4,7 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.amazon.AmazonProduct;
+import com.znsio.sample.e2e.screen.amazon.AmazonProductScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -37,19 +37,20 @@ public class AmazonProductBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public void addProductToCart()
+    public AmazonProductBL addProductToCart()
     {
         LOGGER.info("Adding product to cart");
-        boolean hasProductAddedInCart=AmazonProduct.get().verifyAddedProductToCart().viewCart();
-        softly.assertThat(hasProductAddedInCart).as("Shopping cart navigation problem").isEqualTo(true);
-
+        boolean isProductAvailableInCart= AmazonProductScreen.get().addToCart().isAddedToCart();
+        softly.assertThat(isProductAvailableInCart).as("Shopping cart navigation problem").isEqualTo(true);
+        return this;
     }
 
-    public void seeProductInCart()
+    public AmazonProductBL seeProductInCart()
     {
         LOGGER.info("Verifying product in cart");
-        assertThat(AmazonProduct.get().verifyProductInCart()).
+        assertThat(AmazonProductScreen.get().isProductInCart()).
                 as("verification failure in cart").isEqualTo(true);
+        return this;
     }
 
 }

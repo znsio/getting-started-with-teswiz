@@ -5,7 +5,7 @@
     @web
     Scenario: Guest User searches and adds the product in cart
       Given I, a guest user, search for the product "iphone 13" in search bar on Amazon
-      And I view the first product from the product list
+      And I view the first product from the results list
       When I add the product to cart
       Then I should be able to see the product in cart
 

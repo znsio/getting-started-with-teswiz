@@ -38,9 +38,9 @@ public class ProductDetailsBL {
     }
 
     public ProductDetailsBL verifyProductDetails(){
-        SearchResultsScreen searchResultsScreen = SearchResultsScreen.get();
-        String expectedName = searchResultsScreen.getFirstProductName();
-        String expectedCost = searchResultsScreen.getFirstProductCost();
+
+        String expectedName = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_NAME);
+        String expectedCost = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_COST);
 
         ProductDetailsScreen productDetailsScreen = ProductDetailsScreen.get();
 

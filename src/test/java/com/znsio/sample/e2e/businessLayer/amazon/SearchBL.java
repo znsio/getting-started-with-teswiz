@@ -47,9 +47,9 @@ public class SearchBL {
     }
 
     public SearchBL selectFirstProduct() {
-        SearchResultsScreen searchResultsScreen = SearchResultsScreen.get()
-                .clickOnFirstProduct();
+        SearchResultsScreen searchResultsScreen = SearchResultsScreen.get();
         assertThat(searchResultsScreen.getFirstProductName().contains(context.getTestStateAsString(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD))).as("First item is different from searched product").isTrue();
+        searchResultsScreen.clickOnFirstProduct();
         return this;
     }
 }

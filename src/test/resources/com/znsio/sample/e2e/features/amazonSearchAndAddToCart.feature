@@ -2,7 +2,7 @@
 Feature: Amazon search and cart validation
 
 #  CONFIG=./configs/amazon_local_config.properties TAG="@amazon" PLATFORM=web ./gradlew run
-  @web
+  @web @android
   Scenario: Guest User should be able to search for iPhone 13 and add it to the cart
     Given I, as a guest user, search for "iPhone 13" on amazon
     When I select the first product from the search results

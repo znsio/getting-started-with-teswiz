@@ -10,4 +10,6 @@ public class SAMPLE_TEST_CONTEXT
     public static final String INVITATION_LINK = "invitationLink";
     public static final String GUEST_USER = "guestUser";
     public static final String SEARCH_KEYWORD = "searchKeyword";
+    public static final String PRODUCT_NAME = "productName";
+    public static final String PRODUCT_COST = "productCost";
 }

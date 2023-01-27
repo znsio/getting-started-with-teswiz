@@ -38,7 +38,7 @@ public class CartBL {
 
     public CartBL verifyCart() {
         ProductDetailsScreen productDetailsScreen = ProductDetailsScreen.get();
-        String actualName = productDetailsScreen.getActualProductName();
+        String actualName = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_NAME);
         CartScreen cartScreen = productDetailsScreen.navigateToCartPage();
         softly.assertThat(cartScreen.isCartHeadingVisible()).as("Shopping Cart heading is not visible");
 

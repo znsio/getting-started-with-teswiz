@@ -2,10 +2,10 @@
   "android": {
     "adbExecTimeout": 45000,
     "app": {
-      "local": "https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/main/ajio-8-3-4.apk"
+      "local": "/Users/naman.khurana/getting-started-with-teswiz/temp/Amazon.apk"
     },
-    "appActivity": "com.ril.ajio.launch.activity.SplashScreenActivity",
-    "appPackage": "com.ril.ajio",
+    "appActivity": "com.amazon.twa.CustomTWALauncherActivity",
+    "appPackage": "in.amazon.mShop.android.shopping",
     "appWaitDuration": 45000,
     "automationName": "UiAutomator2",
     "autoGrantPermissions": true,

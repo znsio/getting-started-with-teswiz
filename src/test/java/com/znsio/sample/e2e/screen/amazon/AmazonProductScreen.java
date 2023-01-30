@@ -4,7 +4,8 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.web.Amazon.AmazonProductWeb;
+import com.znsio.sample.e2e.screen.android.amazon.AmazonProductScreenAndroid;
+import com.znsio.sample.e2e.screen.web.Amazon.AmazonProductScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
@@ -27,12 +28,15 @@ public abstract class AmazonProductScreen {
 
         switch(platform) {
             case web:
-                return new AmazonProductWeb(driver, visually);
+                return new AmazonProductScreenWeb(driver, visually);
+            case android:
+                return new AmazonProductScreenAndroid(driver,visually);
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
-    public abstract AmazonProductWeb addToCart();
+    public abstract AmazonCartScreen addToCart();
+    public abstract boolean isProductAvailableAfterSearching();
 
-    public abstract boolean isProductInCart();
+
 
 }

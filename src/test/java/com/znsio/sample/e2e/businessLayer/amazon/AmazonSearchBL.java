@@ -5,7 +5,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazon.AmazonSearchScreen;
-import com.znsio.sample.e2e.screen.web.Amazon.AmazonSearchWeb;
+import com.znsio.sample.e2e.screen.web.Amazon.AmazonSearchScreenWeb;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -38,26 +38,14 @@ public class AmazonSearchBL {
         this.currentPlatform = Runner.platform;
     }
 
-
-
-    public AmazonSearchBL searchProduct(String productName)
+    public AmazonProductBL searchProduct(String productName)
     {
         LOGGER.info(String.format("Searching in home page: '%s'", productName));
-        boolean isSearchCompleted= AmazonSearchScreen.get().
+        boolean isSearchCompleted= AmazonSearchScreenWeb.get().
                 enteringAndSearchingProduct(productName).
-                isSearchComplete();
-        softly.assertThat(isSearchCompleted).as("Searching inaccurate").isEqualTo(true);
-        return this;
-
-    }
-
-    public AmazonSearchBL seeProductResults()
-    {
-        LOGGER.info("Viewing search results");
-        assertThat(AmazonSearchWeb.get().isProductAvailableAfterSearching()).
-                as("Product Results does not contains related products").isEqualTo(true);
-        return this;
-
+        isProductAvailableAfterSearching();
+        assertThat(isSearchCompleted).as("Searching inaccurate").isEqualTo(true);
+        return new AmazonProductBL();
     }
 
 

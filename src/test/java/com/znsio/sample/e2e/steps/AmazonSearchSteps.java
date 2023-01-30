@@ -3,6 +3,7 @@ import com.context.SessionContext;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Drivers;
+import com.znsio.sample.e2e.businessLayer.amazon.AmazonCartBL;
 import com.znsio.sample.e2e.businessLayer.amazon.AmazonProductBL;
 import com.znsio.sample.e2e.businessLayer.amazon.AmazonSearchBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
@@ -33,19 +34,15 @@ public class AmazonSearchSteps {
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
         new AmazonSearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchProduct(productName);
     }
-    @And("I view the first product from the results list")
-    public void iViewTheFirstProductFromTheResultsList()
-    {
-        new AmazonSearchBL().seeProductResults();
-    }
-    @When("I add the product to cart")
-    public void iAddTheProductToCart()
+    @When("I view the first product from the results list and add it to cart")
+    public void iViewTheFirstProductFromTheResultsListAndAddItToCart()
     {
         new AmazonProductBL().addProductToCart();
     }
+
     @Then("I should be able to see the product in cart")
     public void iShouldBeAbleToSeeTheProductInCart()
     {
-        new AmazonProductBL().seeProductInCart();
+        new AmazonCartBL().seeProductInCart();
     }
 }

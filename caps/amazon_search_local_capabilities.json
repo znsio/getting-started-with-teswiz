@@ -2,12 +2,13 @@
   "android": {
     "adbExecTimeout": 45000,
     "app": {
-      "local": ""
+      "local": "/Users/ishan.dhanwal/Downloads/Amazon India Shop, Pay, miniTV_22.14.2.350_Apkpure.apk"
     },
-    "appActivity": "org.jio.meet.introduction.views.SplashActivity",
-    "appPackage": "com.jio.rilconferences",
+    "appActivity": "com.amazon.twa.CustomTWALauncherActivity",
+    "appPackage": "in.amazon.mShop.android.shopping",
     "appWaitDuration": 45000,
     "automationName": "UiAutomator2",
+    "udid": "emulator-5554",
     "autoGrantPermissions": true,
     "deviceName": "android",
     "dontStopAppOnReset": true,

@@ -26,7 +26,7 @@ public class AmazonProductScreenWeb extends AmazonProductScreen {
     }
 
     @Override
-    public boolean verifyProductDetails() {
+    public boolean isProductDetailsDisplayed() {
         LOGGER.info("Verifying product details like Product Title, Customer reviews, Add to cart button.");
         driver.waitTillElementIsPresent(byProductTitle);
         boolean isProductTitle = driver.isElementPresent(byProductTitle);

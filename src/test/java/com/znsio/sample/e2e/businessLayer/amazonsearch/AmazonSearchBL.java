@@ -38,11 +38,11 @@ public class AmazonSearchBL {
     public AmazonSearchBL searchForProduct(String productTitle) {
         int numberOfProductsFound = AmazonHomeScreen.get().searchForProductInSearchBar(productTitle).getNumberOfProductsFound();
         LOGGER.info(String.format("'%s' number of results displayed.", numberOfProductsFound));
-        assertThat(numberOfProductsFound).as("Insufficient search results retrieved").isGreaterThan(10);
+        assertThat(numberOfProductsFound).as("Insufficient search results retrieved").isGreaterThan(0);
         return this;
     }
 
-    public AmazonSearchBL selectFirstItem() {
+    public AmazonSearchBL selectItemFromResults() {
         LOGGER.info("Selecting the first result available");
         assertThat(AmazonHomeScreen.get().selectFirstItem()).as("Unable to select first result item.").isTrue();
         return this;

@@ -11,7 +11,6 @@ import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
 
@@ -40,7 +39,7 @@ public class AmazonSearchSteps {
     @When("I, select first item from the list")
     public void iSelectFirstItemFromTheList() {
         LOGGER.info("In iSelectFirstItemFromTheList");
-        new AmazonSearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).selectFirstItem();
+        new AmazonSearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).selectItemFromResults();
     }
 
     @Then("I, should be able to see the product details")

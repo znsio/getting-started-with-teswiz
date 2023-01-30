@@ -40,7 +40,7 @@ public class AmazonCartBL {
         LOGGER.info("Moving to cart screen.");
         amazonCartScreen.clickOnCartButton();
         LOGGER.info("product should be added to the cart");
-        assertThat(amazonCartScreen.verifyProductPresentInTheCart(ProductName)).as("Product was not present in cart page").isTrue();
+        assertThat(amazonCartScreen.isProductPresentInTheCart(ProductName)).as("Product was not present in cart page").isTrue();
         return this;
     }
 }

@@ -4,6 +4,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.screen.android.amazonsearch.AmazonSearchResultsScreenAndroid;
 import com.znsio.sample.e2e.screen.web.amazonsearch.AmazonSearchResultsScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
@@ -26,6 +27,8 @@ public abstract class AmazonSearchResultsScreen {
                 .getId());
 
         switch(platform) {
+            case android:
+                return new AmazonSearchResultsScreenAndroid(driver, visually);
             case web:
                 return new AmazonSearchResultsScreenWeb(driver, visually);
         }

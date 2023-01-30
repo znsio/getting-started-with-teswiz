@@ -4,6 +4,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.screen.android.amazonsearch.AmazonCartScreenAndroid;
 import com.znsio.sample.e2e.screen.web.amazonsearch.AmazonCartScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
@@ -26,6 +27,8 @@ public abstract class AmazonCartScreen {
                 .getId());
 
         switch(platform) {
+            case android:
+                return new AmazonCartScreenAndroid(driver, visually);
             case web:
                 return new AmazonCartScreenWeb(driver, visually);
         }
@@ -34,5 +37,5 @@ public abstract class AmazonCartScreen {
 
     public abstract AmazonCartScreen clickOnCartButton();
 
-    public abstract boolean verifyProductPresentInTheCart(String productName);
+    public abstract boolean isProductPresentInTheCart(String productName);
 }

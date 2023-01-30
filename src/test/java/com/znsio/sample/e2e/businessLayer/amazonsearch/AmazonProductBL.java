@@ -37,10 +37,8 @@ public class AmazonProductBL {
 
     public AmazonProductBL verifyProductDetails() {
         AmazonProductScreen amazonProductScreen = AmazonProductScreen.get();
-        LOGGER.info("Shifting to next tab as product window is opened in next tab");
-        amazonProductScreen.changeToNewTab();
         LOGGER.info("Verifying if product details are present correctly.");
-        assertThat(amazonProductScreen.verifyProductDetails()).as("Product details are not present correctly").isTrue();
+        assertThat(amazonProductScreen.isProductDetailsDisplayed()).as("Product details are not present correctly").isTrue();
         return this;
     }
 

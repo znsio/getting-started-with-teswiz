@@ -11,4 +11,7 @@ public class SAMPLE_TEST_CONTEXT
     public static final String GUEST_USER = "guestUser";
     public static final String ADDCART_SUCCESS = "Added to Cart";
 
+    public static final String PRODUCT_NAME = "iphone 13";
+
+
 }

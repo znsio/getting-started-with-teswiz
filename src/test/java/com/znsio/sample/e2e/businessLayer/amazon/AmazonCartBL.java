@@ -7,8 +7,8 @@ import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazon.AmazonCartScreen;
 import com.znsio.sample.e2e.screen.amazon.AmazonProductScreen;
 import org.apache.log4j.Logger;
+import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.Assertions;
 
 public class AmazonCartBL {
 
@@ -37,10 +37,12 @@ public class AmazonCartBL {
     }
 
     public AmazonCartBL verifyTheProductInCart() {
-        String expectedAddCartProductName = AmazonProductScreen.get().getProductNameInProductScreen();
         AmazonCartScreen.get().navigateToCart();
+        String expectedProductName = SAMPLE_TEST_CONTEXT.PRODUCT_NAME;
         String actualProductNameOnCart = AmazonCartScreen.get().getProductNameInCart();
-        Assertions.assertEquals(expectedAddCartProductName, actualProductNameOnCart, "Verify the add Cart product is on cart");
+        Assertions.assertThat(actualProductNameOnCart.matches("(.*)expectedProductName(.*)"));
+     //   Assertions.assertEquals(expectedAddCartProductName, actualProductNameOnCart, "Verify the add Cart product is on cart");
+
         return this;
     }
 

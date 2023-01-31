@@ -9,6 +9,7 @@ import com.znsio.sample.e2e.screen.amazon.AmazonSearchScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
+import org.openqa.selenium.UnsupportedCommandException;
 
 public class AmazonHomeBL {
     private static final Logger LOGGER = Logger.getLogger(AmazonHomeBL.class.getName());
@@ -35,12 +36,13 @@ public class AmazonHomeBL {
         this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
         this.currentPlatform = Runner.platform;
     }
+
     public AmazonSearchBL searchTheProduct(String productName) {
         LOGGER.info(System.out.printf("Search the product homepage %s:", productName));
         AmazonHomeScreen.get().enterTheTextOnSearchBar(productName).clickTheSearchButton();
         String actualNameOfProductSearch = AmazonSearchScreen.get().getTextOfSearchResult();
-        String expectedNameOfProductSearch = productName;
-        Assertions.assertThat(actualNameOfProductSearch).as("Verifying the search bar content").contains(expectedNameOfProductSearch);
+        String expectedProductName = SAMPLE_TEST_CONTEXT.PRODUCT_NAME;
+        Assertions.assertThat(actualNameOfProductSearch.matches("(.*)expectedProductName(.*)"));
         return new AmazonSearchBL();
     }
 

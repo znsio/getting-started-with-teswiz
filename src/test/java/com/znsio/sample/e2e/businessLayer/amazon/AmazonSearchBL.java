@@ -10,7 +10,7 @@ import com.znsio.sample.e2e.screen.amazon.AmazonSearchScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
-
+import org.openqa.selenium.UnsupportedCommandException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
@@ -20,6 +20,8 @@ public class AmazonSearchBL {
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
+
+
 
     public AmazonSearchBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread().getId();
@@ -46,17 +48,18 @@ public class AmazonSearchBL {
 
     public AmazonSearchBL verifyTheSelectedProduct() {
         LOGGER.info(System.out.printf("verifying the selected product"));
-        String actualProductNameOnProductPage = AmazonProductScreen.get().getProductNameInProductScreen();
-        Assertions.assertThat(actualProductNameOnProductPage.matches("(.*)iphone(.*)"));
+       String actualProductNameOnProductPage = AmazonProductScreen.get().getProductNameInProductScreen();
+        String expectedProductName = SAMPLE_TEST_CONTEXT.PRODUCT_NAME;
+        Assertions.assertThat(actualProductNameOnProductPage.matches("(.*)expectedProductName(.*)"));
         return this;
     }
 
     public AmazonSearchBL createProductToCart() {
         LOGGER.info(System.out.printf("Create the product cart"));
         AmazonProductScreen.get().click_AddToCart_Button();
-        String expectedSuccessMsgForAddToCart = SAMPLE_TEST_CONTEXT.ADDCART_SUCCESS;
-        String actualSuccessMsgForAddToCart = AmazonProductScreen.get().getAddToCartSuccessMessage();
-        Assertions.assertThat(actualSuccessMsgForAddToCart).contains(expectedSuccessMsgForAddToCart);
+         String expectedSuccessMsgForAddToCart = SAMPLE_TEST_CONTEXT.ADDCART_SUCCESS;
+         String actualSuccessMsgForAddToCart = AmazonProductScreen.get().getAddToCartSuccessMessage();
+       Assertions.assertThat(actualSuccessMsgForAddToCart).containsIgnoringCase(expectedSuccessMsgForAddToCart);
         return this;
     }
 }

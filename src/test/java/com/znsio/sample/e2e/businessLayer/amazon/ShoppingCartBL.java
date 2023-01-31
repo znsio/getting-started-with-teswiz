@@ -12,7 +12,7 @@ import org.testng.Assert;
 import java.util.List;
 
 public class ShoppingCartBL {
-    private static final Logger LOGGER = Logger.getLogger(AmazonHomepageBL.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AmazonHomePageBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
@@ -35,12 +35,13 @@ public class ShoppingCartBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public ShoppingCartBL verifyProductIsPresentInShoppingCart(String product){
+    public ShoppingCartBL verifyShoppingCart(String product) {
         List<String> productTitles = AmazonShoppingCartScreen.get().getTitleOfAllProductsInShoppingCart();
-        boolean isProductPresent = false;
+        LOGGER.info("Checking if the product is present in the shopping cart");
 
-        for(String productTitle: productTitles){
-            if(productTitle.toLowerCase().contains(product)) {
+        boolean isProductPresent = false;
+        for (String productTitle : productTitles) {
+            if (productTitle.toLowerCase().contains(product)) {
                 isProductPresent = true;
                 break;
             }

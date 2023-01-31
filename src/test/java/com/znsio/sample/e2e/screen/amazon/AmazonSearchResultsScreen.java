@@ -4,9 +4,12 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.screen.android.amazon.AmazonSearchResultsScreenAndroid;
 import com.znsio.sample.e2e.screen.web.amazon.AmazonSearchResultsScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
+
+import java.util.List;
 
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
@@ -27,6 +30,8 @@ public abstract class AmazonSearchResultsScreen {
         switch (platform) {
             case web:
                 return new AmazonSearchResultsScreenWeb(driver, visually);
+            case android:
+                return new AmazonSearchResultsScreenAndroid(driver, visually);
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
@@ -36,4 +41,6 @@ public abstract class AmazonSearchResultsScreen {
     public abstract String getActualSearchString();
 
     public abstract AmazonProductViewPageScreen clickOnFirstProductInSearchResultsList();
+
+    public abstract List<String> getTitleOfProductsInSearchResultsList();
 }

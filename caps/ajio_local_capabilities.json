@@ -2,7 +2,7 @@
   "android": {
     "adbExecTimeout": 45000,
     "app": {
-      "local": "https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/main/ajio-8-3-4.apk"
+      "local": "/Users/rahul2.shekhawat/Desktop/Misc/APKs/ajio-8-3-4.apk"
     },
     "appActivity": "com.ril.ajio.launch.activity.SplashScreenActivity",
     "appPackage": "com.ril.ajio",
@@ -16,7 +16,7 @@
     "newCommandTimeout": 12000,
     "noSign": true,
     "platformName": "android",
-    "platformVersion": "11.0",
+    "platformVersion": "13.0",
     "printPageSourceOnFindFailure": true,
     "skipUnlock": true,
     "noReset": false

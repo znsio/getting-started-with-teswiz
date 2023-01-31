@@ -11,7 +11,7 @@ import org.assertj.core.api.SoftAssertions;
 import org.testng.Assert;
 
 public class ProductViewBL {
-    private static final Logger LOGGER = Logger.getLogger(AmazonHomepageBL.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AmazonHomePageBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
@@ -34,11 +34,11 @@ public class ProductViewBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public ProductViewBL createShoppingCart(){
+    public ProductViewBL createShoppingCart() {
 
         AmazonProductViewPageScreen amazonProductViewPageScreen = AmazonProductViewPageScreen.get().addProductToCart();
         String expectedSuccessMessage = SAMPLE_TEST_CONTEXT.ADD_TO_CART_SUCCESS_MESSAGE;
-        String actualSuccessMessage = amazonProductViewPageScreen.getAddToCartSuccessMessage();
+        String actualSuccessMessage = amazonProductViewPageScreen.getAddToCartSuccessMessage().toLowerCase();
         LOGGER.info(System.out.printf("Add To Cart Success Message : %s", actualSuccessMessage));
         Assert.assertEquals(expectedSuccessMessage, actualSuccessMessage, "The product is not successfully added to shopping cart");
 

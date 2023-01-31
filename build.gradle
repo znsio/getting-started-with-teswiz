@@ -54,7 +54,7 @@ task run(type: JavaExec) {
         def logDirectory = "target/" + getCurrentDatestamp() + "/" + getCurrentTimestamp()
         println "Using LOG_DIR: $logDirectory"
         System.setProperty "LOG_DIR", "$logDirectory"
-        environment "APPLITOOLS_API_KEY", System.getenv("teswiz_APPLITOOLS_API_KEY")
+        environment "APPLITOOLS_API_KEY", "gWD186hRDxALn6wle7MjkPWAX3RyrLwx5rCri5o73Gk110"
 
         def configFile = System.getenv("CONFIG")
         if(null == configFile || !file(configFile).exists()) {

@@ -1,4 +1,4 @@
-package com.znsio.sample.e2e.screen.web.amazon;
+package com.znsio.sample.e2e.screen.android.amazon;
 
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
@@ -13,18 +13,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AmazonSearchResultsScreenWeb extends AmazonSearchResultsScreen {
+public class AmazonSearchResultsScreenAndroid extends AmazonSearchResultsScreen {
 
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = AmazonHomeScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = AmazonHomeScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final By productInSearchResultsStringByCSS = By.cssSelector("[data-component-type=\"s-result-info-bar\"] .a-color-state");
     private static final By totalInSearchResultsStringByCSS = By.xpath("//span[contains(text(), \"results for\")]");
-    private static final By firstProductByXpath = By.xpath("(//span[contains(text(),'iPhone 13')])[4]");
-    private static final By searchResultsProductTitles = By.cssSelector(".s-search-results .s-result-item .s-card-container span[class*=\"a-text-normal\"]");
+    private static final By firstProductByXpath = By.xpath("(//android.view.View[@content-desc=\"product-detail\"])[2]");
+    private static final By searchResultsProductTitles = By.xpath("//android.view.View[contains(@content-desc, \"iPhone 13\")]");
 
-    public AmazonSearchResultsScreenWeb(Driver driver, Visual visually) {
+    public AmazonSearchResultsScreenAndroid(Driver driver, Visual visually) {
 
         this.driver = driver;
         this.visually = visually;
@@ -52,19 +52,18 @@ public class AmazonSearchResultsScreenWeb extends AmazonSearchResultsScreen {
     }
 
     @Override
-    public AmazonProductViewPageScreenWeb clickOnFirstProductInSearchResultsList() {
+    public AmazonProductViewPageScreenAndroid clickOnFirstProductInSearchResultsList() {
 
         LOGGER.info("Clicking on first product in search results list");
         WebElement firstProduct = driver.waitTillElementIsPresent(firstProductByXpath);
         firstProduct.click();
         // driver.switchToNextTab();
         visually.checkWindow(SCREEN_NAME, "First product selected");
-        return new AmazonProductViewPageScreenWeb(driver, visually);
+        return new AmazonProductViewPageScreenAndroid(driver, visually);
     }
 
     @Override
     public List<String> getTitleOfProductsInSearchResultsList() {
-
         LOGGER.info("Fetching title of all products in search results list");
         List<String> productTitles = new ArrayList<>();
 

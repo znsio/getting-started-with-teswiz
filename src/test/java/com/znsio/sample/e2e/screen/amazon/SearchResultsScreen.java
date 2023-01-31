@@ -35,7 +35,7 @@ public abstract class SearchResultsScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract String getActualSearchString();
+    public abstract Boolean matchTopResultsWithSearchedString(String product);
 
     public abstract SearchResultsScreen clickOnFirstProduct();
 

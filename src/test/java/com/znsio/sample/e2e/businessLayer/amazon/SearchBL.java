@@ -39,10 +39,10 @@ public class SearchBL {
     }
 
     public SearchBL searchForProduct(String product) {
-        String actualSearchWasFor = HomeScreen.get()
-                .search(product).getActualSearchString();
+        Boolean doSearchResultsMatchSearchedProduct = HomeScreen.get()
+                .search(product).matchTopResultsWithSearchedString(product);
         context.addTestState(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD, product);
-        assertThat(actualSearchWasFor).as("Search results are different from searched product").isEqualTo(product);
+        assertThat(doSearchResultsMatchSearchedProduct).as("Search results are different from searched product").isTrue();
         return this;
     }
 

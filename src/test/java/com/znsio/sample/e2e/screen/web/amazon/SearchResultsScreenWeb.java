@@ -37,19 +37,20 @@ public class SearchResultsScreenWeb extends SearchResultsScreen {
         visually.checkWindow(SCREEN_NAME, "Search results screen");
     }
 
-    private WebElement waitForProductListAndGetFirstProduct(){
+    private List<WebElement> waitForProductList(){
         WebDriverWait wait = new WebDriverWait(driver.getInnerDriver(),30);
-        List<WebElement> productTitleWebElements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(byProductFoundCSSSelector));
-        return productTitleWebElements.get(0);
+        return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(byProductFoundCSSSelector));
     }
 
     @Override
-    public String getActualSearchString() {
-        String searchString = driver.waitTillElementIsPresent(bySearchStringXpath)
-                .getText();
-        String actualSearchString = searchString.substring(1, searchString.length() - 1);
-        LOGGER.info(String.format("Actual search was for: '%s'", actualSearchString));
-        return actualSearchString;
+    public Boolean matchTopResultsWithSearchedString(String product) {
+        List<WebElement> list = waitForProductList();
+        for(WebElement ele : list.subList(0,5)){
+            if(!ele.getText().contains(product)){
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -57,14 +58,14 @@ public class SearchResultsScreenWeb extends SearchResultsScreen {
         context.addTestState(SAMPLE_TEST_CONTEXT.PRODUCT_NAME, getFirstProductName());
         context.addTestState(SAMPLE_TEST_CONTEXT.PRODUCT_COST, getFirstProductCost());
 
-        waitForProductListAndGetFirstProduct().click();
+        waitForProductList().get(0).click();
         visually.checkWindow(SCREEN_NAME, "Clicked on first item");
         return this;
     }
 
     @Override
     public String getFirstProductName(){
-        String itemName = waitForProductListAndGetFirstProduct().getText();
+        String itemName = waitForProductList().get(0).getText();
 
         LOGGER.info(String.format("Expected item name: '%s'", itemName));
         return itemName;

@@ -12,8 +12,8 @@ public class AmazonCartScreenAndroid extends AmazonCartScreen {
     private final Visual visually;
     private static final String SCREEN_NAME = AmazonCartScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-    private static final By cartContentXpath=By.xpath("//android.view.View[contains(@content-desc,\"Apple iPhone 13\")]");
-    private static final By cartButtonXpath=By.xpath("//android.view.View[@content-desc=\"Cart\"]");
+    private static final By byCartContentXpath =By.xpath("//android.view.View[contains(@content-desc,\"Apple iPhone 13\")]");
+    private static final By byCartButtonXpath =By.xpath("//android.view.View[@content-desc=\"Cart\"]");
     private static final By byAddedToCartXpath =By.xpath("//android.widget.TextView[@text=\"Added to cart\"]");
     public AmazonCartScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -29,7 +29,7 @@ public class AmazonCartScreenAndroid extends AmazonCartScreen {
         try {
             WebElement addedToCartText = driver.waitTillElementIsPresent(byAddedToCartXpath);
             if (addedToCartText.isDisplayed()) {
-                driver.waitTillElementIsPresent(cartButtonXpath).click();
+                driver.waitTillElementIsPresent(byCartButtonXpath).click();
                 return true;
             }
         }
@@ -46,7 +46,7 @@ public class AmazonCartScreenAndroid extends AmazonCartScreen {
         visually.checkWindow(SCREEN_NAME, "Cart items");
         LOGGER.info("Verification of product in cart");
         try {
-            WebElement cartElement = driver.waitTillElementIsPresent(cartContentXpath);
+            WebElement cartElement = driver.waitTillElementIsPresent(byCartContentXpath);
             LOGGER.info(String.format("cartContent: '%s'",cartElement.getText()));
             return true;
         }

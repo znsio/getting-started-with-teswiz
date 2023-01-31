@@ -47,6 +47,4 @@ public class AmazonSearchBL {
         assertThat(isSearchCompleted).as("Searching inaccurate").isEqualTo(true);
         return new AmazonProductBL();
     }
-
-
 }

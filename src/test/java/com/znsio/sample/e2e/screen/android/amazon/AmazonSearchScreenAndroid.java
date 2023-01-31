@@ -17,7 +17,6 @@ public class AmazonSearchScreenAndroid extends AmazonSearchScreen {
 
     private static final By bySearchBoxXpath = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.webkit.WebView/android.view.View/android.view.View[1]/android.view.View/android.view.View[2]/android.view.View[2]/android.view.View/android.view.View");
     private static final By bySearchFieldXpath=By.xpath("//android.widget.EditText[@resource-id=\"nav-search-keywords\"]");
-    private static final By bySearchClassName =By.className("android.widget.EditText");
     public AmazonSearchScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;

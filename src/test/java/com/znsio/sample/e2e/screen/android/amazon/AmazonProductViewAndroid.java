@@ -19,10 +19,10 @@ public class AmazonProductViewAndroid extends AmazonProductViewScreen{
     private static final String SCREEN_NAME = AmazonHomeScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    private static By firstProduct = By.xpath("//android.view.View[contains(@content-desc, \""+ SAMPLE_TEST_CONTEXT.PRODUCT_NAME+"\")]/android.view.View[2]");
-    private static final By productTitle = By.xpath("//android.view.View[@resource-id = \"title\"]");
-    private static By addCartButton = By.xpath("//android.widget.Button[@resource-id = \"add-to-cart-button\"]");
-    private static final By addedToCartMsg = By.xpath("//div[@id='attachDisplayAddBaseAlert']/span");
+    private static final By byFirstProductXpath = By.xpath("//android.view.View[contains(@content-desc, \""+ SAMPLE_TEST_CONTEXT.PRODUCT_NAME+"\")]/android.view.View[2]");
+    private static final By byProductTitleXpath = By.xpath("//android.view.View[@resource-id = \"title\"]");
+    private static final By byAddCartButtonXpath = By.xpath("//android.widget.Button[@resource-id = \"add-to-cart-button\"]");
+    private static final By byAddedToCartMsgXpath = By.xpath("//div[@id='attachDisplayAddBaseAlert']/span");
 
     public AmazonProductViewAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -33,34 +33,29 @@ public class AmazonProductViewAndroid extends AmazonProductViewScreen{
     public AmazonProductViewScreen selectFirstProduct(){
         LOGGER.info(String.format("Select the first product"));
         visually.checkWindow(SCREEN_NAME, "Search string entered");
-        driver.waitTillElementIsPresent(firstProduct).click();
+        driver.waitTillElementIsPresent(byFirstProductXpath).click();
         return this;
     }
 
     @Override
     public boolean verifyProductDetails(){
-        WebElement element = driver.waitTillElementIsPresent(productTitle);
+        LOGGER.info("Get the product details from the product detail page");
+        WebElement element = driver.waitTillElementIsPresent(byProductTitleXpath);
         return element.isDisplayed();
     }
 
     @Override
     public AmazonProductViewScreen clickAddToCartButton(){
         LOGGER.info(String.format("Add product to the cart"));
-        while(true) {
-            waitFor(1);
-            if(driver.isElementPresent(addCartButton))
-                break;
-            driver.scrollDownByScreenSize();
-        }
-
-        driver.findElement(addCartButton).click();
+        driver.scrollToAnElementByText("Add to Cart");
+        driver.waitTillElementIsPresent(byAddCartButtonXpath).click();
         return this;
     }
 
     @Override
     public String getAddedToCartMessage(){
         LOGGER.info("Get the added to cart message");
-        String msg = driver.waitTillElementIsVisible(addedToCartMsg).getText();
+        String msg = driver.waitTillElementIsVisible(byAddedToCartMsgXpath).getText();
         return msg;
     }
 }

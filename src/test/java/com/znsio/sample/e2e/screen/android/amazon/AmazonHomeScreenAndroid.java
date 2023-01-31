@@ -27,12 +27,11 @@ public class AmazonHomeScreenAndroid extends AmazonHomeScreen {
     private static final String SCREEN_NAME = CalculatorScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    private static By searchArea = By.xpath("//android.widget.EditText");
-    private static String searchButtonXpath = "//android.view.View[@resource-id = \"nav-search-form\"]//android.widget.Button";
+    private static By bySearchAreaXpath = By.xpath("//android.widget.EditText[]");
+    private static By bysearchButtonXpath = By.xpath("//android.view.View[@resource-id = \"nav-search-form\"]//android.widget.Button");
+    private static By byFirstProductXpath = By.xpath("//android.view.View[contains(@content-desc, \""+SAMPLE_TEST_CONTEXT.PRODUCT_NAME+"\")]/android.view.View[2]");
+    private static By byCountElementXpath = By.xpath("//android.view.View[contains(@content-desc,\""+ SAMPLE_TEST_CONTEXT.PRODUCT_NAME+"\")]");
 
-    private static By firstProduct = By.xpath("//android.view.View[contains(@content-desc, \""+SAMPLE_TEST_CONTEXT.PRODUCT_NAME+"\")]/android.view.View[2]");
-
-    private static By countElement = By.xpath("//android.view.View[contains(@content-desc,\""+ SAMPLE_TEST_CONTEXT.PRODUCT_NAME+"\")]");
     public AmazonHomeScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
@@ -41,24 +40,25 @@ public class AmazonHomeScreenAndroid extends AmazonHomeScreen {
     @Override
     public AmazonHomeScreen searchProductInAmazonSearch(String productName){
         visually.checkWindow(SCREEN_NAME, "Amazon launched");
-        WebElement element = driver.waitTillElementIsPresent(searchArea);
+        WebElement element = driver.waitTillElementIsPresent(bySearchAreaXpath);
         element.click();
         element.sendKeys(productName);
         element.sendKeys(Keys.ENTER);
-        driver.findElementByXpath(searchButtonXpath).click();
+        driver.findElement(bysearchButtonXpath).click();
         return this;
     }
 
     @Override
     public String getActualSearchProduct(){
         visually.checkWindow(SCREEN_NAME, "Product list view");
-        String productName = driver.waitTillElementIsPresent(firstProduct).getText();
+        String productName = driver.waitTillElementIsPresent(byFirstProductXpath).getText();
         return productName;
     }
 
     @Override
     public int getproductCount(){
-        int count = driver.findElements(countElement).size();
+        LOGGER.info("Get the number of product available");
+        int count = driver.findElements(byCountElementXpath).size();
         return count;
     }
 }

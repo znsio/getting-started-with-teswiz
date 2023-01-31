@@ -16,10 +16,10 @@ public class AmazonShoppingCartAndroid extends AmazonShoppingCartScreen {
     private static final String SCREEN_NAME = AmazonHomeScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
-    private static final By shoppingCartButton = By.xpath("//android.view.View[@content-desc=\"Cart\"]/android.view.View");
+    private static final By byShoppingCartButtonXpath = By.xpath("//android.view.View[@content-desc=\"Cart\"]/android.view.View");
 
-    private static final By shoppingCartMessage = By.xpath("//android.view.View[@resource-id = \"sc-buy-box\"]");
-    private static final By firstProductInCart = By.xpath("//android.view.View[contains(@content-desc=\""+ SAMPLE_TEST_CONTEXT.PRODUCT_NAME+"\")]/android.widget.TextView");
+    private static final By byShoppingCartMessageXpath = By.xpath("//android.view.View[@resource-id = \"sc-buy-box\"]");
+    private static final By byFirstProductInCartXpath = By.xpath("//android.view.View[contains(@content-desc=\""+ SAMPLE_TEST_CONTEXT.PRODUCT_NAME+"\")]/android.widget.TextView");
 
     public AmazonShoppingCartAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -28,20 +28,22 @@ public class AmazonShoppingCartAndroid extends AmazonShoppingCartScreen {
 
     @Override
     public AmazonShoppingCartScreen navigateToTheShoppingCart(){
-        driver.waitTillElementIsPresent(shoppingCartButton).click();
+        LOGGER.info("Select the shopping cart option");
+        driver.waitTillElementIsPresent(byShoppingCartButtonXpath).click();
         return this;
     }
 
     @Override
     public boolean checkShoppingCartMessage(){
         visually.checkWindow(SCREEN_NAME, "Shopping Cart Screen and message is displayed");
-        WebElement shoppingCartMsg = driver.waitTillElementIsVisible(shoppingCartMessage);
+        WebElement shoppingCartMsg = driver.waitTillElementIsVisible(byShoppingCartMessageXpath);
         return shoppingCartMsg.isDisplayed();
     }
 
     @Override
     public String getShoppingCartProduct(){
-        WebElement element = driver.waitTillElementIsPresent(firstProductInCart);
+        LOGGER.info("Get the name of the first product added in the cart");
+        WebElement element = driver.waitTillElementIsPresent(byFirstProductInCartXpath);
         return element.getText();
     }
 }

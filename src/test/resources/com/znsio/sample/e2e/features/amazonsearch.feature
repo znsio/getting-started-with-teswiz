@@ -2,8 +2,8 @@
 Feature: Amazon Search
 
 #  CONFIG=./configs/amazonsearch_local_config.properties TAG="@amazonsearch" PLATFORM=web ./gradlew run
-
-  @web @single-user @cart
+#  CONFIG=./configs/amazonsearch_local_config.properties PLATFORM=android TAG=amazonsearch ./gradlew run
+  @web @single-user @cart @android
   Scenario: Guest User search product on the amazon and add product to the cart
     Given I, as a guest user, search for "Iphone 13" in amazon search
     When I select the first product from the result list

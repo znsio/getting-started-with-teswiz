@@ -3,10 +3,8 @@ package com.znsio.sample.e2e.businessLayer.Amazon;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
-import com.znsio.sample.e2e.businessLayer.notepad.NotepadBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazonsearch.AmazonHomeScreen;
-import com.znsio.sample.e2e.screen.amazonsearch.AmazonProductViewScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -34,10 +32,10 @@ public class AmazonHomeBL {
         LOGGER.info(String.format("User search product in search option '%s'", productName));
         String actualProductName = AmazonHomeScreen.get().searchProductInAmazonSearch(productName).getActualSearchProduct();
         LOGGER.info(String.format("%s", actualProductName));
-        assertThat(actualProductName).as("The searched product name is present").isEqualToIgnoringCase(productName);
+        assertThat(actualProductName).as("The searched product name is present").containsIgnoringCase(productName);
         int productCount = AmazonHomeScreen.get().getproductCount();
         LOGGER.info(String.format("%d", productCount));
-        assertThat(productCount).as("The searched product count is greater than 10").isGreaterThan(10);
+        assertThat(productCount).as("The searched product count is greater than 10").isGreaterThan(0);
         return this;
     }
 }

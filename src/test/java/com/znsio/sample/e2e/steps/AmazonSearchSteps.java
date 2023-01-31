@@ -8,7 +8,6 @@ import com.znsio.sample.e2e.businessLayer.Amazon.AmazonHomeBL;
 import com.znsio.sample.e2e.businessLayer.Amazon.AmazonProductViewBL;
 import com.znsio.sample.e2e.businessLayer.Amazon.AmazonShoppingCartBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.amazonsearch.AmazonProductViewScreen;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -31,17 +30,18 @@ public class AmazonSearchSteps {
     @Given("I, as a guest user, search for {string} in amazon search")
     public void iAsAGuestUserSearchForInAmazonSearchOption(String productName) {
         LOGGER.info(System.out.printf("iAsAGuestUserSearchForInAmazonSearchOption - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, Runner.platform));
-        allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
+        allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
         new AmazonHomeBL().searchProduct(productName);
     }
 
     @When("I select the first product from the result list")
     public void iSelectFirstProductFromTheList() {
-        new AmazonProductViewBL().selectFirstProduct();
+        new AmazonProductViewBL().selectProduct();
     }
 
     @And("I add the selected product to the shopping cart")
     public void iAddTheSelectedProductToTheShoppingCart() {
+
         new AmazonProductViewBL().prepareShoppingCart();
     }
 

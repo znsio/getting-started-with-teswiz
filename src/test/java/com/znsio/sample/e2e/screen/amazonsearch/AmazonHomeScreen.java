@@ -4,7 +4,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-//import com.znsio.sample.e2e.screen.android.amazon.AmazonHomeScreenAndroid;
+import com.znsio.sample.e2e.screen.android.amazon.AmazonHomeScreenAndroid;
 import com.znsio.sample.e2e.screen.web.amazon.AmazonHomeScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
@@ -27,8 +27,8 @@ public abstract class AmazonHomeScreen {
                 .getId());
 
         switch(platform) {
-//            case android:
-//                return new AmazonHomeScreenAndroid(driver, visually);
+            case android:
+                return new AmazonHomeScreenAndroid(driver, visually);
             case web:
                 return new AmazonHomeScreenWeb(driver, visually);
         }

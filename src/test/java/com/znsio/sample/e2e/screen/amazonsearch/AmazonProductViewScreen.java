@@ -4,6 +4,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.screen.android.amazon.AmazonProductViewAndroid;
 import com.znsio.sample.e2e.screen.web.amazon.AmazonHomeScreenWeb;
 import com.znsio.sample.e2e.screen.web.amazon.AmazonProductViewWeb;
 import org.apache.commons.lang3.NotImplementedException;
@@ -26,8 +27,8 @@ public abstract class AmazonProductViewScreen {
                 .getId());
 
         switch(platform) {
-//            case android:
-//                return new AmazonProductViewAndroid(driver, visually);
+            case android:
+                return new AmazonProductViewAndroid(driver, visually);
             case web:
                 return new AmazonProductViewWeb(driver, visually);
         }
@@ -36,7 +37,7 @@ public abstract class AmazonProductViewScreen {
 
     public abstract AmazonProductViewScreen selectFirstProduct();
 
-    public abstract boolean getCorrectProductDetails();
+    public abstract boolean verifyProductDetails();
 
     public abstract AmazonProductViewScreen clickAddToCartButton();
 

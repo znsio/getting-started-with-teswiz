@@ -1,7 +1,7 @@
 @amazon @prod
 Feature: Validate Amazon search and Add to Cart functionality
 
-  @web
+  @android @web
   Scenario: Guest user should be able to search item and Add to Cart
     Given I, a guest user, search for the item "iphone 13" in Search bar
     And I select the "first" item from the search results

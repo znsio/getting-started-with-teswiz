@@ -4,14 +4,14 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.AMAZON_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazon.ItemsDetailsScreen;
-import com.znsio.sample.e2e.screen.web.Amazon.ItemsDetailsScreenWeb;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
 
+import java.util.List;
+
 public class ItemDetailsBL {
     private static final Logger LOGGER = Logger.getLogger(ItemDetailsBL.class.getName());
-
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
@@ -25,18 +25,15 @@ public class ItemDetailsBL {
     }
 
     public ItemDetailsBL createCart() {
-        ItemsDetailsScreen itemsDetailsScreen = ItemsDetailsScreenWeb.get().selectAddToCart();
+        ItemsDetailsScreen itemsDetailsScreen = ItemsDetailsScreen.get().selectAddToCart();
         String actualCartCreationSuccessText = itemsDetailsScreen.getCartCreationSuccessText();
-        String expectedCartCreationSuccessText = AMAZON_TEST_CONTEXT.CART_CREATION_SUCCESS_TEXT;
-        LOGGER.info(String.format("Actual Cart Creation Success Text: '%s'",actualCartCreationSuccessText));
-        Assertions.assertThat(actualCartCreationSuccessText)
-                .as(String.format("Expected cart confirmation text '%s' but found '%s'",expectedCartCreationSuccessText,actualCartCreationSuccessText))
-                .isEqualTo(expectedCartCreationSuccessText);
-        String actualCartScreenTitle = itemsDetailsScreen.selectCart().getScreenTitle();
-        String expectedCartScreenTitle = AMAZON_TEST_CONTEXT.CART_SCREEN_TITLE;
-        LOGGER.info(String.format("Actual Item details screen title: '%s'", actualCartScreenTitle));
-        Assertions.assertThat(actualCartScreenTitle).as("After selecting item expected screen title '%s' but found '%s'",expectedCartScreenTitle,actualCartScreenTitle)
-                .contains(expectedCartScreenTitle);
+        List<String> expectedCartCreationSuccessText = AMAZON_TEST_CONTEXT.CART_CREATION_SUCCESS_TEXT;
+        LOGGER.info(String.format("Actual Cart Creation Success Text: '%s'", actualCartCreationSuccessText));
+        Assertions.assertThat(expectedCartCreationSuccessText)
+                .as(String.format("Expected cart confirmation text to be one of '%s' but found '%s'", expectedCartCreationSuccessText, actualCartCreationSuccessText))
+                .contains(actualCartCreationSuccessText);
+        boolean cartScreenLoaded = itemsDetailsScreen.selectCart().isScreenLoaded();
+        Assertions.assertThat(cartScreenLoaded).as("Cart screen not loaded").isTrue();
         return this;
     }
 }

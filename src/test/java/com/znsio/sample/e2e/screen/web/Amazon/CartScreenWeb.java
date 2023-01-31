@@ -2,6 +2,7 @@ package com.znsio.sample.e2e.screen.web.Amazon;
 
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.entities.AMAZON_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazon.CartScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -22,13 +23,16 @@ public class CartScreenWeb extends CartScreen {
     }
 
     @Override
-    public String getScreenTitle() {
-        return driver.getInnerDriver().getTitle();
+    public boolean isScreenLoaded() {
+        String title = AMAZON_TEST_CONTEXT.CART_SCREEN_TITLE;
+        String actualScreenTitle = driver.getInnerDriver().getTitle();
+        LOGGER.info(String.format("Cart screen title is: '%s'", actualScreenTitle));
+        return actualScreenTitle.contains(title);
     }
 
     @Override
     public String getCartItem() {
-        String itemInCart =  driver.waitTillElementIsPresent(byItemStringClassName).getText();
+        String itemInCart = driver.waitTillElementIsPresent(byItemStringClassName).getText();
         LOGGER.info(String.format("Item added in the cart is '%s'", itemInCart));
         return itemInCart;
     }

@@ -33,10 +33,7 @@ public class SearchResultsBL {
         LOGGER.info(String.format("Clicking on item title: '%s' present at position '%s'", itemTitle,position));
         context.addTestState(AMAZON_TEST_CONTEXT.ITEM_TITLE, itemTitle);
         ItemsDetailsScreen itemsDetailsScreen = searchResultsScreen.clickOnItemByPosition(position);
-        String actualScreenTitle = itemsDetailsScreen.getScreenTitle();
-        LOGGER.info(String.format("Actual Item details screen title: '%s'", actualScreenTitle));
-        Assertions.assertThat(actualScreenTitle).as("After selecting item expected screen title '%s' but found '%s'",itemTitle,actualScreenTitle)
-                .contains(itemTitle);
+        Assertions.assertThat(itemsDetailsScreen.isScreenLoaded()).as("Items Details screen not loaded").isTrue();
         String actualItemTitle = itemsDetailsScreen.getItemsTitle();
         Assertions.assertThat(actualItemTitle).as(String.format("On item details screen expected item title '%s' but found '%s'",itemTitle,actualItemTitle))
                 .isEqualTo(itemTitle);

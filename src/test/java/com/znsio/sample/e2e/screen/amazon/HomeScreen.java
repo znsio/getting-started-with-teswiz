@@ -4,6 +4,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.screen.android.Amazon.HomeScreenAndroid;
 import com.znsio.sample.e2e.screen.web.Amazon.HomeScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
@@ -18,15 +19,17 @@ public abstract class HomeScreen {
 
     public static HomeScreen get() {
         Driver driver = fetchDriver(Thread.currentThread()
-                                          .getId());
+                .getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread()
-                                                       .getId());
+                .getId());
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
-        switch(platform) {
+        switch (platform) {
             case web:
-                return new HomeScreenWeb(driver,visually);
+                return new HomeScreenWeb(driver, visually);
+            case android:
+                return new HomeScreenAndroid(driver, visually);
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }

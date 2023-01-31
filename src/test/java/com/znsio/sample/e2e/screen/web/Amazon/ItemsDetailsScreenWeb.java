@@ -1,5 +1,7 @@
 package com.znsio.sample.e2e.screen.web.Amazon;
 
+import com.context.TestExecutionContext;
+import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.amazon.CartScreen;
@@ -14,27 +16,31 @@ public class ItemsDetailsScreenWeb extends ItemsDetailsScreen {
     private final Visual visually;
     private static final String SCREEN_NAME = ItemsDetailsScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-
+    private final TestExecutionContext context;
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
-    private static final By byProductTitleId= By.id("productTitle");
-    private static final By byAddToCartButtonXpath= By.id("add-to-cart-button");
+    private static final By byProductTitleId = By.id("productTitle");
+    private static final By byAddToCartButtonXpath = By.id("add-to-cart-button");
 
     private static final By byAddedToCartTextXpath = By.xpath("//div[@id='attachDisplayAddBaseAlert']//span");
-    private static final By byCartButtonId= By.id("attach-sidesheet-view-cart-button");
+    private static final By byCartButtonId = By.id("attach-sidesheet-view-cart-button");
 
 
     public ItemsDetailsScreenWeb(Driver driver, Visual visually) {
+        long threadId = Thread.currentThread().getId();
         this.driver = driver;
         this.visually = visually;
+        this.context = Runner.getTestExecutionContext(threadId);
         visually.checkWindow(SCREEN_NAME, "Items Details Screen Web ");
         driver.switchToNextTab();
     }
 
     @Override
-    public String getScreenTitle() {
-        String screenTitle =  driver.getInnerDriver().getTitle();
-        LOGGER.info(String.format("Item Details screen title is: '%s'", screenTitle));
-        return screenTitle;
+    public boolean isScreenLoaded() {
+
+        String itemTitle = context.getTestStateAsString("itemTitle");
+        String actualScreenTitle = driver.getInnerDriver().getTitle();
+        LOGGER.info(String.format("Item Details screen title is: '%s'", actualScreenTitle));
+        return actualScreenTitle.contains(itemTitle);
     }
 
     @Override
@@ -54,7 +60,7 @@ public class ItemsDetailsScreenWeb extends ItemsDetailsScreen {
     public String getCartCreationSuccessText() {
         String addToCartConfirmationText = driver.waitForClickabilityOf(byAddedToCartTextXpath).getText();
         LOGGER.info(String.format("Add to Cart Confirmation Text: '%s'", addToCartConfirmationText));
-        return addToCartConfirmationText;
+        return addToCartConfirmationText.toLowerCase();
     }
 
     @Override

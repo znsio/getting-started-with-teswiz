@@ -34,10 +34,9 @@ public class HomeBL {
         SearchResultsScreen searchResultScreen = HomeScreen.get()
                 .enterItemNameInSearch(itemName)
                 .pressEnter();
-        String actualSearchedText = searchResultScreen.getSearchText();
+        Assertions.assertThat(searchResultScreen.isScreenLoaded()).as("Search result screen not loaded").isTrue();
         List<String> actualItemTitles = searchResultScreen.getItemTitles();
-        Assertions.assertThat(actualSearchedText).as(String.format("Expected search was for '%s' but found '%s'",itemName,actualSearchedText)).contains(itemName);
-        softly.assertThat(actualItemTitles).as(String.format("Results are not displayed as per searched: '%s'",itemName))
+        softly.assertThat(actualItemTitles).as(String.format("Results are not displayed as per searched: '%s'", itemName))
                 .allMatch(actualItemTitle->actualItemTitle.contains(itemName));
         return this;
     }

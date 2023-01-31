@@ -4,6 +4,7 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.screen.android.Amazon.CartScreenAndroid;
 import com.znsio.sample.e2e.screen.web.Amazon.CartScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
@@ -14,7 +15,7 @@ public abstract class CartScreen {
     private static final String SCREEN_NAME = CartScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public static CartScreenWeb get() {
+    public static CartScreen get() {
         Driver driver = fetchDriver(Thread.currentThread()
                 .getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread()
@@ -22,14 +23,17 @@ public abstract class CartScreen {
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
-        switch(platform) {
+        switch (platform) {
             case web:
-                return new CartScreenWeb(driver,visually);
+                return new CartScreenWeb(driver, visually);
+            case android:
+                return new CartScreenAndroid(driver, visually);
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract String getScreenTitle();
+    public abstract boolean isScreenLoaded();
+
     public abstract String getCartItem();
 
 }

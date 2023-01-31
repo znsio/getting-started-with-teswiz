@@ -1,7 +1,5 @@
-package com.znsio.sample.e2e.screen.web.Amazon;
+package com.znsio.sample.e2e.screen.android.Amazon;
 
-import com.context.TestExecutionContext;
-import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.entities.OrdinalToNumber;
@@ -14,35 +12,29 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SearchResultsScreenWeb extends SearchResultsScreen {
+public class SearchResultsScreenAndroid extends SearchResultsScreen {
 
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = SearchResultsScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = SearchResultsScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-
-    private final TestExecutionContext context;
-
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
-    private static final By bySearchStringXpath = By.xpath("//span[@class='a-color-state a-text-bold']");
-    private static final By byProductsXpath = By.xpath("//span[contains(@class,'a-size-medium a-color-base a-text-normal')]");
+    private static final By byProductsXpath = By.xpath("//android.view.View[contains(@content-desc,'out of')]/preceding-sibling::android.view.View[last()]");
 
-    public SearchResultsScreenWeb(Driver driver, Visual visually) {
-        long threadId = Thread.currentThread().getId();
+    public SearchResultsScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
-        this.context = Runner.getTestExecutionContext(threadId);
-        visually.checkWindow(SCREEN_NAME, "Search Results Screen Web");
+        visually.checkWindow(SCREEN_NAME, "Search Results Screen Android");
     }
+
 
     @Override
     public boolean isScreenLoaded() {
-        String itemName = context.getTestStateAsString("itemName");
-        String actualSearchString = driver.waitTillElementIsPresent(bySearchStringXpath).getText();
-        LOGGER.info(String.format("Actual search was for: '%s'", actualSearchString));
-        return actualSearchString.contains(itemName);
-    }
 
+        boolean loadStatus = driver.waitTillElementIsPresent(byProductsXpath).isDisplayed();
+        LOGGER.info(String.format("Search result screen Loaded: '%s'", loadStatus));
+        return loadStatus;
+    }
 
     private List<WebElement> getItems() {
         return driver.findElements(byProductsXpath);
@@ -59,7 +51,7 @@ public class SearchResultsScreenWeb extends SearchResultsScreen {
     @Override
     public String getItemText(String itemPosition) {
         int itemIndex = OrdinalToNumber.valueOf(itemPosition.toUpperCase()).ordinal();
-        String itemTitle = getItems().get(itemIndex).getText();
+        String itemTitle = getItems().get(itemIndex).getAttribute("content-desc");
         LOGGER.info(String.format("Fetching item title: '%s'", itemTitle));
         return itemTitle;
     }
@@ -68,6 +60,6 @@ public class SearchResultsScreenWeb extends SearchResultsScreen {
     public List<String> getItemTitles() {
         List<WebElement> items = getItems();
         LOGGER.info("Fetching item titles");
-        return items.stream().map(item -> item.getText().toLowerCase()).collect(Collectors.toList());
+        return items.stream().map(item -> item.getAttribute("content-desc").toLowerCase()).collect(Collectors.toList());
     }
 }

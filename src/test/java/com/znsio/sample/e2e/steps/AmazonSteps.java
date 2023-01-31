@@ -8,7 +8,7 @@ import com.znsio.sample.e2e.businessLayer.amzon.CartsBL;
 import com.znsio.sample.e2e.businessLayer.amzon.HomeBL;
 import com.znsio.sample.e2e.businessLayer.amzon.ItemDetailsBL;
 import com.znsio.sample.e2e.businessLayer.amzon.SearchResultsBL;
-import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.sample.e2e.entities.AMAZON_TEST_CONTEXT;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -24,15 +24,15 @@ public class AmazonSteps {
         context = SessionContext.getTestExecutionContext(Thread.currentThread()
                 .getId());
         LOGGER.info("context: " + context.getTestName());
-        allDrivers = (Drivers) context.getTestState(SAMPLE_TEST_CONTEXT.ALL_DRIVERS);
+        allDrivers = (Drivers) context.getTestState(AMAZON_TEST_CONTEXT.ALL_DRIVERS);
         LOGGER.info("allDrivers: " + (null == allDrivers));
     }
 
     @Given("I, a guest user, search for the item {string} in Search bar")
     public void iAGuestUserSearchForItemInSearchBar(String item) {
-        LOGGER.info(System.out.printf("iSearchForProducts - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, Runner.platform));
-        allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
-        new HomeBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchItem(item);
+        LOGGER.info(System.out.printf("iSearchForProducts - Persona:'%s', Platform: '%s'", AMAZON_TEST_CONTEXT.GUEST_USER, Runner.platform));
+        allDrivers.createDriverFor(AMAZON_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
+        new HomeBL(AMAZON_TEST_CONTEXT.GUEST_USER, Runner.platform).searchItem(item);
     }
 
     @And("I select the {string} item from the search results")

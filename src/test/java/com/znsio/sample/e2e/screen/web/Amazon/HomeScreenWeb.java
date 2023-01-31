@@ -11,7 +11,6 @@ import org.openqa.selenium.WebElement;
 
 public class HomeScreenWeb extends HomeScreen {
     private final Driver driver;
-
     private final Visual visually;
     private static final String SCREEN_NAME = HomeScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);

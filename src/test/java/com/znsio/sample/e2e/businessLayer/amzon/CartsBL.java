@@ -4,7 +4,7 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.AMAZON_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.web.Amazon.CartScreenWeb;
+import com.znsio.sample.e2e.screen.amazon.CartScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
@@ -26,18 +26,18 @@ public class CartsBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public CartsBL verifyCart(){
-        String actualItemTitle  = CartScreenWeb.get().getCartItem();
-        LOGGER.info(String.format("Item added to cart is: '%s'",actualItemTitle));
+    public CartsBL verifyCart() {
+        String actualItemTitle = CartScreen.get().getCartItem();
+        LOGGER.info(String.format("Item added to cart is: '%s'", actualItemTitle));
         String expectedItemName = context.getTestStateAsString("itemName");
         String expectedItemTitle = context.getTestStateAsString("itemTitle");
         Assertions.
                 assertThat(actualItemTitle)
-                .as(String.format("Item Title '%s' in the cart does not contain searched item name '%s'",actualItemTitle,expectedItemName))
+                .as(String.format("Item Title '%s' in the cart does not contain searched item name '%s'", actualItemTitle, expectedItemName))
                 .containsIgnoringCase(expectedItemName);
         Assertions.
                 assertThat(actualItemTitle)
-                .as(String.format("Expected Item Title in the cart '%s' but found '%s'",expectedItemTitle,actualItemTitle))
+                .as(String.format("Expected Item Title in the cart '%s' but found '%s'", expectedItemTitle, actualItemTitle))
                 .isEqualTo(expectedItemTitle);
         return this;
     }

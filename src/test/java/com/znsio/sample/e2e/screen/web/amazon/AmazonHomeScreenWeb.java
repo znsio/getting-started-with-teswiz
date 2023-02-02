@@ -15,8 +15,8 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final By bySearchBoxId = By.id("twotabsearchtextbox");
     private static final By bySearchIconCss = By.cssSelector("[value='Go']");
-    public static final By byProductNameHeadingXpath = By.xpath("//span[@class='a-color-state a-text-bold']");
-    public static final By byProductCountXpath = By.xpath("//span[contains(text(), 'results')]");
+    private static final By byProductNameHeadingXpath = By.xpath("//span[@class='a-color-state a-text-bold']");
+    private static final By byProductCountXpath = By.xpath("//span[contains(text(), 'results')]");
 
     public AmazonHomeScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;

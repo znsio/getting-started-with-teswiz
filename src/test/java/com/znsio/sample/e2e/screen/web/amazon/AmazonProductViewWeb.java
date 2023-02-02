@@ -16,12 +16,11 @@ public class AmazonProductViewWeb extends AmazonProductViewScreen {
     private static final String SCREEN_NAME = AmazonHomeScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    private static final By firstProduct = By.xpath("//div[@data-index='2']//h2//span");
-    private static final By addCartButton = By.id("add-to-cart-button");
-    private static final By productTitle = By.id("productTitle");
-    private static final By sideBarCloseButton = By.id("attach-close_sideSheet-link");
-
-    private static final By addedToCartMsg = By.xpath("//div[@id='attachDisplayAddBaseAlert']/span");
+    private static final By byFirstProductXpath = By.xpath("//div[@data-index='2']//h2//span");
+    private static final By byAddCartButtonId = By.id("add-to-cart-button");
+    private static final By byProductTitleId = By.id("productTitle");
+    private static final By bySideBarCloseButtonId = By.id("attach-close_sideSheet-link");
+    private static final By byAddedToCartMsgXpath = By.xpath("//div[@id='attachDisplayAddBaseAlert']/span");
 
     public AmazonProductViewWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -32,8 +31,8 @@ public class AmazonProductViewWeb extends AmazonProductViewScreen {
     public AmazonProductViewScreen selectFirstProduct(){
         LOGGER.info(String.format("Select the first product"));
         visually.checkWindow(SCREEN_NAME, "Search string entered");
-        driver.scrollTillElementIntoView(firstProduct);
-        WebElement selectProduct = driver.waitTillElementIsPresent(firstProduct);
+        driver.scrollTillElementIntoView(byFirstProductXpath);
+        WebElement selectProduct = driver.waitTillElementIsPresent(byFirstProductXpath);
         selectProduct.click();
         return this;
     }
@@ -41,22 +40,22 @@ public class AmazonProductViewWeb extends AmazonProductViewScreen {
     @Override
     public boolean verifyProductDetails(){
         driver.switchToNextTab();
-        WebElement element = driver.findElement(productTitle);
+        WebElement element = driver.findElement(byProductTitleId);
         return element.isDisplayed();
     }
 
     @Override
     public AmazonProductViewScreen clickAddToCartButton(){
         LOGGER.info(String.format("Add product to the cart"));
-        driver.waitForClickabilityOf(addCartButton).click();
+        driver.waitForClickabilityOf(byAddCartButtonId).click();
         return this;
     }
 
     @Override
     public String getAddedToCartMessage(){
         LOGGER.info("Get the added to cart message");
-        String msg = driver.waitTillElementIsVisible(addedToCartMsg).getText();
-        driver.waitTillElementIsVisible(sideBarCloseButton).click();
+        String msg = driver.waitTillElementIsVisible(byAddedToCartMsgXpath).getText();
+        driver.waitTillElementIsVisible(bySideBarCloseButtonId).click();
         return msg;
     }
 }

@@ -13,11 +13,9 @@ public class AmazonShoppingCartAndroid extends AmazonShoppingCartScreen {
 
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = AmazonHomeScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = AmazonShoppingCartAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-    private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private static final By byShoppingCartButtonXpath = By.xpath("//android.view.View[@content-desc=\"Cart\"]/android.view.View");
-
     private static final By byShoppingCartMessageXpath = By.xpath("//android.view.View[@resource-id = \"sc-buy-box\"]");
     private static final By byFirstProductInCartXpath = By.xpath("//android.view.View[contains(@content-desc=\""+ SAMPLE_TEST_CONTEXT.PRODUCT_NAME+"\")]/android.widget.TextView");
 

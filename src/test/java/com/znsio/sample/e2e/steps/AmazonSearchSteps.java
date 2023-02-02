@@ -41,7 +41,6 @@ public class AmazonSearchSteps {
 
     @And("I add the selected product to the shopping cart")
     public void iAddTheSelectedProductToTheShoppingCart() {
-
         new AmazonProductViewBL().prepareShoppingCart();
     }
 

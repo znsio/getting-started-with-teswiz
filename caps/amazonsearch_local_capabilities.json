@@ -2,7 +2,7 @@
   "android": {
     "adbExecTimeout": 45000,
     "app": {
-      "local": "/Users/medha.gupta/Desktop/NewFolder/getting-started-with-teswiz/temp/Amazon.apk"
+      "local": "/getting-started-with-teswiz/temp/Amazon.apk"
     },
     "appActivity": "com.amazon.twa.CustomTWALauncherActivity",
     "appPackage": "in.amazon.mShop.android.shopping",

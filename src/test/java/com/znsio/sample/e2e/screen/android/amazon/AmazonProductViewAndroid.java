@@ -4,19 +4,16 @@ import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.amazonsearch.AmazonProductViewScreen;
-import com.znsio.sample.e2e.screen.web.amazon.AmazonHomeScreenWeb;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
-import static com.znsio.e2e.tools.Wait.waitFor;
 
 public class AmazonProductViewAndroid extends AmazonProductViewScreen{
 
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = AmazonHomeScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = AmazonProductViewAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     private static final By byFirstProductXpath = By.xpath("//android.view.View[contains(@content-desc, \""+ SAMPLE_TEST_CONTEXT.PRODUCT_NAME+"\")]/android.view.View[2]");

@@ -14,11 +14,9 @@ public class AmazonShoppingCartWeb extends AmazonShoppingCartScreen {
     private final Visual visually;
     private static final String SCREEN_NAME = AmazonHomeScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-    private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
-    private static final By shoppingCartButton = By.id("nav-cart");
-
-    private static final By shoppingCartMessage = By.xpath("//h1[contains(text(),'Shopping Cart')]");
-    private static final By firstProductInCart = By.xpath("(//div[@data-name='Active Items']//span[contains(@class, 'sc-product-title')]//span//span)[2]");
+    private static final By byShoppingCartButtonId = By.id("nav-cart");
+    private static final By byShoppingCartMessageXpath = By.xpath("//h1[contains(text(),'Shopping Cart')]");
+    private static final By byfirstProductInCartXpath = By.xpath("(//div[@data-name='Active Items']//span[contains(@class, 'sc-product-title')]//span//span)[2]");
 
     public AmazonShoppingCartWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -27,13 +25,13 @@ public class AmazonShoppingCartWeb extends AmazonShoppingCartScreen {
 
     @Override
     public AmazonShoppingCartScreen navigateToTheShoppingCart(){
-        driver.waitTillElementIsPresent(shoppingCartButton).click();
+        driver.waitTillElementIsPresent(byShoppingCartButtonId).click();
         return this;
     }
 
     @Override
     public boolean checkShoppingCartMessage(){
-        WebElement shoppingCartMsg = driver.waitTillElementIsVisible(shoppingCartMessage);
+        WebElement shoppingCartMsg = driver.waitTillElementIsVisible(byShoppingCartMessageXpath);
         String expectedAddedToCartMsg = shoppingCartMsg.getText().trim();
         if(expectedAddedToCartMsg.equals("Shopping Cart")){
             visually.takeScreenshot(SCREEN_NAME, "User navigated to shopping cart");
@@ -49,7 +47,7 @@ public class AmazonShoppingCartWeb extends AmazonShoppingCartScreen {
 
     @Override
     public String getShoppingCartProduct(){
-        WebElement element = driver.waitTillElementIsPresent(firstProductInCart);
+        WebElement element = driver.waitTillElementIsPresent(byfirstProductInCartXpath);
         return element.getText();
     }
 }

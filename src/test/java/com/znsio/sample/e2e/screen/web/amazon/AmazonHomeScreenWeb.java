@@ -16,7 +16,7 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
     private static final By bySearchBoxId = By.id("twotabsearchtextbox");
     private static final By bySearchIconCss = By.cssSelector("[value='Go']");
     public static final By byProductNameHeadingXpath = By.xpath("//span[@class='a-color-state a-text-bold']");
-    public static final By byProductCountXpath = By.xpath("//span[@class='rush-component' and @data-component-id='1']//span[contains(text(), 'results')]");
+    public static final By byProductCountXpath = By.xpath("//span[contains(text(), 'results')]");
 
     public AmazonHomeScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -37,6 +37,7 @@ public class AmazonHomeScreenWeb extends AmazonHomeScreen {
 
     @Override
     public String getActualSearchProduct(){
+        visually.checkWindow(SCREEN_NAME, "Result Page for the product");
         WebElement searchElement = driver.waitTillElementIsVisible(byProductNameHeadingXpath);
         String itemSearched = searchElement.getText().replace("\"", "").trim();
         LOGGER.info("On Web the product name searched: "+itemSearched);

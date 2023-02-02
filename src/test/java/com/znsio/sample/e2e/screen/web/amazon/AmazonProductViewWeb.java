@@ -29,18 +29,19 @@ public class AmazonProductViewWeb extends AmazonProductViewScreen {
 
     @Override
     public AmazonProductViewScreen selectFirstProduct(){
-        LOGGER.info(String.format("Select the first product"));
-        visually.checkWindow(SCREEN_NAME, "Search string entered");
         driver.scrollTillElementIntoView(byFirstProductXpath);
         WebElement selectProduct = driver.waitTillElementIsPresent(byFirstProductXpath);
+        LOGGER.info(String.format("Select the first product :" + selectProduct.getText()));
         selectProduct.click();
         return this;
     }
 
     @Override
     public boolean verifyProductDetails(){
+        visually.checkWindow(SCREEN_NAME, "Product detail page");
         driver.switchToNextTab();
         WebElement element = driver.findElement(byProductTitleId);
+        LOGGER.info(String.format("Product heading displayed :" + element.getText()));
         return element.isDisplayed();
     }
 
@@ -53,8 +54,8 @@ public class AmazonProductViewWeb extends AmazonProductViewScreen {
 
     @Override
     public String getAddedToCartMessage(){
-        LOGGER.info("Get the added to cart message");
         String msg = driver.waitTillElementIsVisible(byAddedToCartMsgXpath).getText();
+        LOGGER.info("Message displayed: " + msg);
         driver.waitTillElementIsVisible(bySideBarCloseButtonId).click();
         return msg;
     }

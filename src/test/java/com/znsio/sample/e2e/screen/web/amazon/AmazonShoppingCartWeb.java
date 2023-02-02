@@ -16,7 +16,7 @@ public class AmazonShoppingCartWeb extends AmazonShoppingCartScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final By byShoppingCartButtonId = By.id("nav-cart");
     private static final By byShoppingCartMessageXpath = By.xpath("//h1[contains(text(),'Shopping Cart')]");
-    private static final By byfirstProductInCartXpath = By.xpath("(//div[@data-name='Active Items']//span[contains(@class, 'sc-product-title')]//span//span)[2]");
+    private static final By byFirstProductInCartXpath = By.xpath("(//div[@data-name='Active Items']//span[contains(@class, 'sc-product-title')]//span//span)[2]");
 
     public AmazonShoppingCartWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -26,6 +26,7 @@ public class AmazonShoppingCartWeb extends AmazonShoppingCartScreen {
     @Override
     public AmazonShoppingCartScreen navigateToTheShoppingCart(){
         driver.waitTillElementIsPresent(byShoppingCartButtonId).click();
+        visually.checkWindow(SCREEN_NAME, "Shopping cart page");
         return this;
     }
 
@@ -47,7 +48,8 @@ public class AmazonShoppingCartWeb extends AmazonShoppingCartScreen {
 
     @Override
     public String getShoppingCartProduct(){
-        WebElement element = driver.waitTillElementIsPresent(byfirstProductInCartXpath);
+        WebElement element = driver.waitTillElementIsPresent(byFirstProductInCartXpath);
+        LOGGER.info(String.format("First product in the shopping cart: " + element.getText()));
         return element.getText();
     }
 }

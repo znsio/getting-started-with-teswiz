@@ -37,4 +37,6 @@ public abstract class AmazonProductViewPageScreen {
     public abstract String getAddToCartSuccessMessage();
 
     public abstract String getProductTitle();
+
+    public abstract boolean isAddToCartSuccessMessageAvailable();
 }

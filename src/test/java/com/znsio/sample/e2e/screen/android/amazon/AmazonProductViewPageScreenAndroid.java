@@ -29,7 +29,6 @@ public class AmazonProductViewPageScreenAndroid extends AmazonProductViewPageScr
 
         LOGGER.info("Clicking on add to cart button on product view page");
         driver.scrollToAnElementByText("Add to Cart");
-        // driver.scrollTillElementIntoView(addToCartButtonByXpath);
         WebElement addToCartButton = driver.waitTillElementIsPresent(addToCartButtonByXpath);
         addToCartButton.click();
         visually.checkWindow(SCREEN_NAME, "Product added to cart");
@@ -62,5 +61,17 @@ public class AmazonProductViewPageScreenAndroid extends AmazonProductViewPageScr
         String productTitle = driver.waitTillElementIsPresent(productTitleById).getText().trim();
         LOGGER.info(String.format("Product Title : %s", productTitle));
         return productTitle;
+    }
+
+    @Override
+    public boolean isAddToCartSuccessMessageAvailable() {
+
+        LOGGER.info("Checking the presence of 'Added to Cart' success message on product view page");
+        try {
+            driver.waitTillElementIsPresent(addToCartSuccessMessageByXpath);
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 }

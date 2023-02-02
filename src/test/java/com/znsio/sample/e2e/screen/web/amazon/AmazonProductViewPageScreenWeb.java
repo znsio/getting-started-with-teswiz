@@ -61,4 +61,16 @@ public class AmazonProductViewPageScreenWeb extends AmazonProductViewPageScreen 
         LOGGER.info(String.format("Product Title : %s", productTitle));
         return productTitle;
     }
+
+    @Override
+    public boolean isAddToCartSuccessMessageAvailable() {
+
+        LOGGER.info("Checking the presence of 'Added to Cart' success message on product view page");
+        try {
+            driver.waitTillElementIsPresent(addToCartSuccessMessageByCSS);
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
+    }
 }

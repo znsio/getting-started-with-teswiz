@@ -26,7 +26,6 @@ public class AmazonSteps {
 
     @Given("I, a guest user, search for product {string} on amazon")
     public void iAGuestUserSearchForStringProduct(String product) {
-        context.addTestState(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD, product);
         LOGGER.info(System.out.printf("Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
         new AmazonHomePageBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchForProduct(product);
@@ -44,7 +43,6 @@ public class AmazonSteps {
 
     @Then("I should be able to see the product in the shopping cart")
     public void iVerifyTheStringProductIsPresentInTheShoppingCart() {
-        String product = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.SEARCH_KEYWORD);
-        new ShoppingCartBL().verifyShoppingCart(product);
+        new ShoppingCartBL().verifyShoppingCart();
     }
 }

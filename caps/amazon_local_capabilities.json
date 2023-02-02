@@ -2,7 +2,7 @@
   "android": {
     "adbExecTimeout": 45000,
     "app": {
-      "local": "/Users/rahul2.shekhawat/Desktop/Misc/APKs/amazon.apk"
+      "local": "temp/APKs/amazon.apk"
     },
     "appActivity": "com.amazon.twa.CustomTWALauncherActivity",
     "appPackage": "in.amazon.mShop.android.shopping",

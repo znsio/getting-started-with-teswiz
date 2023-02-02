@@ -39,4 +39,6 @@ public abstract class AmazonShoppingCartScreen {
     public abstract String getShoppingCartPageTitle();
 
     public abstract List<String> getTitleOfAllProductsInShoppingCart();
+
+    public abstract boolean isProceedToBuyButtonPresent();
 }

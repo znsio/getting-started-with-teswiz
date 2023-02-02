@@ -21,8 +21,7 @@ public class AmazonSearchResultsScreenWeb extends AmazonSearchResultsScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final By productInSearchResultsStringByCSS = By.cssSelector("[data-component-type=\"s-result-info-bar\"] .a-color-state");
     private static final By totalInSearchResultsStringByCSS = By.xpath("//span[contains(text(), \"results for\")]");
-    private static final By firstProductByXpath = By.xpath("(//span[contains(text(),'iPhone 13')])[4]");
-    private static final By searchResultsProductTitles = By.cssSelector(".s-search-results .s-result-item .s-card-container span[class*=\"a-text-normal\"]");
+    private static final By searchResultsProductTitlesByCSS = By.cssSelector(".s-result-item .s-card-container .s-title-instructions-style .a-size-medium");
 
     public AmazonSearchResultsScreenWeb(Driver driver, Visual visually) {
 
@@ -54,11 +53,14 @@ public class AmazonSearchResultsScreenWeb extends AmazonSearchResultsScreen {
     @Override
     public AmazonProductViewPageScreenWeb clickOnFirstProductInSearchResultsList() {
 
-        LOGGER.info("Clicking on first product in search results list");
-        WebElement firstProduct = driver.waitTillElementIsPresent(firstProductByXpath);
-        firstProduct.click();
-        // driver.switchToNextTab();
-        visually.checkWindow(SCREEN_NAME, "First product selected");
+        WebDriverWait wait = new WebDriverWait(driver.getInnerDriver(), 30);
+        List<WebElement> productTitleWebElements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(searchResultsProductTitlesByCSS));
+
+        productTitleWebElements.get(4).click();
+        driver.switchToNextTab();
+        LOGGER.info("Clicked on first product in search results list");
+
+        visually.checkWindow(SCREEN_NAME, "First product selected from search results");
         return new AmazonProductViewPageScreenWeb(driver, visually);
     }
 
@@ -68,10 +70,10 @@ public class AmazonSearchResultsScreenWeb extends AmazonSearchResultsScreen {
         LOGGER.info("Fetching title of all products in search results list");
         List<String> productTitles = new ArrayList<>();
 
-        WebDriverWait wait = new WebDriverWait(driver.getInnerDriver(),30);
-        List<WebElement> productTitleWebElements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(searchResultsProductTitles));
+        WebDriverWait wait = new WebDriverWait(driver.getInnerDriver(), 30);
+        List<WebElement> productTitleWebElements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(searchResultsProductTitlesByCSS));
 
-        for(WebElement element: productTitleWebElements){
+        for (WebElement element : productTitleWebElements) {
             productTitles.add(element.getText().trim());
         }
         return productTitles;

@@ -2,7 +2,7 @@
   "android": {
     "adbExecTimeout": 45000,
     "app": {
-      "local": "/Users/rahul2.shekhawat/Desktop/Misc/APKs/ajio-8-3-4.apk"
+      "local": "temp/APKs/ajio-8-3-4.apk"
     },
     "appActivity": "com.ril.ajio.launch.activity.SplashScreenActivity",
     "appPackage": "com.ril.ajio",

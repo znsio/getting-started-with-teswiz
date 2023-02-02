@@ -13,7 +13,6 @@ public class AmazonHomeScreenAndroid extends AmazonHomeScreen {
     private final Visual visually;
     private static final String SCREEN_NAME = AmazonHomeScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-    private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private static final By searchBoxByClass = By.className("android.widget.EditText");
     private static final By searchIconByXpath = By.xpath("//android.view.View[@resource-id=\"nav-search-form\"]//android.widget.Button");
 

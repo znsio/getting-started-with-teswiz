@@ -1,48 +1,54 @@
 package com.znsio.sample.e2e.screen.web.amazonsearch;
 
-import com.context.TestExecutionContext;
-import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.amazonsearch.AmazonHomeScreen;
-import com.znsio.sample.e2e.screen.amazonsearch.AmazonSearchResultsScreen;
-import org.apache.commons.lang.NotImplementedException;
+import com.znsio.sample.e2e.screen.amazonsearch.HomeScreen;
+import com.znsio.sample.e2e.screen.amazonsearch.ProductScreen;
+import com.znsio.sample.e2e.screen.amazonsearch.SearchResultsScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class AmazonHomeScreenWeb extends AmazonHomeScreen{
+public class HomeScreenWeb extends HomeScreen {
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = AmazonHomeScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = HomeScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public AmazonHomeScreenWeb(Driver driver, Visual visually) {
+    public HomeScreenWeb(Driver driver, Visual visually) {
         super();
         this.driver = driver;
         this.visually = visually;
         visually.checkWindow(SCREEN_NAME, "Home Page");
     }
 
-    public static final By bySearchBoxXpath = By.xpath("//input[@id='twotabsearchtextbox']");
+    public static final By bySearchBoxId = By.id("twotabsearchtextbox");
     public static final By bySearchButtonId = By.id("nav-search-submit-button");
     private static final By byFirstImageResultXpath = By.xpath("//img[@class='s-image']");
     @Override
-    public AmazonSearchResultsScreen searchForProductInSearchBar(String productTitle) {
+    public SearchResultsScreen searchForProductInSearchBar(String productTitle) {
         LOGGER.info(String.format("Search for string '%s'", productTitle));
-        driver.waitTillElementIsPresent(bySearchBoxXpath).click();
-        WebElement searchBox = driver.findElement(bySearchBoxXpath);
+        driver.waitTillElementIsPresent(bySearchBoxId).click();
+        WebElement searchBox = driver.findElement(bySearchBoxId);
         searchBox.clear();
         searchBox.sendKeys(productTitle);
         visually.checkWindow(SCREEN_NAME, String.format("Search for product '%s'", productTitle));
         driver.findElement(bySearchButtonId).click();
-        return AmazonSearchResultsScreen.get();
+        return SearchResultsScreen.get();
     }
 
     @Override
-    public boolean selectFirstItem() {
+    public HomeScreenWeb selectFirstItem() {
         LOGGER.info("Clicking the first result item");
         driver.findElement(byFirstImageResultXpath).click();
-        return driver.isElementPresent(byFirstImageResultXpath);
+        return this;
+    }
+
+    @Override
+    public HomeScreenWeb changeToNewTab() {
+        LOGGER.info("Switching to next tab.");
+        driver.switchToNextTab();
+        visually.checkWindow(SCREEN_NAME, "Shifted to next tab");
+        return this;
     }
 }

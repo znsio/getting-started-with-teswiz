@@ -4,20 +4,19 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.android.amazonsearch.AmazonHomeScreenAndroid;
-import com.znsio.sample.e2e.screen.web.amazonsearch.AmazonHomeScreenWeb;
+import com.znsio.sample.e2e.screen.android.amazonsearch.ProductScreenAndroid;
+import com.znsio.sample.e2e.screen.web.amazonsearch.ProductScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
-public abstract class AmazonHomeScreen{
-
-    private static final String SCREEN_NAME = AmazonHomeScreen.class.getSimpleName();
+public abstract class ProductScreen {
+    private static final String SCREEN_NAME = ProductScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public static AmazonHomeScreen get() {
+    public static ProductScreen get() {
         Driver driver = fetchDriver(Thread.currentThread()
                 .getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread()
@@ -28,14 +27,14 @@ public abstract class AmazonHomeScreen{
 
         switch(platform) {
             case android:
-                return new AmazonHomeScreenAndroid(driver, visually);
+                return new ProductScreenAndroid(driver, visually);
             case web:
-                return new AmazonHomeScreenWeb(driver, visually);
+                return new ProductScreenWeb(driver, visually);
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract AmazonSearchResultsScreen searchForProductInSearchBar(String productTitle);
+    public abstract boolean isProductDetailsDisplayed();
 
-    public abstract boolean selectFirstItem();
+    public abstract boolean clickOnAddToCart();
 }

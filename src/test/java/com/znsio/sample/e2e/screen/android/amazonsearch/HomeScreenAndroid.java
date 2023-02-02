@@ -1,22 +1,23 @@
 package com.znsio.sample.e2e.screen.android.amazonsearch;
 
+import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.amazonsearch.AmazonHomeScreen;
-import com.znsio.sample.e2e.screen.amazonsearch.AmazonSearchResultsScreen;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
+import com.znsio.sample.e2e.screen.amazonsearch.HomeScreen;
+import com.znsio.sample.e2e.screen.amazonsearch.ProductScreen;
+import com.znsio.sample.e2e.screen.amazonsearch.SearchResultsScreen;
+import com.znsio.sample.e2e.screen.web.amazonsearch.HomeScreenWeb;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class AmazonHomeScreenAndroid extends AmazonHomeScreen {
+public class HomeScreenAndroid extends HomeScreen {
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = AmazonHomeScreenAndroid.class.getSimpleName();
+    private static final String SCREEN_NAME = HomeScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public AmazonHomeScreenAndroid(Driver driver, Visual visually) {
+    public HomeScreenAndroid(Driver driver, Visual visually) {
         super();
         this.driver = driver;
         this.visually = visually;
@@ -30,7 +31,7 @@ public class AmazonHomeScreenAndroid extends AmazonHomeScreen {
 
 
     @Override
-    public AmazonSearchResultsScreen searchForProductInSearchBar(String productTitle) {
+    public SearchResultsScreen searchForProductInSearchBar(String productTitle) {
         LOGGER.info(String.format("Search for string '%s'", productTitle));
         driver.waitTillElementIsPresent(bySearchBoxXpath, 60);
         WebElement searchBox = driver.findElement(bySearchBoxXpath);
@@ -40,13 +41,19 @@ public class AmazonHomeScreenAndroid extends AmazonHomeScreen {
         searchTextBox.sendKeys(productTitle);
         visually.checkWindow(SCREEN_NAME, String.format("Search for product '%s'", productTitle));
         driver.findElement(bySearchButtonXpath).click();
-        return AmazonSearchResultsScreen.get();
+        return SearchResultsScreen.get();
     }
 
     @Override
-    public boolean selectFirstItem() {
+    public HomeScreenAndroid selectFirstItem() {
         LOGGER.info("Clicking the first result item");
         driver.findElement(byFirstImageResultXpath).click();
-        return driver.isElementPresent(byFirstImageResultXpath);
+        return this;
+    }
+
+    @Override
+    public HomeScreenAndroid changeToNewTab() {
+        LOGGER.info(SCREEN_NAME + " is not implemented in " + Runner.platform);
+        return this;
     }
 }

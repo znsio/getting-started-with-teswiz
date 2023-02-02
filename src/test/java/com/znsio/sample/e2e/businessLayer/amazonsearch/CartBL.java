@@ -4,19 +4,19 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.amazonsearch.AmazonProductScreen;
+import com.znsio.sample.e2e.screen.amazonsearch.CartScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AmazonProductBL {
-    private static final Logger LOGGER = Logger.getLogger(AmazonProductBL.class.getName());
+public class CartBL {
+    private static final Logger LOGGER = Logger.getLogger(CartBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
-    public AmazonProductBL(String userPersona, Platform onPlatform) {
+    public CartBL(String userPersona, Platform onPlatform) {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -26,7 +26,7 @@ public class AmazonProductBL {
         Runner.setCurrentDriverForUser(userPersona, onPlatform, context);
     }
 
-    public AmazonProductBL() {
+    public CartBL() {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -35,17 +35,12 @@ public class AmazonProductBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public AmazonProductBL verifyProductDetails() {
-        AmazonProductScreen amazonProductScreen = AmazonProductScreen.get();
-        LOGGER.info("Verifying if product details are present correctly.");
-        assertThat(amazonProductScreen.isProductDetailsDisplayed()).as("Product details are not present correctly").isTrue();
-        return this;
-    }
-
-    public AmazonProductBL addToCart() {
-        LOGGER.info("Add product to the shopping cart.");
-        AmazonProductScreen amazonProductScreen = AmazonProductScreen.get();
-        assertThat(amazonProductScreen.clickOnAddToCart()).as("Add to cart operation was not successful").isTrue();
+    public CartBL verifyProductAddedToCart(String ProductName) {
+        CartScreen cartScreen = CartScreen.get();
+        LOGGER.info("Moving to cart screen.");
+        cartScreen.clickOnCartButton();
+        LOGGER.info("product should be added to the cart");
+        assertThat(cartScreen.isProductPresentInTheCart(ProductName)).as("Product was not present in cart page").isTrue();
         return this;
     }
 }

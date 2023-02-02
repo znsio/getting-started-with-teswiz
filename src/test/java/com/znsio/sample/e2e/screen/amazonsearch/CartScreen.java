@@ -4,20 +4,20 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.android.amazonsearch.AmazonCartScreenAndroid;
-import com.znsio.sample.e2e.screen.web.amazonsearch.AmazonCartScreenWeb;
+import com.znsio.sample.e2e.screen.android.amazonsearch.CartScreenAndroid;
+import com.znsio.sample.e2e.screen.web.amazonsearch.CartScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
-public abstract class AmazonCartScreen {
+public abstract class CartScreen {
 
-    private static final String SCREEN_NAME = AmazonCartScreen.class.getSimpleName();
+    private static final String SCREEN_NAME = CartScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public static AmazonCartScreen get() {
+    public static CartScreen get() {
         Driver driver = fetchDriver(Thread.currentThread()
                 .getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread()
@@ -28,14 +28,14 @@ public abstract class AmazonCartScreen {
 
         switch(platform) {
             case android:
-                return new AmazonCartScreenAndroid(driver, visually);
+                return new CartScreenAndroid(driver, visually);
             case web:
-                return new AmazonCartScreenWeb(driver, visually);
+                return new CartScreenWeb(driver, visually);
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract AmazonCartScreen clickOnCartButton();
+    public abstract CartScreen clickOnCartButton();
 
     public abstract boolean isProductPresentInTheCart(String productName);
 }

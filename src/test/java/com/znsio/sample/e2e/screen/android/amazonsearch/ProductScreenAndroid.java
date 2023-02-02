@@ -4,19 +4,19 @@ import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.amazonsearch.AmazonProductScreen;
+import com.znsio.sample.e2e.screen.amazonsearch.ProductScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
-public class AmazonProductScreenAndroid extends AmazonProductScreen {
+public class ProductScreenAndroid extends ProductScreen {
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = AmazonProductScreenAndroid.class.getSimpleName();
+    private static final String SCREEN_NAME = ProductScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final By byProductTitle = By.xpath("//android.widget.TextView[contains(@text, '" + SAMPLE_TEST_CONTEXT.PRODUCT_NAME + "')]");
     private static final By byAddToCartButton = By.xpath("//android.widget.Button[@text='Add to Cart']");
 
-    public AmazonProductScreenAndroid(Driver driver, Visual visually) {
+    public ProductScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
         visually.checkWindow(SCREEN_NAME, "Home Page");
@@ -29,12 +29,6 @@ public class AmazonProductScreenAndroid extends AmazonProductScreen {
         boolean isProductTitle = driver.isElementPresent(byProductTitle);
         visually.checkWindow(SCREEN_NAME, "Product information screen");
         return isProductTitle;
-    }
-
-    @Override
-    public AmazonProductScreen changeToNewTab() {
-        LOGGER.info(SCREEN_NAME + " is not implemented in " + Runner.platform);
-        return null;
     }
 
     @Override

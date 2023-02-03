@@ -15,10 +15,8 @@ public class AmazonProductScreenAndroid extends AmazonProductScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String product= SAMPLE_TEST_CONTEXT.PRODUCT;
 
-    private static final By byFirstProduct = By.xpath("//android.view.View[@content-desc=\"Sponsored Ad - Apple iPhone 13 (128GB) - Blue\"]");
-    private static final By byFirstProductId = By.id("Sponsored Ad - Apple iPhone 13 (128GB) - Blue");
-    private static final By byProductTitle = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.webkit.WebView/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.TextView");
-
+    private static final By byFirstProduct = By.xpath("//android.widget.Image[contains(@text,'iPhone 13')]");
+    private static final By byProductTitle = By.xpath("//android.widget.TextView[contains(@text, '" + SAMPLE_TEST_CONTEXT.PRODUCT + "')]");
     public AmazonProductScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
@@ -30,7 +28,6 @@ public class AmazonProductScreenAndroid extends AmazonProductScreen {
     @Override
     public AmazonProductScreen viewProduct() {
         LOGGER.info(String.format("Selected product= '%s'", product));
-       // driver.scrollTillElementIntoView(byFirstProductId);
         WebElement selectProduct= driver.waitTillElementIsPresent(byFirstProduct);
         selectProduct.click();
         return this;

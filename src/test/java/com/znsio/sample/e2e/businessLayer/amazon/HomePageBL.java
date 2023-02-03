@@ -7,7 +7,8 @@ import com.znsio.sample.e2e.screen.amazon.AmazonHomeScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertThat;
 
 
 public class HomePageBL {
@@ -28,11 +29,7 @@ public class HomePageBL {
     }
     public HomePageBL productSearch(String product) {
         LOGGER.info(String.format("User searched for a product: '%s'", product));
-        AmazonHomeScreen amazonSearchResultsScreen = AmazonHomeScreen.get().searchProductFromSearchbar(product);
-        String actualTextInSearchBar = amazonSearchResultsScreen.getActualSearchText();
-        LOGGER.info(String.format("Text present in searchbar: '%s'", actualTextInSearchBar));
-        /*assertThat(actualTextInSearchBar).as("Searched product name is present: "+product)
-                .isEqualTo(product);*/
+        AmazonHomeScreen.get().searchProductFromSearchbar(product);
         return this;
     }
 

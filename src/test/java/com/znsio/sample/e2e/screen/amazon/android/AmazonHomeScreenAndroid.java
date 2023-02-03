@@ -15,9 +15,8 @@ public class AmazonHomeScreenAndroid extends AmazonHomeScreen {
     private static final String SCREEN_NAME = AmazonHomeScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    private static final By bySearchBoxXpath= By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.webkit.WebView/android.view.View/android.view.View[1]/android.view.View/android.view.View[2]/android.view.View[1]/android.view.View/android.widget.EditText");
-    private static final By bySearchIconXpath= By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]/android.webkit.WebView/android.view.View/android.view.View[1]/android.view.View/android.view.View[2]/android.view.View[2]/android.view.View/android.widget.TextView");
-
+    private static final By bySearchBoxXpath= By.xpath("//android.view.View[@content-desc='Clear search keywords']");
+    private static final By bySearchIconXpath= By.xpath("//android.widget.Button[@text='Go']");
 
     public AmazonHomeScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -38,9 +37,4 @@ public class AmazonHomeScreenAndroid extends AmazonHomeScreen {
         return this;
     }
 
-    @Override
-    public String getActualSearchText() {
-
-        return null;
-    }
 }

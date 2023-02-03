@@ -37,7 +37,6 @@ public abstract class AmazonHomeScreen {
     }
     public abstract AmazonHomeScreen searchProductFromSearchbar(String product);
 
-    public abstract String getActualSearchText();
 }
 
 

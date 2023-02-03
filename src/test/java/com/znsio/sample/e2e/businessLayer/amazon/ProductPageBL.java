@@ -20,14 +20,13 @@ public class ProductPageBL {
         softly = Runner.getSoftAssertion(threadId);
     }
     public ProductPageBL viewFirstProduct() {
-        LOGGER.info(String.format("Selecting the first product from search results"));
+        LOGGER.info("Selecting the first product from search results");
         AmazonProductScreen.get().viewProduct();
         return this;
     }
     public ProductPageBL verifyProductDetails() {
-        LOGGER.info(String.format("Verifying the correct product"));
-       boolean isProductDetailsCorrect= AmazonProductScreen.get().isProductPresent();
-        assertThat(isProductDetailsCorrect).as("Correct product is selected").isTrue();
+        LOGGER.info("Verifying the correct product");
+        assertThat(AmazonProductScreen.get().isProductPresent()).as("Correct product is selected").isTrue();
         return this;
     }
 }

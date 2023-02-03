@@ -40,8 +40,8 @@ public class AmazonShoppingCartAndroid extends AmazonShoppingCartScreen {
 
     @Override
     public String getShoppingCartProduct(){
-        LOGGER.info("Get the name of the first product added in the cart");
         WebElement element = driver.waitTillElementIsPresent(byFirstProductInCartXpath);
+        LOGGER.info("Get the name of the first product added in the cart: "+ element.getText());
         return element.getText();
     }
 }

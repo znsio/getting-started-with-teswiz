@@ -42,13 +42,14 @@ public class AmazonHomeScreenAndroid extends AmazonHomeScreen {
     public String getActualSearchProduct(){
         visually.checkWindow(SCREEN_NAME, "Product list view");
         String productName = driver.waitTillElementIsPresent(byFirstProductXpath).getText();
+        LOGGER.info("The product searched: "+ productName);
         return productName;
     }
 
     @Override
     public int getproductCount(){
-        LOGGER.info("Get the number of product available");
         int count = driver.findElements(byCountElementXpath).size();
+        LOGGER.info("Get the number of product available: "+ count);
         return count;
     }
 }

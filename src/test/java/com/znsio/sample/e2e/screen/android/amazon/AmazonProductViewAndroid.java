@@ -28,22 +28,22 @@ public class AmazonProductViewAndroid extends AmazonProductViewScreen{
 
     @Override
     public AmazonProductViewScreen selectFirstProduct(){
-        LOGGER.info(String.format("Select the first product"));
-        visually.checkWindow(SCREEN_NAME, "Search string entered");
-        driver.waitTillElementIsPresent(byFirstProductXpath).click();
+        WebElement product = driver.waitTillElementIsPresent(byFirstProductXpath);
+        LOGGER.info(String.format("Select the first product: "+product.getText()));
+        product.click();
         return this;
     }
 
     @Override
     public boolean verifyProductDetails(){
-        LOGGER.info("Get the product details from the product detail page");
         WebElement element = driver.waitTillElementIsPresent(byProductTitleXpath);
+        LOGGER.info("Verify the product title :" + element.getText());
         return element.isDisplayed();
     }
 
     @Override
     public AmazonProductViewScreen clickAddToCartButton(){
-        LOGGER.info(String.format("Add product to the cart"));
+        LOGGER.info(String.format("clickAddToCartButton: Add product to the cart"));
         driver.scrollToAnElementByText("Add to Cart");
         driver.waitTillElementIsPresent(byAddCartButtonXpath).click();
         return this;
@@ -51,8 +51,8 @@ public class AmazonProductViewAndroid extends AmazonProductViewScreen{
 
     @Override
     public String getAddedToCartMessage(){
-        LOGGER.info("Get the added to cart message");
         String msg = driver.waitTillElementIsVisible(byAddedToCartMsgXpath).getText();
+        LOGGER.info("Get the added to cart message: "+msg);
         return msg;
     }
 }

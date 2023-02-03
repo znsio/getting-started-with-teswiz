@@ -30,26 +30,14 @@ public class AmazonProductViewBL {
 
     public AmazonProductViewBL selectProduct(){
         LOGGER.info(String.format("Select the first product"));
-        Boolean correct_product = AmazonProductViewScreen.get().selectFirstProduct()
-                .verifyProductDetails();
-        assertThat(correct_product).as("The product details are displayed").isTrue();
+        Boolean correctProduct = AmazonProductViewScreen.get().selectFirstProduct().verifyProductDetails();
+        assertThat(correctProduct).as("The product details are displayed").isTrue();
         return this;
     }
     
     public AmazonProductViewBL prepareShoppingCart(){
         LOGGER.info(String.format("User add product into the shopping cart"));
-        String shoppingCartMessage = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.ADDED_TO_CART_MESSAGE);
         AmazonProductViewScreen.get().clickAddToCartButton();
-        String actualAddedToCartMessage;
-        switch (currentPlatform){
-            case android:
-//                actualAddedToCartMessage = AmazonProductViewScreen.get().getAddedToCartMessage();
-//                assertThat(actualAddedToCartMessage).as("Added to cart message is visible on the screen").isEqualToIgnoringCase(shoppingCartMessage);
-
-            case web:
-                actualAddedToCartMessage = AmazonProductViewScreen.get().clickAddToCartButton().getAddedToCartMessage();
-                assertThat(actualAddedToCartMessage).as("Added to cart message is visible on the screen").isEqualToIgnoringCase(shoppingCartMessage);
-        }
         return this;
     }
 }

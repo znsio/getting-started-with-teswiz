@@ -41,7 +41,7 @@ public class AmazonProductBL {
     {
         LOGGER.info("Adding product to cart");
         boolean isProductAvailableInCart= AmazonProductScreen.get().addToCart().isAddedToCart();
-        softly.assertThat(isProductAvailableInCart).as("Shopping cart navigation problem").isEqualTo(true);
+        softly.assertThat(isProductAvailableInCart).as("Added to cart not displayed").isEqualTo(true);
         return new AmazonCartBL();
     }
 

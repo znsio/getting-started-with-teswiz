@@ -1,4 +1,5 @@
 package com.znsio.sample.e2e.steps;
+
 import com.context.SessionContext;
 import com.context.TestExecutionContext;
 import com.znsio.e2e.runner.Runner;
@@ -7,7 +8,6 @@ import com.znsio.sample.e2e.businessLayer.amazon.AmazonCartBL;
 import com.znsio.sample.e2e.businessLayer.amazon.AmazonProductBL;
 import com.znsio.sample.e2e.businessLayer.amazon.AmazonSearchBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -30,7 +30,7 @@ public class AmazonSearchSteps {
     @Given("I, a guest user, search for the product {string} in search bar on Amazon")
     public void iAGuestUserSearchForTheProductInSearchBarOnAmazon(String productName)
     {
-        LOGGER.info(System.out.printf("iAGuestUserSearchForTheProductInSearchBarOnAmazon - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
+        LOGGER.info(System.out.printf("In amazon step definition - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
         new AmazonSearchBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).searchProduct(productName);
     }

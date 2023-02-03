@@ -20,7 +20,6 @@ public class AmazonSearchScreenWeb extends AmazonSearchScreen {
     private static final String SCREEN_NAME = AmazonSearchScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final By bySearchBoxId = By.xpath("//input[@id='twotabsearchtextbox']");
-    private static final By bySearchResultXpath=By.xpath("//div[contains(@class,\"s-search-results\")]");
     private static final By bySearchIconId =By.xpath("//input[@id='nav-search-submit-button']");
 
     public AmazonSearchScreenWeb(Driver driver, Visual visually) {

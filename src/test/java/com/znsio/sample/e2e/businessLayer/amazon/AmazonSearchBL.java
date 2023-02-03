@@ -4,7 +4,6 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.amazon.AmazonSearchScreen;
 import com.znsio.sample.e2e.screen.web.Amazon.AmazonSearchScreenWeb;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;

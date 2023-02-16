@@ -13,7 +13,7 @@ public class AjioSearchResultsScreenWeb extends AjioSearchResultsScreen {
     private static final String SCREEN_NAME = AjioSearchResultsScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final By byNumberOfProductsFoundId = By.cssSelector("[class=\"length\"]");
-    private final By bySearchStringId = By.cssSelector("[class=\"header2\"]");
+    private static final By bySearchStringId = By.cssSelector("[class=\"header2\"]");
 
     public AjioSearchResultsScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;

@@ -13,7 +13,7 @@ public class AjioSearchResultsScreenAndroid
     private static final String SCREEN_NAME = AjioSearchResultsScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final By byNumberOfProductsFoundId = By.id("com.ril.ajio:id/toolbar_subtitle_tv");
-    private final By bySearchStringId = By.id("com.ril.ajio:id/toolbar_title_tv");
+    private static final By bySearchStringId = By.id("com.ril.ajio:id/toolbar_title_tv");
 
     public AjioSearchResultsScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;

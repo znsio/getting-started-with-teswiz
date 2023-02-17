@@ -37,10 +37,10 @@ public class ProductDetailBL {
     }
 
     public ProductDetailBL addProductToCart() {
-        String expectedProductName = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_BRAND);
         ProductDetailScreen productDetailScreen = ProductDetailScreen.get().selectProductSize().selectAddToCart();
-        String actualProductName = productDetailScreen.getProductBrand();
-        assertThat(expectedProductName).as("Product brand name").isEqualToIgnoringCase(actualProductName);
+        assertThat(context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_BRAND))
+                .as("Product brand name")
+                .isEqualToIgnoringCase(productDetailScreen.getProductBrand());
         return this;
     }
 

@@ -80,9 +80,9 @@ public class SearchResultScreenWeb extends SearchResultsScreen {
     public List<String> getAppliedFilters() {
         List<String> appliedFilters = new ArrayList<>();
         List<WebElement> elements = driver.findElements(byAppliedFiltersXpath);
-        for(int ele=0; ele<elements.size(); ele++){
-            appliedFilters.add(elements.get(ele).getText());
-            LOGGER.info(String.format("Applied filter: '%s'", elements.get(ele).getText()));
+        for(int element=0; element<elements.size(); element++){
+            appliedFilters.add(elements.get(element).getText());
+            LOGGER.info(String.format("Applied filter: '%s'", elements.get(element).getText()));
         }
         return appliedFilters;
     }

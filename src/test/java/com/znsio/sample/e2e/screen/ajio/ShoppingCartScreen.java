@@ -30,4 +30,9 @@ public abstract class ShoppingCartScreen {
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
+
+    public abstract String getProductBrand();
+    public abstract double getOrderTotal();
+    public abstract ShoppingCartScreen selectVoucher();
+    public abstract ShoppingCartScreen applyVoucher();
 }

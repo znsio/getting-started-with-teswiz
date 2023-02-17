@@ -16,7 +16,7 @@ public class ProductDetailScreenWeb extends ProductDetailScreen {
     private static final By byProductSizeXpath = By.xpath("//div[@data-index=\"3\"]//div[contains(@class,\"circle\")]//span");
     private static final By byAddToBagClassName = By.className("ic-pdp-add-cart");
     private static  final By byProductBrandCSS = By.cssSelector("[class = brand-name]");
-    private static final By byGoToCartClass = By.className("ic-pdp-add-cart");
+    private static final By byGoToCartClass = By.className("mini-cart-btn");
 
     public ProductDetailScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -47,7 +47,7 @@ public class ProductDetailScreenWeb extends ProductDetailScreen {
 
     @Override
     public ProductDetailScreen selectGoToBag(){
-        driver.waitTillElementIsPresent(byGoToCartClass).click();
+        driver.waitForClickabilityOf(byGoToCartClass).click();
         LOGGER.info(String.format("Navigate to the shopping cart"));
         return this;
     }

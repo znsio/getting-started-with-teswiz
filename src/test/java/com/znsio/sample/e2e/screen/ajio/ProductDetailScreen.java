@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
-public class ProductDetailScreen {
+public abstract class ProductDetailScreen {
     private static final String SCREEN_NAME = ProductDetailScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
@@ -31,4 +31,8 @@ public class ProductDetailScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
+    public abstract ProductDetailScreen selectProductSize();
+    public abstract ProductDetailScreen selectAddToCart();
+    public abstract String getProductBrand();
+    public abstract ProductDetailScreen selectGoToBag();
 }

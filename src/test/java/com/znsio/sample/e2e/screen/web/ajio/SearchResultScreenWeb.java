@@ -22,6 +22,9 @@ public class SearchResultScreenWeb extends SearchResultsScreen {
     private static final By bySizeMoreOptionXpath = By.xpath("//span[contains(text(), 'size')]//following::div[@id=\"verticalsizegroupformat\"]");
     private static final By byApplyButtonXpath = By.xpath("//button[text()='Apply']");
     private static final By byAppliedFiltersXpath = By.xpath("//span[@class = 'pull-left']");
+    private static final String selectGenderCategory = "//input[@name='genderfilter' and @value = '%s']//following-sibling::label";
+    private static final String selectSizeCategory = "//input[@name='verticalsizegroupformat' and @value = '%s']//parent::label";
+    private static final By byFirstProductXpath = By.xpath("(//a[@class=\"rilrtl-products-list__link\"]//div[@class='brand'])[1]");
 
     public SearchResultScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -47,33 +50,55 @@ public class SearchResultScreenWeb extends SearchResultsScreen {
 
     @Override
     public SearchResultsScreen refineOnGender(String gender){
-        String selectGenderCategory = "//input[@name='genderfilter' and @value = '%s']//following-sibling::label";
-        WebElement expandIcon = driver.findElement(byExpandGenderCategoryXpath);
-        if(!expandIcon.getAttribute("class").contains("facet-xpndicon"))
-            expandIcon.click();
+        expendCategory(byExpandGenderCategoryXpath);
         driver.waitForClickabilityOf(By.xpath(String.format(selectGenderCategory, gender))).click();
         LOGGER.info(String.format("Refined products on gender category '%s'", gender));
         return this;
     }
     @Override
     public SearchResultsScreen refineOnSize(String size){
-        String selectSizeCategory = "//input[@name='verticalsizegroupformat' and @value = '%s']//parent::label";
-        WebElement expandIcon = driver.findElement(byExpandSizeCategoryXpath);
-        if(!expandIcon.getAttribute("class").contains("facet-xpndicon"))
-            expandIcon.click();
-        driver.waitForClickabilityOf(bySizeMoreOptionXpath).click();
+        expendCategory(byExpandSizeCategoryXpath);
+        selectMoreOption();
         driver.waitTillElementIsPresent(By.xpath(String.format(selectSizeCategory, size))).click();
-        driver.findElement(byApplyButtonXpath).click();
         LOGGER.info(String.format("Refined products on size category '%s'", size));
         return this;
     }
-    public List<String> getAppliedFilterNames() {
+
+    private SearchResultsScreen selectMoreOption(){
+        driver.waitForClickabilityOf(bySizeMoreOptionXpath).click();
+        return this;
+    }
+
+    @Override
+    public SearchResultsScreen selectApply(){
+        driver.findElement(byApplyButtonXpath).click();
+        LOGGER.info(String.format("Select apply filters"));
+        visually.checkWindow(SCREEN_NAME, "Applied filter Screen");
+        return this;
+    }
+    @Override
+    public List<String> getAppliedFilters() {
         List<String> appliedFilters = new ArrayList<>();
         List<WebElement> elements = driver.findElements(byAppliedFiltersXpath);
-        for(int i=0; i<elements.size(); i++){
-            appliedFilters.add(elements.get(i).getText());
-            LOGGER.info(String.format("Applied filter: '%s'", elements.get(i).getText()));
+        for(int ele=0; ele<elements.size(); ele++){
+            appliedFilters.add(elements.get(ele).getText());
+            LOGGER.info(String.format("Applied filter: '%s'", elements.get(ele).getText()));
         }
         return appliedFilters;
     }
+    @Override
+    public SearchResultsScreen selectFirstProduct(){
+        WebElement webElement = driver.waitTillElementIsPresent(byFirstProductXpath);
+        LOGGER.info(String.format("Product Selected: '%s'", webElement.getText()));
+        webElement.click();
+        return this;
+    }
+
+    private void expendCategory(By elementLocator){
+        WebElement element = driver.waitTillElementIsPresent(elementLocator);
+        if(!element.getAttribute("class").contains("facet-xpndicon"))
+            element.click();
+    }
+
+
 }

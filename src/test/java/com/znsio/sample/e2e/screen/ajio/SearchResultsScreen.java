@@ -42,5 +42,7 @@ public abstract class SearchResultsScreen {
     public abstract String getActualSearchString();
     public abstract SearchResultsScreen refineOnGender(String gender);
     public abstract SearchResultsScreen refineOnSize(String size);
-    public abstract List<String> getAppliedFilterNames();
+    public abstract List<String> getAppliedFilters();
+    public abstract SearchResultsScreen selectApply();
+    public abstract SearchResultsScreen selectFirstProduct();
 }

@@ -4,23 +4,21 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.sample.e2e.screen.ajio.SearchResultsScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RefineByBL {
-
-    private static final Logger LOGGER = Logger.getLogger(AjioSearchBL.class.getName());
+public class ResultsBL {
+    private static final Logger LOGGER = Logger.getLogger(ResultsBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
 
-    public RefineByBL(String userPersona, Platform forPlatform) {
+    public ResultsBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -30,7 +28,7 @@ public class RefineByBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public RefineByBL() {
+    public ResultsBL() {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -39,16 +37,8 @@ public class RefineByBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public RefineByBL refineProducts(String gender, String size) {
-        SearchResultsScreen searchResultsScreen = SearchResultsScreen.get().refineOnGender(gender);
-        searchResultsScreen.refineOnSize(size).selectApply();
-        List<String> appliedFilterNames = searchResultsScreen.getAppliedFilters();
-        for(int filter=0; filter<appliedFilterNames.  size(); filter++){
-            if(gender.equals(appliedFilterNames.get(filter)))
-                softly.assertThat(gender).as("Product refined on the basis of gender").isEqualTo(appliedFilterNames.get(filter));
-            if(size.equals(appliedFilterNames.get(filter)))
-                softly.assertThat(size).as("Product refined on the basis of size").isEqualTo(appliedFilterNames.get(filter));
-        }
-        return this;
+    public ProductDetailBL selectProduct() {
+        SearchResultsScreen.get().selectFirstProduct();
+        return new ProductDetailBL();
     }
 }

@@ -90,9 +90,9 @@ public class GiftVoucherScreenWeb extends GiftVoucherScreen {
     public boolean proceedToBuy() {
         LOGGER.info("Proceed to Purchase Screen and verify");
         driver.findElement(byProceedButtonXpath).click();
-        boolean landedOnPurchasePAge = driver.findElement(byLandOnPurchaseScreenXpath).isDisplayed();
+        boolean landedOnPurchasePage = driver.findElement(byLandOnPurchaseScreenXpath).isDisplayed();
         visually.checkWindow(SCREEN_NAME,"moved to Buy gift voucher Purchase section");
-        return landedOnPurchasePAge;
+        return landedOnPurchasePage;
     }
     @Override
     public boolean applyPromoCode(String promoCode) {

@@ -25,14 +25,14 @@ public abstract class PaymentScreen {
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
 
-        switch(platform) {
-//            case android:
-//                return new PaymentScreenAndroid(driver, visually);
+        switch (platform) {
+            case android:
+                return new PaymentScreenAndroid(driver, visually);
             case web:
                 return new PaymentScreenWeb(driver, visually);
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract boolean landOnPaymentPage() ;
+    public abstract boolean landOnPaymentPage();
 }

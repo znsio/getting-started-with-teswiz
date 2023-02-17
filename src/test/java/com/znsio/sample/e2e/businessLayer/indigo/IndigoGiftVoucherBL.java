@@ -36,7 +36,7 @@ public class IndigoGiftVoucherBL {
         this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
         this.currentPlatform = Runner.platform;
     }
-    public BuyGiftVoucherBL personaliseAndPreviewVoucher(String denomination, String quantity) {
+    public BuyGiftVoucherBL personaliseAndPreviewVoucher(String denomination, String quantity) throws InterruptedException {
         String message = RandomStringUtils.randomAlphabetic(20);
         String titleName = RandomStringUtils.randomAlphabetic(5);
         int voucherPrice = Integer.parseInt(denomination)*Integer.parseInt(quantity);

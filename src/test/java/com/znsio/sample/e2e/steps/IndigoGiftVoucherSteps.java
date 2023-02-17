@@ -16,6 +16,7 @@ public class IndigoGiftVoucherSteps {
     private static final Logger LOGGER = Logger.getLogger(JioMeetSteps.class.getName());
     private final TestExecutionContext context;
     private final Drivers allDrivers;
+
     public IndigoGiftVoucherSteps() {
         context = SessionContext.getTestExecutionContext(Thread.currentThread()
                 .getId());
@@ -23,6 +24,7 @@ public class IndigoGiftVoucherSteps {
         allDrivers = (Drivers) context.getTestState(SAMPLE_TEST_CONTEXT.ALL_DRIVERS);
         LOGGER.info("allDrivers: " + (null == allDrivers));
     }
+
     public IndigoGiftVoucherSteps(TestExecutionContext context, Drivers allDrivers, TestExecutionContext context1, Drivers allDrivers1) {
         this.context = context;
         this.allDrivers = allDrivers;
@@ -32,18 +34,21 @@ public class IndigoGiftVoucherSteps {
         allDrivers = (Drivers) context.getTestState(SAMPLE_TEST_CONTEXT.ALL_DRIVERS);
         LOGGER.info("allDrivers: " + (null == allDrivers));
     }
+
     @Given("I, as a Guest user, personalize and preview {string} gift vouchers of price {string}")
-    public void iPersonaliseAndPreviewAGiftVoucherWithDenominationAndQuantity(String quantity, String denomination) {
+    public void iPersonaliseAndPreviewAGiftVoucherWithDenominationAndQuantity(String quantity, String denomination) throws InterruptedException {
         LOGGER.info("Setting up Driver");
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
         LOGGER.info("Navigating to Gift Voucher Section, Personalize, Preview voucher");
         new IndigoGiftVoucherBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).personaliseAndPreviewVoucher(denomination, quantity);
     }
+
     @When("I apply invalid promo code")
     public void iApplyInvalidPromoCode() {
         LOGGER.info("Applying InvalidPromo code");
         new BuyGiftVoucherBL().applyInvalidPromoCode();
     }
+
     @Then("I can proceed for the payment at the original amount")
     public void iCanPurchaseTheGiftVoucherAtTheOriginalAmount() {
         LOGGER.info("Proceeding to Payment with original amount");

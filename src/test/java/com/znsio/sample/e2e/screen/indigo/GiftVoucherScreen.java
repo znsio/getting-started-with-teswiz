@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
-public abstract  class GiftVoucherScreen {
+public abstract class GiftVoucherScreen {
     private static final String SCREEN_NAME = GiftVoucherScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
@@ -25,20 +25,28 @@ public abstract  class GiftVoucherScreen {
         Visual visually = fetchEyes(Thread.currentThread()
                 .getId());
 
-        switch(platform) {
-//            case android:
-//                return new GiftVoucherScreenAndroid(driver, visually);
+        switch (platform) {
+            case android:
+                return new GiftVoucherScreenAndroid(driver, visually);
             case web:
                 return new GiftVoucherScreenWeb(driver, visually);
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
+
     public abstract GiftVoucherScreen addDenominationAndQuantity(String denomination, String quantity);
-    public abstract GiftVoucherScreen personaliseGiftVoucher(String titleName, String message);
+
+    public abstract GiftVoucherScreen personaliseGiftVoucher(String titleName, String message) throws InterruptedException;
+
     public abstract GiftVoucherScreen previewVoucher();
+
     public abstract boolean verifyVoucherDetails(String titleName, String message, int voucherPrice);
+
     public abstract boolean proceedToBuy();
+
     public abstract boolean applyPromoCode(String promoCode);
+
     public abstract GiftVoucherScreen giveDeliveryOptions();
+
     public abstract PaymentScreen proceedToPaymentPage();
 }

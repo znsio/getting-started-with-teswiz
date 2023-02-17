@@ -4,7 +4,6 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.android.ajio.AjioHomeScreenAndroid;
 import com.znsio.sample.e2e.screen.web.ajio.AjioHomeScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
@@ -26,8 +25,6 @@ public abstract class AjioHomeScreen {
                                           .getId());
 
         switch(platform) {
-            case android:
-                return new AjioHomeScreenAndroid(driver, visually);
             case web:
                 return new AjioHomeScreenWeb(driver, visually);
         }

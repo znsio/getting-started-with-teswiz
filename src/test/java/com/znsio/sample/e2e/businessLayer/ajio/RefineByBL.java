@@ -39,15 +39,15 @@ public class RefineByBL {
         this.currentPlatform = Runner.platform;
     }
 
-    public RefineByBL refineProducts(String gender, String size) {
-        SearchResultsScreen searchResultsScreen = SearchResultsScreen.get().refineOnGender(gender);
-        searchResultsScreen.refineOnSize(size).selectApply();
+    public RefineByBL refineProducts(String genderFilter , String sizeFilter) {
+        SearchResultsScreen searchResultsScreen = SearchResultsScreen.get().refineOnGender(genderFilter );
+        searchResultsScreen.refineOnSize(sizeFilter).selectApply();
         List<String> appliedFilterNames = searchResultsScreen.getAppliedFilters();
         for(int filter=0; filter<appliedFilterNames.  size(); filter++){
-            if(gender.equals(appliedFilterNames.get(filter)))
-                softly.assertThat(gender).as("Product refined on the basis of gender").isEqualTo(appliedFilterNames.get(filter));
-            if(size.equals(appliedFilterNames.get(filter)))
-                softly.assertThat(size).as("Product refined on the basis of size").isEqualTo(appliedFilterNames.get(filter));
+            if(genderFilter.equals(appliedFilterNames.get(filter)))
+                softly.assertThat(genderFilter ).as("Product is not refined on the basis of gender").isEqualTo(appliedFilterNames.get(filter));
+            if(sizeFilter.equals(appliedFilterNames.get(filter)))
+                softly.assertThat(sizeFilter).as("Product is not refined on the basis of size").isEqualTo(appliedFilterNames.get(filter));
         }
         return this;
     }

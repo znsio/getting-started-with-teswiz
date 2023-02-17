@@ -39,10 +39,10 @@ public class CartBL {
     public CartBL applyCouponCode() {
         String expectedProductBrand = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_BRAND);
         ShoppingCartScreen shoppingCartScreen = ShoppingCartScreen.get();
-        softly.assertThat(shoppingCartScreen.getProductBrand()).as("Product brand in the cart").containsIgnoringCase(expectedProductBrand);
+        softly.assertThat(shoppingCartScreen.getProductBrand()).as("The product name is different").containsIgnoringCase(expectedProductBrand);
         double orderTotal = shoppingCartScreen.getOrderTotal();
         shoppingCartScreen.selectVoucher().applyVoucher();
-        assertThat(orderTotal).as("Coupon applied successfully")
+        assertThat(orderTotal).as("The applied voucher value not added to the total amount")
                 .isGreaterThan(shoppingCartScreen.getOrderTotal());
         return this;
     }

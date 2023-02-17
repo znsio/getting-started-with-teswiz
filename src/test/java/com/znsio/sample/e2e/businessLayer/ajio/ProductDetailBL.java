@@ -39,7 +39,7 @@ public class ProductDetailBL {
     public ProductDetailBL addProductToCart() {
         ProductDetailScreen productDetailScreen = ProductDetailScreen.get().selectProductSize().selectAddToCart();
         assertThat(context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_BRAND))
-                .as("Product brand name")
+                .as("Product brand name is different")
                 .isEqualToIgnoringCase(productDetailScreen.getProductBrand());
         return this;
     }

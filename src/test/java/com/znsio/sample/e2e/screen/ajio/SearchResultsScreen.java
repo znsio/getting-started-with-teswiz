@@ -28,9 +28,6 @@ public abstract class SearchResultsScreen {
                                           .getId());
 
         switch(platform) {
-//            case android:
-//                return new AjioSearchResultsScreenAndroid(driver, visually);
-
             case web:
                 return new SearchResultScreenWeb(driver, visually);
         }

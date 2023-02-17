@@ -3,7 +3,7 @@ package com.znsio.sample.e2e.screen.web.ajio;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
-import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
+import com.znsio.sample.e2e.screen.ajio.SearchResultsScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -25,14 +25,14 @@ public class AjioHomeScreenWeb
     }
 
     @Override
-    public AjioSearchResultsScreen searchFor(String product) {
+    public SearchResultsScreen searchFor(String product) {
         LOGGER.info(String.format("Search for '%s'", product));
         WebElement searchElement = driver.waitTillElementIsPresent(bySearchBoxXpath);
         searchElement.click();
         searchElement.clear();
         searchElement.sendKeys(product);
         visually.checkWindow(SCREEN_NAME, "Search string entered");
-        driver.waitTillElementIsPresent(bySearchIconClassName);
-        return AjioSearchResultsScreen.get();
+        driver.waitTillElementIsPresent(bySearchIconClassName).click();
+        return SearchResultsScreen.get();
     }
 }

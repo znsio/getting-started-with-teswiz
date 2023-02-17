@@ -1,38 +1,34 @@
-package com.znsio.sample.e2e.screen.ajio2;
+package com.znsio.sample.e2e.screen.ajio;
 
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.android.ajio2.AjioHomeScreenAndroid;
-import com.znsio.sample.e2e.screen.web.ajio2.AjioHomeScreenWeb;
+import com.znsio.sample.e2e.screen.web.ajio.ProductDetailScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
 import static com.znsio.e2e.runner.Runner.fetchDriver;
 import static com.znsio.e2e.runner.Runner.fetchEyes;
 
-public abstract class AjioHomeScreen {
-    private static final String SCREEN_NAME = AjioHomeScreen.class.getSimpleName();
+public class ProductDetailScreen {
+    private static final String SCREEN_NAME = ProductDetailScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public static AjioHomeScreen get() {
+    public static ProductDetailScreen get() {
         Driver driver = fetchDriver(Thread.currentThread()
-                                          .getId());
+                .getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread()
-                                                       .getId());
+                .getId());
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
         Visual visually = fetchEyes(Thread.currentThread()
-                                          .getId());
+                .getId());
 
         switch(platform) {
-            case android:
-                return new AjioHomeScreenAndroid(driver, visually);
             case web:
-                return new AjioHomeScreenWeb(driver, visually);
+                return new ProductDetailScreenWeb(driver, visually);
         }
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract AjioSearchResultsScreen searchFor(String product);
 }

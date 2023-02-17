@@ -4,21 +4,23 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.ajio2.AjioHomeScreen;
-import com.znsio.sample.e2e.screen.ajio2.AjioSearchResultsScreen;
+import com.znsio.sample.e2e.screen.ajio.SearchResultsScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AjioSearchBL2 {
-    private static final Logger LOGGER = Logger.getLogger(AjioSearchBL2.class.getName());
+public class RefineByBL {
+
+    private static final Logger LOGGER = Logger.getLogger(AjioSearchBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
 
-    public AjioSearchBL2(String userPersona, Platform forPlatform) {
+    public RefineByBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -28,7 +30,7 @@ public class AjioSearchBL2 {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public AjioSearchBL2() {
+    public RefineByBL() {
         long threadId = Thread.currentThread()
                 .getId();
         this.context = Runner.getTestExecutionContext(threadId);
@@ -37,16 +39,15 @@ public class AjioSearchBL2 {
         this.currentPlatform = Runner.platform;
     }
 
-    public AjioSearchBL2 searchFor(String product) {
-        AjioSearchResultsScreen ajioSearchResultsScreen = AjioHomeScreen.get()
-                .searchFor(product);
-        String actualSearchWasFor = ajioSearchResultsScreen.getActualSearchString();
-        softly.assertThat(actualSearchWasFor).as("Search was for a different value").isEqualToIgnoringCase(product);
-
-        int numberOfProductsFound = ajioSearchResultsScreen
-                .getNumberOfProductsFound();
-        assertThat(numberOfProductsFound).as("Insufficient search results retrieved")
-                .isGreaterThan(100);
+    public RefineByBL refineProducts(String gender, String size) {
+        SearchResultsScreen ajioSearchResultsScreen = SearchResultsScreen.get().refineOnGender(gender).refineOnSize(size);
+        List<String> appliedFilterNames = ajioSearchResultsScreen.getAppliedFilterNames();
+        for(int i=0; i<appliedFilterNames.  size(); i++){
+            if(gender.equals(appliedFilterNames.get(i)))
+                softly.assertThat(gender).as("Product refined on the basis of gender").isEqualTo(appliedFilterNames.get(i));
+            if(size.equals(appliedFilterNames.get(i)))
+                softly.assertThat(size).as("Product refined on the basis of size").isEqualTo(appliedFilterNames.get(i));
+        }
         return this;
     }
 }

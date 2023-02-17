@@ -3,7 +3,7 @@ package com.znsio.sample.e2e.screen.android.ajio;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
-import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
+import com.znsio.sample.e2e.screen.ajio.SearchResultsScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -26,7 +26,7 @@ public class AjioHomeScreenAndroid
     }
 
     @Override
-    public AjioSearchResultsScreen searchFor(String product) {
+    public SearchResultsScreen searchFor(String product) {
         LOGGER.info(String.format("Search for: '%s'", product));
         driver.waitTillElementIsPresent(byStartSearchBoxId)
                 .click();
@@ -37,6 +37,6 @@ public class AjioHomeScreenAndroid
         visually.checkWindow(SCREEN_NAME, String.format("Search for product: %s", product));
         driver.waitTillElementIsPresent(byStartSearchId)
                 .click();
-        return AjioSearchResultsScreen.get();
+        return SearchResultsScreen.get();
     }
 }

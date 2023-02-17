@@ -34,5 +34,5 @@ public abstract class AjioHomeScreen {
         throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
     }
 
-    public abstract AjioSearchResultsScreen searchFor(String product);
+    public abstract SearchResultsScreen searchFor(String product);
 }

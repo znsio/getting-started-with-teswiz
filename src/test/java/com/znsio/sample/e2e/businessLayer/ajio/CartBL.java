@@ -37,6 +37,7 @@ public class CartBL {
     }
 
     public CartBL applyCouponCode() {
+        LOGGER.info(String.format("applyCouponCode: Apply coupon code"));
         String expectedProductBrand = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_BRAND);
         ShoppingCartScreen shoppingCartScreen = ShoppingCartScreen.get();
         softly.assertThat(shoppingCartScreen.getProductBrand()).as("The product name is different").containsIgnoringCase(expectedProductBrand);

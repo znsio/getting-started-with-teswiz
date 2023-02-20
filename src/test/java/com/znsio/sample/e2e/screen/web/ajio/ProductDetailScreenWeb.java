@@ -13,7 +13,8 @@ public class ProductDetailScreenWeb extends ProductDetailScreen {
     private static final String SCREEN_NAME = ProductDetailScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    private static final By byProductSizeXpath = By.xpath("//div[@data-index=\"3\"]//div[contains(@class,\"circle\")]//span");
+    //improve xpath
+    private static final By byProductSizeXpath = By.xpath("(//div[contains(@class,\"size-instock\")])[1]");
     private static final By byAddToBagClassName = By.className("ic-pdp-add-cart");
     private static  final By byProductBrandCSS = By.cssSelector("[class = brand-name]");
     private static final By byGoToCartClass = By.className("mini-cart-btn");
@@ -28,12 +29,13 @@ public class ProductDetailScreenWeb extends ProductDetailScreen {
         driver.switchToNextTab();
         visually.checkWindow(SCREEN_NAME, "Product detail screen");
         WebElement webElement = driver.waitTillElementIsPresent(byProductSizeXpath);
-        LOGGER.info(String.format("Product size selected '%s'", webElement.getText()));
+        LOGGER.info(String.format("selectProductSize: Product size selected '%s'", webElement.getText()));
         webElement.click();
         return this;
     }
     @Override
-    public ProductDetailScreen selectAddToCart(){
+    public ProductDetailScreen addToCart(){
+        LOGGER.info(String.format("addToCart: Add product"));
         driver.findElement(byAddToBagClassName).click();
         return this;
     }
@@ -41,14 +43,14 @@ public class ProductDetailScreenWeb extends ProductDetailScreen {
     @Override
     public String getProductBrand(){
         String productBrand = driver.findElement(byProductBrandCSS).getText();
-        LOGGER.info(String.format("Product brand name: '%s'", productBrand));
+        LOGGER.info(String.format("getProductBrand: Product brand name: '%s'", productBrand));
         return productBrand;
     }
 
     @Override
-    public ProductDetailScreen selectGoToBag(){
+    public ProductDetailScreen proceedToCart(){
+        LOGGER.info(String.format("proceedToCart: Navigate to the shopping cart"));
         driver.waitForClickabilityOf(byGoToCartClass).click();
-        LOGGER.info(String.format("Navigate to the shopping cart"));
         return this;
     }
 }

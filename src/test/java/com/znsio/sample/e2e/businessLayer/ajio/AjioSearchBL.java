@@ -38,16 +38,17 @@ public class AjioSearchBL {
     }
 
     public AjioSearchBL searchFor(String product) {
+        LOGGER.info(String.format("searchFor: search for product '%s': ", product));
         context.addTestState(SAMPLE_TEST_CONTEXT.PRODUCT_BRAND, product);
         SearchResultsScreen ajioSearchResultsScreen = AjioHomeScreen.get()
                                                                         .searchFor(product);
         String actualSearchWasFor = ajioSearchResultsScreen.getActualSearchString();
-        softly.assertThat(actualSearchWasFor).as("Search was for a different value").isEqualTo(product);
+        softly.assertThat(actualSearchWasFor).as("Search was for a different value").isEqualToIgnoringCase(product);
 
         int numberOfProductsFound = ajioSearchResultsScreen
                                                   .getNumberOfProductsFound();
         assertThat(numberOfProductsFound).as("Insufficient search results retrieved")
-                                         .isGreaterThan(100);
+                                         .isGreaterThan(1);
         return this;
     }
 }

@@ -29,7 +29,7 @@ public class ShoppingCartScreenWeb extends ShoppingCartScreen {
     public String getProductBrand() {
         String productName = driver.waitTillElementIsPresent(byProductNameCss).getText().trim();
         visually.checkWindow(SCREEN_NAME, "Shopping cart screen");
-        LOGGER.info(String.format("Product present in the cart '%s'", productName));
+        LOGGER.info(String.format("getProductBrand: Product present in the cart '%s'", productName));
         return productName;
     }
 
@@ -37,25 +37,27 @@ public class ShoppingCartScreenWeb extends ShoppingCartScreen {
     public double getOrderTotal() {
         waitFor(4);
         String orderTotal = driver.waitTillElementIsPresent(byOrderTotalXpath).getText();
-        LOGGER.info(String.format("Order total: '%s'", orderTotal));
-        return stringPriceToInteger(orderTotal);
+        LOGGER.info(String.format("getOrderTotal: Order total: '%s'", orderTotal));
+        return convertStringPriceToInteger(orderTotal);
     }
 
     @Override
     public ShoppingCartScreen selectVoucher() {
+        LOGGER.info(String.format("selectVoucher: Select first voucher"));
         WebElement element = driver.waitTillElementIsPresent(byFirstVoucherXpath);
-        LOGGER.info(String.format("First voucher name: '%s'", element.getAttribute("value")));
+        LOGGER.info(String.format("Voucher name: '%s'", element.getAttribute("value")));
         element.click();
         return this;
     }
 
     @Override
     public ShoppingCartScreen applyVoucher() {
+        LOGGER.info(String.format("applyVoucher: select apply voucher option"));
         driver.waitForClickabilityOf(byApplyOptionClassName).click();
         return this;
     }
 
-    private double stringPriceToInteger(String orderTotal) {
+    private double convertStringPriceToInteger(String orderTotal) {
         String price = orderTotal.substring(1).replace(",", "");
         return Double.parseDouble(price);
     }

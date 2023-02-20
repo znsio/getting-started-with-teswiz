@@ -37,7 +37,8 @@ public class ProductDetailBL {
     }
 
     public ProductDetailBL addProductToCart() {
-        ProductDetailScreen productDetailScreen = ProductDetailScreen.get().selectProductSize().selectAddToCart();
+        LOGGER.info(String.format("addProductToCart: Add product to cart"));
+        ProductDetailScreen productDetailScreen = ProductDetailScreen.get().selectProductSize().addToCart();
         assertThat(context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_BRAND))
                 .as("Product brand name is different")
                 .isEqualToIgnoringCase(productDetailScreen.getProductBrand());
@@ -45,7 +46,8 @@ public class ProductDetailBL {
     }
 
     public CartBL navigateToCart(){
-        ProductDetailScreen.get().selectGoToBag();
+        LOGGER.info(String.format("navigateToCart: Navigate to the cart"));
+        ProductDetailScreen.get().proceedToCart();
         return new CartBL();
     }
 }

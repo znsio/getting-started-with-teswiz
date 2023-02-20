@@ -32,7 +32,7 @@ public abstract class ProductDetailScreen {
     }
 
     public abstract ProductDetailScreen selectProductSize();
-    public abstract ProductDetailScreen selectAddToCart();
+    public abstract ProductDetailScreen addToCart();
     public abstract String getProductBrand();
-    public abstract ProductDetailScreen selectGoToBag();
+    public abstract ProductDetailScreen proceedToCart();
 }

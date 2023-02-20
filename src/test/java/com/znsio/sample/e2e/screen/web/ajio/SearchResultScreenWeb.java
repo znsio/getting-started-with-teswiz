@@ -35,7 +35,7 @@ public class SearchResultScreenWeb extends SearchResultsScreen {
     public int getNumberOfProductsFound() {
         String numberOfProducts = driver.waitTillElementIsPresent(byNumberOfProductsFoundId)
                 .getText();
-        LOGGER.info(String.format("Found '%s'", numberOfProducts));
+        LOGGER.info(String.format("getNumberOfProductsFound: Found '%s'", numberOfProducts));
         return Integer.parseInt(numberOfProducts.split(" ")[0]);
     }
 
@@ -43,41 +43,37 @@ public class SearchResultScreenWeb extends SearchResultsScreen {
     public String getActualSearchString() {
         String actualSearchString = driver.waitTillElementIsPresent(bySearchStringId)
                 .getText();
-        LOGGER.info(String.format("Actual search was for: '%s'", actualSearchString));
+        LOGGER.info(String.format("getActualSearchString: Actual search was for: '%s'", actualSearchString));
         visually.checkWindow(SCREEN_NAME, "Search results screen");
         return actualSearchString;
     }
 
     @Override
     public SearchResultsScreen refineOnGender(String gender){
+        LOGGER.info(String.format("refineOnGender: Refine products on size category '%s'", gender));
         expendCategory(byExpandGenderCategoryXpath);
         driver.waitForClickabilityOf(By.xpath(String.format(selectGenderCategory, gender))).click();
-        LOGGER.info(String.format("Refined products on gender category '%s'", gender));
         return this;
     }
     @Override
     public SearchResultsScreen refineOnSize(String size){
+        LOGGER.info(String.format("refineOnSize: Refine products on size category '%s'", size));
         expendCategory(byExpandSizeCategoryXpath);
         selectMoreOption();
         driver.waitTillElementIsPresent(By.xpath(String.format(selectSizeCategory, size))).click();
-        LOGGER.info(String.format("Refined products on size category '%s'", size));
-        return this;
-    }
-
-    private SearchResultsScreen selectMoreOption(){
-        driver.waitForClickabilityOf(bySizeMoreOptionXpath).click();
         return this;
     }
 
     @Override
     public SearchResultsScreen selectApply(){
+        LOGGER.info(String.format("selectApply: Apply selected filter"));
         driver.findElement(byApplyButtonXpath).click();
-        LOGGER.info(String.format("Select apply filters"));
         visually.checkWindow(SCREEN_NAME, "Applied filter Screen");
         return this;
     }
     @Override
     public List<String> getAppliedFilters() {
+        LOGGER.info(String.format("getAppliedFilters: get all the applied filter"));
         List<String> appliedFilters = new ArrayList<>();
         List<WebElement> elements = driver.findElements(byAppliedFiltersXpath);
         for(int element=0; element<elements.size(); element++){
@@ -89,7 +85,7 @@ public class SearchResultScreenWeb extends SearchResultsScreen {
     @Override
     public SearchResultsScreen selectFirstProduct(){
         WebElement webElement = driver.waitTillElementIsPresent(byFirstProductXpath);
-        LOGGER.info(String.format("Product Selected: '%s'", webElement.getText()));
+        LOGGER.info(String.format("selectFirstProduct: Product Selected: '%s'", webElement.getText()));
         webElement.click();
         return this;
     }
@@ -100,5 +96,9 @@ public class SearchResultScreenWeb extends SearchResultsScreen {
             element.click();
     }
 
+    private SearchResultsScreen selectMoreOption(){
+        driver.waitForClickabilityOf(bySizeMoreOptionXpath).click();
+        return this;
+    }
 
 }

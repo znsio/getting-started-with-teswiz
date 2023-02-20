@@ -4,12 +4,11 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.sample.e2e.screen.ajio.SearchResultsScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.List;
 
 public class ResultsBL {
     private static final Logger LOGGER = Logger.getLogger(ResultsBL.class.getName());
@@ -37,7 +36,22 @@ public class ResultsBL {
         this.currentPlatform = Runner.platform;
     }
 
+    public ResultsBL refineProducts(String genderFilter , String sizeFilter) {
+        LOGGER.info(String.format("refineProducts: Refine product on gender filter '%s' and size filter '%s'", genderFilter, sizeFilter));
+        SearchResultsScreen searchResultsScreen = SearchResultsScreen.get().refineOnGender(genderFilter );
+        searchResultsScreen.refineOnSize(sizeFilter).selectApply();
+        List<String> appliedFilterNames = searchResultsScreen.getAppliedFilters();
+        for(int filter=0; filter<appliedFilterNames.  size(); filter++){
+            if(genderFilter.equals(appliedFilterNames.get(filter)))
+                softly.assertThat(genderFilter ).as("Product is not refined on the basis of gender").isEqualTo(appliedFilterNames.get(filter));
+            if(sizeFilter.equals(appliedFilterNames.get(filter)))
+                softly.assertThat(sizeFilter).as("Product is not refined on the basis of size").isEqualTo(appliedFilterNames.get(filter));
+        }
+        return this;
+    }
+
     public ProductDetailBL selectProduct() {
+        LOGGER.info(String.format("selectProduct: Select product from the product list"));
         SearchResultsScreen.get().selectFirstProduct();
         return new ProductDetailBL();
     }

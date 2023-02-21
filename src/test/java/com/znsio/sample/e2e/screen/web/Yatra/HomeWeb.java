@@ -7,7 +7,6 @@ import com.znsio.sample.e2e.screen.web.ajio.AjioHomeScreenWeb;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
 
 public class HomeWeb extends HomeScreen {
     private final Driver driver;
@@ -27,7 +26,15 @@ public class HomeWeb extends HomeScreen {
     private static final String byDestinationCityCodeXpath = "//label[@for = 'BE_flight_arrival_city%s']//p";
     private static final By byPopUpCloseCss = By.cssSelector("[class=\"close\"]");
     private static final String byAdvertisementFrameId = "webklipper-publisher-widget-container-notification-frame";
-    private static final String  bySelectCityXath = "//p[contains(text(), '%s')]";
+    private static final String  bySelectCityXpath = "//p[contains(text(), '%s')]";
+    private static final By byTravellersOptionClassName = By.className("arrowpassengerBox");
+    private static final String byClassOptionsXpath = "//div[@id='flight_class_select_child']//span[contains(text(), '%s')]";
+    private static final By bySelectNonStopCss = By.cssSelector("[title=\"Non Stop Flights\"]");
+    private static final By bySearchFightCss = By.cssSelector("[value=\"Search Flights\"]");
+    private static final By byTotalPassengerCountClassName = By.className("totalCount");
+    private static final By byAddAdultXpath = By.xpath("//div[@data-flightagegroup='adult' and contains(@class, 'pax-limit')]//span[@class='ddSpinnerPlus']");
+    private static final By byAddChildrenXpath = By.xpath("//div[@data-flightagegroup='child' and contains(@class, 'pax-limit')]//span[@class='ddSpinnerPlus']");
+    private static final By byAddInfantXpath = By.xpath("//div[@data-flightagegroup='infant' and contains(@class, 'pax-limit')]//span[@class='ddSpinnerPlus']");
 
 
     public HomeWeb(Driver driver, Visual visually) {
@@ -49,7 +56,7 @@ public class HomeWeb extends HomeScreen {
     public HomeScreen selectSourceCity(String sourceCity, String tripNumber) {
         LOGGER.info(String.format("selectSourceCity: Select source city: '%s'", sourceCity));
         driver.waitForClickabilityOf(By.id(String.format(bySourceCityId, tripNumber))).click();
-        driver.waitTillElementIsPresent(By.xpath(String.format(bySelectCityXath, sourceCity))).click();
+        driver.waitTillElementIsPresent(By.xpath(String.format(bySelectCityXpath, sourceCity))).click();
         return this;
     }
 
@@ -57,7 +64,7 @@ public class HomeWeb extends HomeScreen {
     public HomeScreen selectDestinationCity(String destinationCity, String tripNumber) {
         LOGGER.info(String.format("selectDestinationCity: Select destination city: '%s'", destinationCity));
         driver.waitForClickabilityOf(By.id(String.format(byArrivalCityId, tripNumber))).click();
-        driver.waitTillElementIsPresent(By.xpath(String.format(bySelectCityXath, destinationCity))).click();
+        driver.waitTillElementIsPresent(By.xpath(String.format(bySelectCityXpath, destinationCity))).click();
         return this;
     }
 
@@ -104,22 +111,64 @@ public class HomeWeb extends HomeScreen {
     }
 
     @Override
-    public HomeScreen selectClassOption() {
+    public HomeScreen selectTravellerOption() {
+        LOGGER.info("selectTravellerOption: Select traveller's option for the flight");
+        driver.findElement(byTravellersOptionClassName).click();
         return this;
     }
 
     @Override
-    public HomeScreen addAdults(String adultCount) {
+    public HomeScreen addAdults(int adultCount) {
+        LOGGER.info(String.format("addAdults: Add adults for the flight '%s'", adultCount));
+        for(int adult=1; adult<adultCount; adult++){
+            driver.findElement(byAddAdultXpath).click();
+        }
         return this;
     }
 
     @Override
-    public HomeScreen addChildren(String childrenCount) {
+    public HomeScreen addChildren(int childrenCount) {
+        LOGGER.info(String.format("addChildren: Add children for the flight '%s'", childrenCount));
+        for(int child=1; child<=childrenCount; child++){
+            driver.findElement(byAddChildrenXpath).click();
+        }
         return this;
     }
 
     @Override
-    public HomeScreen addInfants(String infantCount) {
+    public HomeScreen addInfants(int infantCount) {
+        LOGGER.info(String.format("addInfants: Add infant for the flight: '%s'", infantCount));
+        for(int infant=1; infant <= infantCount; infant++){
+            driver.findElement(byAddInfantXpath).click();
+        }
         return this;
+    }
+
+    @Override
+    public HomeScreen selectFlightClass(String flightClass) {
+        LOGGER.info(String.format("selectFlightClass: Select flight class: '%s'", flightClass));
+        driver.findElement(By.xpath(String.format(byClassOptionsXpath, flightClass))).click();
+        return this;
+    }
+
+    @Override
+    public HomeScreen selectNonStopFlight() {
+        LOGGER.info("selectNonStopFlight: Select non stop flight type");
+        driver.findElement(bySelectNonStopCss).click();
+        return this;
+    }
+
+    @Override
+    public HomeScreen selectSearchFight() {
+        LOGGER.info("selectSearchFight: Select search flight option");
+        driver.findElement(bySearchFightCss).click();
+        return this;
+    }
+
+    @Override
+    public int getTravelCount() {
+        String totalCount = driver.findElement(byTotalPassengerCountClassName).getText();
+        LOGGER.info(String.format("getTravelCount: Total number of passenger added '%s'", totalCount));
+        return Integer.parseInt(totalCount);
     }
 }

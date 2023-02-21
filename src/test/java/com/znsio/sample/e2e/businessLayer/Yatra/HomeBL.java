@@ -60,15 +60,18 @@ public class HomeBL {
         return this;
     }
 
-    public HomeBL addPassenger(String adultCount, String childrenCount, String infantCount) {
-        LOGGER.info(String.format("addPassenger: Add passenger with adult count: '%s', children count: '%s' and infant count: '%s'", adultCount, childrenCount, infantCount));
-        HomeScreen homeScreen = HomeScreen.get().selectClassOption()
+    public HomeBL addPassenger(int adultCount, int childrenCount, int infantCount) {
+        LOGGER.info(String.format("addPassenger: Add passenger with adult count: '%d', children count: '%d' and infant count: '%d'", adultCount, childrenCount, infantCount));
+        HomeScreen homeScreen = HomeScreen.get().selectTravellerOption()
                 .addAdults(adultCount).addChildren(childrenCount).addInfants(infantCount);
-
+        assertThat(adultCount + childrenCount + infantCount).as("").isEqualTo(homeScreen.getTravelCount());
         return this;
     }
 
     public ResultBL selectCategory(String flightClass, String flightType) {
+        LOGGER.info(String.format("selectCategory: select '%s' class and '%s' flight type", flightClass, flightType));
+        HomeScreen homeScreen = HomeScreen.get().selectFlightClass(flightClass).selectNonStopFlight().selectSearchFight();
+
         return new ResultBL();
     }
 }

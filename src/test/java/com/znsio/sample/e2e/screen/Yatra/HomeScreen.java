@@ -43,11 +43,18 @@ public abstract class HomeScreen {
 
     public abstract HomeScreen closeAdvertisement();
 
-    public abstract HomeScreen selectClassOption();
+    public abstract HomeScreen selectTravellerOption();
 
-    public abstract HomeScreen addAdults(String adultCount);
+    public abstract HomeScreen addAdults(int adultCount);
 
-    public abstract HomeScreen addChildren(String childrenCount);
+    public abstract HomeScreen addChildren(int childrenCount);
 
-    public abstract HomeScreen addInfants(String infantCount);
+    public abstract HomeScreen addInfants(int infantCount);
+
+    public abstract HomeScreen selectFlightClass(String flightClass);
+
+    public abstract HomeScreen selectNonStopFlight();
+
+    public abstract HomeScreen selectSearchFight();
+    public abstract int getTravelCount();
 }

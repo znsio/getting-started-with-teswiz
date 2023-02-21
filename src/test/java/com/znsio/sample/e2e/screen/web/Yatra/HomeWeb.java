@@ -145,21 +145,21 @@ public class HomeWeb extends HomeScreen {
     }
 
     @Override
-    public HomeScreen selectFlightClass(String flightClass) {
+    public HomeScreen selectClass(String flightClass) {
         LOGGER.info(String.format("selectFlightClass: Select flight class: '%s'", flightClass));
         driver.findElement(By.xpath(String.format(byClassOptionsXpath, flightClass))).click();
         return this;
     }
 
     @Override
-    public HomeScreen selectNonStopFlight() {
+    public HomeScreen selectNonStop() {
         LOGGER.info("selectNonStopFlight: Select non stop flight type");
         driver.findElement(bySelectNonStopCss).click();
         return this;
     }
 
     @Override
-    public HomeScreen selectSearchFight() {
+    public HomeScreen selectSearch() {
         LOGGER.info("selectSearchFight: Select search flight option");
         driver.findElement(bySearchFightCss).click();
         return this;

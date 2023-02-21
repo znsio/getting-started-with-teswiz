@@ -60,7 +60,7 @@ public class HomeBL {
         return this;
     }
 
-    public HomeBL addPassenger(int adultCount, int childrenCount, int infantCount) {
+    public HomeBL addPassengers(int adultCount, int childrenCount, int infantCount) {
         LOGGER.info(String.format("addPassenger: Add passenger with adult count: '%d', children count: '%d' and infant count: '%d'", adultCount, childrenCount, infantCount));
         HomeScreen homeScreen = HomeScreen.get().selectTravellerOption()
                 .addAdults(adultCount).addChildren(childrenCount).addInfants(infantCount);
@@ -70,8 +70,7 @@ public class HomeBL {
 
     public ResultBL selectCategory(String flightClass, String flightType) {
         LOGGER.info(String.format("selectCategory: select '%s' class and '%s' flight type", flightClass, flightType));
-        HomeScreen homeScreen = HomeScreen.get().selectFlightClass(flightClass).selectNonStopFlight().selectSearchFight();
-
+        HomeScreen homeScreen = HomeScreen.get().selectClass(flightClass).selectNonStop().selectSearch();
         return new ResultBL();
     }
 }

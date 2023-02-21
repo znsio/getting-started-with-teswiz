@@ -41,7 +41,7 @@ public class YatraSteps {
     @When("I add {int} adults, {int} children and {int} infant passengers")
     public void iAddAdultsChildrenAndInfantPassengers(int adultCount, int childrenCount, int infantCount) {
         LOGGER.info("iAddAdultsChildrenAndInfantPassengers - Add passengers for the trip");
-        new HomeBL().addPassenger(adultCount, childrenCount, infantCount);
+        new HomeBL().addPassengers(adultCount, childrenCount, infantCount);
     }
 
     @Then("I choose {string} class category {string} flight")

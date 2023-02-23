@@ -16,7 +16,7 @@ public class ProductDetailScreenAndroid extends ProductDetailScreen {
     private static final By byProductBrandId = By.id("com.ril.ajio:id/brand_name");
     private static final By byAddToCartId = By.id("com.ril.ajio:id/add_to_cart_tv");
     private static final By byProductSizeXpath = By.xpath("//android.widget.TextView[@resource-id = 'com.ril.ajio:id/row_pdp_fixed_size_tv' and @text = '8']");
-    private static final By byProceedToCartId = By.id("com.ril.ajio:id/cart_rv");
+    private static final By byProceedToCartId = By.id("com.ril.ajio:id/menu_cart_iv");
 
 
     public ProductDetailScreenAndroid(Driver driver, Visual visually) {

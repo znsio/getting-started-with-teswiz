@@ -76,7 +76,7 @@ task run(type: JavaExec) {
         ]
         args = runnerArgs
     }
-    mainClass = "com.znsio.e2e.runner.Runner"
+    mainClass = "com.znsio.teswiz.runner.Runner"
     classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
 }
 

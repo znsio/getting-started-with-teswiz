@@ -1,13 +1,13 @@
 package com.znsio.sample.e2e.screen.web.theapp;
 
-import com.znsio.e2e.tools.Driver;
-import com.znsio.e2e.tools.Visual;
+import com.znsio.teswiz.runner.Driver;
+import com.znsio.teswiz.runner.Visual;
 import com.znsio.sample.e2e.screen.theapp.LoginScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import static com.znsio.e2e.tools.Wait.waitFor;
+import static com.znsio.teswiz.tools.Wait.waitFor;
 
 public class LoginScreenWeb
         extends LoginScreen {

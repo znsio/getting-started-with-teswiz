@@ -1,17 +1,17 @@
 package com.znsio.sample.e2e.screen;
 
-import com.znsio.e2e.entities.Platform;
-import com.znsio.e2e.runner.Runner;
-import com.znsio.e2e.tools.Driver;
-import com.znsio.e2e.tools.Visual;
+import com.znsio.teswiz.entities.Platform;
+import com.znsio.teswiz.runner.Runner;
+import com.znsio.teswiz.runner.Driver;
+import com.znsio.teswiz.runner.Visual;
 import com.znsio.sample.e2e.screen.android.ScreenShotScreenAndroid;
 import com.znsio.sample.e2e.screen.web.ScreenShotScreenWeb;
 import com.znsio.sample.e2e.screen.windows.ScreenShotScreenWindows;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
-import static com.znsio.e2e.runner.Runner.fetchDriver;
-import static com.znsio.e2e.runner.Runner.fetchEyes;
+import static com.znsio.teswiz.runner.Runner.fetchDriver;
+import static com.znsio.teswiz.runner.Runner.fetchEyes;
 
 public abstract class ScreenShotScreen {
     private static final String SCREEN_NAME = ScreenShotScreen.class.getSimpleName();

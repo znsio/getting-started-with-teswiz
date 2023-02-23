@@ -2,9 +2,9 @@ package com.znsio.sample.e2e.steps;
 
 import com.context.SessionContext;
 import com.context.TestExecutionContext;
-import com.znsio.e2e.entities.Platform;
-import com.znsio.e2e.runner.Runner;
-import com.znsio.e2e.tools.Drivers;
+import com.znsio.teswiz.entities.Platform;
+import com.znsio.teswiz.runner.Runner;
+import com.znsio.teswiz.runner.Drivers;
 import com.znsio.sample.e2e.businessLayer.calculator.CalculatorBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import io.cucumber.java.en.And;
@@ -13,7 +13,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 
-import static com.znsio.e2e.tools.Wait.waitFor;
+import static com.znsio.teswiz.tools.Wait.waitFor;
 
 public class CalculatorSteps {
     private static final Logger LOGGER = Logger.getLogger(CalculatorSteps.class.getName());

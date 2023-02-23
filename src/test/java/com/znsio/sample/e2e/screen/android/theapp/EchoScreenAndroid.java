@@ -1,7 +1,7 @@
 package com.znsio.sample.e2e.screen.android.theapp;
 
-import com.znsio.e2e.tools.Driver;
-import com.znsio.e2e.tools.Visual;
+import com.znsio.teswiz.runner.Driver;
+import com.znsio.teswiz.runner.Visual;
 import com.znsio.sample.e2e.screen.theapp.EchoScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;

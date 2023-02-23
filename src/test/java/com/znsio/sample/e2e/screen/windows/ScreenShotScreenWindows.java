@@ -1,7 +1,7 @@
 package com.znsio.sample.e2e.screen.windows;
 
-import com.znsio.e2e.tools.Driver;
-import com.znsio.e2e.tools.Visual;
+import com.znsio.teswiz.runner.Driver;
+import com.znsio.teswiz.runner.Visual;
 import com.znsio.sample.e2e.screen.ScreenShotScreen;
 import org.apache.log4j.Logger;
 

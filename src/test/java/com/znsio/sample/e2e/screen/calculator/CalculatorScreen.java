@@ -1,15 +1,15 @@
 package com.znsio.sample.e2e.screen.calculator;
 
-import com.znsio.e2e.entities.Platform;
-import com.znsio.e2e.runner.Runner;
-import com.znsio.e2e.tools.Driver;
-import com.znsio.e2e.tools.Visual;
+import com.znsio.teswiz.entities.Platform;
+import com.znsio.teswiz.runner.Runner;
+import com.znsio.teswiz.runner.Driver;
+import com.znsio.teswiz.runner.Visual;
 import com.znsio.sample.e2e.screen.android.calculator.CalculatorScreenAndroid;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
-import static com.znsio.e2e.runner.Runner.fetchDriver;
-import static com.znsio.e2e.runner.Runner.fetchEyes;
+import static com.znsio.teswiz.runner.Runner.fetchDriver;
+import static com.znsio.teswiz.runner.Runner.fetchEyes;
 
 public abstract class CalculatorScreen {
     private static final String SCREEN_NAME = CalculatorScreen.class.getSimpleName();

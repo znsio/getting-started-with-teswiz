@@ -1,12 +1,12 @@
 package com.znsio.sample.e2e.screen.android.calculator;
 
-import com.znsio.e2e.tools.Driver;
-import com.znsio.e2e.tools.Visual;
+import com.znsio.teswiz.runner.Driver;
+import com.znsio.teswiz.runner.Visual;
 import com.znsio.sample.e2e.screen.calculator.CalculatorScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
-import static com.znsio.e2e.tools.Wait.waitFor;
+import static com.znsio.teswiz.tools.Wait.waitFor;
 
 public class CalculatorScreenAndroid
         extends CalculatorScreen {

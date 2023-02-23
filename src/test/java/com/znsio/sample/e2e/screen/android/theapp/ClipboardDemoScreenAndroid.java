@@ -1,14 +1,14 @@
 package com.znsio.sample.e2e.screen.android.theapp;
 
 import com.context.TestExecutionContext;
-import com.znsio.e2e.runner.Runner;
-import com.znsio.e2e.tools.Driver;
-import com.znsio.e2e.tools.Visual;
+import com.znsio.teswiz.runner.Runner;
+import com.znsio.teswiz.runner.Driver;
+import com.znsio.teswiz.runner.Visual;
 import com.znsio.sample.e2e.screen.theapp.ClipboardDemoScreen;
 import io.appium.java_client.MobileElement;
 import org.apache.log4j.Logger;
 
-import static com.znsio.e2e.tools.Wait.waitFor;
+import static com.znsio.teswiz.tools.Wait.waitFor;
 
 public class ClipboardDemoScreenAndroid
         extends ClipboardDemoScreen {

@@ -2,9 +2,9 @@ package com.znsio.sample.e2e.screen.web.jiomeet;
 
 import com.context.TestExecutionContext;
 import com.epam.reportportal.service.ReportPortal;
-import com.znsio.e2e.runner.Runner;
-import com.znsio.e2e.tools.Driver;
-import com.znsio.e2e.tools.Visual;
+import com.znsio.teswiz.runner.Runner;
+import com.znsio.teswiz.runner.Driver;
+import com.znsio.teswiz.runner.Visual;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.jiomeet.InAMeetingScreen;
 import org.apache.log4j.Logger;

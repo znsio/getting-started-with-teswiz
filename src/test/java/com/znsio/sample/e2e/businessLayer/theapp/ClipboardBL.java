@@ -1,8 +1,8 @@
 package com.znsio.sample.e2e.businessLayer.theapp;
 
 import com.context.TestExecutionContext;
-import com.znsio.e2e.entities.Platform;
-import com.znsio.e2e.runner.Runner;
+import com.znsio.teswiz.entities.Platform;
+import com.znsio.teswiz.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.theapp.AppLaunchScreen;
 import com.znsio.sample.e2e.screen.theapp.ClipboardDemoScreen;

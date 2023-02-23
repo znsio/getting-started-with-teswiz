@@ -28,7 +28,7 @@ public abstract class CalculatorScreen {
             case android:
                 return new CalculatorScreenAndroid(driver, visually);
         }
-        throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
+        throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
     public abstract CalculatorScreen handlePopupIfPresent();

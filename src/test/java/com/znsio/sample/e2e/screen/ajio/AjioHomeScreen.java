@@ -31,7 +31,7 @@ public abstract class AjioHomeScreen {
             case web:
                 return new AjioHomeScreenWeb(driver, visually);
         }
-        throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
+        throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
     public abstract AjioSearchResultsScreen searchFor(String product);

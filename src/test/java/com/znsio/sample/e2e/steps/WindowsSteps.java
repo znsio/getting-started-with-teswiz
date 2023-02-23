@@ -13,21 +13,18 @@ import org.apache.log4j.Logger;
 public class WindowsSteps {
     private static final Logger LOGGER = Logger.getLogger(WindowsSteps.class.getName());
     private final TestExecutionContext context;
-    private final Drivers allDrivers;
 
     public WindowsSteps() {
         context = SessionContext.getTestExecutionContext(Thread.currentThread()
                                                                .getId());
         LOGGER.info("context: " + context.getTestName());
-        allDrivers = (Drivers) context.getTestState(SAMPLE_TEST_CONTEXT.ALL_DRIVERS);
-        LOGGER.info("allDrivers: " + (null == allDrivers));
     }
 
     @Given("I have launched Notepad application")
     public void iHaveLaunchedNotepadApplication() {
-        allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.platform, context);
-        LOGGER.info(System.out.printf("iHaveLaunchedNotepadApplication - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, Runner.platform));
-        new NotepadBL(SAMPLE_TEST_CONTEXT.ME, Runner.platform).verifyLaunched();
+        Drivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform(), context);
+        LOGGER.info(System.out.printf("iHaveLaunchedNotepadApplication - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()));
+        new NotepadBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).verifyLaunched();
     }
 
     @Then("I should be able to type {string}")

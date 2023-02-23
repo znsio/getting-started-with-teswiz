@@ -31,7 +31,7 @@ public abstract class EchoScreen {
             case web:
                 return new EchoScreenWeb(driver, visually);
         }
-        throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
+        throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
     public abstract EchoScreen echoMessage(String message);

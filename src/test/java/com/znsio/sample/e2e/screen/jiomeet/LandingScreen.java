@@ -31,7 +31,7 @@ public abstract class LandingScreen {
             case web:
                 return new LandingScreenWeb(driver, visually);
         }
-        throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
+        throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
     public abstract String getSignedInWelcomeMessage();

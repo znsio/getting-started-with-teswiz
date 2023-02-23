@@ -31,7 +31,7 @@ public abstract class SignInScreen {
             case web:
                 return new SignInScreenWeb(driver, visually);
         }
-        throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
+        throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
     public abstract LandingScreen signIn(String username, String password);

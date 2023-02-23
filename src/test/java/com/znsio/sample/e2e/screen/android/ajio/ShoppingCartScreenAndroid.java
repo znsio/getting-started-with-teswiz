@@ -15,8 +15,8 @@ public class ShoppingCartScreenAndroid extends ShoppingCartScreen {
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private static final By byProductBrandId = By.id("com.ril.ajio:id/brandInfo");
     private static final By byOrderPriceId = By.id("com.ril.ajio:id/fragment_cart_list_tv_price");
-    private static final By byApplyCouponId = By.id("com.ril.ajio:id/changeCoupon");
-    private static final By bySelectVoucherXpath = By.xpath("(//android.widget.TextView[@text='Apply coupon'])[1]");
+    private static final By bySelectVoucherId = By.id("com.ril.ajio:id/changeCoupon");
+    private static final By byApplyVoucherXpath = By.xpath("(//android.widget.TextView[@text='Apply coupon'])[1]");
     private static final By byCloseDialogId = By.id("com.ril.ajio:id/close_dialog");
 
 
@@ -43,20 +43,20 @@ public class ShoppingCartScreenAndroid extends ShoppingCartScreen {
     public double getOrderTotal() {
         String grandTotal = driver.findElement(byOrderPriceId).getText();
         LOGGER.info(String.format("getOrderTotal: Order total price '%s'", grandTotal));
-        return convertStringPriceToInteger(grandTotal);
+        return Double.parseDouble(grandTotal.substring(1).replace(",", ""));
     }
 
     @Override
     public ShoppingCartScreen selectVoucher() {
-        LOGGER.info("selectVoucher: Select apply coupon option");
-        driver.findElement(byApplyCouponId).click();
+        LOGGER.info("selectVoucher: Select apply voucher option");
+        driver.findElement(bySelectVoucherId).click();
         return this;
     }
 
     @Override
     public ShoppingCartScreen applyVoucher() {
         LOGGER.info("applyVoucher: Select voucher");
-        driver.findElement(bySelectVoucherXpath).click();
+        driver.findElement(byApplyVoucherXpath).click();
         closeDialog();
         return this;
     }
@@ -65,11 +65,5 @@ public class ShoppingCartScreenAndroid extends ShoppingCartScreen {
         LOGGER.info("closeDialog: Close dialog");
         driver.waitTillElementIsPresent(byCloseDialogId).click();
         return this;
-    }
-
-
-    private double convertStringPriceToInteger(String orderTotal) {
-        String price = orderTotal.substring(1).replace(",", "");
-        return Double.parseDouble(price);
     }
 }

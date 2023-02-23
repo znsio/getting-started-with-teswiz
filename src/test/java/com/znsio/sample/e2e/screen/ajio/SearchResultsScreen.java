@@ -4,6 +4,8 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.screen.android.ajio.HomeScreenAndroid;
+import com.znsio.sample.e2e.screen.android.ajio.SearchResultScreenAndroid;
 import com.znsio.sample.e2e.screen.web.ajio.SearchResultScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
@@ -27,6 +29,8 @@ public abstract class SearchResultsScreen {
                                           .getId());
 
         switch(platform) {
+            case android:
+                return new SearchResultScreenAndroid(driver, visually);
             case web:
                 return new SearchResultScreenWeb(driver, visually);
         }
@@ -38,7 +42,7 @@ public abstract class SearchResultsScreen {
     public abstract String getActualSearchString();
     public abstract SearchResultsScreen refineOnGender(String gender);
     public abstract SearchResultsScreen refineOnSize(String size);
-    public abstract List<String> getAppliedFilters();
+    public abstract int getAppliedFilters();
     public abstract SearchResultsScreen selectApply();
     public abstract SearchResultsScreen selectFirstProduct();
 }

@@ -40,13 +40,7 @@ public class ResultsBL {
         LOGGER.info(String.format("refineProducts: Refine product on gender filter '%s' and size filter '%s'", genderFilter, sizeFilter));
         SearchResultsScreen searchResultsScreen = SearchResultsScreen.get().refineOnGender(genderFilter );
         searchResultsScreen.refineOnSize(sizeFilter).selectApply();
-        List<String> appliedFilterNames = searchResultsScreen.getAppliedFilters();
-        for(int filter=0; filter<appliedFilterNames.  size(); filter++){
-            if(genderFilter.equals(appliedFilterNames.get(filter)))
-                softly.assertThat(genderFilter ).as("Product is not refined on the basis of gender").isEqualTo(appliedFilterNames.get(filter));
-            if(sizeFilter.equals(appliedFilterNames.get(filter)))
-                softly.assertThat(sizeFilter).as("Product is not refined on the basis of size").isEqualTo(appliedFilterNames.get(filter));
-        }
+        softly.assertThat(searchResultsScreen.getAppliedFilters() ).as("Product is not refined on the basis of gender").isGreaterThan(1);
         return this;
     }
 

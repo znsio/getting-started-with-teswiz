@@ -72,15 +72,10 @@ public class SearchResultScreenWeb extends SearchResultsScreen {
         return this;
     }
     @Override
-    public List<String> getAppliedFilters() {
+    public int getAppliedFilters() {
         LOGGER.info(String.format("getAppliedFilters: get all the applied filter"));
-        List<String> appliedFilters = new ArrayList<>();
         List<WebElement> elements = driver.findElements(byAppliedFiltersXpath);
-        for(int element=0; element<elements.size(); element++){
-            appliedFilters.add(elements.get(element).getText());
-            LOGGER.info(String.format("Applied filter: '%s'", elements.get(element).getText()));
-        }
-        return appliedFilters;
+        return elements.size();
     }
     @Override
     public SearchResultsScreen selectFirstProduct(){

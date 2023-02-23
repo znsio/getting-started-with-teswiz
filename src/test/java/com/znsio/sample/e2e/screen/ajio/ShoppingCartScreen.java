@@ -4,6 +4,8 @@ import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
+import com.znsio.sample.e2e.screen.android.ajio.HomeScreenAndroid;
+import com.znsio.sample.e2e.screen.android.ajio.ShoppingCartScreenAndroid;
 import com.znsio.sample.e2e.screen.web.ajio.ShoppingCartScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
@@ -25,6 +27,8 @@ public abstract class ShoppingCartScreen {
                 .getId());
 
         switch(platform) {
+            case android:
+                return new ShoppingCartScreenAndroid(driver, visually);
             case web:
                 return new ShoppingCartScreenWeb(driver, visually);
         }

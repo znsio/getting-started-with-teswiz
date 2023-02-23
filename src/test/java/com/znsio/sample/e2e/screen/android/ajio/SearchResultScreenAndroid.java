@@ -26,7 +26,6 @@ public class SearchResultScreenAndroid extends SearchResultsScreen {
     public SearchResultScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
-        visually.checkWindow(SCREEN_NAME, "Home page");
     }
     @Override
     public int getNumberOfProductsFound() {
@@ -48,6 +47,7 @@ public class SearchResultScreenAndroid extends SearchResultsScreen {
     @Override
     public SearchResultsScreen refineOnGender(String gender) {
         LOGGER.info(String.format("refineOnGender: Refine search on gender: '%s'", gender));
+        visually.checkWindow(SCREEN_NAME, "Filter Screen");
         closeGuideOptions();
         selectFilterOption();
         driver.findElement(By.xpath(String.format(byCategoryValueXpath, gender))).click();
@@ -56,7 +56,7 @@ public class SearchResultScreenAndroid extends SearchResultsScreen {
 
     @Override
     public SearchResultsScreen refineOnSize(String size) {
-        LOGGER.info(String.format("refineOnGender: Refine search on size: '%s'", size));
+        LOGGER.info(String.format("refineOnSize: Refine search on size: '%s'", size));
         selectSizeCategory();
         driver.findElement(By.xpath(String.format(byCategoryValueXpath, size))).click();
         return this;
@@ -78,8 +78,9 @@ public class SearchResultScreenAndroid extends SearchResultsScreen {
 
     @Override
     public SearchResultsScreen selectFirstProduct() {
-        LOGGER.info("getAppliedFilters: Select first product from the list");
-        driver.findElement(byFirstProductXpath).click();
+        LOGGER.info("selectFirstProduct: Select first product from the list");
+        visually.checkWindow(SCREEN_NAME, "Result page screen");
+        driver.waitTillElementIsVisible(byFirstProductXpath).click();
         return this;
     }
 

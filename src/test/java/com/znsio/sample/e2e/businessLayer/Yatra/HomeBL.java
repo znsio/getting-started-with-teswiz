@@ -42,7 +42,7 @@ public class HomeBL {
                 .selectTripType(tripType)
                 .selectSourceCity(sourceCity, "1")
                 .selectDestinationCity(destinationCity, "1");
-        assertThat(homeScreen.getTitle()).as("").isNotNull();
+        assertThat(homeScreen.getTitle()).as("Unable to see yatra home title").isNotNull();
         softAssertCities(sourceCity, destinationCity);
         return this;
     }

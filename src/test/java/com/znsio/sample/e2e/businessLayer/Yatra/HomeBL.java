@@ -38,30 +38,29 @@ public class HomeBL {
 
     public HomeBL addFirstTrip(String tripType, String sourceCity, String destinationCity) {
         LOGGER.info(String.format("addFirstTrip: Select '%s' trip with source city '%s' and destination city '%s' ", tripType, sourceCity, destinationCity));
+        context.addTestState(SAMPLE_TEST_CONTEXT.CITIES_CODE, "cityCode");
         HomeScreen homeScreen = HomeScreen.get().closeAdvertisement()
-                .selectTripType(tripType)
-                .selectSourceCity(sourceCity, "1")
-                .selectDestinationCity(destinationCity, "1");
+                .selectTripType(tripType).selectFirstSourceCity(sourceCity)
+                .selectFirstDestinationCity(destinationCity);
         assertThat(homeScreen.getTitle()).as("Unable to see yatra home title").isNotNull();
-        softAssertCities(sourceCity, destinationCity);
+        Map cityCode = Runner.getTestDataAsMap(context.getTestStateAsString(SAMPLE_TEST_CONTEXT.CITIES_CODE));
+        softly.assertThat(homeScreen.getFirstSourceCity())
+                .as("First source city found to be different").isEqualToIgnoringCase(String.valueOf(cityCode.get(sourceCity)));
+        softly.assertThat(homeScreen.getFirstDestinationCity())
+                .as("First destination city found to be different").isEqualToIgnoringCase(String.valueOf(cityCode.get(destinationCity)));
         return this;
     }
 
     public HomeBL addSecondTrip(String sourceCity, String destinationCity) {
         LOGGER.info(String.format("addSecondTrip: Select source city '%s' and destination city '%s' for second trip", sourceCity, destinationCity));
-        HomeScreen.get().selectSourceCity(sourceCity, "2")
-                .selectDestinationCity(destinationCity, "2").selectTravelDate();
-        softAssertCities(sourceCity, destinationCity);
-        return this;
-    }
-
-    private HomeBL softAssertCities(String sourceCity, String destinationCity) {
-        HomeScreen homeScreen = HomeScreen.get();
-        Map cityCode = Runner.getTestDataAsMap("cityCode");
-        softly.assertThat(homeScreen.getSourceCity("1"))
-                .as("First source city found to be different").isEqualToIgnoringCase(String.valueOf(cityCode.get(sourceCity)));
-        softly.assertThat(homeScreen.getDestinationCity("1"))
-                .as("First destination city found to be different").isEqualToIgnoringCase(String.valueOf(cityCode.get(destinationCity)));
+        HomeScreen homeScreen = HomeScreen.get().selectSecondSourceCity(sourceCity)
+                .selectSecondDestinationCity(destinationCity)
+                .selectTravelDate();
+        Map cityCode = Runner.getTestDataAsMap(context.getTestStateAsString(SAMPLE_TEST_CONTEXT.CITIES_CODE));
+        softly.assertThat(homeScreen.getSecondSourceCity())
+                .as("Second source city found to be different").isEqualToIgnoringCase(String.valueOf(cityCode.get(sourceCity)));
+        softly.assertThat(homeScreen.getSecondDestinationCity())
+                .as("Second destination city found to be different").isEqualToIgnoringCase(String.valueOf(cityCode.get(destinationCity)));
         return this;
     }
 
@@ -70,13 +69,13 @@ public class HomeBL {
         LOGGER.info(String.format("addPassenger: Add passenger with adult count: '%d', children count: '%d' and infant count: '%d'", adultCount, childrenCount, infantCount));
         HomeScreen homeScreen = HomeScreen.get().selectTravellerOption()
                 .addAdults(adultCount).addChildren(childrenCount).addInfants(infantCount);
-        assertThat(adultCount + childrenCount + infantCount).as("").isEqualTo(homeScreen.getTravelCount());
+        assertThat(adultCount + childrenCount + infantCount).as("The count of passenger is different than selected").isEqualTo(homeScreen.getTravelCount());
         return this;
     }
 
     public ResultBL selectCategory(String flightClass, String flightType) {
         LOGGER.info(String.format("selectCategory: select '%s' class and '%s' flight type", flightClass, flightType));
-        HomeScreen homeScreen = HomeScreen.get().selectClass(flightClass).selectNonStop().selectSearch();
+        HomeScreen.get().selectClass(flightClass).selectNonStop().selectSearch();
         return new ResultBL();
     }
 }

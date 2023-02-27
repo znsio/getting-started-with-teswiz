@@ -16,14 +16,9 @@ public class HomeWeb extends HomeScreen {
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
 
     private static final By byTripTypeCss = By.cssSelector("[title=\"Multicity\"]");
-    private static final String bySourceCityId = "BE_flight_origin_city_%s";
-    private static final String byArrivalCityId = "BE_flight_arrival_city%s";
-
     private static final By byTravelDateXpath = By.id("BE_flight_origin_date_2");
     private static final By bySelectDateXpath = By.xpath("(//td[not (contains(@class,'inActiveTD')) and contains(@id,'01')])[1]");
     private static final By byLogoCss = By.cssSelector("a.logo");
-    private static final String bySourceCityCodeXpath = "//label[@for = 'BE_flight_origin_city_%s']//p";
-    private static final String byDestinationCityCodeXpath = "//label[@for = 'BE_flight_arrival_city%s']//p";
     private static final By byPopUpCloseCss = By.cssSelector("[class=\"close\"]");
     private static final String byAdvertisementFrameId = "webklipper-publisher-widget-container-notification-frame";
     private static final String  bySelectCityXpath = "//p[contains(text(), '%s')]";
@@ -35,7 +30,14 @@ public class HomeWeb extends HomeScreen {
     private static final By byAddAdultXpath = By.xpath("//div[@data-flightagegroup='adult' and contains(@class, 'pax-limit')]//span[@class='ddSpinnerPlus']");
     private static final By byAddChildrenXpath = By.xpath("//div[@data-flightagegroup='child' and contains(@class, 'pax-limit')]//span[@class='ddSpinnerPlus']");
     private static final By byAddInfantXpath = By.xpath("//div[@data-flightagegroup='infant' and contains(@class, 'pax-limit')]//span[@class='ddSpinnerPlus']");
-
+    private static final By byFirstSourceCityId = By.id("BE_flight_origin_city_1");
+    private static final By byFirstDestinationCityId = By.id("BE_flight_arrival_city1");
+    private static final By bySecondSourceCityId = By.id("BE_flight_origin_city_2");
+    private static final By bySecondDestinationCityId = By.id("BE_flight_arrival_city2");
+    private static final By byFirstSourceCityCodeXpath = By.xpath("//label[@for = 'BE_flight_origin_city_1']//p");
+    private static final By byFirstDestinationCityCodeXpath = By.xpath("//label[@for = 'BE_flight_arrival_city1']//p");
+    private static final By bySecondSourceCityCodeXpath = By.xpath("//label[@for = 'BE_flight_origin_city_2']//p");
+    private static final By bySecondDestinationCityCodeXpath = By.xpath("//label[@for = 'BE_flight_arrival_city2']//p");
 
     public HomeWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -53,18 +55,35 @@ public class HomeWeb extends HomeScreen {
     }
 
     @Override
-    public HomeScreen selectSourceCity(String sourceCity, String tripNumber) {
-        LOGGER.info(String.format("selectSourceCity: Select source city: '%s'", sourceCity));
-        driver.waitForClickabilityOf(By.id(String.format(bySourceCityId, tripNumber))).click();
-        driver.waitTillElementIsPresent(By.xpath(String.format(bySelectCityXpath, sourceCity))).click();
-        return this;
+    public HomeScreen selectFirstSourceCity(String sourceCity) {
+        LOGGER.info(String.format("selectSourceCity: Select first source city: '%s'", sourceCity));
+        driver.waitForClickabilityOf(byFirstSourceCityId).click();
+        return selectCity(sourceCity);
     }
 
     @Override
-    public HomeScreen selectDestinationCity(String destinationCity, String tripNumber) {
-        LOGGER.info(String.format("selectDestinationCity: Select destination city: '%s'", destinationCity));
-        driver.waitForClickabilityOf(By.id(String.format(byArrivalCityId, tripNumber))).click();
-        driver.waitTillElementIsPresent(By.xpath(String.format(bySelectCityXpath, destinationCity))).click();
+    public HomeScreen selectFirstDestinationCity(String destinationCity) {
+        LOGGER.info(String.format("selectDestinationCity: Select first destination city: '%s'", destinationCity));
+        driver.waitForClickabilityOf(byFirstDestinationCityId).click();
+        return selectCity(destinationCity);
+    }
+
+    @Override
+    public HomeScreen selectSecondSourceCity(String sourceCity) {
+        LOGGER.info(String.format("selectSourceCity: Select second source city: '%s'", sourceCity));
+        driver.waitForClickabilityOf(bySecondSourceCityId).click();
+        return selectCity(sourceCity);
+    }
+
+    @Override
+    public HomeScreen selectSecondDestinationCity(String destinationCity) {
+        LOGGER.info(String.format("selectDestinationCity: Select first destination city: '%s'", destinationCity));
+        driver.waitForClickabilityOf(bySecondDestinationCityId).click();
+        return selectCity(destinationCity);
+    }
+
+    private HomeScreen selectCity(String cityName){
+        driver.waitTillElementIsPresent(By.xpath(String.format(bySelectCityXpath, cityName))).click();
         return this;
     }
 
@@ -77,15 +96,29 @@ public class HomeWeb extends HomeScreen {
     }
 
     @Override
-    public String getSourceCity(String tripNumber) {
-        String sourceCityCode = driver.findElement(By.xpath(String.format(bySourceCityCodeXpath, tripNumber))).getText();
+    public String getFirstSourceCity() {
+        String sourceCityCode = driver.findElement(byFirstSourceCityCodeXpath).getText();
         LOGGER.info(String.format("getSourceCity: Source city code: '%s'", sourceCityCode));
         return sourceCityCode;
     }
 
     @Override
-    public String getDestinationCity(String tripNumber) {
-        String destinationCityCode = driver.findElement(By.xpath(String.format(byDestinationCityCodeXpath, tripNumber))).getText();
+    public String getFirstDestinationCity() {
+        String destinationCityCode = driver.findElement(byFirstDestinationCityCodeXpath).getText();
+        LOGGER.info(String.format("getDestinationCity: Destination city code: '%s'", destinationCityCode));
+        return destinationCityCode;
+    }
+
+    @Override
+    public String getSecondSourceCity() {
+        String sourceCityCode = driver.findElement(bySecondSourceCityCodeXpath).getText();
+        LOGGER.info(String.format("getSourceCity: Source city code: '%s'", sourceCityCode));
+        return sourceCityCode;
+    }
+
+    @Override
+    public String getSecondDestinationCity() {
+        String destinationCityCode = driver.findElement(bySecondDestinationCityCodeXpath).getText();
         LOGGER.info(String.format("getDestinationCity: Destination city code: '%s'", destinationCityCode));
         return destinationCityCode;
     }

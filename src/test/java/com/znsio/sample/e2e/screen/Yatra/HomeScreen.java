@@ -32,11 +32,11 @@ public abstract class HomeScreen {
     }
 
     public abstract HomeScreen selectTripType(String tripType);
-    public abstract HomeScreen selectSourceCity(String sourceCity, String tripNumber);
-    public abstract HomeScreen selectDestinationCity(String destinationCity , String tripNumber);
+    public abstract HomeScreen selectFirstSourceCity(String sourceCity);
+    public abstract HomeScreen selectFirstDestinationCity(String destinationCity);
+    public abstract HomeScreen selectSecondSourceCity(String sourceCity);
+    public abstract HomeScreen selectSecondDestinationCity(String destinationCity);
     public abstract HomeScreen selectTravelDate();
-    public abstract String getSourceCity(String tripNumber);
-    public abstract String getDestinationCity(String tripNumber);
     public abstract String getTitle();
     public abstract HomeScreen closeAdvertisement();
     public abstract HomeScreen selectTravellerOption();
@@ -47,4 +47,8 @@ public abstract class HomeScreen {
     public abstract HomeScreen selectNonStop();
     public abstract HomeScreen selectSearch();
     public abstract int getTravelCount();
+    public abstract String getFirstSourceCity();
+    public abstract String getFirstDestinationCity();
+    public abstract String getSecondSourceCity();
+    public abstract String getSecondDestinationCity();
 }

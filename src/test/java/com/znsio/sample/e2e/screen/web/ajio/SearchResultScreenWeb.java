@@ -66,14 +66,14 @@ public class SearchResultScreenWeb extends SearchResultsScreen {
 
     @Override
     public SearchResultsScreen selectApply(){
-        LOGGER.info(String.format("selectApply: Apply selected filter"));
+        LOGGER.info("selectApply: Apply selected filter");
         driver.findElement(byApplyButtonXpath).click();
         visually.checkWindow(SCREEN_NAME, "Applied filter Screen");
         return this;
     }
     @Override
     public int getAppliedFilters() {
-        LOGGER.info(String.format("getAppliedFilters: get all the applied filter"));
+        LOGGER.info("getAppliedFilters: get all the applied filter");
         List<WebElement> elements = driver.findElements(byAppliedFiltersXpath);
         return elements.size();
     }

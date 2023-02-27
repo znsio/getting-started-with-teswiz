@@ -13,11 +13,11 @@ public class ShoppingCartScreenAndroid extends ShoppingCartScreen {
     private static final String SCREEN_NAME = ShoppingCartScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
-    private static final By byProductBrandId = By.id("com.ril.ajio:id/brandInfo");
-    private static final By byOrderPriceId = By.id("com.ril.ajio:id/fragment_cart_list_tv_price");
-    private static final By bySelectVoucherId = By.id("com.ril.ajio:id/changeCoupon");
+    private static final By byProductBrandId = By.id("brandInfo");
+    private static final By byOrderPriceId = By.id("fragment_cart_list_tv_price");
+    private static final By bySelectVoucherId = By.id("changeCoupon");
     private static final By byApplyVoucherXpath = By.xpath("(//android.widget.TextView[@text='Apply coupon'])[1]");
-    private static final By byCloseDialogId = By.id("com.ril.ajio:id/close_dialog");
+    private static final By byCloseDialogId = By.id("close_dialog");
 
 
     public ShoppingCartScreenAndroid(Driver driver, Visual visually) {
@@ -29,6 +29,7 @@ public class ShoppingCartScreenAndroid extends ShoppingCartScreen {
     public String getProductBrand() {
         closeGuide();
         String productBrand = driver.waitTillElementIsPresent(byProductBrandId).getText();
+        visually.checkWindow(SCREEN_NAME, "Shopping cart screen");
         LOGGER.info(String.format("getProductBrand: product brand in shopping cart: '%s'", productBrand));
         return productBrand;
     }

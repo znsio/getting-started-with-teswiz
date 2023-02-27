@@ -12,8 +12,6 @@ public class ProductDetailScreenWeb extends ProductDetailScreen {
     private final Visual visually;
     private static final String SCREEN_NAME = ProductDetailScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-
-    //improve xpath
     private static final By byProductSizeXpath = By.xpath("(//div[contains(@class,\"size-instock\")])[1]");
     private static final By byAddToBagClassName = By.className("ic-pdp-add-cart");
     private static  final By byProductBrandCSS = By.cssSelector("[class = brand-name]");
@@ -35,7 +33,7 @@ public class ProductDetailScreenWeb extends ProductDetailScreen {
     }
     @Override
     public ProductDetailScreen addToCart(){
-        LOGGER.info(String.format("addToCart: Add product"));
+        LOGGER.info("addToCart: Add product");
         driver.findElement(byAddToBagClassName).click();
         return this;
     }
@@ -49,7 +47,7 @@ public class ProductDetailScreenWeb extends ProductDetailScreen {
 
     @Override
     public ProductDetailScreen proceedToCart(){
-        LOGGER.info(String.format("proceedToCart: Navigate to the shopping cart"));
+        LOGGER.info("proceedToCart: Navigate to the shopping cart");
         driver.waitForClickabilityOf(byGoToCartClass).click();
         return this;
     }

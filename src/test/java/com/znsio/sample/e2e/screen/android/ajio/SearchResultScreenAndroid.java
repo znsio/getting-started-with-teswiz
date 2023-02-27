@@ -12,15 +12,15 @@ public class SearchResultScreenAndroid extends SearchResultsScreen {
     private static final String SCREEN_NAME = SearchResultScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
-    private static final By byNumberOfProductsFoundId = By.id("com.ril.ajio:id/toolbar_subtitle_tv");
-    private static final By bySearchStringId = By.id("com.ril.ajio:id/toolbar_title_tv");
+    private static final By byNumberOfProductsFoundId = By.id("toolbar_subtitle_tv");
+    private static final By bySearchStringId = By.id("toolbar_title_tv");
     private static final String byCategoryValueXpath = "//android.widget.TextView[contains(@text, '%s')]";
     private static final By byRefineSizeXpath = By.xpath("//android.widget.TextView[contains(@text, 'Size & Fit')]");
-    private static final By byApplyFilterId = By.id("com.ril.ajio:id/filter_view_apply_filter_tv");
-    private static final By byAppliedFilterCountId = By.id("com.ril.ajio:id/plp_filter_subheading_tv");
+    private static final By byApplyFilterId = By.id("filter_view_apply_filter_tv");
+    private static final By byAppliedFilterCountId = By.id("plp_filter_subheading_tv");
     private static final By byFirstProductXpath = By.xpath("(//android.widget.ImageView[@resource-id = 'com.ril.ajio:id/plp_row_product_iv'])[1]");
-    private static final By byFilterOptionId = By.id("com.ril.ajio:id/plp_filter_view");
-    private static final By byDismissGuideId = By.id("com.ril.ajio:id/footer_button_2");
+    private static final By byFilterOptionId = By.id("plp_filter_view");
+    private static final By byDismissGuideId = By.id("footer_button_2");
 
 
     public SearchResultScreenAndroid(Driver driver, Visual visually) {
@@ -31,6 +31,7 @@ public class SearchResultScreenAndroid extends SearchResultsScreen {
     public int getNumberOfProductsFound() {
         String numberOfProducts = driver.waitTillElementIsPresent(byNumberOfProductsFoundId)
                 .getText();
+        visually.checkWindow(SCREEN_NAME, "Product result page");
         LOGGER.info(String.format("getNumberOfProductsFound: Found '%s'", numberOfProducts));
         return Integer.parseInt(numberOfProducts.split(" ")[0]);
     }

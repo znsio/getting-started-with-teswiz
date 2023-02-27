@@ -4,7 +4,7 @@ import com.context.TestExecutionContext;
 import com.znsio.e2e.entities.Platform;
 import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
+import com.znsio.sample.e2e.screen.ajio.HomeScreen;
 import com.znsio.sample.e2e.screen.ajio.SearchResultsScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
@@ -40,7 +40,7 @@ public class AjioSearchBL {
     public AjioSearchBL searchFor(String product) {
         LOGGER.info(String.format("searchFor: search for product '%s': ", product));
         context.addTestState(SAMPLE_TEST_CONTEXT.PRODUCT_BRAND, product);
-        SearchResultsScreen ajioSearchResultsScreen = AjioHomeScreen.get()
+        SearchResultsScreen ajioSearchResultsScreen = HomeScreen.get()
                                                                         .searchFor(product);
         String actualSearchWasFor = ajioSearchResultsScreen.getActualSearchString();
         softly.assertThat(actualSearchWasFor).as("Search was for a different value").isEqualToIgnoringCase(product);

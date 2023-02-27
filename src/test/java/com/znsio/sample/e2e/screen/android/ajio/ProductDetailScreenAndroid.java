@@ -13,10 +13,10 @@ public class ProductDetailScreenAndroid extends ProductDetailScreen {
     private static final String SCREEN_NAME = ProductDetailScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
-    private static final By byProductBrandId = By.id("com.ril.ajio:id/brand_name");
-    private static final By byAddToCartId = By.id("com.ril.ajio:id/add_to_cart_tv");
-    private static final By byProductSizeXpath = By.xpath("//android.widget.TextView[@resource-id = 'com.ril.ajio:id/row_pdp_fixed_size_tv' and @text = '8']");
-    private static final By byProceedToCartId = By.id("com.ril.ajio:id/menu_cart_iv");
+    private static final By byProductBrandId = By.id("brand_name");
+    private static final By byAddToCartId = By.id("add_to_cart_tv");
+    private static final By byProductSizeXpath = By.xpath("//android.widget.TextView[@text = '8']");
+    private static final By byProceedToCartId = By.id("menu_cart_iv");
 
 
     public ProductDetailScreenAndroid(Driver driver, Visual visually) {
@@ -27,6 +27,7 @@ public class ProductDetailScreenAndroid extends ProductDetailScreen {
     @Override
     public ProductDetailScreen selectProductSize() {
         LOGGER.info("selectProductSize: Select size for the product");
+        visually.checkWindow(SCREEN_NAME, "Product detail page");
         removeGuide();
         addToCart();
         driver.waitTillElementIsVisible(byProductSizeXpath).click();

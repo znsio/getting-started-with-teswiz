@@ -35,6 +35,7 @@ public class ShoppingCartScreenWeb extends ShoppingCartScreen {
 
     @Override
     public double getOrderTotal() {
+        LOGGER.info("Element is present on the screen and the total order value takes time to update after applying coupon code");
         waitFor(4);
         String orderTotal = driver.waitTillElementIsPresent(byOrderTotalXpath).getText();
         LOGGER.info(String.format("getOrderTotal: Order total: '%s'", orderTotal));
@@ -43,7 +44,7 @@ public class ShoppingCartScreenWeb extends ShoppingCartScreen {
 
     @Override
     public ShoppingCartScreen selectVoucher() {
-        LOGGER.info(String.format("selectVoucher: Select first voucher"));
+        LOGGER.info("selectVoucher: Select first voucher");
         WebElement element = driver.waitTillElementIsPresent(byFirstVoucherXpath);
         LOGGER.info(String.format("Voucher name: '%s'", element.getAttribute("value")));
         element.click();
@@ -52,7 +53,7 @@ public class ShoppingCartScreenWeb extends ShoppingCartScreen {
 
     @Override
     public ShoppingCartScreen applyVoucher() {
-        LOGGER.info(String.format("applyVoucher: select apply voucher option"));
+        LOGGER.info("applyVoucher: select apply voucher option");
         driver.waitForClickabilityOf(byApplyOptionClassName).click();
         return this;
     }

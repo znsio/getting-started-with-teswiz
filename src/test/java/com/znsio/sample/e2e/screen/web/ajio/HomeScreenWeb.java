@@ -2,23 +2,23 @@ package com.znsio.sample.e2e.screen.web.ajio;
 
 import com.znsio.e2e.tools.Driver;
 import com.znsio.e2e.tools.Visual;
-import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
+import com.znsio.sample.e2e.screen.ajio.HomeScreen;
 import com.znsio.sample.e2e.screen.ajio.SearchResultsScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class AjioHomeScreenWeb
-        extends AjioHomeScreen {
+public class HomeScreenWeb
+        extends HomeScreen {
     private final Driver driver;
     private final Visual visually;
-    private static final String SCREEN_NAME = AjioHomeScreenWeb.class.getSimpleName();
+    private static final String SCREEN_NAME = HomeScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private static final By bySearchBoxXpath = By.xpath("//input[@name='searchVal']");
     private static final By bySearchIconClassName = By.className("ic-search");
 
-    public AjioHomeScreenWeb(Driver driver, Visual visually) {
+    public HomeScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
         visually.checkWindow(SCREEN_NAME, "Home page");

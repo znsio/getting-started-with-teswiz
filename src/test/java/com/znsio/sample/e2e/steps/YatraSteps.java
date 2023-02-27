@@ -25,15 +25,17 @@ public class YatraSteps {
         allDrivers = (Drivers) context.getTestState(SAMPLE_TEST_CONTEXT.ALL_DRIVERS);
         LOGGER.info("allDrivers: " + (null == allDrivers));
     }
-    @Given("I, as guest user, search for a {string} trip with first flight from {string} with destination {string}")
-    public void iAsGuestUserSearchForAFightFromSourceAndDestination(String tripType, String sourceCity, String destinationCity) {
+
+    @Given("I, as guest user, search for a {string} trip with source {string} and destination {string} for first trip")
+    public void iAsGuestUserSearchForATripWithSourceAndDestinationForFirstTrip(String tripType, String sourceCity, String destinationCity) {
         LOGGER.info(String.format("iAsGuestUserSearchForAFightFromSourceAndDestination - Persona:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, Runner.platform));
         allDrivers.createDriverFor(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform, context);
         new HomeBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.platform).addFirstTrip(tripType, sourceCity, destinationCity);
+
     }
 
-    @And("I select flight from {string} with destination {string} for the second trip")
-    public void iSelectSourceAndDestinationForTheRoundTrip(String sourceCity, String destinationCity) {
+    @And("I select flight from source {string} and destination {string} for second trip")
+    public void iSelectFlightFromSourceAndDestinationForSecondTrip(String sourceCity, String destinationCity) {
         LOGGER.info(String.format("iSelectSourceAndDestinationForTheRoundTrip - select source city '%s' and destination city '%s' for second trip", sourceCity, destinationCity));
         new HomeBL().addSecondTrip(sourceCity, destinationCity);
     }

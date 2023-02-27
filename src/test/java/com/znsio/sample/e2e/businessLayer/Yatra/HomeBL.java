@@ -8,6 +8,8 @@ import com.znsio.sample.e2e.screen.Yatra.HomeScreen;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HomeBL {
@@ -41,24 +43,28 @@ public class HomeBL {
                 .selectSourceCity(sourceCity, "1")
                 .selectDestinationCity(destinationCity, "1");
         assertThat(homeScreen.getTitle()).as("").isNotNull();
-//        softly.assertThat(yatraHomeScreen.getSourceCity("1"))
-//                .as("First source city found to be different").isEqualToIgnoringCase(sourceCity);
-//        softly.assertThat(yatraHomeScreen.getDestinationCity("1"))
-//                .as("First destination city found to be different").isEqualToIgnoringCase(destinationCity);
+        softAssertCities(sourceCity, destinationCity);
         return this;
     }
 
     public HomeBL addSecondTrip(String sourceCity, String destinationCity) {
         LOGGER.info(String.format("addSecondTrip: Select source city '%s' and destination city '%s' for second trip", sourceCity, destinationCity));
-        HomeScreen homeScreen = HomeScreen.get()
-                .selectSourceCity(sourceCity, "2")
+        HomeScreen.get().selectSourceCity(sourceCity, "2")
                 .selectDestinationCity(destinationCity, "2").selectTravelDate();
-//        softly.assertThat(yatraHomeScreen.getSourceCity("2"))
-//                .as("First source city found to be different").isEqualToIgnoringCase(sourceCity);
-//        softly.assertThat(yatraHomeScreen.getDestinationCity("2"))
-//                .as("First destination city found to be different").isEqualToIgnoringCase(destinationCity);
+        softAssertCities(sourceCity, destinationCity);
         return this;
     }
+
+    private HomeBL softAssertCities(String sourceCity, String destinationCity) {
+        HomeScreen homeScreen = HomeScreen.get();
+        Map cityCode = Runner.getTestDataAsMap("cityCode");
+        softly.assertThat(homeScreen.getSourceCity("1"))
+                .as("First source city found to be different").isEqualToIgnoringCase(String.valueOf(cityCode.get(sourceCity)));
+        softly.assertThat(homeScreen.getDestinationCity("1"))
+                .as("First destination city found to be different").isEqualToIgnoringCase(String.valueOf(cityCode.get(destinationCity)));
+        return this;
+    }
+
 
     public HomeBL addPassengers(int adultCount, int childrenCount, int infantCount) {
         LOGGER.info(String.format("addPassenger: Add passenger with adult count: '%d', children count: '%d' and infant count: '%d'", adultCount, childrenCount, infantCount));

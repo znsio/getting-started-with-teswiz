@@ -38,12 +38,11 @@ public class HomeBL {
 
     public HomeBL addFirstTrip(String tripType, String sourceCity, String destinationCity) {
         LOGGER.info(String.format("addFirstTrip: Select '%s' trip with source city '%s' and destination city '%s' ", tripType, sourceCity, destinationCity));
-        context.addTestState(SAMPLE_TEST_CONTEXT.CITIES_CODE, "cityCode");
         HomeScreen homeScreen = HomeScreen.get().closeAdvertisement()
                 .selectTripType(tripType).selectFirstSourceCity(sourceCity)
                 .selectFirstDestinationCity(destinationCity);
         assertThat(homeScreen.getTitle()).as("Unable to see yatra home title").isNotNull();
-        Map cityCode = Runner.getTestDataAsMap(context.getTestStateAsString(SAMPLE_TEST_CONTEXT.CITIES_CODE));
+        Map cityCode = Runner.getTestDataAsMap(SAMPLE_TEST_CONTEXT.CITIES_CODE);
         softly.assertThat(homeScreen.getFirstSourceCity())
                 .as("First source city found to be different").isEqualToIgnoringCase(String.valueOf(cityCode.get(sourceCity)));
         softly.assertThat(homeScreen.getFirstDestinationCity())
@@ -56,7 +55,7 @@ public class HomeBL {
         HomeScreen homeScreen = HomeScreen.get().selectSecondSourceCity(sourceCity)
                 .selectSecondDestinationCity(destinationCity)
                 .selectTravelDate();
-        Map cityCode = Runner.getTestDataAsMap(context.getTestStateAsString(SAMPLE_TEST_CONTEXT.CITIES_CODE));
+        Map cityCode = Runner.getTestDataAsMap(SAMPLE_TEST_CONTEXT.CITIES_CODE);
         softly.assertThat(homeScreen.getSecondSourceCity())
                 .as("Second source city found to be different").isEqualToIgnoringCase(String.valueOf(cityCode.get(sourceCity)));
         softly.assertThat(homeScreen.getSecondDestinationCity())

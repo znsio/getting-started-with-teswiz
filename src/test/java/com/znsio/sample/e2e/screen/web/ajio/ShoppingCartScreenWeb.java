@@ -35,7 +35,7 @@ public class ShoppingCartScreenWeb extends ShoppingCartScreen {
 
     @Override
     public double getOrderTotal() {
-        LOGGER.info("Element is present on the screen and the total order value takes time to update after applying coupon code");
+//        Element is present on the screen and the total order value takes time to update after applying coupon code
         waitFor(4);
         String orderTotal = driver.waitTillElementIsPresent(byOrderTotalXpath).getText();
         LOGGER.info(String.format("getOrderTotal: Order total: '%s'", orderTotal));

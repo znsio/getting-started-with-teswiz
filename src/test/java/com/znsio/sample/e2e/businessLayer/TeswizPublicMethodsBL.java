@@ -1,17 +1,12 @@
 package com.znsio.sample.e2e.businessLayer;
 
 import com.context.TestExecutionContext;
-import com.znsio.sample.e2e.businessLayer.ajio.AjioSearchBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.teswiz.entities.Platform;
-import com.znsio.teswiz.entities.TEST_CONTEXT;
-import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
-
-import java.util.Map;
 
 public class TeswizPublicMethodsBL {
     private static final Logger LOGGER = Logger.getLogger(TeswizPublicMethodsBL.class.getName());
@@ -21,8 +16,7 @@ public class TeswizPublicMethodsBL {
     private final Platform currentPlatform;
 
     public TeswizPublicMethodsBL(String userPersona, Platform forPlatform) {
-        long threadId = Thread.currentThread()
-                              .getId();
+        long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
         this.currentUserPersona = userPersona;
@@ -31,8 +25,7 @@ public class TeswizPublicMethodsBL {
     }
 
     public TeswizPublicMethodsBL() {
-        long threadId = Thread.currentThread()
-                              .getId();
+        long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
         this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
@@ -40,9 +33,7 @@ public class TeswizPublicMethodsBL {
     }
 
     private void teswizPublicMethodsCheck() {
-        //        Runner.closeAllDrivers();
         long threadId = Thread.currentThread().getId();
-        Runner.fetchDeviceName(currentUserPersona);
         Runner.getPlatform();
         Runner.getApplitoolsConfiguration();
         Runner.getCloudKey();
@@ -72,12 +63,14 @@ public class TeswizPublicMethodsBL {
 
         Drivers.setDriverFor(currentUserPersona, currentPlatform, context);
         Drivers.createDriverFor(currentUserPersona, currentPlatform, context);
-        Drivers.createDriverFor(currentUserPersona, "appName", "browserName", currentPlatform, context);
+        Drivers.createDriverFor(currentUserPersona, "appName", "browserName", currentPlatform,
+                                context);
         Drivers.createDriverFor(currentUserPersona, "appNane", currentPlatform, context);
         Drivers.getDriverForUser(currentUserPersona);
         Drivers.assignNewPersonaToExistingDriver(currentUserPersona, "newPersona", context);
         Drivers.getDriverForCurrentUser(threadId);
         Drivers.getVisualDriverForCurrentUser(threadId);
+        Drivers.getNameOfDeviceUsedByUser(currentUserPersona);
 
     }
 }

@@ -71,6 +71,7 @@ public class TeswizPublicMethodsBL {
         Drivers.getDriverForCurrentUser(threadId);
         Drivers.getVisualDriverForCurrentUser(threadId);
         Drivers.getNameOfDeviceUsedByUser(currentUserPersona);
-
+        Drivers.isDriverAssignedForUser(currentUserPersona);
+        Drivers.getAvailableUserPersonas();
     }
 }

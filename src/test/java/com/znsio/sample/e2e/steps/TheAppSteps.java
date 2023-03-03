@@ -54,7 +54,7 @@ public class TheAppSteps {
 
     @When("{string} login with invalid credentials - {string}, {string}")
     public void loginWithInvalidCredentials(String userPersona, String username, String password) {
-        Platform onPlatform = Drivers.getPlatformForUser(userPersona);
+        Platform onPlatform = Runner.getPlatformForUser(userPersona);
         LOGGER.info(System.out.printf("LoginWithInvalidCredentials - Persona:'%s', Username: '%s', Password:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, username, password,
                                       onPlatform.name()));
         new AppBL(userPersona, onPlatform).provideInvalidDetailsForSignup(username, password);
@@ -62,7 +62,7 @@ public class TheAppSteps {
 
     @When("{string} login again with invalid credentials - {string}, {string}")
     public void loginAgainWithInvalidCredentials(String userPersona, String username, String password) {
-        Platform onPlatform = Drivers.getPlatformForUser(userPersona);
+        Platform onPlatform = Runner.getPlatformForUser(userPersona);
         LOGGER.info(System.out.printf("LoginWithInvalidCredentials - Persona:'%s', Username: '%s', Password:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, username, password,
                                       onPlatform.name()));
         new AppBL(userPersona, onPlatform).loginAgain(username, password);

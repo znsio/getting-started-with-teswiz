@@ -1,11 +1,11 @@
 package com.znsio.sample.e2e.screen.web.theapp;
 
-import com.znsio.teswiz.runner.Driver;
-import com.znsio.teswiz.runner.Visual;
 import com.znsio.sample.e2e.screen.theapp.AppLaunchScreen;
 import com.znsio.sample.e2e.screen.theapp.ClipboardDemoScreen;
 import com.znsio.sample.e2e.screen.theapp.EchoScreen;
 import com.znsio.sample.e2e.screen.theapp.LoginScreen;
+import com.znsio.teswiz.runner.Driver;
+import com.znsio.teswiz.runner.Visual;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
@@ -26,8 +26,7 @@ public class AppLaunchScreenWeb
 
     @Override
     public LoginScreen selectLogin() {
-        driver.findElement(byLoginFormLinkText)
-              .click();
+        driver.findElement(byLoginFormLinkText).click();
         return LoginScreen.get();
     }
 

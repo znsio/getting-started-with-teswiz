@@ -1,12 +1,12 @@
 package com.znsio.sample.e2e.screen.theapp;
 
-import com.znsio.teswiz.entities.Platform;
-import com.znsio.teswiz.runner.Drivers;
-import com.znsio.teswiz.runner.Runner;
-import com.znsio.teswiz.runner.Driver;
-import com.znsio.teswiz.runner.Visual;
 import com.znsio.sample.e2e.screen.android.theapp.LoginScreenAndroid;
 import com.znsio.sample.e2e.screen.web.theapp.LoginScreenWeb;
+import com.znsio.teswiz.entities.Platform;
+import com.znsio.teswiz.runner.Driver;
+import com.znsio.teswiz.runner.Drivers;
+import com.znsio.teswiz.runner.Runner;
+import com.znsio.teswiz.runner.Visual;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
@@ -15,13 +15,10 @@ public abstract class LoginScreen {
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     public static LoginScreen get() {
-        Driver driver = Drivers.getDriverForCurrentUser(Thread.currentThread()
-                                                              .getId());
-        Platform platform = Runner.fetchPlatform(Thread.currentThread()
-                                                       .getId());
+        Driver driver = Drivers.getDriverForCurrentUser(Thread.currentThread().getId());
+        Platform platform = Runner.fetchPlatform(Thread.currentThread().getId());
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
-        Visual visually = Drivers.getVisualDriverForCurrentUser(Thread.currentThread()
-                                          .getId());
+        Visual visually = Drivers.getVisualDriverForCurrentUser(Thread.currentThread().getId());
 
         switch(platform) {
             case android:
@@ -29,7 +26,8 @@ public abstract class LoginScreen {
             case web:
                 return new LoginScreenWeb(driver, visually);
         }
-        throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
+        throw new NotImplementedException(
+                SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
     public abstract LoginScreen enterLoginDetails(String username, String password);

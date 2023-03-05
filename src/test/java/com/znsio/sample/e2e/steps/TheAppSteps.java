@@ -2,13 +2,13 @@ package com.znsio.sample.e2e.steps;
 
 import com.context.SessionContext;
 import com.context.TestExecutionContext;
-import com.znsio.teswiz.entities.Platform;
-import com.znsio.teswiz.runner.Runner;
-import com.znsio.teswiz.runner.Drivers;
 import com.znsio.sample.e2e.businessLayer.theapp.AppBL;
 import com.znsio.sample.e2e.businessLayer.theapp.ClipboardBL;
 import com.znsio.sample.e2e.businessLayer.theapp.EchoBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.teswiz.entities.Platform;
+import com.znsio.teswiz.runner.Drivers;
+import com.znsio.teswiz.runner.Runner;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -19,18 +19,20 @@ public class TheAppSteps {
     private final TestExecutionContext context;
 
     public TheAppSteps() {
-        context = SessionContext.getTestExecutionContext(Thread.currentThread()
-                                                               .getId());
+        context = SessionContext.getTestExecutionContext(Thread.currentThread().getId());
         LOGGER.info("context: " + context.getTestName());
     }
 
     @When("I login with invalid credentials - {string}, {string}")
     public void iLoginWithInvalidCredentials(String username, String password) {
-        LOGGER.info(System.out.printf("iLoginWithInvalidCredentials - Persona:'%s', Username: '%s', Password:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, username, password,
-                                      Runner.getPlatform()));
+        LOGGER.info(System.out.printf(
+                "iLoginWithInvalidCredentials - Persona:'%s', Username: '%s', Password:'%s', " +
+                "Platform: '%s'",
+                SAMPLE_TEST_CONTEXT.ME, username, password, Runner.getPlatform()));
         Drivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform(), context);
         context.addTestState(SAMPLE_TEST_CONTEXT.ME, username);
-        new AppBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).provideInvalidDetailsForSignup(username, password);
+        new AppBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).provideInvalidDetailsForSignup(
+                username, password);
     }
 
     @When("I go back")
@@ -39,32 +41,44 @@ public class TheAppSteps {
     }
 
     @Given("{string} login with invalid credentials - {string}, {string} on {string}")
-    public void loginWithInvalidCredentialsOn(String userPersona, String username, String password, String onPlatform) {
-        LOGGER.info(System.out.printf("LoginWithInvalidCredentials - Persona:'%s', Username: '%s', Password:'%s', Platform: '%s'", userPersona, username, password, onPlatform));
+    public void loginWithInvalidCredentialsOn(String userPersona, String username, String password,
+                                              String onPlatform) {
+        LOGGER.info(System.out.printf(
+                "LoginWithInvalidCredentials - Persona:'%s', Username: '%s', Password:'%s', " +
+                "Platform: '%s'",
+                userPersona, username, password, onPlatform));
         context.addTestState(userPersona, username);
         Drivers.createDriverFor(userPersona, Platform.valueOf(onPlatform), context);
-        new AppBL(userPersona, Platform.valueOf(onPlatform)).provideInvalidDetailsForSignup(username, password);
+        new AppBL(userPersona, Platform.valueOf(onPlatform)).provideInvalidDetailsForSignup(
+                username, password);
     }
 
     @Then("I try to login again with invalid credentials - {string}, {string}")
     public void iTryToLoginAgainWithInvalidCredentials(String username, String password) {
-        LOGGER.info(System.out.printf("iTryToLoginAgainWithInvalidCredentials - Username: '%s', Password:'%s'", username, password));
+        LOGGER.info(System.out.printf(
+                "iTryToLoginAgainWithInvalidCredentials - Username: '%s', Password:'%s'", username,
+                password));
         new AppBL().loginAgain(username, password);
     }
 
     @When("{string} login with invalid credentials - {string}, {string}")
     public void loginWithInvalidCredentials(String userPersona, String username, String password) {
         Platform onPlatform = Runner.getPlatformForUser(userPersona);
-        LOGGER.info(System.out.printf("LoginWithInvalidCredentials - Persona:'%s', Username: '%s', Password:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, username, password,
-                                      onPlatform.name()));
+        LOGGER.info(System.out.printf(
+                "LoginWithInvalidCredentials - Persona:'%s', Username: '%s', Password:'%s', " +
+                "Platform: '%s'",
+                SAMPLE_TEST_CONTEXT.ME, username, password, onPlatform.name()));
         new AppBL(userPersona, onPlatform).provideInvalidDetailsForSignup(username, password);
     }
 
     @When("{string} login again with invalid credentials - {string}, {string}")
-    public void loginAgainWithInvalidCredentials(String userPersona, String username, String password) {
+    public void loginAgainWithInvalidCredentials(String userPersona, String username,
+                                                 String password) {
         Platform onPlatform = Runner.getPlatformForUser(userPersona);
-        LOGGER.info(System.out.printf("LoginWithInvalidCredentials - Persona:'%s', Username: '%s', Password:'%s', Platform: '%s'", SAMPLE_TEST_CONTEXT.ME, username, password,
-                                      onPlatform.name()));
+        LOGGER.info(System.out.printf(
+                "LoginWithInvalidCredentials - Persona:'%s', Username: '%s', Password:'%s', " +
+                "Platform: '%s'",
+                SAMPLE_TEST_CONTEXT.ME, username, password, onPlatform.name()));
         new AppBL(userPersona, onPlatform).loginAgain(username, password);
     }
 
@@ -95,6 +109,7 @@ public class TheAppSteps {
     public void iSaveInTheClipboard(String content) {
         LOGGER.info(System.out.printf("iStartTheApp - Persona:'%s'", SAMPLE_TEST_CONTEXT.ME));
         Drivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform(), context);
-        new ClipboardBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).saveContentInClipboard(content);
+        new ClipboardBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).saveContentInClipboard(
+                content);
     }
 }

@@ -1,11 +1,11 @@
 package com.znsio.sample.e2e.businessLayer.ajio;
 
 import com.context.TestExecutionContext;
-import com.znsio.teswiz.entities.Platform;
-import com.znsio.teswiz.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
+import com.znsio.teswiz.entities.Platform;
+import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -19,8 +19,7 @@ public class AjioSearchBL {
     private final Platform currentPlatform;
 
     public AjioSearchBL(String userPersona, Platform forPlatform) {
-        long threadId = Thread.currentThread()
-                              .getId();
+        long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
         this.currentUserPersona = userPersona;
@@ -29,8 +28,7 @@ public class AjioSearchBL {
     }
 
     public AjioSearchBL() {
-        long threadId = Thread.currentThread()
-                              .getId();
+        long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
         this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
@@ -38,13 +36,12 @@ public class AjioSearchBL {
     }
 
     public AjioSearchBL searchFor(String product) {
-        AjioSearchResultsScreen ajioSearchResultsScreen = AjioHomeScreen.get()
-                                                                        .searchFor(product);
+        AjioSearchResultsScreen ajioSearchResultsScreen = AjioHomeScreen.get().searchFor(product);
         String actualSearchWasFor = ajioSearchResultsScreen.getActualSearchString();
-        softly.assertThat(actualSearchWasFor).as("Search was for a different value").isEqualTo(product);
+        softly.assertThat(actualSearchWasFor).as("Search was for a different value")
+              .isEqualTo(product);
 
-        int numberOfProductsFound = ajioSearchResultsScreen
-                                                  .getNumberOfProductsFound();
+        int numberOfProductsFound = ajioSearchResultsScreen.getNumberOfProductsFound();
         assertThat(numberOfProductsFound).as("Insufficient search results retrieved")
                                          .isGreaterThan(100);
         return this;

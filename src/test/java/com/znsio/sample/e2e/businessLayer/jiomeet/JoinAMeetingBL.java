@@ -1,10 +1,10 @@
 package com.znsio.sample.e2e.businessLayer.jiomeet;
 
 import com.context.TestExecutionContext;
-import com.znsio.teswiz.entities.Platform;
-import com.znsio.teswiz.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.jiomeet.SignInScreen;
+import com.znsio.teswiz.entities.Platform;
+import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -18,8 +18,7 @@ public class JoinAMeetingBL {
     private final Platform currentPlatform;
 
     public JoinAMeetingBL(String userPersona, Platform forPlatform) {
-        long threadId = Thread.currentThread()
-                              .getId();
+        long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
         this.currentUserPersona = userPersona;
@@ -28,8 +27,7 @@ public class JoinAMeetingBL {
     }
 
     public JoinAMeetingBL() {
-        long threadId = Thread.currentThread()
-                              .getId();
+        long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
         this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
@@ -37,8 +35,8 @@ public class JoinAMeetingBL {
     }
 
     public InAMeetingBL joinMeeting(String meetingId, String meetingPassword) {
-        boolean hasMeetingStarted = SignInScreen.get()
-                                                .joinAMeeting(meetingId, meetingPassword, currentUserPersona)
+        boolean hasMeetingStarted = SignInScreen.get().joinAMeeting(meetingId, meetingPassword,
+                                                                    currentUserPersona)
                                                 .isMeetingStarted();
         assertThat(hasMeetingStarted).as(currentUserPersona + " not yet joined the meeting")
                                      .isTrue();

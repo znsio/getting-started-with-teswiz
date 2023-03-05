@@ -1,11 +1,11 @@
 package com.znsio.sample.e2e.screen.web.jiomeet;
 
 import com.applitools.eyes.selenium.fluent.Target;
-import com.znsio.e2e.tools.Driver;
-import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.jiomeet.InAMeetingScreen;
 import com.znsio.sample.e2e.screen.jiomeet.LandingScreen;
 import com.znsio.sample.e2e.screen.jiomeet.SignInScreen;
+import com.znsio.teswiz.runner.Driver;
+import com.znsio.teswiz.runner.Visual;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -13,11 +13,11 @@ import org.openqa.selenium.WebElement;
 
 public class SignInScreenWeb
         extends SignInScreen {
-    private final Driver driver;
-    private final Visual visually;
     private static final String SCREEN_NAME = SignInScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
+    private final Driver driver;
+    private final Visual visually;
     private final By byEnterMeetingId = By.id("meetingId");
     private final By byJoinMeetingButtonId = By.id("headerJoinMeetingButton");
     private final By byEnterPasswordId = By.id("pin");
@@ -36,16 +36,14 @@ public class SignInScreenWeb
 
     @Override
     public LandingScreen signIn(String username, String password) {
-        driver.waitTillElementIsPresent(bySignInXpath)
-              .click();
+        driver.waitTillElementIsPresent(bySignInXpath).click();
 
         visually.checkWindow(SCREEN_NAME, "Start signin");
         WebElement usernameElement = driver.waitTillElementIsPresent(byUsernameId);
         usernameElement.clear();
         usernameElement.sendKeys(username);
 
-        driver.waitTillElementIsPresent(byProceedButtonId)
-              .click();
+        driver.waitTillElementIsPresent(byProceedButtonId).click();
 
         WebElement passwordElement = driver.waitTillElementIsPresent(byPasswordId);
         passwordElement.clear();
@@ -53,14 +51,14 @@ public class SignInScreenWeb
 
         visually.checkWindow(SCREEN_NAME, "Credentials entered");
 
-        driver.waitTillElementIsPresent(bySigninButtonId)
-              .click();
+        driver.waitTillElementIsPresent(bySigninButtonId).click();
 
         return LandingScreen.get();
     }
 
     @Override
-    public InAMeetingScreen joinAMeeting(String meetingId, String meetingPassword, String currentUserPersona) {
+    public InAMeetingScreen joinAMeeting(String meetingId, String meetingPassword,
+                                         String currentUserPersona) {
         WebElement joinMeetingElement = driver.waitTillElementIsPresent(byJoinMeetingButtonId);
         visually.checkWindow(SCREEN_NAME, "Landing screen");
         joinMeetingElement.click();
@@ -77,13 +75,13 @@ public class SignInScreenWeb
         enterNameElement.clear();
         enterNameElement.sendKeys(currentUserPersona);
 
-        visually.check(SCREEN_NAME, "After entering meeting details", Target.window()
-                                                                            .strict()
-                                                                            .layout(byEnterPasswordId)
-                                                                            .layout(byNameId));
+        visually.check(SCREEN_NAME, "After entering meeting details",
+                       Target.window().strict().layout(byEnterPasswordId).layout(byNameId));
 
         visually.takeScreenshot(SCREEN_NAME, "Before clicking on Join button");
-        ((JavascriptExecutor) driver.getInnerDriver()).executeScript("arguments[0].click()", driver.waitForClickabilityOf(byJoinMeetingButtonXpath));
+        ((JavascriptExecutor) driver.getInnerDriver()).executeScript("arguments[0].click()",
+                                                                     driver.waitForClickabilityOf(
+                                                                             byJoinMeetingButtonXpath));
         return this.waitForInAMeetingScreenToLoad();
     }
 

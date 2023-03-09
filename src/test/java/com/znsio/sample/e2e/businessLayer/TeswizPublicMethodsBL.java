@@ -5,8 +5,11 @@ import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
+import com.znsio.teswiz.tools.ReportPortalLogger;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+
+import java.io.File;
 
 public class TeswizPublicMethodsBL {
     private static final Logger LOGGER = Logger.getLogger(TeswizPublicMethodsBL.class.getName());
@@ -43,14 +46,12 @@ public class TeswizPublicMethodsBL {
         Runner.getMaxNumberOfAppiumDrivers();
         Runner.getMaxNumberOfWebDrivers();
         Runner.isVisualTestingEnabled();
-        Runner.remove(threadId);
         Runner.getFromEnvironmentConfiguration("BASE_URL");
         Runner.getTestData("USERNAME");
         Runner.getTestDataAsMap("ENV");
         Runner.getSoftAssertion(threadId);
         Runner.setCurrentDriverForUser(currentUserPersona, currentPlatform, context);
         Runner.fetchPlatform(threadId);
-        Runner.closeAllDrivers();
         Runner.getTargetEnvironment();
         Runner.getBaseURLForWeb();
         Runner.getAppPackageName();
@@ -73,5 +74,11 @@ public class TeswizPublicMethodsBL {
         Drivers.getNameOfDeviceUsedByUser(currentUserPersona);
         Drivers.isDriverAssignedForUser(currentUserPersona);
         Drivers.getAvailableUserPersonas();
+        Drivers.attachLogsAndCloseAllDrivers();
+
+        ReportPortalLogger.logDebugMessage("logDebugMessage");
+        ReportPortalLogger.logInfoMessage("logInfoMessage");
+        ReportPortalLogger.logWarningMessage("logWarningMessage");
+        ReportPortalLogger.attachFileInReportPortal("attachFileInReportPortal", new File("build.gradle"));
     }
 }

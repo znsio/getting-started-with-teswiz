@@ -112,4 +112,9 @@ public class TheAppSteps {
         new ClipboardBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).saveContentInClipboard(
                 content);
     }
+
+    @When("{string} changed to {string}")
+    public void changedTo(String oldUserPersona, String newUserPersona) {
+        Drivers.assignNewPersonaToExistingDriver(oldUserPersona,newUserPersona,context);
+    }
 }

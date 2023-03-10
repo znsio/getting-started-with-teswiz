@@ -7,6 +7,12 @@
       "password": "eotTesting@0",
       "firstName": "Eot",
       "lastName": "Testing"
+    },
+    "cityCode": {
+      "Mumbai": "BOM",
+      "Bangalore": "BLR",
+      "Goa": "GOI",
+      "Chennai": "MAA"
     }
   }
 }

@@ -115,6 +115,6 @@ public class TheAppSteps {
 
     @When("{string} changed to {string}")
     public void changedTo(String oldUserPersona, String newUserPersona) {
-        Drivers.assignNewPersonaToExistingDriver(oldUserPersona,newUserPersona,context);
+        Drivers.assignNewPersonaToExistingDriver(oldUserPersona, newUserPersona, context);
     }
 }

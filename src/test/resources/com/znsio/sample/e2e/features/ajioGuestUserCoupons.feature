@@ -1,5 +1,5 @@
 @ajio @prod @guestUser @coupon
-Feature: In a meeting scenarios
+Feature: Ajio B2C Scenarios
 
 #  CONFIG=./configs/ajio_local_config.properties TAG="@ajio" PLATFORM=android ./gradlew run
 #  CONFIG=./configs/ajio_local_config.properties TAG="@ajio" PLATFORM=web ./gradlew run

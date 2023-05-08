@@ -1,5 +1,10 @@
 {
   "prod": {
+    "operator": {
+      "EMAIL": "avmso2@ril.com",
+      "PASSWORD": "Jio1234@"
+    },
+    "uploadFilePathLocal": "/src/test/resources/documents/fileUploadTest.pdf",
     "GMAIL_USER_1_EMAIL": "mytestemail@gmail.com",
     "GMAIL_USER_1_PASSWORD": "Invalid passw0rd",
     "Host": {

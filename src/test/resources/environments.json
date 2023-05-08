@@ -1,5 +1,6 @@
 {
   "prod": {
+    "AJIO_B2B_BASE_URL": "http://10.21.77.73/vmsui",
     "BASE_URL_API": "http://the-internet.herokuapp.com",
     "BASE_URL": "http://the-internet.herokuapp.com/",
     "IMAGES_BASE_URL": "http://images.google.com/",

@@ -2,16 +2,18 @@ package com.znsio.sample.e2e.businessLayer.ajioOperator;
 
 import com.context.TestExecutionContext;
 
-import com.znsio.e2e.entities.Platform;
-import com.znsio.e2e.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.ajioOperator.OperatorHomeScreen;
 import com.znsio.sample.e2e.screen.ajioOperator.OperatorLoginScreen;
 
+import com.znsio.sample.e2e.screen.ajioOperator.OperatorManageSellerScreen;
+import com.znsio.teswiz.entities.Platform;
+import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class OperatorLoginBL extends SAMPLE_TEST_CONTEXT {
+public class OperatorLoginBL {
 
     private static final Logger LOGGER = Logger.getLogger(OperatorLoginBL.class.getName());
     private final TestExecutionContext context;
@@ -34,20 +36,14 @@ public class OperatorLoginBL extends SAMPLE_TEST_CONTEXT {
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
         this.currentUserPersona = SAMPLE_TEST_CONTEXT.ME;
-        this.currentPlatform = Runner.platform;
+        this.currentPlatform = Runner.getPlatform();
     }
 
-
-    public OperatorHomeBL logOnSellerPage(String userName, String password) {
-        LOGGER.info(System.out.printf("Operator on seller page with userName %s: password %s:", userName,password));
-        OperatorLoginScreen.get().loginToSellerPage(userName, password);
-        //implement assertion
-        return new OperatorHomeBL();
-    }
-
-    public OperatorLoginBL verifyPageTitle() {
-        OperatorHomeScreen.get().logOff();
-        //implement assertion
-        return this;
+    public OperatorManageSellerBL operatorLoggedOnSellerCentralPage(String email, String password) {
+        OperatorLoginScreen.get().loginToSellerCentralPage(email, password);
+        LOGGER.info(String.format("Operator on seller page with email %s: password %s:",email,password));
+        assertThat(OperatorManageSellerScreen.get().isManageSellerTitleDisplayed())
+                .as("operator is not land on Manage Seller page").isTrue();
+        return new OperatorManageSellerBL();
     }
 }

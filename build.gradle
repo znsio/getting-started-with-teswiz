@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat
 buildscript {
     ext {
         gradleVersion = '7.3.3'
-        teswizVersion = '62d7948809'
+        teswizVersion = '0.0.73'
     }
     repositories {
         mavenLocal()
@@ -54,8 +54,7 @@ task run(type: JavaExec) {
         def logDirectory = "target/" + getCurrentDatestamp() + "/" + getCurrentTimestamp()
         println "Using LOG_DIR: $logDirectory"
         System.setProperty "LOG_DIR", "$logDirectory"
-        environment "APPLITOOLS_API_KEY", System.getenv("teswiz_APPLITOOLS_API_KEY")
-
+        environment "APPLITOOLS_API_KEY","pp99GB102fZpV64CLRzF1n101rVPPIPNEA2B8HyMLpkCouQA110" //System.getenv("teswiz_APPLITOOLS_API_KEY")
         def configFile = System.getenv("CONFIG")
         if(null == configFile || !file(configFile).exists()) {
             println("CONFIG file not provided, or does not exist")
@@ -76,7 +75,8 @@ task run(type: JavaExec) {
         ]
         args = runnerArgs
     }
-    mainClass = "com.znsio.e2e.runner.Runner"
+   // mainClass = "com.znsio.e2e.runner.Runner"
+    mainClass = "com.znsio.teswiz.runner.Runner"
     classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
 }
 

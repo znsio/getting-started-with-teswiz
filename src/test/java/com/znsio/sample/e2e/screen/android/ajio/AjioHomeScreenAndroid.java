@@ -37,4 +37,14 @@ public class AjioHomeScreenAndroid
         driver.waitTillElementIsPresent(byStartSearchId).click();
         return AjioSearchResultsScreen.get();
     }
+
+    @Override
+    public AjioHomeScreen signInUser(String emailId, String password) {
+        return null;
+    }
+
+    @Override
+    public boolean isUserSignedIn() {
+        return false;
+    }
 }

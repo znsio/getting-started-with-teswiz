@@ -33,7 +33,7 @@ public class AjioSearchResultsScreenWeb
     public int getNumberOfProductsFound() {
         String itemsFound = driver.findElement(byitemsFoundClassName).getText().split("\\s+")[0];
         LOGGER.info("number of items found for the searched product : " + itemsFound);
-        return Integer.parseInt(itemsFound);
+        return Integer.parseInt(itemsFound.replaceAll(",",""));
     }
 
     @Override

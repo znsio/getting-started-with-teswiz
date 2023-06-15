@@ -8,5 +8,4 @@ Feature: Ajio B2C Scenarios
     Given I login to ajio as "ajioTestUser"
     And I search for for "heels" product
     When I wishlist the 7th product and move it to cart
-    And I remove the product from cart
-    Then I Relog and verify cart is empty
+    Then I remove the product from cart and verify cart is empty by relog

@@ -29,4 +29,6 @@ public abstract class AjioWishlistScreen {
     }
 
     public abstract boolean isProductWishlisted(String productName);
+
+    public abstract AjioProductDetailsScreen goToProductDetails();
 }

@@ -1,6 +1,7 @@
 package com.znsio.sample.e2e.screen.web.ajio;
 
 
+import com.znsio.sample.e2e.screen.ajio.AjioCartScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioProductDetailsScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioWishlistScreen;
 import com.znsio.teswiz.runner.Driver;
@@ -13,10 +14,10 @@ public class AjioProductDetailsScreenWeb
     private static final String SCREEN_NAME = AjioProductDetailsScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
-    private static final By byProductContentClassName = By.className("  prod-content");
+    private static final By byProductContentClassName = By.className("prod-container");
     private static final By byWishlistProductClassName = By.className("pdp-wishlist-desktop-icon");
     private static final By byProductNameClassName = By.className("prod-name");
-    private static final By byWishlistIconClassName = By.className("popup-blk wishlist-blk-icon");
+    private static final By byWishlistIconXpath = By.xpath("//div[@class='popup-blk wishlist-blk-icon']//a");
 
 
     private final Driver driver;
@@ -32,7 +33,7 @@ public class AjioProductDetailsScreenWeb
     public AjioProductDetailsScreen wishlistTheProduct() {
         LOGGER.info("Adding the product to Wishlist");
         driver.findElement(byWishlistProductClassName).click();
-        return null;
+        return this;
     }
 
     @Override
@@ -51,7 +52,22 @@ public class AjioProductDetailsScreenWeb
     @Override
     public AjioWishlistScreen goToWishList() {
         LOGGER.info("Going to wishlist of user");
-        driver.findElement(byWishlistIconClassName).click();
+        driver.waitForClickabilityOf(byWishlistIconXpath).click();
         return AjioWishlistScreen.get();
+    }
+
+    @Override
+    public AjioProductDetailsScreen selectSize() {
+        return this;
+    }
+
+    @Override
+    public AjioProductDetailsScreen addToBag() {
+        return this;
+    }
+
+    @Override
+    public AjioCartScreen goToBag() {
+        return AjioCartScreen.get();
     }
 }

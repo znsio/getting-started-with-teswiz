@@ -9,16 +9,19 @@ import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import java.util.Map;
+
+import static com.znsio.teswiz.tools.Wait.waitFor;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AjioSearchBL {
-    private static final Logger LOGGER = Logger.getLogger(AjioSearchBL.class.getName());
+public class AjioHomeBL {
+    private static final Logger LOGGER = Logger.getLogger(AjioHomeBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
 
-    public AjioSearchBL(String userPersona, Platform forPlatform) {
+    public AjioHomeBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
@@ -27,7 +30,7 @@ public class AjioSearchBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public AjioSearchBL() {
+    public AjioHomeBL() {
         long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
@@ -35,7 +38,18 @@ public class AjioSearchBL {
         this.currentPlatform = Runner.getPlatform();
     }
 
-    public AjioSearchBL searchFor(String product) {
+    public AjioHomeBL loginAsValidUser(Map userDetails) {
+        assertThat(AjioHomeScreen.get().signInUser(
+                        userDetails.get("emailId").toString(),
+                        userDetails.get("password").toString())
+                .isUserSignedIn())
+                .as("User is not Signed In")
+                .isTrue();
+        return this;
+    }
+
+    public AjioHomeBL searchFor(String product) {
+        waitFor(20);
         LOGGER.info("Searching in home page for the product");
         AjioSearchResultsScreen ajioSearchResultsScreen = AjioHomeScreen.get().searchFor(product);
         String actualSearchWasFor = ajioSearchResultsScreen.getActualSearchString();
@@ -48,4 +62,8 @@ public class AjioSearchBL {
         return this;
     }
 
+    public AjioHomeBL logoutUser() {
+
+        return this;
+    }
 }

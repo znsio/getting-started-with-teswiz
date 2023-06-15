@@ -2,8 +2,10 @@ package com.znsio.sample.e2e.businessLayer.ajioEAT;
 
 import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.sample.e2e.screen.ajio.AjioCartScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioProductDetailsScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
+import com.znsio.sample.e2e.screen.ajio.AjioWishlistScreen;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
@@ -42,9 +44,10 @@ public class AjioProductBL {
                 .isProductOpened())
                 .as("Product Details not Opened")
                 .isTrue();
-        AjioProductDetailsScreen ajioProductDetailsScreen = AjioProductDetailsScreen.get().wishlistTheProduct();
 
+        AjioProductDetailsScreen ajioProductDetailsScreen = AjioProductDetailsScreen.get();
         assertThat(ajioProductDetailsScreen
+                .wishlistTheProduct()
                 .goToWishList()
                 .isProductWishlisted(ajioProductDetailsScreen.getProductName()))
                 .as(" Product is not added to wishlist ")
@@ -54,11 +57,23 @@ public class AjioProductBL {
     }
 
     public AjioProductBL moveTheProductToCart() {
-
+        assertThat(AjioWishlistScreen.get()
+                .goToProductDetails()
+                .selectSize()
+                .addToBag()
+                .goToBag()
+                .isProductAddedToBag())
+                .as(" Product is not added to Cart")
+                .isTrue();
         return this;
     }
 
     public AjioProductBL removeProductFromCart() {
+        assertThat(AjioCartScreen.get()
+                .removeProductFromCart()
+                .isProductRemovedFromCart())
+                .as("Product not removed from cart")
+                .isTrue();
         return this;
     }
 

@@ -48,4 +48,9 @@ public class AjioCartScreenWeb
     public boolean isProductRemovedFromCart() {
         return false;
     }
+
+    @Override
+    public boolean isCartEmpty() {
+        return false;
+    }
 }

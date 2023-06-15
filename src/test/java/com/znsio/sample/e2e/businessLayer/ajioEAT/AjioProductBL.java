@@ -78,6 +78,10 @@ public class AjioProductBL {
     }
 
     public AjioProductBL verifyCartIsEmpty() {
+        assertThat(AjioCartScreen.get()
+                .isCartEmpty())
+                .as("Cart is not empty")
+                .isTrue();
         return this;
     }
 }

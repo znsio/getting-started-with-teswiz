@@ -41,7 +41,7 @@ public class AjioHomeScreenWeb
         searchElement.clear();
         searchElement.sendKeys(product);
         visually.checkWindow(SCREEN_NAME, "Search string entered");
-        driver.waitTillElementIsPresent(bySearchIconClassName);
+        driver.waitTillElementIsPresent(bySearchIconClassName).click();
         return AjioSearchResultsScreen.get();
     }
 

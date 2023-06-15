@@ -2,7 +2,6 @@ package com.znsio.sample.e2e.businessLayer.ajioEAT;
 
 import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
@@ -35,19 +34,11 @@ public class AjioProductBL {
         this.currentPlatform = Runner.getPlatform();
     }
 
-    public AjioProductBL searchFor(String product) {
-        AjioSearchResultsScreen ajioSearchResultsScreen = AjioHomeScreen.get().searchFor(product);
-        String actualSearchWasFor = ajioSearchResultsScreen.getActualSearchString();
-        softly.assertThat(actualSearchWasFor).as("Search was for a different value")
-                .isEqualTo(product);
-
-        int numberOfProductsFound = ajioSearchResultsScreen.getNumberOfProductsFound();
-        assertThat(numberOfProductsFound).as("Insufficient search results retrieved")
-                .isGreaterThan(10);
-        return this;
-    }
 
     public AjioProductBL wishlistTheProductFromSearchResult(int itemNumber) {
+      AjioSearchResultsScreen ajioSearchResultsScreen =  AjioSearchResultsScreen.get();
+      ajioSearchResultsScreen.goToProductDetails(itemNumber).wishlistTheProduct();
+
 
         return this;
     }

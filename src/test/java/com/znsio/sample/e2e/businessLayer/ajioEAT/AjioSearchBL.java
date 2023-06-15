@@ -36,6 +36,7 @@ public class AjioSearchBL {
     }
 
     public AjioSearchBL searchFor(String product) {
+        LOGGER.info("Searching in home page for the product");
         AjioSearchResultsScreen ajioSearchResultsScreen = AjioHomeScreen.get().searchFor(product);
         String actualSearchWasFor = ajioSearchResultsScreen.getActualSearchString();
         softly.assertThat(actualSearchWasFor).as("Search was for a different value")

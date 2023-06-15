@@ -2,18 +2,21 @@ package com.znsio.sample.e2e.screen.web.ajio;
 
 
 import com.znsio.sample.e2e.screen.ajio.AjioProductDetailsScreen;
+import com.znsio.sample.e2e.screen.ajio.AjioWishlistScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 public class AjioProductDetailsScreenWeb
         extends AjioProductDetailsScreen {
     private static final String SCREEN_NAME = AjioProductDetailsScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
-    private static final By bySearchBoxXpath = By.xpath("//input[@name='searchVal']");
+    private static final By byProductContentClassName = By.className("  prod-content");
+    private static final By byWishlistProductClassName = By.className("pdp-wishlist-desktop-icon");
+    private static final By byProductNameClassName = By.className("prod-name");
+    private static final By byWishlistIconClassName = By.className("popup-blk wishlist-blk-icon");
 
 
     private final Driver driver;
@@ -27,6 +30,28 @@ public class AjioProductDetailsScreenWeb
 
     @Override
     public AjioProductDetailsScreen wishlistTheProduct() {
+        LOGGER.info("Adding the product to Wishlist");
+        driver.findElement(byWishlistProductClassName).click();
         return null;
+    }
+
+    @Override
+    public boolean isProductOpened() {
+        LOGGER.info("Verifying Product Details Page");
+        driver.switchToNextTab();
+        return driver.isElementPresent(byProductContentClassName);
+    }
+
+    @Override
+    public String getProductName() {
+        LOGGER.info("Getting product name");
+        return driver.findElement(byProductNameClassName).getText();
+    }
+
+    @Override
+    public AjioWishlistScreen goToWishList() {
+        LOGGER.info("Going to wishlist of user");
+        driver.findElement(byWishlistIconClassName).click();
+        return AjioWishlistScreen.get();
     }
 }

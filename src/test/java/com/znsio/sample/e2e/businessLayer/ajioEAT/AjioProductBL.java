@@ -2,6 +2,7 @@ package com.znsio.sample.e2e.businessLayer.ajioEAT;
 
 import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.sample.e2e.screen.ajio.AjioProductDetailsScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
@@ -36,9 +37,18 @@ public class AjioProductBL {
 
 
     public AjioProductBL wishlistTheProductFromSearchResult(int itemNumber) {
-      AjioSearchResultsScreen ajioSearchResultsScreen =  AjioSearchResultsScreen.get();
-      ajioSearchResultsScreen.goToProductDetails(itemNumber).wishlistTheProduct();
+        assertThat(AjioSearchResultsScreen.get()
+                .goToProductDetails(itemNumber)
+                .isProductOpened())
+                .as("Product Details not Opened")
+                .isTrue();
+        AjioProductDetailsScreen ajioProductDetailsScreen = AjioProductDetailsScreen.get().wishlistTheProduct();
 
+        assertThat(ajioProductDetailsScreen
+                .goToWishList()
+                .isProductWishlisted(ajioProductDetailsScreen.getProductName()))
+                .as(" Product is not added to wishlist ")
+                .isTrue();
 
         return this;
     }

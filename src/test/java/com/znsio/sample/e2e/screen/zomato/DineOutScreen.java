@@ -1,6 +1,6 @@
 package com.znsio.sample.e2e.screen.zomato;
 
-import com.znsio.sample.e2e.screen.web.zomato.ZomatoHomeScreenWeb;
+import com.znsio.sample.e2e.screen.web.zomato.DineOutScreenWeb;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Drivers;
@@ -9,11 +9,11 @@ import com.znsio.teswiz.runner.Visual;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
-public abstract class ZomatoHomeScreen {
-    private static final String SCREEN_NAME = ZomatoHomeScreen.class.getSimpleName();
+public abstract class DineOutScreen {
+    private static final String SCREEN_NAME = DineOutScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public static ZomatoHomeScreen get() {
+    public static DineOutScreen get() {
         Driver driver = Drivers.getDriverForCurrentUser(Thread.currentThread().getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread().getId());
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
@@ -21,12 +21,13 @@ public abstract class ZomatoHomeScreen {
 
         switch(platform) {
             case web:
-                return new ZomatoHomeScreenWeb(driver, visually);
+                return new DineOutScreenWeb(driver, visually);
         }
         throw new NotImplementedException(
                 SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
-    public abstract DeliveryScreen selectLocation(String cityName);
-
+    public abstract RestaurantDetailScreen selectRestaurant();
+    public abstract String getRestaurantName();
+    public abstract String getRestaurantPageHeading();
 }

@@ -2,26 +2,24 @@ package com.znsio.sample.e2e.businessLayer.zomato;
 
 import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.zomato.DiningOutScreen;
 import com.znsio.sample.e2e.screen.zomato.RestaurantDetailScreen;
-import com.znsio.sample.e2e.screen.zomato.ZomatoHomeScreen;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-
-public class ZomatoBL {
-
-    private static final Logger LOGGER = Logger.getLogger(ZomatoBL.class.getName());
+public class BookATableBL {
+    private static final Logger LOGGER = Logger.getLogger(BookATableBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
 
-    public ZomatoBL(String userPersona, Platform forPlatform) {
+    public BookATableBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
@@ -30,7 +28,7 @@ public class ZomatoBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public ZomatoBL() {
+    public BookATableBL() {
         long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
@@ -38,29 +36,13 @@ public class ZomatoBL {
         this.currentPlatform = Runner.getPlatform();
     }
 
-    public ZomatoBL selectDiningLocation(String cityName) {
-        LOGGER.info("selectDiningLocation(): select the location for booking");
-
-        assertThat(ZomatoHomeScreen.get().selectLocation(cityName)
-                .selectDineOutOption()
-                .getRestaurantPageHeading())
-                .as("The select city name is different")
-                .containsIgnoringCase(cityName);
-        return this;
-    }
-
-    public ZomatoBL bookATable(int guestCount, int aheadDays) {
+    public BookATableBL enterBookingDetails(int guestCount, int aheadDays) {
         LOGGER.info(String.format("bookATable(): book a table with %d number of guest and %d days ahead date", guestCount, aheadDays));
 
-        String restaurantName = DiningOutScreen.get().getRestaurantName();
-
-        assertThat(DiningOutScreen.get().selectRestaurant().isRestaurantNameVisible(restaurantName))
-                .as("Different restaurant detail page obtained").isTrue();
-
         RestaurantDetailScreen restaurantDetailScreen = RestaurantDetailScreen.get()
-                .selectBookATable()
+                .clickBookATableTab()
                 .selectBookingDate(aheadDays)
-                .enterGuestCount(guestCount);
+                .selectGuestCount(guestCount);
 
         softly.assertThat(restaurantDetailScreen.isSelectTimeOptionEnabled())
                 .as("Select time option did not get enabled").isTrue();
@@ -71,13 +53,14 @@ public class ZomatoBL {
         assertThat(restaurantDetailScreen.isSelectedAheadDateCorrect(aheadDays))
                 .as("The date selected is different").isTrue();
 
-        restaurantDetailScreen.selectBookOption();
-        return this;
-    }
+        Map<String, Object> userDetails = Runner.getTestDataAsMap("userDetail");
+        restaurantDetailScreen.selectTimeSlot()
+                .addFirstName(userDetails.get("firstName").toString())
+                .addLastName(userDetails.get("lastName").toString())
+                .addEmail(userDetails.get("userEmail").toString())
+                .addPhoneNumber(userDetails.get("phoneNo").toString());
 
-    public ZomatoBL verifyLoginOption() {
-        LOGGER.info("verifyLoginOption(): verify login option");
-        RestaurantDetailScreen.get().verifyLogin();
+        restaurantDetailScreen.clickBookButton();
         return this;
     }
 }

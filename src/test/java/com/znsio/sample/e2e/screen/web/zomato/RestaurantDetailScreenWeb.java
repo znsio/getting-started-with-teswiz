@@ -32,6 +32,11 @@ public class RestaurantDetailScreenWeb extends RestaurantDetailScreen {
     private final By byLoginHeaderXpath = By.xpath("//h2[text()='Login']");
     private String byLoginFrameId = "auth-login-ui";
     private final By bySelectTimeOptionXpath = By.xpath("//h4[text()='Select time']//parent::section");
+    private final By byFirstNameInputCSS = By.cssSelector("input[name='firstName']");
+    private final By byLastNameInputCSS = By.cssSelector("input[name='lastName']");
+    private final By byUserEmailInputCSS = By.cssSelector("input[name='email']");
+    private final By byUserPhoneNumberCSS = By.cssSelector("input[name='phone']");
+    private final By byTimeXpath = By.xpath("//li[text()='08:00 PM']");
 
     public RestaurantDetailScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -40,7 +45,7 @@ public class RestaurantDetailScreenWeb extends RestaurantDetailScreen {
     }
 
     @Override
-    public RestaurantDetailScreen selectBookATable() {
+    public RestaurantDetailScreen clickBookATableTab() {
         driver.findElement(byBookATableXpath).click();
         return this;
     }
@@ -58,25 +63,24 @@ public class RestaurantDetailScreenWeb extends RestaurantDetailScreen {
     }
 
     @Override
-    public RestaurantDetailScreen enterGuestCount(int guestCount) {
+    public RestaurantDetailScreen selectGuestCount(int guestCount) {
         driver.findElement(byGuestCountInput).click();
         driver.findElement(By.cssSelector(String.format(bySelectGuestCountCSS, guestCount))).click();
         return this;
     }
     
     @Override
-    public RestaurantDetailScreen selectBookOption() {
+    public RestaurantDetailScreen clickBookButton() {
         driver.findElement(byBookButtonXpath).click();
         return this;
     }
 
     @Override
-    public RestaurantDetailScreen verifyLogin() {
-        driver.waitTillElementIsPresent(By.id(byLoginFrameId));
+    public boolean isLoginWindowVisible() {
         driver.switchToFrame(byLoginFrameId);
         driver.waitTillElementIsVisible(byLoginHeaderXpath, 20);
         visually.checkWindow(SCREEN_NAME, "Login Page");
-        return this;
+        return driver.isElementPresent(byLoginHeaderXpath);
     }
 
     @Override
@@ -102,5 +106,35 @@ public class RestaurantDetailScreenWeb extends RestaurantDetailScreen {
     public boolean isSelectTimeOptionEnabled() {
         visually.check(SCREEN_NAME, "Select time option", Target.region(bySelectTimeOptionXpath));
         return driver.isElementPresent(bySelectTimeOptionXpath);
+    }
+
+    @Override
+    public RestaurantDetailScreen addFirstName(String firstName) {
+        driver.findElement(byFirstNameInputCSS).sendKeys(firstName);
+        return this;
+    }
+
+    @Override
+    public RestaurantDetailScreen addLastName(String lastName) {
+        driver.findElement(byLastNameInputCSS).sendKeys(lastName);
+        return this;
+    }
+
+    @Override
+    public RestaurantDetailScreen addEmail(String userEmail) {
+        driver.findElement(byUserEmailInputCSS).sendKeys(userEmail);
+        return this;
+    }
+
+    @Override
+    public RestaurantDetailScreen addPhoneNumber(String phoneNo) {
+        driver.findElement(byUserPhoneNumberCSS).sendKeys(phoneNo);
+        return this;
+    }
+
+    @Override
+    public RestaurantDetailScreen selectTimeSlot() {
+        driver.findElement(byTimeXpath).click();
+        return this;
     }
 }

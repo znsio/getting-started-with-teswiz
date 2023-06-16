@@ -1,7 +1,8 @@
 package com.znsio.sample.e2e.screen.web.zomato;
 
 import com.applitools.eyes.selenium.fluent.Target;
-import com.znsio.sample.e2e.screen.zomato.DiningOutScreen;
+import com.znsio.sample.e2e.screen.zomato.DeliveryScreen;
+import com.znsio.sample.e2e.screen.zomato.DineOutScreen;
 import com.znsio.sample.e2e.screen.zomato.ZomatoHomeScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
@@ -23,13 +24,13 @@ public class ZomatoHomeScreenWeb extends ZomatoHomeScreen {
     }
 
     @Override
-    public DiningOutScreen selectLocation(String cityName) {
+    public DeliveryScreen selectLocation(String cityName) {
         visually.check(SCREEN_NAME, "Home page", Target.window().fully().layout(byCityNameInputXpath, byCityNameClass));
         driver.waitTillElementIsPresent(byCityNameInputXpath).clear();
         driver.findElement(byCityNameInputXpath).sendKeys(cityName);
         driver.findElement(byCityNameInputXpath).click();
         driver.waitTillPresenceOfAllElements(By.xpath(String.format(bySelectCityXpath, cityName))).get(0).click();
-        return DiningOutScreen.get();
+        return DeliveryScreen.get();
     }
 
 }

@@ -27,13 +27,18 @@ public abstract class RestaurantDetailScreen {
                 SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
-    public abstract RestaurantDetailScreen selectBookATable();
+    public abstract RestaurantDetailScreen clickBookATableTab();
     public abstract RestaurantDetailScreen selectBookingDate(int aheadDays);
-    public abstract RestaurantDetailScreen enterGuestCount(int guestCount);
-    public abstract RestaurantDetailScreen selectBookOption();
-    public abstract RestaurantDetailScreen verifyLogin();
+    public abstract RestaurantDetailScreen selectGuestCount(int guestCount);
+    public abstract RestaurantDetailScreen clickBookButton();
+    public abstract boolean isLoginWindowVisible();
     public abstract boolean isRestaurantNameVisible(String restaurantName);
     public abstract boolean isSelectedAheadDateCorrect(int aheadDays);
     public abstract boolean isNumberOfGuestSelectedCorrect(int guestCount);
     public abstract boolean isSelectTimeOptionEnabled();
+    public abstract RestaurantDetailScreen addFirstName(String firstName);
+    public abstract RestaurantDetailScreen addLastName(String lastName);
+    public abstract RestaurantDetailScreen addEmail(String userEmail);
+    public abstract RestaurantDetailScreen addPhoneNumber(String phoneNo);
+    public abstract RestaurantDetailScreen selectTimeSlot();
 }

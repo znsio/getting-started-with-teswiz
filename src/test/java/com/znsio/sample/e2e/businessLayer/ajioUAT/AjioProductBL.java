@@ -1,4 +1,4 @@
-package com.znsio.sample.e2e.businessLayer.ajioEAT;
+package com.znsio.sample.e2e.businessLayer.ajioUAT;
 
 import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;

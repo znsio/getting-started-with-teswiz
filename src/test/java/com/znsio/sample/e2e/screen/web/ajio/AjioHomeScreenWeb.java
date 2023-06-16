@@ -63,4 +63,9 @@ public class AjioHomeScreenWeb
         driver.waitTillElementIsVisible(byMyAccountXpath);
         return driver.isElementPresent(byMyAccountXpath);
     }
+
+    @Override
+    public boolean isUserLoggedOut() {
+        return false;
+    }
 }

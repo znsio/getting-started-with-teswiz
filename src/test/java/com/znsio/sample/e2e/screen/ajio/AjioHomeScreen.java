@@ -35,4 +35,6 @@ public abstract class AjioHomeScreen {
     public abstract AjioHomeScreen signInUser(String emailId, String password);
 
     public abstract boolean isUserSignedIn();
+
+    public abstract boolean isUserLoggedOut();
 }

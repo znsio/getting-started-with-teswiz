@@ -1,7 +1,8 @@
-package com.znsio.sample.e2e.businessLayer.ajioEAT;
+package com.znsio.sample.e2e.businessLayer.ajioUAT;
 
 import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.sample.e2e.screen.ajio.AjioCartScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
 import com.znsio.teswiz.entities.Platform;
@@ -12,6 +13,7 @@ import org.assertj.core.api.SoftAssertions;
 import java.util.Map;
 
 import static com.znsio.teswiz.tools.Wait.waitFor;
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AjioHomeBL {
@@ -63,6 +65,11 @@ public class AjioHomeBL {
     }
 
     public AjioHomeBL logoutUser() {
+        assertThat(AjioCartScreen.get()
+                .logout()
+                .isUserLoggedOut())
+                .as("User is not logged out")
+                .isTrue();
 
         return this;
     }

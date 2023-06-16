@@ -4,6 +4,7 @@ import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -40,11 +41,16 @@ public class AjioHomeScreenAndroid
 
     @Override
     public AjioHomeScreen signInUser(String emailId, String password) {
-        return null;
+        throw new NotImplementedException(NOT_YET_IMPLEMENTED);
     }
 
     @Override
     public boolean isUserSignedIn() {
-        return false;
+        throw new NotImplementedException(NOT_YET_IMPLEMENTED);
+    }
+
+    @Override
+    public boolean isUserLoggedOut() {
+        throw new NotImplementedException(NOT_YET_IMPLEMENTED);
     }
 }

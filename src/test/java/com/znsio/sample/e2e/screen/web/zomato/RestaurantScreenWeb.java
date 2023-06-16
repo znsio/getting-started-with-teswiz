@@ -49,6 +49,7 @@ public class RestaurantScreenWeb extends RestaurantScreen {
     }
 
     public boolean isCorrectRestaurantSelected() {
+        driver.getInnerDriver().manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         driver.getInnerDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         return driver.isElementPresent(By.xpath(String.format(restaurantNameHeading, context.getTestState(SAMPLE_TEST_CONTEXT.RESTAURANT_NAME))));
     }

@@ -9,6 +9,8 @@ import com.znsio.teswiz.runner.Visual;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -59,7 +61,8 @@ public class DineOutScreenWeb extends DineOutScreen {
     @Override
     public boolean isCorrectLocationSelected(String location) {
         visually.checkWindow(SCREEN_NAME, "Dineout Screen, Location Selected");
-        return driver.findElement(byLocationSearchInput).getAttribute("value").contains(location);
+        driver.getInnerDriver().manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+        return driver.findElement(byLocationSearchInput).getAttribute("placeholder").contains(location);
     }
 
     @Override

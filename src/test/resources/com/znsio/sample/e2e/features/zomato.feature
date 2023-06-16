@@ -11,3 +11,4 @@ Feature: Book a dinner reservation without login in Zomato web application
     When I select restaurant number 3 from results
     Then I should get same restaurant which was selected
     When I try to book a table for 4 guests on a date day after tomorrow
+    Then I should get login pop up message

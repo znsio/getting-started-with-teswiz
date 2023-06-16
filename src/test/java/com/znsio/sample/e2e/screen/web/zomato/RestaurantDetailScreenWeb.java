@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
 public class RestaurantDetailScreenWeb extends RestaurantDetailScreen {
     private static final String SCREEN_NAME = RestaurantDetailScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
@@ -71,8 +72,9 @@ public class RestaurantDetailScreenWeb extends RestaurantDetailScreen {
 
     @Override
     public RestaurantDetailScreen verifyLogin() {
-        driver.getInnerDriver().switchTo().frame(byLoginFrameId);
-        driver.waitTillElementIsVisible(byLoginHeaderXpath);
+        driver.waitTillElementIsPresent(By.id(byLoginFrameId));
+        driver.switchToFrame(byLoginFrameId);
+        driver.waitTillElementIsVisible(byLoginHeaderXpath, 20);
         visually.checkWindow(SCREEN_NAME, "Login Page");
         return this;
     }

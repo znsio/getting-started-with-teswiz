@@ -52,7 +52,7 @@ public class AjioHomeBL {
         AjioSearchResultsScreen ajioSearchResultsScreen = AjioHomeScreen.get().searchFor(product);
         String actualSearchWasFor = ajioSearchResultsScreen.getActualSearchString();
         softly.assertThat(actualSearchWasFor).as("Search was for a different value")
-                .isEqualTo(product);
+                .isEqualTo(product.toUpperCase());
 
         int numberOfProductsFound = ajioSearchResultsScreen.getNumberOfProductsFound();
         assertThat(numberOfProductsFound).as("Insufficient search results retrieved")

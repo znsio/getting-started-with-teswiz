@@ -1,5 +1,6 @@
 package com.znsio.sample.e2e.screen.web.ajio;
 
+import com.applitools.eyes.selenium.fluent.Target;
 import com.znsio.sample.e2e.screen.ajio.AjioCartScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
@@ -63,6 +64,7 @@ public class AjioHomeScreenWeb
     public boolean isUserSignedIn() {
         LOGGER.info("Verifying user is logged in successfully");
         driver.waitTillElementIsVisible(byMyAccountXpath);
+        visually.check(SCREEN_NAME, "Ajio Home page for LoggedIn User", Target.window().fully());
         return driver.isElementPresent(byMyAccountXpath);
     }
 
@@ -70,6 +72,7 @@ public class AjioHomeScreenWeb
     public boolean isUserLoggedOut() {
         LOGGER.info("Checking if user is logged out successfully");
         driver.waitTillElementIsVisible(bySignInXpath);
+        visually.check(SCREEN_NAME, "Ajio Landing Page", Target.window().fully().strict());
         return driver.isElementPresent(bySignInXpath);
     }
 

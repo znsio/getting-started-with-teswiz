@@ -1,6 +1,7 @@
 package com.znsio.sample.e2e.screen.web.ajio;
 
 
+import com.applitools.eyes.selenium.fluent.Target;
 import com.znsio.sample.e2e.screen.ajio.AjioCartScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioProductDetailsScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioWishlistScreen;
@@ -44,6 +45,8 @@ public class AjioProductDetailsScreenWeb
     public boolean isProductOpened() {
         LOGGER.info("Verifying Product Details Page");
         driver.switchToNextTab();
+        driver.waitTillElementIsVisible(byProductContentClassName);
+        visually.check(SCREEN_NAME, "Product Details page", Target.window().fully().strict());
         return driver.isElementPresent(byProductContentClassName);
     }
 

@@ -1,5 +1,6 @@
 package com.znsio.sample.e2e.screen.web.ajio;
 
+import com.applitools.eyes.selenium.fluent.Target;
 import com.znsio.sample.e2e.screen.ajio.AjioCartScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.teswiz.runner.Driver;
@@ -47,6 +48,8 @@ public class AjioCartScreenWeb
     @Override
     public boolean isCartEmpty() {
         LOGGER.info("Checking if cart is empty");
+        driver.waitTillElementIsVisible(byEmptyBagMessageClassName);
+        visually.check(SCREEN_NAME, "Empty Cart for LoggedIn User", Target.region(byEmptyBagMessageClassName));
         return driver.isElementPresent(byEmptyBagMessageClassName);
     }
 

@@ -1,6 +1,6 @@
 package com.znsio.sample.e2e.screen.web.ajio;
 
-
+import com.applitools.eyes.selenium.fluent.Target;
 import com.znsio.sample.e2e.screen.ajio.AjioProductDetailsScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioWishlistScreen;
 import com.znsio.teswiz.runner.Driver;
@@ -29,6 +29,7 @@ public class AjioWishlistScreenWeb
     public boolean isProductWishlisted(String productName) {
         LOGGER.info("Checking if product is added to wishlist");
         String wishlistProductName = driver.findElement(byProductNameClassName).getText();
+        visually.check(SCREEN_NAME, "Wishlist page for User", Target.window().fully().strict());
         return wishlistProductName.equalsIgnoreCase(productName);
     }
 

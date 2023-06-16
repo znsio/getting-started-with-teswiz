@@ -61,6 +61,7 @@ public class AjioHomeBL {
     }
 
     public AjioHomeBL verifyCartIsEmpty() {
+        LOGGER.info("Verifying in Cart Page for Empty Cart");
         assertThat(AjioHomeScreen.get()
                 .goToCart()
                 .isCartEmpty())
@@ -70,6 +71,7 @@ public class AjioHomeBL {
     }
 
     public AjioHomeBL logoutUser() {
+        LOGGER.info("Logout User");
         assertThat(AjioCartScreen.get()
                 .logout()
                 .isUserLoggedOut())

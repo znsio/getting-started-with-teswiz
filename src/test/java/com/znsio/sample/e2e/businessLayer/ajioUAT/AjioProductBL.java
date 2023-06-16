@@ -36,6 +36,7 @@ public class AjioProductBL {
 
 
     public AjioProductBL wishlistTheProductFromSearchResult(int itemNumber) {
+        LOGGER.info("Adding the Product to Wishlist from Product Details");
         assertThat(AjioSearchResultsScreen.get()
                 .goToProductDetails(itemNumber)
                 .isProductOpened())

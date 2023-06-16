@@ -3,34 +3,27 @@ package com.znsio.sample.e2e.screen.web.zomato;
 import com.context.SessionContext;
 import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.zomato.ZomatoScreen;
+import com.znsio.sample.e2e.screen.zomato.RestaurantScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-public class ZomatoScreenWeb extends ZomatoScreen {
+public class RestaurantScreenWeb extends RestaurantScreen {
     private final Driver driver;
     private final Visual visually;
-    private final String SCREEN_NAME = ZomatoScreenWeb.class.getSimpleName();
-    private static final Logger LOGGER = Logger.getLogger(ZomatoScreenWeb.class.getName());
+    private final String SCREEN_NAME = RestaurantScreenWeb.class.getSimpleName();
+    private static final Logger LOGGER = Logger.getLogger(RestaurantScreenWeb.class.getName());
     private final TestExecutionContext context;
-    private final String homePagePartialUrl = "www.zomato.com";
-    private final String dineoutPagePartialUrl = "dine-out";
-    private final By byDiningCardText = By.xpath("//p[text()='Dining']");
-    private final By byDiningOutTabText = By.xpath("//div[text()='Dining Out']");
-    private final By byLocationSearchInput = By.xpath("(//ul[starts-with(@id,'navigation')]/li/div//div/div/input)[1]");
-    private final By byLocationSearchDropdown = By.xpath("(//ul[starts-with(@id,'navigation')]/li/div/div/div/i)[2]");
-    private String subLocationCityNameText = "//ul[starts-with(@id,'navigation')]/li/div/div/div/div/div/p[starts-with(@class,'sc') and text()='%s']";
-    private final By byRestaurantNameText = By.xpath("//div[@id='root']/div/div[9]/div/div[3]/div/div/a/div/h4");
     private String restaurantNameHeading = "//h1[text()='%s']";
     private final By byBookATable = By.linkText("Book a Table");
     private final By byBookATableVerificationText = By.xpath("//h4[text()='Please select your booking details']");
@@ -38,69 +31,21 @@ public class ZomatoScreenWeb extends ZomatoScreen {
     private String bySelectDateDropdownOption = "//*[contains(text(),'%s')]";
     private final By bySelectGuestsDropdown = By.xpath("(//span[starts-with(@class,'sc-qnejpk-6')])[2]");
     private final By bySelectGuestsDropdownOption = By.xpath("(//span[starts-with(@class,'sc-qnejpk-0')])[2]/section/div/span/span[contains(text(),'4')]");
-    private final By bySelectTimeSlot = By.xpath("//li[text()='08:00 PM']");
-    private final By byFirstNameInputField = By.name("firstName");
-    private final By byLastNameInputField = By.name("lastName");
-    private final By byEmailInputField = By.name("email");
-    private final By byISDCodeInputField = By.name("isdCode");
-    private final By byPhoneNumberInputField = By.name("phone");
+    private String bySelectTimeSlot = "//li[text()='%s']";
+    private By byAllTimeSlotsXPath = By.xpath("//section/ul/li[starts-with(@class,'sc')]");
+    private final By byFirstNameInputField = By.xpath("//input[@name='firstName']");
+    private final By byLastNameInputField = By.xpath("//input[@name='lastName']");
+    private final By byEmailInputField = By.xpath("//input[@name='email']");
+    private final By byISDCodeInputField = By.xpath("//input[@name='isdCode']");
+    private final By byPhoneNumberInputField = By.xpath("//input[@name='phone']");
     private final By byBookButton = By.xpath("//button/span/span[text()='Book']");
+    private final By bySendOneTimePassword = By.xpath("//span[text()='Send One Time Password']");
+    private final By byContinueWithGoogle = By.xpath("//span[text()='Continue with Google']");
 
-    public ZomatoScreenWeb(Driver driver, Visual visually) {
+    public RestaurantScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
         context = SessionContext.getTestExecutionContext(Thread.currentThread().getId());
-    }
-
-    @Override
-    public boolean isHomePageLaunchedSuccessfully() {
-        driver.getInnerDriver().manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
-        return driver.getInnerDriver().getCurrentUrl().contains(homePagePartialUrl);
-    }
-
-    @Override
-    public ZomatoScreen clickOnDiningOption() {
-        driver.waitTillElementIsPresent(byDiningCardText);
-        driver.findElement(byDiningCardText).click();
-        return this;
-    }
-
-    @Override
-    public boolean verifyRedirectionToDineoutPage() {
-        driver.getInnerDriver().manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
-        return driver.getInnerDriver().getCurrentUrl().contains(dineoutPagePartialUrl) && driver.isElementPresent(byDiningOutTabText);
-    }
-
-    @Override
-    public ZomatoScreen selectLocationForRestaurants(String location) {
-        driver.waitTillElementIsPresent(byLocationSearchInput);
-        driver.findElement(byLocationSearchInput).sendKeys(location);
-        driver.findElement(byLocationSearchInput).sendKeys(Keys.RETURN);
-
-        String[] subLocations = location.split(",");
-        subLocationCityNameText = String.format(subLocationCityNameText, subLocations[0]);
-
-        driver.getInnerDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        if (driver.isElementPresent(By.xpath(subLocationCityNameText))) {
-            if (!driver.findElement(By.xpath(subLocationCityNameText)).isDisplayed()) {
-                driver.findElement(byLocationSearchDropdown).click();
-            }
-            driver.findElement(By.xpath(subLocationCityNameText)).click();
-        }
-        return this;
-    }
-
-    @Override
-    public boolean isCorrectLocationSelected(String location) {
-//        driver.getInnerDriver().manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
-        return driver.findElement(byLocationSearchInput).getAttribute("value").contains(location);
-    }
-
-    @Override
-    public ZomatoScreen selectSpecificRestaurant() {
-        context.addTestState(SAMPLE_TEST_CONTEXT.RESTAURANT_NAME, driver.findElement(byRestaurantNameText).getText());
-        driver.findElement(byRestaurantNameText).click();
-        return this;
     }
 
     public boolean isCorrectRestaurantSelected() {
@@ -108,7 +53,8 @@ public class ZomatoScreenWeb extends ZomatoScreen {
         return driver.isElementPresent(By.xpath(String.format(restaurantNameHeading, context.getTestState(SAMPLE_TEST_CONTEXT.RESTAURANT_NAME))));
     }
 
-    public ZomatoScreen clickOnBookATable() {
+    public RestaurantScreen clickOnBookATable() {
+        visually.checkWindow(SCREEN_NAME, "Restaurant Screen opened, after Restaurant selection");
         driver.waitTillElementIsPresent(byBookATable);
         driver.findElement(byBookATable).click();
         return this;
@@ -119,7 +65,8 @@ public class ZomatoScreenWeb extends ZomatoScreen {
         return driver.isElementPresent(byBookATableVerificationText);
     }
 
-    public ZomatoScreen selectDate() {
+    public RestaurantScreen selectDate() {
+        visually.checkWindow(SCREEN_NAME, "Restaurant Screen opened, Book a Table selected");
         driver.waitTillElementIsPresent(bySelectDateDropdown);
         driver.findElement(bySelectDateDropdown).click();
         driver.getInnerDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -131,10 +78,11 @@ public class ZomatoScreenWeb extends ZomatoScreen {
 
     public boolean isCorrectDateSelected() {
         driver.getInnerDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        return driver.findElement(bySelectDateDropdown).getText().contains(calculateDateInFutureFormat(2));
+        return driver.findElement(bySelectDateDropdown).getText().contains(calculateDateInFuture(2, "yyyy-MM-dd"));
     }
 
-    public ZomatoScreen selectNumberOfGuests() {
+    public RestaurantScreen selectNumberOfGuests() {
+        visually.checkWindow(SCREEN_NAME, "Restaurant Screen opened, correct Date Selected");
         driver.waitTillElementIsPresent(bySelectGuestsDropdown);
         driver.findElement(bySelectGuestsDropdown).click();
         driver.getInnerDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -148,18 +96,44 @@ public class ZomatoScreenWeb extends ZomatoScreen {
         return driver.findElement(bySelectGuestsDropdown).getText().contains("4");
     }
 
-    public ZomatoScreen selectTimeSlot() {
-        driver.waitTillElementIsPresent(bySelectTimeSlot);
-        driver.findElement(bySelectTimeSlot).click();
+    public RestaurantScreen selectTimeSlot() {
+        visually.checkWindow(SCREEN_NAME, "Restaurant Screen opened, correct number of Guests selected");
+        driver.getInnerDriver().manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+        for (int hour = 7; hour <= 11; hour++) {
+            if (driver.isElementPresent(By.xpath(String.format(bySelectTimeSlot, "0" + hour + ":00 PM")))) {
+                driver.findElement(By.xpath(String.format(bySelectTimeSlot, "0" + hour + ":00 PM"))).click();
+                context.addTestState(SAMPLE_TEST_CONTEXT.TIMESLOT_BOOKED, "0" + hour + ":00 PM");
+                break;
+            } else if (driver.isElementPresent(By.xpath(String.format(bySelectTimeSlot, "0" + hour + ":30 PM")))) {
+                driver.findElement(By.xpath(String.format(bySelectTimeSlot, "0" + hour + ":30 PM"))).click();
+                context.addTestState(SAMPLE_TEST_CONTEXT.TIMESLOT_BOOKED, "0" + hour + ":00 PM");
+                break;
+            }
+        }
+
         return this;
     }
 
     public boolean isCorrectTimeSlotSelected() {
-        driver.getInnerDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        return driver.findElement(bySelectGuestsDropdown).getText().contains("4");
+        boolean flag = false;
+        driver.waitTillPresenceOfAllElements(byAllTimeSlotsXPath);
+        List<WebElement> timeSlotList = driver.findElements(byAllTimeSlotsXPath);
+        if (timeSlotList.size() > 1) {
+            for (int i = 1; i < timeSlotList.size(); i++) {
+                if (!timeSlotList.get(0).getAttribute("class").equals(timeSlotList.get(i).getAttribute("class"))) {
+                    flag = true;
+                }
+            }
+        } else if (timeSlotList.size() == 1) {
+            if (timeSlotList.get(0).getText().equals(context.getTestState(SAMPLE_TEST_CONTEXT.TIMESLOT_BOOKED))) {
+                flag = true;
+            }
+        }
+        return flag;
     }
 
-    public ZomatoScreen fillGuestBasicDetails() {
+    public RestaurantScreen fillGuestBasicDetails() {
+        visually.checkWindow(SCREEN_NAME, "Restaurant Screen opened, dinner time slot selected");
         driver.waitTillElementIsPresent(byFirstNameInputField);
         driver.findElement(byFirstNameInputField).sendKeys("Max");
         driver.waitTillElementIsPresent(byLastNameInputField);
@@ -172,9 +146,26 @@ public class ZomatoScreenWeb extends ZomatoScreen {
         }
         driver.waitTillElementIsPresent(byPhoneNumberInputField);
         driver.findElement(byPhoneNumberInputField).sendKeys("9980768956");
+        visually.checkWindow(SCREEN_NAME, "Restaurant Screen opened, basic guest details filled");
+        return this;
+    }
+
+    public boolean areGuestDetailsCorrect() {
+        boolean flag= driver.findElement(byFirstNameInputField).getAttribute("value").equals("Max") &&
+                driver.findElement(byLastNameInputField).getAttribute("value").equals("Payne") &&
+                driver.findElement(byEmailInputField).getAttribute("value").equals("maxpayne@gmail.com") &&
+                driver.findElement(byISDCodeInputField).getAttribute("value").equals("91") &&
+                driver.findElement(byPhoneNumberInputField).getAttribute("value").equals("9980768956");
         driver.waitTillElementIsPresent(byBookButton);
         driver.findElement(byBookButton).click();
-        return this;
+        return flag;
+    }
+
+    public boolean isLoginPopUpMessageVisible() {
+        driver.getInnerDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.getInnerDriver().switchTo().frame("auth-login-ui");
+        visually.checkWindow(SCREEN_NAME, "Restaurant Screen opened,, switched to frame, checking pop up");
+        return driver.isElementPresent(bySendOneTimePassword) && driver.isElementPresent(byContinueWithGoogle);
     }
 
     private String calculateDateInFuture(int numberOfDaysInFuture) {
@@ -189,11 +180,10 @@ public class ZomatoScreenWeb extends ZomatoScreen {
         return dayOfWeek + ", " + dayOfMonth + " " + month;
     }
 
-    private String calculateDateInFutureFormat(int numberOfDaysInFuture) {
+    private String calculateDateInFuture(int numberOfDaysInFuture, String format) {
         Date date = new Date();
         LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         localDateTime = localDateTime.plusDays(numberOfDaysInFuture);
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(localDateTime);
+        return DateTimeFormatter.ofPattern(format, Locale.ENGLISH).format(localDateTime);
     }
-
 }

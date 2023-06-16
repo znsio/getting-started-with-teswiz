@@ -77,6 +77,7 @@ public class RestaurantDetailScreenWeb extends RestaurantDetailScreen {
 
     @Override
     public boolean isLoginWindowVisible() {
+        driver.waitTillElementIsPresent(By.id(byLoginFrameId));
         driver.switchToFrame(byLoginFrameId);
         driver.waitTillElementIsVisible(byLoginHeaderXpath, 20);
         visually.checkWindow(SCREEN_NAME, "Login Page");

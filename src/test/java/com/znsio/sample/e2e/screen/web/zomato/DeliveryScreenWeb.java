@@ -30,8 +30,7 @@ public class DeliveryScreenWeb extends DeliveryScreen {
 
     @Override
     public DineOutScreen clickDineOutTab() {
-        driver.waitTillElementIsVisible(byDineOutXpath);
-        driver.findElement(byDineOutXpath).click();
+        driver.waitTillElementIsVisible(byDineOutXpath).click();
         return DineOutScreen.get();
     }
 }

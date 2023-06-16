@@ -1,5 +1,5 @@
 @ajio @prod @loggedInUser
-Feature: Ajio B2C Scenarios
+Feature: Ajio LoggedIn User Scenarios
 
 
 #  CONFIG=./configs/ajio_local_config.properties TAG="@validateCart" PLATFORM=web ./gradlew run

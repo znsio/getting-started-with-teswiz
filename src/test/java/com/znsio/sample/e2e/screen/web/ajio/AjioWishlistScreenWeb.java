@@ -28,15 +28,14 @@ public class AjioWishlistScreenWeb
     @Override
     public boolean isProductWishlisted(String productName) {
         LOGGER.info("Checking if product is added to wishlist");
-        String wishlishtProductName = driver.findElement(byProductNameClassName).getText();
-        LOGGER.info("Product added to wishlist" + wishlishtProductName);
-        return productName.equalsIgnoreCase(wishlishtProductName);
+        String wishlistProductName = driver.findElement(byProductNameClassName).getText();
+        return wishlistProductName.equalsIgnoreCase(productName);
     }
 
     @Override
-    public AjioProductDetailsScreen goToProductDetails() {
+    public AjioProductDetailsScreen goBackToProductDetails() {
         LOGGER.info("Going to Product Details from Wishlist");
-
+        driver.getInnerDriver().navigate().back();
         return AjioProductDetailsScreen.get();
     }
 }

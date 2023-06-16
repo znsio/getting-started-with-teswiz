@@ -27,7 +27,7 @@ public abstract class AjioCartScreen {
                 SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
-    public abstract boolean isProductAddedToBag(String productName);
+    public abstract boolean isProductAddedToBag();
 
     public abstract AjioCartScreen removeProductFromCart();
 

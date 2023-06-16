@@ -2,10 +2,10 @@
 Feature: Ajio B2C Scenarios
 
 
-#  CONFIG=./configs/ajio_eat_local_config.properties TAG="@validateCart" PLATFORM=web ./gradlew run
+#  CONFIG=./configs/ajio_local_config.properties TAG="@validateCart" PLATFORM=web ./gradlew run
   @android @web @validateCart
-  Scenario: As a guest user, I should be able to apply a coupon to a "qasics" product with size "UK 10" in my shopping bag
+  Scenario: As a loggedIn user,I should be able to Validate the cart is empty
     Given I login to ajio as "ajioTestUser"
-    And I search for for "heels" product
-    When I wishlist the 7th product and move it to cart
+    When I search for for "nike" product
+    And I wishlist the 7th product and move it to cart
     Then I remove the product from cart and verify cart is empty by relog

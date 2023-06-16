@@ -11,9 +11,6 @@ import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
 import java.util.Map;
-
-import static com.znsio.teswiz.tools.Wait.waitFor;
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AjioHomeBL {
@@ -51,7 +48,6 @@ public class AjioHomeBL {
     }
 
     public AjioHomeBL searchFor(String product) {
-        waitFor(20);
         LOGGER.info("Searching in home page for the product");
         AjioSearchResultsScreen ajioSearchResultsScreen = AjioHomeScreen.get().searchFor(product);
         String actualSearchWasFor = ajioSearchResultsScreen.getActualSearchString();
@@ -61,6 +57,15 @@ public class AjioHomeBL {
         int numberOfProductsFound = ajioSearchResultsScreen.getNumberOfProductsFound();
         assertThat(numberOfProductsFound).as("Insufficient search results retrieved")
                 .isGreaterThan(10);
+        return this;
+    }
+
+    public AjioHomeBL verifyCartIsEmpty() {
+        assertThat(AjioHomeScreen.get()
+                .goToCart()
+                .isCartEmpty())
+                .as("Cart is not empty")
+                .isTrue();
         return this;
     }
 

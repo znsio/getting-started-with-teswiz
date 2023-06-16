@@ -2,10 +2,7 @@ package com.znsio.sample.e2e.businessLayer.ajioUAT;
 
 import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.ajio.AjioCartScreen;
-import com.znsio.sample.e2e.screen.ajio.AjioProductDetailsScreen;
-import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
-import com.znsio.sample.e2e.screen.ajio.AjioWishlistScreen;
+import com.znsio.sample.e2e.screen.ajio.*;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
@@ -60,29 +57,23 @@ public class AjioProductBL {
     }
 
     public AjioProductBL moveTheProductToCart() {
+        String productSize = "6";
         assertThat(AjioWishlistScreen.get()
-                .goToProductDetails()
-                .selectSize()
+                .goBackToProductDetails()
+                .removeFromWishlist()
+                .selectSize(productSize)
                 .addToBag()
                 .goToBag()
-                .isProductAddedToBag(context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_NAME)))
+                .isProductAddedToBag())
                 .as(" Product is not added to Cart")
                 .isTrue();
         return this;
     }
 
-    public AjioProductBL removeProductFromCart() {
+    public AjioHomeBL removeProductFromCart() {
         LOGGER.info("Removing Product from Cart");
         AjioCartScreen.get()
                 .removeProductFromCart();
-        return this;
-    }
-
-    public AjioProductBL verifyCartIsEmpty() {
-        assertThat(AjioCartScreen.get()
-                .isCartEmpty())
-                .as("Cart is not empty")
-                .isTrue();
-        return this;
+        return new AjioHomeBL();
     }
 }

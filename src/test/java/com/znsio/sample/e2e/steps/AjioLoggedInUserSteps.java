@@ -9,6 +9,8 @@ import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 
 import java.util.Map;
@@ -32,9 +34,9 @@ public class AjioLoggedInUserSteps {
         new AjioHomeBL(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER, Runner.getPlatform()).loginAsValidUser(userDetails);
     }
 
-    @And("I search for for {string} product")
+    @When("I search for for {string} product")
     public void iSearchForForProduct(String product) {
-        new AjioHomeBL(SAMPLE_TEST_CONTEXT.GUEST_USER, Runner.getPlatform()).searchFor(product);
+        new AjioHomeBL(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER, Runner.getPlatform()).searchFor(product);
     }
 
     @And("I wishlist the {int}th product and move it to cart")
@@ -42,18 +44,15 @@ public class AjioLoggedInUserSteps {
         new AjioProductBL().wishlistTheProductFromSearchResult(itemNumber).moveTheProductToCart();
     }
 
-    @And("I remove the product from cart and verify cart is empty by relog")
+    @Then("I remove the product from cart and verify cart is empty by relog")
     public void iRemoveTheProductFromCartAndVerifyCartIsEmpty() {
         Map<String, Object> userDetails = Runner.getTestDataAsMap(
                 context.getTestStateAsString(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER));
-        new AjioProductBL().removeProductFromCart();
-        new AjioHomeBL().logoutUser().loginAsValidUser(userDetails);
-        new AjioProductBL().verifyCartIsEmpty();
+        new AjioProductBL()
+                .removeProductFromCart()
+                .logoutUser()
+                .loginAsValidUser(userDetails)
+                .verifyCartIsEmpty();
     }
 
-
-//    @And("I Relog and verify cart is empty")
-//    public void iRelogAndVerifyCartIsEmpty() {
-//        new AjioLoginBL().logoutUser().verifyCartIsEmpty();
-//    }
 }

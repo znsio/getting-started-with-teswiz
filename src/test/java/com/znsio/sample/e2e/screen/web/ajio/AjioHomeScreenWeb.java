@@ -1,5 +1,6 @@
 package com.znsio.sample.e2e.screen.web.ajio;
 
+import com.znsio.sample.e2e.screen.ajio.AjioCartScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
 import com.znsio.teswiz.runner.Driver;
@@ -21,6 +22,7 @@ public class AjioHomeScreenWeb
     private static final By byLoginWithPasswordXpath = By.xpath("//input[@value='LOGIN WITH PASSWORD']");
     private static final By byPasswordEntryId = By.id("pwdInput");
     private static final By byStartShoppingXpath = By.xpath("//input[@value='START SHOPPING']");
+    private static final By byGoToCartXpath = By.xpath("//div[@class='popup-blk cart-blk']//a");
     private static final By byMyAccountXpath = By.xpath("//a[text()='My Account']");
 
 
@@ -67,6 +69,14 @@ public class AjioHomeScreenWeb
     @Override
     public boolean isUserLoggedOut() {
         LOGGER.info("Checking if user is logged out successfully");
+        driver.waitTillElementIsVisible(bySignInXpath);
         return driver.isElementPresent(bySignInXpath);
+    }
+
+    @Override
+    public AjioCartScreen goToCart() {
+        LOGGER.info("Going to Cart");
+        driver.waitTillElementIsVisible(byGoToCartXpath).click();
+        return AjioCartScreen.get();
     }
 }

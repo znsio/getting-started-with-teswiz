@@ -1,5 +1,6 @@
 package com.znsio.sample.e2e.screen.android.ajio;
 
+import com.znsio.sample.e2e.screen.ajio.AjioCartScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
 import com.znsio.teswiz.runner.Driver;
@@ -51,6 +52,11 @@ public class AjioHomeScreenAndroid
 
     @Override
     public boolean isUserLoggedOut() {
+        throw new NotImplementedException(NOT_YET_IMPLEMENTED);
+    }
+
+    @Override
+    public AjioCartScreen goToCart() {
         throw new NotImplementedException(NOT_YET_IMPLEMENTED);
     }
 }

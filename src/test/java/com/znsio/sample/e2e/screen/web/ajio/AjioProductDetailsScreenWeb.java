@@ -17,10 +17,11 @@ public class AjioProductDetailsScreenWeb
     private static final By byProductContentClassName = By.className("prod-container");
     private static final By byWishlistProductClassName = By.className("pdp-wishlist-desktop-icon");
     private static final By byProductNameClassName = By.className("prod-name");
-    private static final By bySizeClassName = By.className("slick-slide slick-active size-swatch");
+    private static final String sizeXpath = "//span[text()='%s']";
     private static final By byWishlistIconXpath = By.xpath("//div[@class='popup-blk wishlist-blk-icon']//a");
     private static final By byAddToCartClassName = By.className("pdp-addtocart-button");
-    private static final By byGoToBagClassName = By.className("btn-cart ");
+    private static final By byGoToBagXpath = By.xpath("//span[text()='GO TO BAG']");
+    private static final By byRemoveFromWishlistClassName = By.className("pdp-wishlist-desktop-icon");
 
 
     private final Driver driver;
@@ -60,9 +61,9 @@ public class AjioProductDetailsScreenWeb
     }
 
     @Override
-    public AjioProductDetailsScreen selectSize() {
+    public AjioProductDetailsScreen selectSize(String productSize) {
         LOGGER.info("selecting size for the product");
-        driver.findElement(bySizeClassName).click();
+        driver.waitTillElementIsVisible(By.xpath(String.format(sizeXpath, productSize))).click();
         return this;
     }
 
@@ -76,7 +77,14 @@ public class AjioProductDetailsScreenWeb
     @Override
     public AjioCartScreen goToBag() {
         LOGGER.info("Go to bag");
-        driver.findElement(byGoToBagClassName).click();
+        driver.waitTillElementIsVisible(byGoToBagXpath).click();
         return AjioCartScreen.get();
+    }
+
+    @Override
+    public AjioProductDetailsScreen removeFromWishlist() {
+        LOGGER.info("Removing product from Wishlist");
+        driver.waitTillElementIsVisible(byRemoveFromWishlistClassName).click();
+        return this;
     }
 }

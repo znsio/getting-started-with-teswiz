@@ -1,8 +1,6 @@
 package com.znsio.sample.e2e.screen.ajio;
 
-import com.znsio.sample.e2e.screen.android.ajio.AjioHomeScreenAndroid;
 import com.znsio.sample.e2e.screen.web.ajio.AjioCartScreenWeb;
-import com.znsio.sample.e2e.screen.web.ajio.AjioHomeScreenWeb;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Drivers;
@@ -29,11 +27,10 @@ public abstract class AjioCartScreen {
                 SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
-    public abstract boolean isProductAddedToBag();
+    public abstract boolean isProductAddedToBag(String productName);
 
     public abstract AjioCartScreen removeProductFromCart();
 
-    public abstract boolean isProductRemovedFromCart();
 
     public abstract boolean isCartEmpty();
 

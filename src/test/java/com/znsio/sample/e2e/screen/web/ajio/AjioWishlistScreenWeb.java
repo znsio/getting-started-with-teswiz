@@ -1,6 +1,7 @@
 package com.znsio.sample.e2e.screen.web.ajio;
 
 
+import com.znsio.sample.e2e.screen.ajio.AjioProductDetailsScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioWishlistScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
@@ -30,5 +31,12 @@ public class AjioWishlistScreenWeb
         String wishlishtProductName = driver.findElement(byProductNameClassName).getText();
         LOGGER.info("Product added to wishlist" + wishlishtProductName);
         return productName.equalsIgnoreCase(wishlishtProductName);
+    }
+
+    @Override
+    public AjioProductDetailsScreen goToProductDetails() {
+        LOGGER.info("Going to Product Details from Wishlist");
+
+        return AjioProductDetailsScreen.get();
     }
 }

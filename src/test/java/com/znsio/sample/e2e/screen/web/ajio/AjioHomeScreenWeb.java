@@ -66,6 +66,7 @@ public class AjioHomeScreenWeb
 
     @Override
     public boolean isUserLoggedOut() {
-        return false;
+        LOGGER.info("Checking if user is logged out successfully");
+        return driver.isElementPresent(bySignInXpath);
     }
 }

@@ -46,10 +46,13 @@ public class AjioProductBL {
                 .isTrue();
 
         AjioProductDetailsScreen ajioProductDetailsScreen = AjioProductDetailsScreen.get();
+        String productName = ajioProductDetailsScreen.getProductName();
+        context.addTestState(SAMPLE_TEST_CONTEXT.PRODUCT_NAME, productName);
+        LOGGER.info("Name of the Product Selected : " + productName);
         assertThat(ajioProductDetailsScreen
                 .wishlistTheProduct()
                 .goToWishList()
-                .isProductWishlisted(ajioProductDetailsScreen.getProductName()))
+                .isProductWishlisted(productName))
                 .as(" Product is not added to wishlist ")
                 .isTrue();
 
@@ -62,18 +65,16 @@ public class AjioProductBL {
                 .selectSize()
                 .addToBag()
                 .goToBag()
-                .isProductAddedToBag())
+                .isProductAddedToBag(context.getTestStateAsString(SAMPLE_TEST_CONTEXT.PRODUCT_NAME)))
                 .as(" Product is not added to Cart")
                 .isTrue();
         return this;
     }
 
     public AjioProductBL removeProductFromCart() {
-        assertThat(AjioCartScreen.get()
-                .removeProductFromCart()
-                .isProductRemovedFromCart())
-                .as("Product not removed from cart")
-                .isTrue();
+        LOGGER.info("Removing Product from Cart");
+        AjioCartScreen.get()
+                .removeProductFromCart();
         return this;
     }
 

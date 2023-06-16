@@ -10,4 +10,5 @@ public class SAMPLE_TEST_CONTEXT
     public static final String INVITATION_LINK = "invitationLink";
     public static final String GUEST_USER = "guestUser";
     public static final String LOGGEDIN_USER = "loggedInUser";
+    public static final String PRODUCT_NAME = "productName";
 }

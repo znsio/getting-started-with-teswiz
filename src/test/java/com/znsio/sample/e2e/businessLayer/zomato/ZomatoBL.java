@@ -43,7 +43,7 @@ public class ZomatoBL {
 
         assertThat(ZomatoHomeScreen.get().selectLocation(cityName)
                 .selectDineOutOption()
-                .getPageHeading())
+                .getRestaurantPageHeading())
                 .as("The select city name is different")
                 .containsIgnoringCase(cityName);
         return this;
@@ -54,7 +54,7 @@ public class ZomatoBL {
 
         String restaurantName = DiningOutScreen.get().getRestaurantName();
 
-        assertThat(DiningOutScreen.get().selectRestaurant().verifyRestaurantNameVisible(restaurantName))
+        assertThat(DiningOutScreen.get().selectRestaurant().isRestaurantNameVisible(restaurantName))
                 .as("Different restaurant detail page obtained").isTrue();
 
         RestaurantDetailScreen restaurantDetailScreen = RestaurantDetailScreen.get()

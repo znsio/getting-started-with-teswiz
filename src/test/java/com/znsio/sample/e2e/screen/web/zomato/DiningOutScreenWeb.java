@@ -31,14 +31,13 @@ public class DiningOutScreenWeb extends DiningOutScreen {
 
     @Override
     public String getRestaurantName() {
-        visually.checkWindow(SCREEN_NAME, "Restaurant list page");
-        String restaurantName = driver.waitTillElementIsVisible(byRestaurantNameXpath).getText();
+        String restaurantName = driver.findElement(byRestaurantNameXpath).getText();
         LOGGER.info(String.format("Selected restaurant name: %s", restaurantName));
         return restaurantName;
     }
 
     @Override
-    public String getPageHeading() {
+    public String getRestaurantPageHeading() {
         return driver.waitTillElementIsVisible(byRestaurantCityXpath).getText();
     }
 

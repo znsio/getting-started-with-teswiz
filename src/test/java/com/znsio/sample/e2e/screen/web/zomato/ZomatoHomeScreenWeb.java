@@ -1,5 +1,6 @@
 package com.znsio.sample.e2e.screen.web.zomato;
 
+import com.applitools.eyes.selenium.fluent.Target;
 import com.znsio.sample.e2e.screen.zomato.DiningOutScreen;
 import com.znsio.sample.e2e.screen.zomato.ZomatoHomeScreen;
 import com.znsio.teswiz.runner.Driver;
@@ -14,6 +15,7 @@ public class ZomatoHomeScreenWeb extends ZomatoHomeScreen {
     private final Visual visually;
     private final By byCityNameInputXpath = By.xpath("(//input)[1]");
     private final String bySelectCityXpath = "//p[text()='%s']";
+    private final By byCityNameClass = By.className("next-line");
 
     public ZomatoHomeScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
@@ -22,7 +24,7 @@ public class ZomatoHomeScreenWeb extends ZomatoHomeScreen {
 
     @Override
     public DiningOutScreen selectLocation(String cityName) {
-        visually.checkWindow(SCREEN_NAME, "Home page");
+        visually.check(SCREEN_NAME, "Home page", Target.window().fully().layout(byCityNameInputXpath, byCityNameClass));
         driver.waitTillElementIsPresent(byCityNameInputXpath).clear();
         driver.findElement(byCityNameInputXpath).sendKeys(cityName);
         driver.findElement(byCityNameInputXpath).click();

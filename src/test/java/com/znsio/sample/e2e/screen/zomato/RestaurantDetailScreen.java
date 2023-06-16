@@ -32,7 +32,7 @@ public abstract class RestaurantDetailScreen {
     public abstract RestaurantDetailScreen enterGuestCount(int guestCount);
     public abstract RestaurantDetailScreen selectBookOption();
     public abstract RestaurantDetailScreen verifyLogin();
-    public abstract boolean verifyRestaurantNameVisible(String restaurantName);
+    public abstract boolean isRestaurantNameVisible(String restaurantName);
     public abstract boolean isSelectedAheadDateCorrect(int aheadDays);
     public abstract boolean isNumberOfGuestSelectedCorrect(int guestCount);
     public abstract boolean isSelectTimeOptionEnabled();

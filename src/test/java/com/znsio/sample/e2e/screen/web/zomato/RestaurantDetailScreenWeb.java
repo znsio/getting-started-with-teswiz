@@ -46,7 +46,7 @@ public class RestaurantDetailScreenWeb extends RestaurantDetailScreen {
 
     @Override
     public RestaurantDetailScreen selectBookingDate(int aheadDays) {
-        visually.check(SCREEN_NAME, "Booking Details", Target.region(byBookingDetailCSS));
+        visually.check(SCREEN_NAME, "Booking form", Target.region(byBookingDetailCSS));
         driver.waitTillElementIsVisible(byDateInputXpath).click();
         driver.waitTillElementIsVisible(By.xpath(String.format(bySelectDateXpath, getAheadDate(aheadDays)))).click();
         return this;
@@ -78,8 +78,9 @@ public class RestaurantDetailScreenWeb extends RestaurantDetailScreen {
     }
 
     @Override
-    public boolean verifyRestaurantNameVisible(String restaurantName) {
-        visually.check(SCREEN_NAME, "Restaurant detail page", Target.window().fully().strict());
+    public boolean isRestaurantNameVisible(String restaurantName) {
+        visually.check(SCREEN_NAME, "Restaurant detail page", Target.window()
+                .fully().strict(byTabListCSS, byPageHeaderCSS, byPageFooterCSS));
         driver.waitTillElementIsVisible(By.xpath(String.format(byRestaurantNameXpath, restaurantName)));
         return driver.isElementPresent(By.xpath(String.format(byRestaurantNameXpath, restaurantName)));
     }

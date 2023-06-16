@@ -29,6 +29,6 @@ public abstract class DiningOutScreen {
 
     public abstract RestaurantDetailScreen selectRestaurant();
     public abstract String getRestaurantName();
-    public abstract String getPageHeading();
+    public abstract String getRestaurantPageHeading();
     public abstract DiningOutScreen selectDineOutOption();
 }

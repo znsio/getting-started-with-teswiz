@@ -12,7 +12,7 @@ import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 
 public class ZomatoSteps {
-    private static final Logger LOGGER = Logger.getLogger(JioMeetSteps.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ZomatoSteps.class.getName());
     private final TestExecutionContext context;
 
     public ZomatoSteps() {
@@ -28,13 +28,13 @@ public class ZomatoSteps {
         new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).selectDiningLocation(cityName);
     }
 
-    @Then("I am able to view login option")
-    public void iAmAbleToViewLoginOption() {
-        new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).verifyLoginOption();
-    }
-
     @When("I book a table for {int} guests in a restaurant for {int} days ahead")
     public void iBookATableForGuestsInARestaurantForDaysAhead(int guestCount, int aheadDays) {
         new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).bookATable(guestCount, aheadDays);
+    }
+
+    @Then("I am able to view login option")
+    public void iAmAbleToViewLoginOption() {
+        new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).verifyLoginOption();
     }
 }

@@ -31,17 +31,21 @@ public class AjioLoggedInUserSteps {
         Drivers.createDriverFor(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER, Runner.getPlatform(), context);
         context.addTestState(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER, user);
         Map<String, Object> userDetails = Runner.getTestDataAsMap(user);
-        new AjioHomeBL(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER, Runner.getPlatform()).loginAsValidUser(userDetails);
+        new AjioHomeBL(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER, Runner.getPlatform())
+                .loginAsValidUser(userDetails);
     }
 
     @When("I search for for {string} product")
     public void iSearchForForProduct(String product) {
-        new AjioHomeBL(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER, Runner.getPlatform()).searchFor(product);
+        new AjioHomeBL(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER, Runner.getPlatform())
+                .searchFor(product);
     }
 
     @And("I wishlist the {int}th product and move it to cart")
     public void iWishlistTheThProductAndMoveItToCart(int itemNumber) {
-        new AjioProductBL().wishlistTheProductFromSearchResult(itemNumber).moveTheProductToCart();
+        new AjioProductBL()
+                .wishlistTheProductFromSearchResult(itemNumber)
+                .moveTheProductToCart();
     }
 
     @Then("I remove the product from cart and verify cart is empty by relog")

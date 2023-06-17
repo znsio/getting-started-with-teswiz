@@ -30,5 +30,7 @@ public abstract class AjioWishlistScreen {
 
     public abstract boolean isProductPresentInWishlist(String productName);
 
-    public abstract AjioProductDetailsScreen goBackToProductDetails();
+    public abstract AjioWishlistScreen selectSizeAndMoveToBag(String productSize);
+
+    public abstract AjioCartScreen proceedToBag();
 }

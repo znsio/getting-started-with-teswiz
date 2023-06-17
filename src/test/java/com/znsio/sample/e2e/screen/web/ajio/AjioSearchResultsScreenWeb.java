@@ -46,7 +46,7 @@ public class AjioSearchResultsScreenWeb
     @Override
     public AjioProductDetailsScreen goToProductDetails(int itemNumber) {
         LOGGER.info(String.format("Selecting %s th product from the item list ", itemNumber));
-        getProductList().get(itemNumber).click();
+        getProductList().get(itemNumber-1).click();
         return AjioProductDetailsScreen.get();
     }
 

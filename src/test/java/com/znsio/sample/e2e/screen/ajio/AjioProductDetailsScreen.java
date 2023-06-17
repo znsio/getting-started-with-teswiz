@@ -37,13 +37,5 @@ public abstract class AjioProductDetailsScreen {
 
     public abstract AjioWishlistScreen goToWishList();
 
-    public abstract AjioProductDetailsScreen selectSize(String productSize);
-
-    public abstract AjioProductDetailsScreen addToBag();
-
-    public abstract AjioCartScreen goToBag();
-
-    public abstract AjioProductDetailsScreen removeFromWishlist();
-
     public abstract boolean isProductWishlisted();
 }

@@ -14,14 +14,10 @@ public class AjioProductDetailsScreenWeb
         extends AjioProductDetailsScreen {
     private static final String SCREEN_NAME = AjioProductDetailsScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
-    private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private static final By byProductContentClassName = By.className("prod-container");
     private static final By byWishlistProductClassName = By.className("pdp-wishlist-desktop-icon");
     private static final By byProductNameClassName = By.className("prod-name");
-    private static final String sizeXpath = "//span[text()='%s']";
     private static final By byWishlistIconXpath = By.xpath("//div[@class='popup-blk wishlist-blk-icon']//a");
-    private static final By byAddToCartClassName = By.className("pdp-addtocart-button");
-    private static final By byGoToBagXpath = By.xpath("//span[text()='GO TO BAG']");
     private static final By byRemoveFromWishlistXpath = By.xpath("//span[contains(text(),'REMOVE FROM WISHLIST')]");
 
 
@@ -61,34 +57,6 @@ public class AjioProductDetailsScreenWeb
         LOGGER.info("Going to wishlist of user");
         driver.waitForClickabilityOf(byWishlistIconXpath).click();
         return AjioWishlistScreen.get();
-    }
-
-    @Override
-    public AjioProductDetailsScreen selectSize(String productSize) {
-        LOGGER.info("selecting size for the product");
-        driver.waitTillElementIsVisible(By.xpath(String.format(sizeXpath, productSize))).click();
-        return this;
-    }
-
-    @Override
-    public AjioProductDetailsScreen addToBag() {
-        LOGGER.info("Adding product to Bag");
-        driver.findElement(byAddToCartClassName).click();
-        return this;
-    }
-
-    @Override
-    public AjioCartScreen goToBag() {
-        LOGGER.info("Go to bag");
-        driver.waitTillElementIsVisible(byGoToBagXpath).click();
-        return AjioCartScreen.get();
-    }
-
-    @Override
-    public AjioProductDetailsScreen removeFromWishlist() {
-        LOGGER.info("Removing product from Wishlist");
-        driver.waitTillElementIsVisible(byRemoveFromWishlistXpath).click();
-        return this;
     }
 
     @Override

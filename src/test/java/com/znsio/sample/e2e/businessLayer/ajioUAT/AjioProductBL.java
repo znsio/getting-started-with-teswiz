@@ -50,25 +50,27 @@ public class AjioProductBL {
         LOGGER.info("Name of the Product Selected : " + productName);
 
         if (!(ajioProductDetailsScreen.isProductWishlisted())) {
-            assertThat(ajioProductDetailsScreen
-                    .wishlistTheProduct()
-                    .goToWishList()
-                    .isProductPresentInWishlist(productName))
-                    .as(" Product is not added to wishlist ")
+            softly.assertThat(ajioProductDetailsScreen
+                            .wishlistTheProduct()
+                            .isProductWishlisted())
+                    .as("Status not changed as Wishlisted in Details Page")
                     .isTrue();
         }
+        assertThat(ajioProductDetailsScreen
+                .goToWishList()
+                .isProductPresentInWishlist(productName))
+                .as(" Product is not added to wishlist ")
+                .isTrue();
+
         return this;
     }
 
     public AjioProductBL moveTheProductToCart() {
-        LOGGER.info("Moving the product to Cart from Details");
+        LOGGER.info("Moving the product to Cart from wishlist");
         String productSize = "6";
         assertThat(AjioWishlistScreen.get()
-                .goBackToProductDetails()
-                .removeFromWishlist()
-                .selectSize(productSize)
-                .addToBag()
-                .goToBag()
+                .selectSizeAndMoveToBag(productSize)
+                .proceedToBag()
                 .isProductAddedToBag())
                 .as(" Product is not added to Cart")
                 .isTrue();

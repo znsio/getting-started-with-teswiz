@@ -9,7 +9,6 @@ import com.znsio.teswiz.runner.Runner;
 import com.znsio.teswiz.runner.Visual;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.WebElement;
 
 import java.util.List;
 

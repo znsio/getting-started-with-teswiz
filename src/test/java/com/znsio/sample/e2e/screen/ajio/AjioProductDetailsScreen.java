@@ -44,4 +44,6 @@ public abstract class AjioProductDetailsScreen {
     public abstract AjioCartScreen goToBag();
 
     public abstract AjioProductDetailsScreen removeFromWishlist();
+
+    public abstract boolean isProductWishlisted();
 }

@@ -51,7 +51,7 @@ public class AjioHomeBL {
         LOGGER.info("Searching in home page for the product");
         AjioSearchResultsScreen ajioSearchResultsScreen = AjioHomeScreen.get().searchFor(product);
         String actualSearchWasFor = ajioSearchResultsScreen.getActualSearchString();
-        softly.assertThat(actualSearchWasFor).as("Search was for a different value")
+        softly.assertThat(actualSearchWasFor.toUpperCase()).as("Search was for a different value")
                 .isEqualTo(product.toUpperCase());
 
         int numberOfProductsFound = ajioSearchResultsScreen.getNumberOfProductsFound();

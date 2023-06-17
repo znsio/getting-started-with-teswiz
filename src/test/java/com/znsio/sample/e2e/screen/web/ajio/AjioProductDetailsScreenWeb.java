@@ -22,7 +22,7 @@ public class AjioProductDetailsScreenWeb
     private static final By byWishlistIconXpath = By.xpath("//div[@class='popup-blk wishlist-blk-icon']//a");
     private static final By byAddToCartClassName = By.className("pdp-addtocart-button");
     private static final By byGoToBagXpath = By.xpath("//span[text()='GO TO BAG']");
-    private static final By byRemoveFromWishlistClassName = By.className("pdp-wishlist-desktop-icon");
+    private static final By byRemoveFromWishlistXpath = By.xpath("//span[contains(text(),'REMOVE FROM WISHLIST')]");
 
 
     private final Driver driver;
@@ -87,7 +87,13 @@ public class AjioProductDetailsScreenWeb
     @Override
     public AjioProductDetailsScreen removeFromWishlist() {
         LOGGER.info("Removing product from Wishlist");
-        driver.waitTillElementIsVisible(byRemoveFromWishlistClassName).click();
+        driver.waitTillElementIsVisible(byRemoveFromWishlistXpath).click();
         return this;
+    }
+
+    @Override
+    public boolean isProductWishlisted() {
+        LOGGER.info("Checking if product is wishlisted ");
+        return driver.isElementPresent(byRemoveFromWishlistXpath);
     }
 }

@@ -28,7 +28,7 @@ public abstract class AjioWishlistScreen {
                 SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
-    public abstract boolean isProductWishlisted(String productName);
+    public abstract boolean isProductPresentInWishlist(String productName);
 
     public abstract AjioProductDetailsScreen goBackToProductDetails();
 }

@@ -26,7 +26,7 @@ public class AjioWishlistScreenWeb
 
 
     @Override
-    public boolean isProductWishlisted(String productName) {
+    public boolean isProductPresentInWishlist(String productName) {
         LOGGER.info("Checking if product is added to wishlist");
         String wishlistProductName = driver.findElement(byProductNameClassName).getText();
         visually.check(SCREEN_NAME, "Wishlist page for User", Target.window().fully().strict());

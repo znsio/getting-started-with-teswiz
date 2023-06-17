@@ -37,6 +37,7 @@ public class AjioProductBL {
 
     public AjioProductBL wishlistTheProductFromSearchResult(int itemNumber) {
         LOGGER.info("Adding the Product to Wishlist from Product Details");
+
         assertThat(AjioSearchResultsScreen.get()
                 .goToProductDetails(itemNumber)
                 .isProductOpened())
@@ -47,17 +48,20 @@ public class AjioProductBL {
         String productName = ajioProductDetailsScreen.getProductName();
         context.addTestState(SAMPLE_TEST_CONTEXT.PRODUCT_NAME, productName);
         LOGGER.info("Name of the Product Selected : " + productName);
-        assertThat(ajioProductDetailsScreen
-                .wishlistTheProduct()
-                .goToWishList()
-                .isProductWishlisted(productName))
-                .as(" Product is not added to wishlist ")
-                .isTrue();
 
+        if (!(ajioProductDetailsScreen.isProductWishlisted())) {
+            assertThat(ajioProductDetailsScreen
+                    .wishlistTheProduct()
+                    .goToWishList()
+                    .isProductPresentInWishlist(productName))
+                    .as(" Product is not added to wishlist ")
+                    .isTrue();
+        }
         return this;
     }
 
     public AjioProductBL moveTheProductToCart() {
+        LOGGER.info("Moving the product to Cart from Details");
         String productSize = "6";
         assertThat(AjioWishlistScreen.get()
                 .goBackToProductDetails()

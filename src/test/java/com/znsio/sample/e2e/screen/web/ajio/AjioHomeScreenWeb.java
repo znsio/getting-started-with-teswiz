@@ -62,15 +62,15 @@ public class AjioHomeScreenWeb
 
     @Override
     public boolean isUserSignedIn() {
-        LOGGER.info("Verifying user is logged in successfully");
+        LOGGER.info("Verifying user is signed in successfully");
         driver.waitTillElementIsVisible(byMyAccountXpath);
         visually.check(SCREEN_NAME, "Ajio Home page for LoggedIn User", Target.window().fully());
         return driver.isElementPresent(byMyAccountXpath);
     }
 
     @Override
-    public boolean isUserLoggedOut() {
-        LOGGER.info("Checking if user is logged out successfully");
+    public boolean isUserSignedOut() {
+        LOGGER.info("Checking if user is signed out successfully");
         driver.waitTillElementIsVisible(bySignInXpath);
         visually.check(SCREEN_NAME, "Ajio Landing Page", Target.window().fully().strict());
         return driver.isElementPresent(bySignInXpath);

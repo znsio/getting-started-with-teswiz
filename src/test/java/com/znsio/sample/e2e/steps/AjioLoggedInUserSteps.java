@@ -7,7 +7,6 @@ import com.znsio.sample.e2e.businessLayer.ajioUAT.AjioProductBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -32,18 +31,13 @@ public class AjioLoggedInUserSteps {
         context.addTestState(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER, user);
         Map<String, Object> userDetails = Runner.getTestDataAsMap(user);
         new AjioHomeBL(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER, Runner.getPlatform())
-                .loginAsValidUser(userDetails);
+                .signinAsValidUser(userDetails);
     }
 
-    @When("I search for for {string} product")
-    public void iSearchForForProduct(String product) {
+    @When("I search for for {string} and wishlist the {int}th product and move it to cart")
+    public void iSearchForForAndWishlistTheThProductAndMoveItToCart(String product, int itemNumber) {
         new AjioHomeBL(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER, Runner.getPlatform())
-                .searchFor(product);
-    }
-
-    @And("I wishlist the {int}th product and move it to cart")
-    public void iWishlistTheThProductAndMoveItToCart(int itemNumber) {
-        new AjioProductBL()
+                .searchFor(product)
                 .wishlistTheProductFromSearchResult(itemNumber)
                 .moveTheProductToCart();
     }
@@ -54,9 +48,11 @@ public class AjioLoggedInUserSteps {
                 context.getTestStateAsString(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER));
         new AjioProductBL()
                 .removeProductFromCart()
-                .logoutUser()
-                .loginAsValidUser(userDetails)
+                .signOutUser()
+                .signinAsValidUser(userDetails)
                 .verifyCartIsEmpty();
     }
 
+
 }
+

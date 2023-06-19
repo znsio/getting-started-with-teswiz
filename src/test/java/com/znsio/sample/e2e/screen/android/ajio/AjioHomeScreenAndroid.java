@@ -51,7 +51,7 @@ public class AjioHomeScreenAndroid
     }
 
     @Override
-    public boolean isUserLoggedOut() {
+    public boolean isUserSignedOut() {
         throw new NotImplementedException(NOT_YET_IMPLEMENTED);
     }
 

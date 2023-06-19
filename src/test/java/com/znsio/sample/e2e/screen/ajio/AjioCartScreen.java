@@ -34,5 +34,5 @@ public abstract class AjioCartScreen {
 
     public abstract boolean isCartEmpty();
 
-    public abstract AjioHomeScreen logout();
+    public abstract AjioHomeScreen signOut();
 }

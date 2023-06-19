@@ -40,7 +40,7 @@ public class AjioProductBL {
 
         assertThat(AjioSearchResultsScreen.get()
                 .goToProductDetails(itemNumber)
-                .isProductOpened())
+                .isProductDetailsPageLoaded())
                 .as("Product Details not Opened")
                 .isTrue();
 

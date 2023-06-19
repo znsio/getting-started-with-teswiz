@@ -37,7 +37,7 @@ public class AjioHomeBL {
         this.currentPlatform = Runner.getPlatform();
     }
 
-    public AjioHomeBL loginAsValidUser(Map userDetails) {
+    public AjioHomeBL signinAsValidUser(Map userDetails) {
         assertThat(AjioHomeScreen.get().signInUser(
                         userDetails.get("emailId").toString(),
                         userDetails.get("password").toString())
@@ -47,7 +47,7 @@ public class AjioHomeBL {
         return this;
     }
 
-    public AjioHomeBL searchFor(String product) {
+    public AjioProductBL searchFor(String product) {
         LOGGER.info("Searching in home page for the product");
         AjioSearchResultsScreen ajioSearchResultsScreen = AjioHomeScreen.get().searchFor(product);
         String actualSearchWasFor = ajioSearchResultsScreen.getActualSearchString();
@@ -57,7 +57,7 @@ public class AjioHomeBL {
         int numberOfProductsFound = ajioSearchResultsScreen.getNumberOfProductsFound();
         assertThat(numberOfProductsFound).as("Insufficient search results retrieved")
                 .isGreaterThan(10);
-        return this;
+        return new AjioProductBL();
     }
 
     public AjioHomeBL verifyCartIsEmpty() {
@@ -70,12 +70,12 @@ public class AjioHomeBL {
         return this;
     }
 
-    public AjioHomeBL logoutUser() {
-        LOGGER.info("Logout User");
+    public AjioHomeBL signOutUser() {
+        LOGGER.info("SignOut User");
         assertThat(AjioCartScreen.get()
-                .logout()
-                .isUserLoggedOut())
-                .as("User is not logged out")
+                .signOut()
+                .isUserSignedOut())
+                .as("User is not signed out")
                 .isTrue();
 
         return this;

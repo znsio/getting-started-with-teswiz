@@ -54,7 +54,7 @@ public class AjioCartScreenWeb
     }
 
     @Override
-    public AjioHomeScreen logout() {
+    public AjioHomeScreen signOut() {
         LOGGER.info("Logout user");
         driver.waitTillElementIsVisible(bySignOutXpath).click();
         return AjioHomeScreen.get();

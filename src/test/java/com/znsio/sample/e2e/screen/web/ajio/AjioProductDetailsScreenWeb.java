@@ -38,7 +38,7 @@ public class AjioProductDetailsScreenWeb
     }
 
     @Override
-    public boolean isProductOpened() {
+    public boolean isProductDetailsPageLoaded() {
         LOGGER.info("Verifying Product Details Page");
         driver.switchToNextTab();
         driver.waitTillElementIsVisible(byProductContentClassName);

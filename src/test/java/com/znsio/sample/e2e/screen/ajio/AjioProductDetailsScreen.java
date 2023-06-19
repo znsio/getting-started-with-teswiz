@@ -31,7 +31,7 @@ public abstract class AjioProductDetailsScreen {
 
     public abstract AjioProductDetailsScreen wishlistTheProduct();
 
-    public abstract boolean isProductOpened();
+    public abstract boolean isProductDetailsPageLoaded();
 
     public abstract String getProductName();
 

@@ -8,6 +8,8 @@ import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class InAMeetingBL {
     private static final Logger LOGGER = Logger.getLogger(InAMeetingBL.class.getName());
     private final TestExecutionContext context;
@@ -40,6 +42,18 @@ public class InAMeetingBL {
 
     public InAMeetingBL muteMyself() {
         InAMeetingScreen.get().mute();
+        return this;
+    }
+
+    public InAMeetingBL openNotificationFromNotificationBar() {
+        InAMeetingScreen.get().openJioMeetNotification();
+        return this;
+    }
+
+    public InAMeetingBL verifyMeetingOpenedInJioMeetApplication() {
+        assertThat(InAMeetingScreen.get().isMeetingStarted())
+                .as("Meeting is not opened in Jio Meet Application")
+                .isTrue();
         return this;
     }
 }

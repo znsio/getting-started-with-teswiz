@@ -41,4 +41,5 @@ public abstract class InAMeetingScreen {
     public abstract InAMeetingScreen mute();
 
     public abstract String getMicLabelText();
+    public abstract InAMeetingScreen openJioMeetNotification();
 }

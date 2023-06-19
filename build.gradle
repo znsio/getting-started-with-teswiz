@@ -3,7 +3,8 @@ import java.text.SimpleDateFormat
 buildscript {
     ext {
         gradleVersion = '7.3.3'
-        teswizVersion = '56413e91b0'
+        teswizVersion = 'd97e6840f8'
+        atdVersion = '54ff762128'
     }
     repositories {
         mavenLocal()
@@ -21,6 +22,7 @@ version '0.0.1'
 repositories {
     mavenLocal()
     maven { url 'https://jitpack.io' }
+    mavenCentral()
 }
 
 configurations {
@@ -35,6 +37,7 @@ dependencies {
     implementation("com.github.znsio:teswiz:${project.teswizVersion}") {
         transitive = false
     }
+    implementation "com.github.AppiumTestDistribution:AppiumTestDistribution:$project.atdVersion"
 }
 
 static def getCurrentDatestamp() {

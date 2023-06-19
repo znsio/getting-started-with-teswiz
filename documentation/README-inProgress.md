@@ -23,6 +23,14 @@ There are some method name changes as listed below:
 | Purpose                                          | ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Old ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) | ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) New ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) |
 |:-------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
 
+## Minor Enhancement
+
+1. setWebViewContext() - Have updated use of AppiumDriver to SupportsContextSwitching for switching to Web View context.
+   Added logger for enhanced logging of context handles.
+2. setNativeAppContext() - Have updated use of AppiumDriver to SupportsContextSwitching for switching to Native App
+   context. Added logger for enhanced logging of context handles.
+
+
 ## Logging to ReportPortal
 
 To make it easy to log to ReportPortal, the following new methods have been added:

@@ -53,8 +53,7 @@ public class ClipboardDemoScreenAndroid
 
     private ClipboardDemoScreenAndroid enterTextToAddInClipboard(String content) {
         waitFor(2);
-        WebElement contentElement =  driver.findElementByAccessibilityId(
-                byMessageInputAccessibilityId);
+        WebElement contentElement = driver.findElementByAccessibilityId(byMessageInputAccessibilityId);
         contentElement.click();
         contentElement.clear();
         contentElement.sendKeys(content);

@@ -62,4 +62,7 @@ public abstract class VodqaScreen {
     public abstract VodqaScreen swipeByPassingPercentageAttributes(int atPercentScreenHeight, int fromPercentScreenWidth, int toPercentScreenWidth);
 
     public abstract VodqaScreen scrollDownInDynamicLayer(Direction direction);
+
+    public abstract VodqaScreen scrollVerticallyByPercentage(int fromPercentHeight, int toPercentHeight, int percentWidth);
+
 }

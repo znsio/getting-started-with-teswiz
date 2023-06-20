@@ -127,4 +127,9 @@ public class VodqaBL {
         VodqaScreen.get().openVerticalSwipingScreen().scrollDownInDynamicLayer(direction);
         return this;
     }
+
+    public VodqaBL scrollVerticallyByPercentageOnVerticalSwipingScreen(int fromPercentHeight, int toPercentHeight, int percentWidth) {
+        VodqaScreen.get().openVerticalSwipingScreen().scrollVerticallyByPercentage(fromPercentHeight, toPercentHeight, percentWidth);
+        return this;
+    }
 }

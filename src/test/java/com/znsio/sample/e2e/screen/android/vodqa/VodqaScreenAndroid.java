@@ -179,4 +179,12 @@ public class VodqaScreenAndroid extends VodqaScreen {
         driver.scrollInDynamicLayer(direction);
         return this;
     }
+
+    @Override
+    public VodqaScreen scrollVerticallyByPercentage(int fromPercentHeight, int toPercentHeight, int percentWidth) {
+        driver.waitTillElementIsPresent(byCLanguageTextView);
+        driver.scrollVertically(fromPercentHeight, toPercentHeight, percentWidth);
+        visually.checkWindow(SCREEN_NAME, "Screen scrolled down");
+        return this;
+    }
 }

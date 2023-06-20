@@ -10,6 +10,7 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
 public abstract class VodqaScreen {
+
     private static final String SCREEN_NAME = VodqaScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
@@ -28,6 +29,10 @@ public abstract class VodqaScreen {
     }
 
     public abstract VodqaScreen login();
+
+    public abstract VodqaScreen putAppInTheBackground(int time);
+
+    public abstract boolean isAppWorkingInBackground();
 
     public abstract WebViewScreen enterIntoNewsWebViewSection();
 

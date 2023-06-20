@@ -12,6 +12,7 @@ import io.cucumber.java.en.Then;
 import org.apache.log4j.Logger;
 
 public class VodQASteps {
+
     private static final Logger LOGGER = Logger.getLogger(VodQASteps.class.getName());
     private final TestExecutionContext context;
 
@@ -24,6 +25,12 @@ public class VodQASteps {
     public void loginToApplication() {
         Drivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform(), context);
         new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).login();
+    }
+
+
+    @Then("App should work in background for {int} sec")
+    public void appShouldWorkInBackgroundForDefinedTime(int time) {
+        new VodqaBL().verifyAppWorksInBackground(time);
     }
 
     @Then("I am able to view hacker news login button inside web view section")

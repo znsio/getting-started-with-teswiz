@@ -5,7 +5,6 @@ import com.znsio.sample.e2e.screen.theapp.ClipboardDemoScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Runner;
 import com.znsio.teswiz.runner.Visual;
-
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 
@@ -54,8 +53,8 @@ public class ClipboardDemoScreenAndroid
 
     private ClipboardDemoScreenAndroid enterTextToAddInClipboard(String content) {
         waitFor(2);
-        WebElement contentElement =
-                driver.findElementByAccessibilityId(byMessageInputAccessibilityId);
+        WebElement contentElement = driver.findElementByAccessibilityId(
+                byMessageInputAccessibilityId);
         contentElement.click();
         contentElement.clear();
         contentElement.sendKeys(content);

@@ -15,7 +15,10 @@
     "noSign": true,
     "platformName": "android",
     "printPageSourceOnFindFailure": true,
-    "skipUnlock": true
+    "skipUnlock": true,
+    "app": {
+      "local": "https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/main/VodQA.apk"
+    }
   },
   "serverConfig" : {
     "server": {

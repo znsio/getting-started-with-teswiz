@@ -1,8 +1,8 @@
 package com.znsio.sample.e2e.screen.windows.notepad;
 
-import com.znsio.e2e.tools.Driver;
-import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.notepad.NotepadScreen;
+import com.znsio.teswiz.runner.Driver;
+import com.znsio.teswiz.runner.Visual;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
@@ -22,8 +22,7 @@ public class NotepadScreenWindows
     @Override
     public NotepadScreen typeMessage(String message) {
         LOGGER.info(String.format("Typing message: '%s'", message));
-        driver.findElement(byEditorName)
-              .sendKeys(message);
+        driver.findElement(byEditorName).sendKeys(message);
         visually.checkWindow(SCREEN_NAME, "Typed message in Notepad");
         return this;
     }

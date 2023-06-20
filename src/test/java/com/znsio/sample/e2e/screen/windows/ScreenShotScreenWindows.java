@@ -1,16 +1,16 @@
 package com.znsio.sample.e2e.screen.windows;
 
-import com.znsio.e2e.tools.Driver;
-import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.ScreenShotScreen;
+import com.znsio.teswiz.runner.Driver;
+import com.znsio.teswiz.runner.Visual;
 import org.apache.log4j.Logger;
 
 public class ScreenShotScreenWindows
         extends ScreenShotScreen {
-    private final Driver driver;
-    private final Visual visually;
     private static final String SCREEN_NAME = ScreenShotScreenWindows.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
+    private final Driver driver;
+    private final Visual visually;
 
     public ScreenShotScreenWindows(Driver driver, Visual visually) {
         this.driver = driver;

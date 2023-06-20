@@ -6,9 +6,9 @@ import com.applitools.eyes.visualgrid.model.DeviceName;
 import com.applitools.eyes.visualgrid.model.ScreenOrientation;
 import com.context.SessionContext;
 import com.context.TestExecutionContext;
-import com.znsio.e2e.entities.APPLITOOLS;
-import com.znsio.e2e.entities.TEST_CONTEXT;
-import com.znsio.e2e.steps.Hooks;
+import com.znsio.teswiz.entities.APPLITOOLS;
+import com.znsio.teswiz.entities.TEST_CONTEXT;
+import com.znsio.teswiz.steps.Hooks;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -22,18 +22,18 @@ public class RunTestCukes
     private final TestExecutionContext context;
 
     public RunTestCukes() {
-        long threadId = Thread.currentThread()
-                              .getId();
+        long threadId = Thread.currentThread().getId();
         LOGGER.info("RunTestCukes constructor: ThreadId: " + threadId);
         context = SessionContext.getTestExecutionContext(threadId);
-        System.setProperty(TEST_CONTEXT.TAGS_TO_EXCLUDE_FROM_CUCUMBER_REPORT, "@android,@web,@prod,@sit,@eat,@uat,@qa");
+        System.setProperty(TEST_CONTEXT.TAGS_TO_EXCLUDE_FROM_CUCUMBER_REPORT,
+                           "@android,@web,@prod,@sit,@eat,@uat,@qa");
     }
 
     @Override
     @DataProvider(parallel = true)
     public Object[][] scenarios() {
-        LOGGER.info(String.format("ThreadID: %d: in overridden scenarios%n", Thread.currentThread()
-                                                                                   .getId()));
+        LOGGER.info(String.format("ThreadID: %d: in overridden scenarios%n",
+                                  Thread.currentThread().getId()));
         Object[][] scenarios = super.scenarios();
         LOGGER.info(scenarios);
         return scenarios;
@@ -41,8 +41,8 @@ public class RunTestCukes
 
     @Before
     public void beforeTestScenario(Scenario scenario) {
-        LOGGER.info(String.format("ThreadID: %d: in overridden beforeTestScenario%n", Thread.currentThread()
-                                                                                            .getId()));
+        LOGGER.info(String.format("ThreadID: %d: in overridden beforeTestScenario%n",
+                                  Thread.currentThread().getId()));
         new Hooks().beforeScenario(scenario);
         Configuration ufgConfig = new Configuration();
         ufgConfig.addBrowser(1024, 1024, BrowserType.CHROME);
@@ -54,8 +54,8 @@ public class RunTestCukes
 
     @After
     public void afterTestScenario(Scenario scenario) {
-        LOGGER.info(String.format("ThreadID: %d: in overridden afterTestScenario%n", Thread.currentThread()
-                                                                                           .getId()));
+        LOGGER.info(String.format("ThreadID: %d: in overridden afterTestScenario%n",
+                                  Thread.currentThread().getId()));
         new Hooks().afterScenario(scenario);
     }
 }

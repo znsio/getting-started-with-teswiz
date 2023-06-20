@@ -1,29 +1,24 @@
 package com.znsio.sample.e2e.screen.jiomeet;
 
-import com.znsio.e2e.entities.Platform;
-import com.znsio.e2e.runner.Runner;
-import com.znsio.e2e.tools.Driver;
-import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.android.jiomeet.SignInScreenAndroid;
 import com.znsio.sample.e2e.screen.web.jiomeet.SignInScreenWeb;
+import com.znsio.teswiz.entities.Platform;
+import com.znsio.teswiz.runner.Driver;
+import com.znsio.teswiz.runner.Drivers;
+import com.znsio.teswiz.runner.Runner;
+import com.znsio.teswiz.runner.Visual;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
-
-import static com.znsio.e2e.runner.Runner.fetchDriver;
-import static com.znsio.e2e.runner.Runner.fetchEyes;
 
 public abstract class SignInScreen {
     private static final String SCREEN_NAME = SignInScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
     public static SignInScreen get() {
-        Driver driver = fetchDriver(Thread.currentThread()
-                                          .getId());
-        Platform platform = Runner.fetchPlatform(Thread.currentThread()
-                                                       .getId());
+        Driver driver = Drivers.getDriverForCurrentUser(Thread.currentThread().getId());
+        Platform platform = Runner.fetchPlatform(Thread.currentThread().getId());
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
-        Visual visually = fetchEyes(Thread.currentThread()
-                                          .getId());
+        Visual visually = Drivers.getVisualDriverForCurrentUser(Thread.currentThread().getId());
 
         switch(platform) {
             case android:
@@ -31,10 +26,12 @@ public abstract class SignInScreen {
             case web:
                 return new SignInScreenWeb(driver, visually);
         }
-        throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.platform);
+        throw new NotImplementedException(
+                SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
     public abstract LandingScreen signIn(String username, String password);
 
-    public abstract InAMeetingScreen joinAMeeting(String meetingId, String meetingPassword, String currentUserPersona);
+    public abstract InAMeetingScreen joinAMeeting(String meetingId, String meetingPassword,
+                                                  String currentUserPersona);
 }

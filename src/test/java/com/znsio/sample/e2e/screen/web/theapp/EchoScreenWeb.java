@@ -1,8 +1,8 @@
 package com.znsio.sample.e2e.screen.web.theapp;
 
-import com.znsio.e2e.tools.Driver;
-import com.znsio.e2e.tools.Visual;
 import com.znsio.sample.e2e.screen.theapp.EchoScreen;
+import com.znsio.teswiz.runner.Driver;
+import com.znsio.teswiz.runner.Visual;
 import org.apache.log4j.Logger;
 
 public class EchoScreenWeb

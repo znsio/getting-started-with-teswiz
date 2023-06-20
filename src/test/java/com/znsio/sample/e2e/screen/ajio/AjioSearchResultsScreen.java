@@ -1,7 +1,6 @@
-package com.znsio.sample.e2e.screen.jiomeet;
+package com.znsio.sample.e2e.screen.ajio;
 
-import com.znsio.sample.e2e.screen.android.jiomeet.LandingScreenAndroid;
-import com.znsio.sample.e2e.screen.web.jiomeet.LandingScreenWeb;
+import com.znsio.sample.e2e.screen.android.ajio.AjioSearchResultsScreenAndroid;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Drivers;
@@ -10,11 +9,11 @@ import com.znsio.teswiz.runner.Visual;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
-public abstract class LandingScreen {
-    private static final String SCREEN_NAME = LandingScreen.class.getSimpleName();
+public abstract class AjioSearchResultsScreen {
+    private static final String SCREEN_NAME = AjioSearchResultsScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public static LandingScreen get() {
+    public static AjioSearchResultsScreen get() {
         Driver driver = Drivers.getDriverForCurrentUser(Thread.currentThread().getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread().getId());
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
@@ -22,17 +21,13 @@ public abstract class LandingScreen {
 
         switch(platform) {
             case android:
-                return new LandingScreenAndroid(driver, visually);
-            case web:
-                return new LandingScreenWeb(driver, visually);
+                return new AjioSearchResultsScreenAndroid(driver, visually);
         }
         throw new NotImplementedException(
                 SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
-    public abstract String getSignedInWelcomeMessage();
+    public abstract int getNumberOfProductsFound();
 
-    public abstract InAMeetingScreen startInstantMeeting();
-
-    public abstract LandingScreen waitTillWelcomeMessageIsSeen();
+    public abstract String getActualSearchString();
 }

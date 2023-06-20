@@ -1,21 +1,24 @@
-package com.znsio.sample.e2e.businessLayer.theapp;
+package com.znsio.sample.e2e.businessLayer.ajio;
 
 import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
-import com.znsio.sample.e2e.screen.theapp.AppLaunchScreen;
+import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
+import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
-public class EchoBL {
-    private static final Logger LOGGER = Logger.getLogger(EchoBL.class.getName());
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class AjioSearchBL {
+    private static final Logger LOGGER = Logger.getLogger(AjioSearchBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;
     private final Platform currentPlatform;
 
-    public EchoBL(String userPersona, Platform forPlatform) {
+    public AjioSearchBL(String userPersona, Platform forPlatform) {
         long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
@@ -24,7 +27,7 @@ public class EchoBL {
         Runner.setCurrentDriverForUser(userPersona, forPlatform, context);
     }
 
-    public EchoBL() {
+    public AjioSearchBL() {
         long threadId = Thread.currentThread().getId();
         this.context = Runner.getTestExecutionContext(threadId);
         softly = Runner.getSoftAssertion(threadId);
@@ -32,8 +35,15 @@ public class EchoBL {
         this.currentPlatform = Runner.getPlatform();
     }
 
-    public EchoBL echoMessage(String message) {
-        AppLaunchScreen.get().selectEcho().echoMessage(message);
+    public AjioSearchBL searchFor(String product) {
+        AjioSearchResultsScreen ajioSearchResultsScreen = AjioHomeScreen.get().searchFor(product);
+        String actualSearchWasFor = ajioSearchResultsScreen.getActualSearchString();
+        softly.assertThat(actualSearchWasFor).as("Search was for a different value")
+              .isEqualTo(product);
+
+        int numberOfProductsFound = ajioSearchResultsScreen.getNumberOfProductsFound();
+        assertThat(numberOfProductsFound).as("Insufficient search results retrieved")
+                                         .isGreaterThan(100);
         return this;
     }
 }

@@ -37,6 +37,12 @@ public abstract class VodqaScreen {
     public abstract WebViewScreen enterIntoNewsWebViewSection();
 
     public abstract NativeViewScreen enterIntoNativeViewSection();
+
+    public abstract VodqaScreen scrollFromOneElementPointToAnother();
+
+    public abstract boolean isElementWithTextVisible(String elementText);
+
     public abstract VodqaScreen tapInTheMiddle();
+
     public abstract boolean isPreviousPageHeadingVisible(String pageHeading);
 }

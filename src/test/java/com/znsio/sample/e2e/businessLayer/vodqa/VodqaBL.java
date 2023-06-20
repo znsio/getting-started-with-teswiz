@@ -46,7 +46,7 @@ public class VodqaBL {
         assertThat(isAppWorkInBackground).as(String.format("App do not works in background")).isTrue();
         return this;
     }
-}
+
     public VodqaBL enterAndVerifyLoginOptionUnderWebViewSection() {
         LOGGER.info("Entering into hacker news under webView section");
         assertThat(VodqaScreen.get().enterIntoNewsWebViewSection()
@@ -71,4 +71,3 @@ public class VodqaBL {
         return this;
     }
 }
-

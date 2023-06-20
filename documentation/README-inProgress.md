@@ -26,10 +26,9 @@ There are some method name changes as listed below:
 
 ## Minor Enhancement
 
-1. setWebViewContext() - Have updated use of AppiumDriver to SupportsContextSwitching for switching to Web View context.
-   Added logger for enhanced logging of context handles.
-2. setNativeAppContext() - Have updated use of AppiumDriver to SupportsContextSwitching for switching to Native App
-   context. Added logger for enhanced logging of context handles.
+1. setWebViewContext() - Updated use of AppiumDriver to SupportsContextSwitching for switching to Web View context.
+2. setNativeAppContext() - Updated use of AppiumDriver to SupportsContextSwitching for switching to Native App
+   context.
 
 
 ## Logging to ReportPortal

@@ -1,4 +1,5 @@
 @vodqa
+  #  CONFIG=./configs/vodqa_local_config.properties PLATFORM=android TAG=vodqa ./gradlew run
 Feature: Vodqa test
 
   #  CONFIG=./configs/vodqa_local_config.properties PLATFORM=android TAG=appInBackground ./gradlew run

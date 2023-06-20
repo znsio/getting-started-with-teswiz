@@ -31,7 +31,7 @@ There are some method name changes as listed below:
 2. setNativeAppContext() - Updated use of AppiumDriver to SupportsContextSwitching for switching to Native App
    context.
 3. scroll(Point fromPoint, Point toPoint) - Updated use of AppiumDriver using PointerInput and Sequence to scroll using 2 points 
-4. tapOnMiddleOfScreenOnDevice() - Updated appium TouchAction to tap in the middle of the screen
+4. tapOnMiddleOfScreenOnDevice() - Updated use of AppiumDriver using PointerInput to tap in the middle of the screen
 
 
 ## Logging to ReportPortal

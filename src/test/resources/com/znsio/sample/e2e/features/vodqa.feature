@@ -13,3 +13,10 @@ Feature: Vodqa test
     Given I login to vodqa application using valid credentials
     Then I am able to view hacker news login button inside web view section
     And I am able to view section header by navigating inside native view section
+
+    #  CONFIG=./configs/vodqa_local_config.properties PLATFORM=android TAG=tapInTheMiddleOfTheScreen ./gradlew run
+  @tapInTheMiddleOfTheScreen @android
+  Scenario: User tap in the middle of the screen
+    Given I login to vodqa application using valid credentials
+    When I tap in the middle of the screen
+    Then I am able to move from "Samples List" page to next page

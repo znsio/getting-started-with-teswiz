@@ -29,6 +29,7 @@ There are some method name changes as listed below:
 1. setWebViewContext() - Updated use of AppiumDriver to SupportsContextSwitching for switching to Web View context.
 2. setNativeAppContext() - Updated use of AppiumDriver to SupportsContextSwitching for switching to Native App
    context.
+3. tapOnMiddleOfScreenOnDevice() - Updated appium TouchAction to tap in the middle of the screen
 
 
 ## Logging to ReportPortal

@@ -21,6 +21,8 @@ public class VodqaScreenAndroid extends VodqaScreen {
     private final By byLoginButton = AppiumBy.xpath("//android.view.ViewGroup[@content-desc='login']/android.widget.Button");
     private final By byWebViewSectionOptionXpath = AppiumBy.xpath("//android.view.ViewGroup[@content-desc='webView']");
     private final By byNativeViewSectionXpath = AppiumBy.xpath("//android.view.ViewGroup[@content-desc='chainedView']");
+    private final By byNativeViewXpath = AppiumBy.xpath("//android.widget.TextView[@content-desc=\"chainedView\"]");
+    private final String byPageHeaderXpath = "//android.widget.TextView[@text='%s']";
 
     public VodqaScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -65,5 +67,18 @@ public class VodqaScreenAndroid extends VodqaScreen {
         visually.checkWindow(SCREEN_NAME, "Sample List Screen");
         driver.waitTillElementIsVisible(byNativeViewSectionXpath).click();
         return NativeViewScreen.get();
+    }
+    @Override
+    public VodqaScreen tapInTheMiddle() {
+        driver.waitTillElementIsVisible(byNativeViewXpath);
+        visually.checkWindow(SCREEN_NAME, "Sample List page");
+        driver.tapOnMiddleOfScreen();
+        return this;
+    }
+
+    @Override
+    public boolean isPreviousPageHeadingVisible(String pageHeading) {
+        visually.checkWindow(SCREEN_NAME, "Page landed after tapping in the middle");
+        return driver.isElementPresent(AppiumBy.xpath(String.format(byPageHeaderXpath, pageHeading)));
     }
 }

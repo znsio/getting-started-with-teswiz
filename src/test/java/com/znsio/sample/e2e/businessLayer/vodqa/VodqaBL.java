@@ -70,4 +70,16 @@ public class VodqaBL {
                 .isTrue();
         return this;
     }
+
+    public VodqaBL tapInTheMiddleOfTheScreen() {
+        LOGGER.info("performTapActionInTheMiddle(): perform tap operation in the middle of the screen");
+        VodqaScreen.get().tapInTheMiddle();
+        return this;
+    }
+
+    public VodqaBL verifyUserMoveToNextPage(String pageHeading) {
+        LOGGER.info("performTapActionInTheMiddle(): verify the operation has been executed successfully or not");
+        assertThat(VodqaScreen.get().isPreviousPageHeadingVisible(pageHeading)).as(String.format("User is still on %s page", pageHeading)).isFalse();
+        return this;
+    }
 }

@@ -95,6 +95,7 @@ public class VodqaScreenAndroid extends VodqaScreen {
         visually.check(SCREEN_NAME, String.format("%s language element text view", elementText), Target.region(byLanguageTextView));
         return driver.isElementPresent(byLanguageTextView);
     }
+
     @Override
     public VodqaScreen tapInTheMiddle() {
         driver.waitTillElementIsVisible(byNativeViewXpath);

@@ -9,6 +9,7 @@ import com.znsio.teswiz.runner.Runner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 
 public class VodQASteps {
@@ -27,6 +28,15 @@ public class VodQASteps {
         new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).login();
     }
 
+    @When("I scroll from one to another element point on vertical swiping screen")
+    public void scrollToElement() {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).scrollFromOneElementPointToAnother();
+    }
+
+    @Then("Element text {string} should be visible")
+    public void elementTextShouldBeVisible(String elementText) {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).isElementWithTextVisible(elementText);
+    }
 
     @Then("App should work in background for {int} sec")
     public void appShouldWorkInBackgroundForDefinedTime(int time) {

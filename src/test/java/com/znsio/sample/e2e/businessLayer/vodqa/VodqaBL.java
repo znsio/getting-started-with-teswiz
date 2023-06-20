@@ -70,4 +70,15 @@ public class VodqaBL {
                 .isTrue();
         return this;
     }
+
+    public VodqaBL scrollFromOneElementPointToAnother() {
+        VodqaScreen.get().scrollFromOneElementPointToAnother();
+        return this;
+    }
+
+    public VodqaBL isElementWithTextVisible(String elementText) {
+        boolean isScrollSuccessful= VodqaScreen.get().isElementWithTextVisible(elementText);
+        assertThat(isScrollSuccessful).as("Scroll was not successful, text is not visible").isTrue();
+        return this;
+    }
 }

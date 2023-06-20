@@ -32,6 +32,7 @@ There are some method name changes as listed below:
    context.
 3. scroll(Point fromPoint, Point toPoint) - Updated use of AppiumDriver using PointerInput and Sequence to scroll using 2 points 
 4. tapOnMiddleOfScreenOnDevice() - Updated use of AppiumDriver using PointerInput to tap in the middle of the screen
+5. scrollDownByScreenSize() - Updated use of AppiumDriver to perform scroll as per the screen size
 
 
 ## Logging to ReportPortal

@@ -93,4 +93,10 @@ public class VodqaBL {
         assertThat(VodqaScreen.get().isPreviousPageHeadingVisible(pageHeading)).as(String.format("User is still on %s page", pageHeading)).isFalse();
         return this;
     }
+
+
+    public VodqaBL scrollDownByScreenSizeOnVerticalSwipingScreen() {
+        VodqaScreen.get().openVerticalSwipingScreen().scrollDownByScreenSize();
+        return this;
+    }
 }

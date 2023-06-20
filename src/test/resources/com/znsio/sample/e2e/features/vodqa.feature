@@ -63,3 +63,10 @@ Feature: Vodqa test
     Given I login to vodqa application using valid credentials
     When I scroll "down" in dynamic layer on vertical swiping screen
     Then Element text ".net" should be visible
+
+  #  CONFIG=./configs/vodqa_local_config.properties TAG=@scrollVertically PLATFORM=android ./gradlew run
+  @android @scrollVertically
+  Scenario: Validate that user is able to scroll vertically by screen percentage
+    Given I login to vodqa application using valid credentials
+    When I scroll vertically from 60 percent height to 20 percent height and 50 percent width
+    Then Element text "Ruby" should be visible

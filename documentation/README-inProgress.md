@@ -39,6 +39,7 @@ There are some method name changes as listed below:
 6. swipeLeft() - Updated use of AppiumDriver & swiping points percentage changed(swiping from the edge of the screen)
 7. swipeRight() - Updated use of AppiumDriver & swiping points percentage changed(swiping from the edge of the screen)
 8. swipe(int height, int fromWidth, int toWidth) - Updated use of AppiumDriver
+9. scrollVertically - Updated use of AppiumDriver
 
 ## Logging to ReportPortal
 

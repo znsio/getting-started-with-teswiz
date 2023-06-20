@@ -42,7 +42,7 @@ public class ClipboardDemoScreenAndroid
         boolean isElementPresentByAccessibilityId = driver.isElementPresentByAccessibilityId(
                 contentExpectedInClipboard);
         LOGGER.info(String.format("Is content present in clipboad: '%s':: '%s'",
-                                  contentExpectedInClipboard, isElementPresentByAccessibilityId));
+                contentExpectedInClipboard, isElementPresentByAccessibilityId));
         return isElementPresentByAccessibilityId;
     }
 
@@ -53,7 +53,8 @@ public class ClipboardDemoScreenAndroid
 
     private ClipboardDemoScreenAndroid enterTextToAddInClipboard(String content) {
         waitFor(2);
-        WebElement contentElement = driver.findElementByAccessibilityId(byMessageInputAccessibilityId);
+        WebElement contentElement = driver.findElementByAccessibilityId(
+                byMessageInputAccessibilityId);
         contentElement.click();
         contentElement.clear();
         contentElement.sendKeys(content);

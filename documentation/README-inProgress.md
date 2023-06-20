@@ -25,6 +25,13 @@ There are some method name changes as listed below:
 | To put App in Background for number of Seconds |    putAppInBackground                                                                                                                   | putAppInBackgroundFor                                                                                                 |
 |          Method Selects Device Notification from Notification Drawer                                        |              selectNotification()	                                                                                                         |                    selectNotificationFromNotificationDrawer()                                                                                                   |
 
+## Minor Enhancement
+
+1. setWebViewContext() - Updated use of AppiumDriver to SupportsContextSwitching for switching to Web View context.
+2. setNativeAppContext() - Updated use of AppiumDriver to SupportsContextSwitching for switching to Native App
+   context.
+
+
 ## Logging to ReportPortal
 
 To make it easy to log to ReportPortal, the following new methods have been added:

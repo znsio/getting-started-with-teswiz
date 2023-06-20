@@ -93,4 +93,22 @@ public class VodqaScreenAndroid extends VodqaScreen {
         visually.check(SCREEN_NAME, String.format("%s language element text view", elementText), Target.region(byLanguageTextView));
         return driver.isElementPresent(byLanguageTextView);
     }
+
+    @Override
+    public VodqaScreen openVerticalSwipingScreen() {
+        driver.waitTillElementIsPresent(byVerticalSwipeViewGroup);
+        visually.checkWindow(SCREEN_NAME, "Home Screen");
+        driver.findElement(byVerticalSwipeViewGroup).click();
+        LOGGER.info("vertical swiping screen is open");
+        return this;
+    }
+
+    @Override
+    public VodqaScreen scrollDownByScreenSize() {
+        driver.waitTillElementIsPresent(byCLanguageTextView);
+        driver.scrollDownByScreenSize();
+        visually.checkWindow(SCREEN_NAME, "Screen scrolled down");
+        return this;
+    }
+
 }

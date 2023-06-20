@@ -21,3 +21,10 @@ Feature: Vodqa test
     Given I login to vodqa application using valid credentials
     When I scroll from one to another element point on vertical swiping screen
     Then Element text "Jasmine" should be visible
+
+  #  CONFIG=./configs/vodqa_local_config.properties PLATFORM=android TAG=@scrollByScreenSize ./gradlew run
+  @android @scrollByScreenSize
+  Scenario: Validate that user is able to scroll down by screen size
+    Given I login to vodqa application using valid credentials
+    When I scroll down by screen size on vertical swiping screen
+    Then Element text "Jasmine" should be visible

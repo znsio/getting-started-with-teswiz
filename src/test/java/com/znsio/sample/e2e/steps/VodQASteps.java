@@ -52,4 +52,10 @@ public class VodQASteps {
     public void iAmAbleToViewSectionHeaderByNavigatingInsideNativeViewSection() {
         new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).enterIntoNativeViewSection();
     }
+
+    @When("I scroll down by screen size on vertical swiping screen")
+    public void iScrollDownByScreenSizeOnVerticalSwipingScreen() {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).scrollDownByScreenSizeOnVerticalSwipingScreen();
+    }
+
 }

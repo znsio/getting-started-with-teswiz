@@ -35,8 +35,7 @@ public class BMSSelectSeatsBL {
         double actualPercentageOfVacantSeats = totalAvailableSeats/totalSeats;
         LOGGER.info("Actual vacant seats are " + actualPercentageOfVacantSeats + " %");
 
-        //Need to check syntax to insert message for failure as well of the below assertion
-        softly.assertThat(actualPercentageOfVacantSeats).isGreaterThan(validatePercent);
+        softly.assertThat(actualPercentageOfVacantSeats).as("Actual vacant seat percentage is lower than Validation percentage").isGreaterThan(validatePercent);
         //Assert.assertTrue("No of vacant seats is less than " + validatePercent + " %", actualPercentageOfVacantSeats>validatePercent);
 
         return this;

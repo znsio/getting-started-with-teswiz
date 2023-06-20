@@ -29,6 +29,15 @@ public class VodQASteps {
         new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).login();
     }
 
+    @When("I scroll from one to another element point on vertical swiping screen")
+    public void scrollToElement() {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).scrollFromOneElementPointToAnother();
+    }
+
+    @Then("Element text {string} should be visible")
+    public void elementTextShouldBeVisible(String elementText) {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).isElementWithTextVisible(elementText);
+    }
 
     @Then("App should work in background for {int} sec")
     public void appShouldWorkInBackgroundForDefinedTime(int time) {
@@ -43,6 +52,21 @@ public class VodQASteps {
     @And("I am able to view section header by navigating inside native view section")
     public void iAmAbleToViewSectionHeaderByNavigatingInsideNativeViewSection() {
         new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).enterIntoNativeViewSection();
+    }
+
+    @When("I tap in the middle of the screen")
+    public void iTapInTheMiddleOfTheScreen() {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).tapInTheMiddleOfTheScreen();
+    }
+
+    @Then("I am able to move from {string} page to next page")
+    public void iAmAbleToMoveFromPageToNextPage(String pageHeading) {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).verifyUserMoveToNextPage(pageHeading);
+    }
+
+    @When("I scroll down by screen size on vertical swiping screen")
+    public void iScrollDownByScreenSizeOnVerticalSwipingScreen() {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).scrollDownByScreenSizeOnVerticalSwipingScreen();
     }
 
     @When("I swipe left on {string} screen")
@@ -64,11 +88,6 @@ public class VodQASteps {
     public void iSwipeAtPercentHeightFromPercentWidthToPercentWidthOnScreen(int atPercentileHeight, int fromPercentageWidth, int toPercentageWidth, String screenName) {
         new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform())
                 .selectScreenAndSwipeByPassingPercentageAttributes(atPercentileHeight, fromPercentageWidth, toPercentageWidth, screenName);
-    }
-
-    @Then("Element text {string} should be visible")
-    public void elementTextShouldBeVisible(String elementText) {
-        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).isElementWithTextVisible(elementText);
     }
 
     @When("I scroll {string} in dynamic layer on vertical swiping screen")

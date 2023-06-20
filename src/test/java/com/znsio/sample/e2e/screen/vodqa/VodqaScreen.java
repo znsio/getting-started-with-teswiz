@@ -39,9 +39,19 @@ public abstract class VodqaScreen {
 
     public abstract NativeViewScreen enterIntoNativeViewSection();
 
-    public abstract VodqaScreen selectScreen(String screenName);
+    public abstract VodqaScreen scrollFromOneElementPointToAnother();
+
+    public abstract boolean isElementWithTextVisible(String elementText);
+
+    public abstract VodqaScreen tapInTheMiddle();
+
+    public abstract boolean isPreviousPageHeadingVisible(String pageHeading);
 
     public abstract VodqaScreen openVerticalSwipingScreen();
+
+    public abstract VodqaScreen scrollDownByScreenSize();
+
+    public abstract VodqaScreen selectScreen(String screenName);
 
     public abstract VodqaScreen swipeLeft();
 
@@ -52,6 +62,4 @@ public abstract class VodqaScreen {
     public abstract VodqaScreen swipeByPassingPercentageAttributes(int atPercentScreenHeight, int fromPercentScreenWidth, int toPercentScreenWidth);
 
     public abstract VodqaScreen scrollDownInDynamicLayer(Direction direction);
-
-    public abstract boolean isElementWithTextVisible(String elementText);
 }

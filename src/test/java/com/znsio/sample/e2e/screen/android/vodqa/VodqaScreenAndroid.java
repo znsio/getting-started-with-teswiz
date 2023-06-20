@@ -27,6 +27,8 @@ public class VodqaScreenAndroid extends VodqaScreen {
     private final By byCLanguageTextView = AppiumBy.xpath("//android.widget.TextView[@text=' C']");
     private final By byRubyLanguageTextView = AppiumBy.xpath("//android.widget.TextView[@text=' Ruby']");
     private final String languageTextView = "//android.widget.TextView[@text=' %s']";
+    private final By byNativeViewXpath = AppiumBy.xpath("//android.widget.TextView[@content-desc=\"chainedView\"]");
+    private final String byPageHeaderXpath = "//android.widget.TextView[@text='%s']";
 
     public VodqaScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -92,5 +94,19 @@ public class VodqaScreenAndroid extends VodqaScreen {
         By byLanguageTextView = AppiumBy.xpath(String.format(this.languageTextView, elementText));
         visually.check(SCREEN_NAME, String.format("%s language element text view", elementText), Target.region(byLanguageTextView));
         return driver.isElementPresent(byLanguageTextView);
+    }
+
+    @Override
+    public VodqaScreen tapInTheMiddle() {
+        driver.waitTillElementIsVisible(byNativeViewXpath);
+        visually.checkWindow(SCREEN_NAME, "Sample List page");
+        driver.tapOnMiddleOfScreen();
+        return this;
+    }
+
+    @Override
+    public boolean isPreviousPageHeadingVisible(String pageHeading) {
+        visually.checkWindow(SCREEN_NAME, "Page landed after tapping in the middle");
+        return driver.isElementPresent(AppiumBy.xpath(String.format(byPageHeaderXpath, pageHeading)));
     }
 }

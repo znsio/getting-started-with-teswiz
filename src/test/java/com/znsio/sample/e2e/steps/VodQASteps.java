@@ -52,4 +52,14 @@ public class VodQASteps {
     public void iAmAbleToViewSectionHeaderByNavigatingInsideNativeViewSection() {
         new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).enterIntoNativeViewSection();
     }
+
+    @When("I tap in the middle of the screen")
+    public void iTapInTheMiddleOfTheScreen() {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).tapInTheMiddleOfTheScreen();
+    }
+
+    @Then("I am able to move from {string} page to next page")
+    public void iAmAbleToMoveFromPageToNextPage(String pageHeading) {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).verifyUserMoveToNextPage(pageHeading);
+    }
 }

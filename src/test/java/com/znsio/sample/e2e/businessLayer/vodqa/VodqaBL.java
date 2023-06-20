@@ -42,7 +42,7 @@ public class VodqaBL {
 
     public VodqaBL verifyAppWorksInBackground(int time) {
         LOGGER.info("Validating app working in background");
-        boolean isAppWorkInBackground =  VodqaScreen.get().putAppInTheBackground(time).isAppWorkingInBackground();
+        boolean isAppWorkInBackground = VodqaScreen.get().putAppInTheBackground(time).isAppWorkingInBackground();
         assertThat(isAppWorkInBackground).as(String.format("App do not works in background")).isTrue();
         return this;
     }
@@ -79,6 +79,18 @@ public class VodqaBL {
     public VodqaBL isElementWithTextVisible(String elementText) {
         boolean isScrollSuccessful= VodqaScreen.get().isElementWithTextVisible(elementText);
         assertThat(isScrollSuccessful).as("Scroll was not successful, text is not visible").isTrue();
+        return this;
+    }
+
+    public VodqaBL tapInTheMiddleOfTheScreen() {
+        LOGGER.info("performTapActionInTheMiddle(): perform tap operation in the middle of the screen");
+        VodqaScreen.get().tapInTheMiddle();
+        return this;
+    }
+
+    public VodqaBL verifyUserMoveToNextPage(String pageHeading) {
+        LOGGER.info("performTapActionInTheMiddle(): verify the operation has been executed successfully or not");
+        assertThat(VodqaScreen.get().isPreviousPageHeadingVisible(pageHeading)).as(String.format("User is still on %s page", pageHeading)).isFalse();
         return this;
     }
 }

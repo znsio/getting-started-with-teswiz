@@ -31,6 +31,7 @@ There are some method name changes as listed below:
 2. setNativeAppContext() - Updated use of AppiumDriver to SupportsContextSwitching for switching to Native App
    context.
 3. scroll(Point fromPoint, Point toPoint) - Updated use of AppiumDriver using PointerInput and Sequence to scroll using 2 points
+4. scrollDownByScreenSize() - Updated use of AppiumDriver to perform scroll as per the screen size
 
 
 ## Logging to ReportPortal

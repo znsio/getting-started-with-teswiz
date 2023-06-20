@@ -109,4 +109,21 @@ public class VodqaScreenAndroid extends VodqaScreen {
         visually.checkWindow(SCREEN_NAME, "Page landed after tapping in the middle");
         return driver.isElementPresent(AppiumBy.xpath(String.format(byPageHeaderXpath, pageHeading)));
     }
+
+    @Override
+    public VodqaScreen openVerticalSwipingScreen() {
+        driver.waitTillElementIsPresent(byVerticalSwipeViewGroup);
+        visually.checkWindow(SCREEN_NAME, "Home Screen");
+        driver.findElement(byVerticalSwipeViewGroup).click();
+        LOGGER.info("vertical swiping screen is open");
+        return this;
+    }
+
+    @Override
+    public VodqaScreen scrollDownByScreenSize() {
+        driver.waitTillElementIsPresent(byCLanguageTextView);
+        driver.scrollDownByScreenSize();
+        visually.checkWindow(SCREEN_NAME, "Screen scrolled down");
+        return this;
+    }
 }

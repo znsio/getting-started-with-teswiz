@@ -33,6 +33,7 @@ public class BMSMoviesScreenWeb extends BMSMoviesScreen {
     public BMSMoviesScreen selectMovieAtPosition(String moviePosition) {
         LOGGER.info("Trying to select movie number " + moviePosition + " from Now Showing movie page");
 
+        visually.takeScreenshot(SCREEN_NAME,"NOW SHOWING movies Page");
         if(driver.findElement(By.xpath("(//div[@class='sc-1ljcxl3-0 iUuHNJ']/a)["+moviePosition+"]")).isDisplayed())
         {
             LOGGER.info("Movie number " + moviePosition + " is present.");
@@ -41,6 +42,7 @@ public class BMSMoviesScreenWeb extends BMSMoviesScreen {
             driver.waitTillElementIsPresent(byBookTicketsBtnXpath).click();
             if(driver.findElement(byScreen2DTypeBtnXpath).isDisplayed())
             {
+                visually.takeScreenshot(SCREEN_NAME,"Select screen type page");
                 LOGGER.info("Screen types present");
                 driver.findElement(byScreen2DTypeBtnXpath).click();
                 LOGGER.info("Clicked on 2D screen type");
@@ -48,7 +50,7 @@ public class BMSMoviesScreenWeb extends BMSMoviesScreen {
         }
         else
         {
-            LOGGER.error("Moviee number " + moviePosition + " is not present");
+            LOGGER.error("Movie number " + moviePosition + " is not present");
         }
 
         return this;
@@ -58,7 +60,8 @@ public class BMSMoviesScreenWeb extends BMSMoviesScreen {
     public BMSMoviesScreen selectDateAfterTwoDays() {
 
         LOGGER.info("Selecting Day after tomorrow's date");
-        driver.waitTillElementIsPresent(byDateAfterTwoDaysXpath);
+        driver.waitTillElementIsPresent(byDateAfterTwoDaysXpath).click();
+        visually.takeScreenshot(SCREEN_NAME,"Date and Cinema hall selection Page");
         LOGGER.info("Selected Day after tomorrow's date");
         return this;
     }
@@ -87,6 +90,7 @@ public class BMSMoviesScreenWeb extends BMSMoviesScreen {
     public BMSSelectSeatsScreen selectNoOfSeatsToBook(String noOfSeats) {
 
         LOGGER.info("Select no of seats as : " + noOfSeats);
+        visually.takeScreenshot(SCREEN_NAME,"No of seats to be booked page");
         driver.waitTillElementIsPresent(By.xpath("//li[contains(text(),'"+noOfSeats+"')]")).click();
         driver.waitTillElementIsPresent(bySelectSeatsXpath).click();
         LOGGER.info("Seats selected");

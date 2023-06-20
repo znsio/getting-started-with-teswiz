@@ -31,6 +31,7 @@ public class BMSSelectSeatsScreenWeb extends BMSSelectSeatsScreen {
     public int getTotalAvailableSeats() {
 
         LOGGER.info("Calculating Count of total available seats");
+        visually.takeScreenshot(SCREEN_NAME,"Seat availablity and selection page.");
         int totalAvailableSeats;
         List<WebElement> numberOfAvailableSeats = driver.findElements(byNoOfAvailableSeats);
         totalAvailableSeats = numberOfAvailableSeats.size();

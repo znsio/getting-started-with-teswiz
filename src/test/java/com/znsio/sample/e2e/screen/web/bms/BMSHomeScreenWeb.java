@@ -26,10 +26,10 @@ public class BMSHomeScreenWeb extends BMSHomeScreen {
 
 
     public BMSHomeScreen searchForLocation(String location) {
+
         LOGGER.info("Location to be searched is " + location);
-        //WebElement searchElement = driver.waitTillElementIsPresent(bySearchBoxXpath);
         driver.waitTillElementIsPresent(bySearchBarXpath).sendKeys(location);
-        //waitFor(5);
+        visually.takeScreenshot(SCREEN_NAME,"BMS Homepage");
         driver.waitTillElementIsVisible(By.xpath("//strong[text()='"+location+"']")).click();
         LOGGER.info(location + " searched and clicked");
 
@@ -38,6 +38,7 @@ public class BMSHomeScreenWeb extends BMSHomeScreen {
 
     @Override
     public BMSMoviesScreen selectMoviesCategory() {
+
         LOGGER.info("Selecting MOVIES tab");
         driver.waitTillElementIsPresent(byMoviesTabXpath).click();
         LOGGER.info("Movies tab selected successfully");

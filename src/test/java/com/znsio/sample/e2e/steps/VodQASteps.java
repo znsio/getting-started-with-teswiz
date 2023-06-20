@@ -6,11 +6,10 @@ import com.znsio.sample.e2e.businessLayer.vodqa.VodqaBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.apache.log4j.Logger;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class VodQASteps {
 
@@ -34,4 +33,13 @@ public class VodQASteps {
         new VodqaBL().verifyAppWorksInBackground(time);
     }
 
+    @Then("I am able to view hacker news login button inside web view section")
+    public void iAmAbleToViewHackerNewsLoginButtonInsideWebViewSection() {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).enterAndVerifyLoginOptionUnderWebViewSection();
+    }
+
+    @And("I am able to view section header by navigating inside native view section")
+    public void iAmAbleToViewSectionHeaderByNavigatingInsideNativeViewSection() {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).enterIntoNativeViewSection();
+    }
 }

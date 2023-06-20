@@ -1,6 +1,7 @@
 package com.znsio.sample.e2e.screen.vodqa;
 
 import com.znsio.sample.e2e.screen.android.vodqa.VodqaScreenAndroid;
+import com.znsio.teswiz.entities.Direction;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Drivers;
@@ -37,4 +38,20 @@ public abstract class VodqaScreen {
     public abstract WebViewScreen enterIntoNewsWebViewSection();
 
     public abstract NativeViewScreen enterIntoNativeViewSection();
+
+    public abstract VodqaScreen selectScreen(String screenName);
+
+    public abstract VodqaScreen openVerticalSwipingScreen();
+
+    public abstract VodqaScreen swipeLeft();
+
+    public abstract boolean isSwipeSuccessful(String tileNumber);
+
+    public abstract VodqaScreen swipeRight();
+
+    public abstract VodqaScreen swipeByPassingPercentageAttributes(int atPercentScreenHeight, int fromPercentScreenWidth, int toPercentScreenWidth);
+
+    public abstract VodqaScreen scrollDownInDynamicLayer(Direction direction);
+
+    public abstract boolean isElementWithTextVisible(String elementText);
 }

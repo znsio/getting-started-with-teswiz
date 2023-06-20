@@ -4,6 +4,7 @@ import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.vodqa.VodqaScreen;
 import com.znsio.sample.e2e.screen.vodqa.WebViewScreen;
+import com.znsio.teswiz.entities.Direction;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
@@ -68,6 +69,40 @@ public class VodqaBL {
                 .isUserOnNativeViewScreen())
                 .as("User Unable to navigate to native view section")
                 .isTrue();
+        return this;
+    }
+
+    public VodqaBL selectScreenAndSwipeLeft(String screenName) {
+        VodqaScreen.get().selectScreen(screenName).swipeLeft();
+        return this;
+    }
+
+    public VodqaBL verifySwipe(String elementText) {
+        assertThat(VodqaScreen.get().isSwipeSuccessful(elementText))
+                .as("swipe was not successful")
+                .isTrue();
+        return this;
+    }
+
+    public VodqaBL selectScreenAndSwipeRight(String screenName) {
+        VodqaScreen.get().selectScreen(screenName).swipeRight();
+        return this;
+    }
+
+    public VodqaBL selectScreenAndSwipeByPassingPercentageAttributes(int atPercentScreenHeight, int fromPercentScreenWidth, int toPercentScreenWidth, String screenName) {
+        VodqaScreen.get().selectScreen(screenName)
+                .swipeByPassingPercentageAttributes(atPercentScreenHeight, fromPercentScreenWidth, toPercentScreenWidth);
+        return this;
+    }
+
+    public VodqaBL scrollInDynamicLayerOnVerticalSwipingScreen(Direction direction) {
+        VodqaScreen.get().openVerticalSwipingScreen().scrollDownInDynamicLayer(direction);
+        return this;
+    }
+
+    public VodqaBL isElementWithTextVisible(String elementText) {
+        boolean isScrollSuccessful= VodqaScreen.get().isElementWithTextVisible(elementText);
+        assertThat(isScrollSuccessful).as("Scroll was not successful, text is not visible").isTrue();
         return this;
     }
 }

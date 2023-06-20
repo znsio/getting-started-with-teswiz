@@ -4,11 +4,13 @@ import com.context.SessionContext;
 import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.businessLayer.vodqa.VodqaBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.teswiz.entities.Direction;
 import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 
 public class VodQASteps {
@@ -41,5 +43,37 @@ public class VodQASteps {
     @And("I am able to view section header by navigating inside native view section")
     public void iAmAbleToViewSectionHeaderByNavigatingInsideNativeViewSection() {
         new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).enterIntoNativeViewSection();
+    }
+
+    @When("I swipe left on {string} screen")
+    public void selectScreenAndSwipeLeft(String screenName) {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).selectScreenAndSwipeLeft(screenName);
+    }
+
+    @When("I swipe right on {string} screen")
+    public void selectScreenAndSwipeRight(String screenName) {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).selectScreenAndSwipeRight(screenName);
+    }
+
+    @Then("I am able to see element with text {string} on the screen")
+    public void iAmAbleToSeeElementWithTextOnTheScreen(String elementText) {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).verifySwipe(elementText);
+    }
+
+    @When("I swipe at {int} percent height from {int} percent width to {int} percent width on {string} screen")
+    public void iSwipeAtPercentHeightFromPercentWidthToPercentWidthOnScreen(int atPercentileHeight, int fromPercentageWidth, int toPercentageWidth, String screenName) {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform())
+                .selectScreenAndSwipeByPassingPercentageAttributes(atPercentileHeight, fromPercentageWidth, toPercentageWidth, screenName);
+    }
+
+    @Then("Element text {string} should be visible")
+    public void elementTextShouldBeVisible(String elementText) {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).isElementWithTextVisible(elementText);
+    }
+
+    @When("I scroll {string} in dynamic layer on vertical swiping screen")
+    public void iScrollInDynamicLayerOnVerticalSwipingScreen(String direction) {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform())
+                .scrollInDynamicLayerOnVerticalSwipingScreen(Direction.valueOf(direction.toUpperCase()));
     }
 }

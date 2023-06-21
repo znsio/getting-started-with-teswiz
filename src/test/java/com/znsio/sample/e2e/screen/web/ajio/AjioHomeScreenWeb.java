@@ -9,7 +9,10 @@ import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AjioHomeScreenWeb
         extends AjioHomeScreen {
@@ -65,7 +68,9 @@ public class AjioHomeScreenWeb
     @Override
     public boolean isUserSignedIn() {
         LOGGER.info("Verifying user is signed in successfully");
-        driver.waitTillElementIsVisible(byMyAccountXpath);
+        new WebDriverWait(driver.getInnerDriver(), 10)
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.elementToBeClickable(driver.waitTillElementIsVisible(byMyAccountXpath)));
         visually.check(SCREEN_NAME, "Ajio Home page for LoggedIn User", Target.window().fully());
         return driver.isElementPresent(byMyAccountXpath);
     }

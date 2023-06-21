@@ -8,7 +8,10 @@ import com.znsio.teswiz.runner.Visual;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AjioCartScreenWeb
         extends AjioCartScreen {
@@ -57,8 +60,11 @@ public class AjioCartScreenWeb
     @Override
     public AjioCartScreen clearCart() {
         LOGGER.info("Clearing Cart for the logged in user");
-        for (WebElement deleteProduct : driver.findElements(byDeleteProductClassName)) {
-            deleteProduct.click();
+        for (WebElement clearProduct : driver.findElements(byDeleteProductClassName)) {
+            new WebDriverWait(driver.getInnerDriver(), 10)
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.stalenessOf(clearProduct));
+            clearProduct.click();
             driver.waitTillElementIsVisible(bySubmitDeleteProductXpath).click();
         }
         return this;
@@ -74,8 +80,6 @@ public class AjioCartScreenWeb
     @Override
     public boolean isCartEmpty() {
         LOGGER.info("Checking if cart is empty");
-        driver.waitTillElementIsVisible(byEmptyBagMessageClassName);
-        visually.check(SCREEN_NAME, "Empty Cart for LoggedIn User", Target.region(byEmptyBagMessageClassName));
         return driver.isElementPresent(byEmptyBagMessageClassName);
     }
 

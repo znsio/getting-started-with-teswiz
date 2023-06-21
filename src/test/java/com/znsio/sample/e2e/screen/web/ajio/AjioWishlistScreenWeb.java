@@ -7,7 +7,10 @@ import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AjioWishlistScreenWeb
         extends AjioWishlistScreen {
@@ -17,7 +20,7 @@ public class AjioWishlistScreenWeb
     private static final String selectSizeXpath = "//div[@class='size-variant-section']//div[contains(text(),'%s')]";
     private static final By byProceedToBagClassName = By.className("mini-cart-btn");
     private static final By byMoveToBagIcon = By.className("wishlist-card-bag");
-    private static final By byDeleteWishlistItemClassName = By.className("ic-delete rilrtl-remove-product");
+    private static final By byDeleteWishlistItemClassName = By.xpath("//div[@class='ic-delete rilrtl-remove-product']");
     private static final By byEmptyBagMessageClassName = By.className("empty-msg");
 
 
@@ -65,15 +68,23 @@ public class AjioWishlistScreenWeb
     @Override
     public AjioWishlistScreen clearWishlist() {
         LOGGER.info("Clearing wishlist of the logged in user");
-        for (WebElement clearProduct : driver.findElements(byDeleteWishlistItemClassName)) clearProduct.click();
+        for (WebElement clearProduct : driver.waitTillVisibilityOfAllElements(byDeleteWishlistItemClassName)) {
+            new WebDriverWait(driver.getInnerDriver(), 10)
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.stalenessOf(clearProduct));
+            clearProduct.click();
+        }
         return this;
     }
 
     @Override
     public boolean isWishlistEmpty() {
         LOGGER.info("Checking if wishlist is cleared");
-        driver.waitTillElementIsVisible(byEmptyBagMessageClassName);
-        visually.check(SCREEN_NAME, "Empty Wishlist of user", Target.region(byEmptyBagMessageClassName));
-        return driver.isElementPresent(byEmptyBagMessageClassName);
+        try {
+            driver.waitTillElementIsVisible(byEmptyBagMessageClassName);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

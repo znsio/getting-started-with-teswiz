@@ -39,4 +39,6 @@ public abstract class AjioHomeScreen {
     public abstract boolean isUserSignedOut();
 
     public abstract AjioCartScreen goToCart();
+
+    public abstract AjioWishlistScreen goToWishList();
 }

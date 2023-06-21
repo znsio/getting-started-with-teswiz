@@ -3,6 +3,7 @@ package com.znsio.sample.e2e.screen.android.ajio;
 import com.znsio.sample.e2e.screen.ajio.AjioCartScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
+import com.znsio.sample.e2e.screen.ajio.AjioWishlistScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
 import org.apache.commons.lang.NotImplementedException;
@@ -57,6 +58,11 @@ public class AjioHomeScreenAndroid
 
     @Override
     public AjioCartScreen goToCart() {
+        throw new NotImplementedException(NOT_YET_IMPLEMENTED);
+    }
+
+    @Override
+    public AjioWishlistScreen goToWishList() {
         throw new NotImplementedException(NOT_YET_IMPLEMENTED);
     }
 }

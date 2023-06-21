@@ -9,7 +9,6 @@ import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
-
 import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -48,6 +47,7 @@ public class AjioHomeBL {
     }
 
     public AjioProductBL searchFor(String product) {
+        clearAccountDataForUser();
         LOGGER.info("Searching in home page for the product");
         AjioSearchResultsScreen ajioSearchResultsScreen = AjioHomeScreen.get().searchFor(product);
         String actualSearchWasFor = ajioSearchResultsScreen.getActualSearchString();
@@ -58,6 +58,23 @@ public class AjioHomeBL {
         assertThat(numberOfProductsFound).as("Insufficient search results retrieved")
                 .isGreaterThan(10);
         return new AjioProductBL();
+    }
+
+    private void clearAccountDataForUser() {
+        AjioHomeScreen ajioHomeScreen = AjioHomeScreen.get();
+        assertThat(ajioHomeScreen
+                .goToWishList()
+                .clearWishlist()
+                .isWishlistEmpty())
+                .as("User wishlist is not cleared")
+                .isTrue();
+
+        assertThat(ajioHomeScreen
+                .goToCart()
+                .clearCart()
+                .isCartEmpty())
+                .as("User Cart is not cleared")
+                .isTrue();
     }
 
     public AjioHomeBL verifyCartIsEmpty() {

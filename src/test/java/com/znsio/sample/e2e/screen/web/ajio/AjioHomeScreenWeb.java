@@ -4,6 +4,7 @@ import com.applitools.eyes.selenium.fluent.Target;
 import com.znsio.sample.e2e.screen.ajio.AjioCartScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
+import com.znsio.sample.e2e.screen.ajio.AjioWishlistScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
 import org.apache.log4j.Logger;
@@ -25,6 +26,8 @@ public class AjioHomeScreenWeb
     private static final By byStartShoppingXpath = By.xpath("//input[@value='START SHOPPING']");
     private static final By byGoToCartXpath = By.xpath("//div[@class='popup-blk cart-blk']//a");
     private static final By byMyAccountXpath = By.xpath("//a[text()='My Account']");
+    private static final By byWishlistIconXpath = By.xpath("//div[@class='popup-blk wishlist-blk-icon']//a");
+    private static final By byDeleteWishlistItemClassName = By.className("ic-delete rilrtl-remove-product");
 
 
     private final Driver driver;
@@ -80,5 +83,12 @@ public class AjioHomeScreenWeb
         LOGGER.info("Going to Cart");
         driver.waitTillElementIsVisible(byGoToCartXpath).click();
         return AjioCartScreen.get();
+    }
+
+    @Override
+    public AjioWishlistScreen goToWishList() {
+        LOGGER.info("Going to wishlist of user");
+        driver.waitForClickabilityOf(byWishlistIconXpath).click();
+        return AjioWishlistScreen.get();
     }
 }

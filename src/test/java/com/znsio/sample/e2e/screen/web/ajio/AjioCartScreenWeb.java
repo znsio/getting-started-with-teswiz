@@ -8,6 +8,7 @@ import com.znsio.teswiz.runner.Visual;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
 public class AjioCartScreenWeb
         extends AjioCartScreen {
@@ -50,6 +51,16 @@ public class AjioCartScreenWeb
         LOGGER.info("verifying product is removed from Cart");
         String productRemovedMessage = "Removed from bag";
         return driver.waitTillElementIsVisible(byAlertMessageClassName).getText().equals(productRemovedMessage);
+    }
+
+    @Override
+    public AjioCartScreen clearCart() {
+        LOGGER.info("Clearing Cart for the logged in user");
+        for (WebElement deleteProduct : driver.findElements(byDeleteProductClassName)) {
+            deleteProduct.click();
+            driver.waitTillElementIsVisible(bySubmitDeleteProductXpath).click();
+        }
+        return this;
     }
 
     @Override

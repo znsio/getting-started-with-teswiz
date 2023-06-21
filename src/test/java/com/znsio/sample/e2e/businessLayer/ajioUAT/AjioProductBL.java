@@ -51,13 +51,12 @@ public class AjioProductBL {
         context.addTestState(SAMPLE_TEST_CONTEXT.PRODUCT_NAME, productName);
         LOGGER.info("Name of the Product Selected : " + productName);
 
-        if (!(ajioProductDetailsScreen.isProductWishlisted())) {
-            softly.assertThat(ajioProductDetailsScreen
-                            .wishlistTheProduct()
-                            .isProductWishlisted())
-                    .as("Status not changed as Wishlisted in Details Page")
-                    .isTrue();
-        }
+        softly.assertThat(ajioProductDetailsScreen
+                        .wishlistTheProduct()
+                        .isProductWishlisted())
+                .as("Status not changed as Wishlisted in Details Page")
+                .isTrue();
+
         assertThat(ajioProductDetailsScreen
                 .goToWishList()
                 .isProductPresentInWishlist(productName))

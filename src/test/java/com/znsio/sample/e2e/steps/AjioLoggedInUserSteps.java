@@ -46,7 +46,5 @@ public class AjioLoggedInUserSteps {
                 context.getTestStateAsString(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER));
         new AjioProductBL().removeProductFromCartAndVerifyCartIsEmpty(userDetails);
     }
-
-
 }
 

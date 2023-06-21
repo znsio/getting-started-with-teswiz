@@ -35,4 +35,8 @@ public abstract class AjioWishlistScreen {
     public abstract AjioCartScreen proceedToBag();
 
     public abstract boolean isproductSizeInStock(String productSize);
+
+    public abstract AjioWishlistScreen clearWishlist();
+
+    public abstract boolean isWishlistEmpty();
 }

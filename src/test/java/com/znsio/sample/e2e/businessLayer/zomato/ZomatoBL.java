@@ -37,14 +37,14 @@ public class ZomatoBL {
     }
 
     public ZomatoBL launchHomePageAndValidate() {
-        boolean isHomePageLaunchedSuccessfully = HomePageScreen.get().isHomePageLaunchedSuccessfully();
+        boolean isHomePageLaunchedSuccessfully = HomePageScreen.get().verifyHomePageLaunch();
         assertThat(isHomePageLaunchedSuccessfully).as("Url mismatch occurred, try opening the correct url for the application").isTrue();
         LOGGER.info("Homepage launched successfully");
         return this;
     }
 
-    public ZomatoBL clickOnDiningOption() {
-        HomePageScreen.get().clickOnDiningOption();
+    public ZomatoBL selectDiningOption() {
+        HomePageScreen.get().selectDiningOption();
         return this;
     }
 
@@ -55,57 +55,57 @@ public class ZomatoBL {
         return this;
     }
 
-    public ZomatoBL selectLocationForRestaurants(String location) {
-        DineOutScreen.get().selectLocationForRestaurants(location);
+    public ZomatoBL selectLocationForRestaurant() {
+        DineOutScreen.get().selectLocation();
         return this;
     }
 
-    public ZomatoBL verifySelectedLocation(String location) {
-        boolean isCorrectLocationSelected = DineOutScreen.get().isCorrectLocationSelected(location);
+    public ZomatoBL verifySelectedLocationWithLocationDisplayed() {
+        boolean isCorrectLocationSelected = DineOutScreen.get().verifyLocationDisplayed();
         assertThat(isCorrectLocationSelected).as("Incorrect/Improper location was set").isTrue();
-        LOGGER.info("Selected Location is correct");
+        LOGGER.info("Displayed Location is correct");
         return this;
     }
 
-    public ZomatoBL selectSpecificRestaurant() {
+    public ZomatoBL chooseRestaurantFromSelectedLocation() {
         DineOutScreen.get().selectSpecificRestaurant();
         return this;
     }
 
-    public ZomatoBL verifySelectedRestaurant() {
-        boolean isCorrectRestaurantSelected = RestaurantScreen.get().isCorrectRestaurantSelected();
-        assertThat(isCorrectRestaurantSelected).as("incorrect location set").isTrue();
-        LOGGER.info("Correct Restaurant is selected");
+    public ZomatoBL verifySelectedRestaurantWithRestaurantDisplayed() {
+        boolean isCorrectRestaurantDisplayed = RestaurantScreen.get().verifyRestaurantDisplayed();
+        assertThat(isCorrectRestaurantDisplayed).as("incorrect location set").isTrue();
+        LOGGER.info("Displayed Restaurant is correct");
         return this;
     }
 
-    public ZomatoBL bookTableForGuestDayForASpecificDate() {
-        boolean isBookATableOptionSelected = RestaurantScreen.get().clickOnBookATable().isBookATableOptionSelected();
+    public ZomatoBL bookATableOnASpecificDateAndTimeForGuests() {
+        boolean isBookATableOptionSelected = RestaurantScreen.get().clickOnBookATable().verifyBookATableOptionSelected();
         assertThat(isBookATableOptionSelected).as("Book a Table option not selected").isTrue();
         LOGGER.info("Book a Table option successfully selected");
 
-        boolean isCorrectDateSelected = RestaurantScreen.get().selectDate().isCorrectDateSelected();
-        assertThat(isCorrectDateSelected).as("Incorrect date or no date selected").isTrue();
+        boolean isDateDisplayedSameAsSelected = RestaurantScreen.get().selectDate().verifyDateSelectedMatchingWithDateDisplayed();
+        softly.assertThat(isDateDisplayedSameAsSelected).as("Incorrect date displayed or no date selected").isTrue();
         LOGGER.info("Correct Date selected");
 
-        boolean areCorrectNumberOfGuestsSelected = RestaurantScreen.get().selectNumberOfGuests().areCorrectNumberOfGuestsSelected();
-        assertThat(areCorrectNumberOfGuestsSelected).as("Incorrect number of guests or no guests selected").isTrue();
+        boolean areNumberOfGuestsDisplayedSameAsSelected = RestaurantScreen.get().selectNumberOfGuests().verifyNumberOfGuestsSelectedMatchingWithNumberOfGuestsDisplayed();
+        softly.assertThat(areNumberOfGuestsDisplayedSameAsSelected).as("Incorrect number of guests displayed or no guests selected").isTrue();
         LOGGER.info("Correct Number of Guests selected");
 
-        boolean isCorrectTimeSlotSelected = RestaurantScreen.get().selectTimeSlot().isCorrectTimeSlotSelected();
-        assertThat(isCorrectTimeSlotSelected).as("Incorrect time slot or no timeslot selected").isTrue();
-        LOGGER.info("Correct Timeslot selected");
+        boolean isTimeSlotSelected = RestaurantScreen.get().selectTimeSlot().verifyTimeSlotSelected();
+        softly.assertThat(isTimeSlotSelected).as("No timeslot selected").isTrue();
+        LOGGER.info("Timeslot selected");
 
-        boolean areGuestDetailsCorrect = RestaurantScreen.get().fillGuestBasicDetails().areGuestDetailsCorrect();
-        assertThat(areGuestDetailsCorrect).as("Incorrect/No guest details selected").isTrue();
-        LOGGER.info("Correct Guest details filled");
+        boolean areGuestDetailsCorrect = RestaurantScreen.get().fillGuestBasicDetails().verifyGuestDetails();
+        softly.assertThat(areGuestDetailsCorrect).as("Guest details filled are incorrect or incomplete").isTrue();
+        LOGGER.info("Guest details filled correctly");
         return this;
     }
 
     public ZomatoBL verifyLoginPopUpMessage() {
-        boolean isLoginPopUpMessageVisible = RestaurantScreen.get().isLoginPopUpMessageVisible();
-        assertThat(isLoginPopUpMessageVisible).as("Login Pop Up mesaage didn't occur").isTrue();
-        LOGGER.info("Login Pop up Message Occurred");
+        boolean isLoginPopUpMessageDisplayed = RestaurantScreen.get().verifyLoginPopUpMessageDisplayed();
+        assertThat(isLoginPopUpMessageDisplayed).as("Login Pop Up message not displayed").isTrue();
+        LOGGER.info("Login Pop up Message displayed");
         return this;
     }
 }

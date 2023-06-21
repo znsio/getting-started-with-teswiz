@@ -24,7 +24,7 @@ public class ZomatoSteps {
     @Given("I, as a User have set the location to {string} on the home page")
     public void iAsAUserHaveSetTheLocationToOnTheHomePage(String cityName) {
         LOGGER.info(String.format(
-                "iAsAUserShouldBeOnTheZomatoHomePageAndAbleToSelectTheLocation - Persona:'%s', Platform: '%s'",
+                "iAsAUserHaveSetTheLocationToOnTheHomePage - Persona:'%s', Platform: '%s'",
                 SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()));
         Drivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform(), context);
         new ZomatoHomePageBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).selectDiningLocation(cityName);

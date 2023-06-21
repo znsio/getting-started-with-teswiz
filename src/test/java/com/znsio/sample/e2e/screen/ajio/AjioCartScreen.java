@@ -38,4 +38,6 @@ public abstract class AjioCartScreen {
     public abstract boolean isProductRemovedMessageVisible();
 
     public abstract AjioCartScreen clearCart();
+
+    public abstract AjioHomeScreen continueShopping();
 }

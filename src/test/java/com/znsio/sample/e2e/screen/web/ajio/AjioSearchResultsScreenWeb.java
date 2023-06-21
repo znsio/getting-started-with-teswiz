@@ -37,7 +37,7 @@ public class AjioSearchResultsScreenWeb
 
     @Override
     public String getActualSearchString() {
-        String actualSearchProduct = driver.findElement(bysearchedProductResultXpath).getText();
+        String actualSearchProduct = driver.waitTillElementIsVisible(bysearchedProductResultXpath).getText();
         LOGGER.info("Search  Product Result : " + actualSearchProduct);
         return actualSearchProduct;
     }

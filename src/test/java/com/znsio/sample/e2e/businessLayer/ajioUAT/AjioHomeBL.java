@@ -5,11 +5,14 @@ import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.ajio.AjioCartScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
+import com.znsio.sample.e2e.screen.ajio.AjioWishlistScreen;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+
 import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AjioHomeBL {
@@ -47,7 +50,8 @@ public class AjioHomeBL {
     }
 
     public AjioProductBL searchFor(String product) {
-        clearAccountDataForUser();
+        clearWishlistForUser();
+        clearCartForUser();
         LOGGER.info("Searching in home page for the product");
         AjioSearchResultsScreen ajioSearchResultsScreen = AjioHomeScreen.get().searchFor(product);
         String actualSearchWasFor = ajioSearchResultsScreen.getActualSearchString();
@@ -60,21 +64,27 @@ public class AjioHomeBL {
         return new AjioProductBL();
     }
 
-    private void clearAccountDataForUser() {
-        AjioHomeScreen ajioHomeScreen = AjioHomeScreen.get();
-        assertThat(ajioHomeScreen
-                .goToWishList()
-                .clearWishlist()
-                .isWishlistEmpty())
-                .as("User wishlist is not cleared")
-                .isTrue();
+    private void clearWishlistForUser() {
+        AjioWishlistScreen ajioWishlistScreen = AjioHomeScreen.get().goToWishList();
+        if (!(ajioWishlistScreen.isWishlistEmpty())) {
+            assertThat(ajioWishlistScreen
+                    .clearWishlist()
+                    .isWishlistEmpty())
+                    .as("User wishlist is not cleared")
+                    .isTrue();
+        }
+    }
 
-        assertThat(ajioHomeScreen
-                .goToCart()
-                .clearCart()
-                .isCartEmpty())
-                .as("User Cart is not cleared")
-                .isTrue();
+    private void clearCartForUser() {
+        AjioCartScreen ajioCartScreen = AjioHomeScreen.get().goToCart();
+        if (!(ajioCartScreen.isCartEmpty())) {
+            assertThat(ajioCartScreen
+                    .clearCart()
+                    .isCartEmpty())
+                    .as("User Cart is not cleared")
+                    .isTrue();
+        }
+        ajioCartScreen.continueShopping();
     }
 
     public AjioHomeBL verifyCartIsEmpty() {

@@ -21,6 +21,7 @@ public class AjioCartScreenWeb
     private static final By byAlertMessageClassName = By.className("msg-content");
     private static final By bySubmitDeleteProductXpath = By.xpath("//div[text()='DELETE']");
     private static final By byEmptyBagMessageClassName = By.className("empty-msg");
+    private static final By byContinueShoppingClassName = By.className("cart-shopping");
 
 
     private final Driver driver;
@@ -61,6 +62,13 @@ public class AjioCartScreenWeb
             driver.waitTillElementIsVisible(bySubmitDeleteProductXpath).click();
         }
         return this;
+    }
+
+    @Override
+    public AjioHomeScreen continueShopping() {
+        LOGGER.info("Continue Shopping : Going back to Home Page");
+        driver.findElement(byContinueShoppingClassName).click();
+        return AjioHomeScreen.get();
     }
 
     @Override

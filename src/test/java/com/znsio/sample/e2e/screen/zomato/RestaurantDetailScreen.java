@@ -31,14 +31,14 @@ public abstract class RestaurantDetailScreen {
     public abstract RestaurantDetailScreen selectBookingDate(int aheadDays);
     public abstract RestaurantDetailScreen selectGuestCount(int guestCount);
     public abstract RestaurantDetailScreen clickBookButton();
-    public abstract boolean isLoginWindowVisible();
+    public abstract boolean isLoginPopUpWindowVisible();
     public abstract boolean isRestaurantNameVisible(String restaurantName);
     public abstract boolean isSelectedAheadDateCorrect(int aheadDays);
     public abstract boolean isNumberOfGuestSelectedCorrect(int guestCount);
     public abstract boolean isSelectTimeOptionEnabled();
-    public abstract RestaurantDetailScreen addFirstName(String firstName);
-    public abstract RestaurantDetailScreen addLastName(String lastName);
-    public abstract RestaurantDetailScreen addEmail(String userEmail);
-    public abstract RestaurantDetailScreen addPhoneNumber(String phoneNo);
+    public abstract RestaurantDetailScreen enterFirstName(String firstName);
+    public abstract RestaurantDetailScreen enterLastName(String lastName);
+    public abstract RestaurantDetailScreen enterUserEmail(String userEmail);
+    public abstract RestaurantDetailScreen enterPhoneNumber(String phoneNo);
     public abstract RestaurantDetailScreen selectTimeSlot();
 }

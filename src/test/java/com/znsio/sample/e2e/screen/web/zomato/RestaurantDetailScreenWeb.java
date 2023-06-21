@@ -76,7 +76,7 @@ public class RestaurantDetailScreenWeb extends RestaurantDetailScreen {
     }
 
     @Override
-    public boolean isLoginWindowVisible() {
+    public boolean isLoginPopUpWindowVisible() {
         driver.waitTillElementIsPresent(By.id(byLoginFrameId));
         driver.switchToFrame(byLoginFrameId);
         driver.waitTillElementIsVisible(byLoginHeaderXpath, 20);
@@ -110,25 +110,25 @@ public class RestaurantDetailScreenWeb extends RestaurantDetailScreen {
     }
 
     @Override
-    public RestaurantDetailScreen addFirstName(String firstName) {
+    public RestaurantDetailScreen enterFirstName(String firstName) {
         driver.findElement(byFirstNameInputCSS).sendKeys(firstName);
         return this;
     }
 
     @Override
-    public RestaurantDetailScreen addLastName(String lastName) {
+    public RestaurantDetailScreen enterLastName(String lastName) {
         driver.findElement(byLastNameInputCSS).sendKeys(lastName);
         return this;
     }
 
     @Override
-    public RestaurantDetailScreen addEmail(String userEmail) {
+    public RestaurantDetailScreen enterUserEmail(String userEmail) {
         driver.findElement(byUserEmailInputCSS).sendKeys(userEmail);
         return this;
     }
 
     @Override
-    public RestaurantDetailScreen addPhoneNumber(String phoneNo) {
+    public RestaurantDetailScreen enterPhoneNumber(String phoneNo) {
         driver.findElement(byUserPhoneNumberCSS).sendKeys(phoneNo);
         return this;
     }

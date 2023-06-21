@@ -36,8 +36,10 @@ public class RestaurantDetailBL {
 
     public RestaurantDetailBL LoginPopUpWindow() {
         LOGGER.info("verifyLoginOption(): verify login option");
-        assertThat(RestaurantDetailScreen.get().isLoginWindowVisible())
+        assertThat(RestaurantDetailScreen.get().isLoginPopUpWindowVisible())
                 .as("User is unable to see the login window").isTrue();
         return this;
     }
+
+
 }

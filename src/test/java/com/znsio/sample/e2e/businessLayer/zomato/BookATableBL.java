@@ -55,10 +55,10 @@ public class BookATableBL {
 
         Map<String, Object> userDetails = Runner.getTestDataAsMap("userDetail");
         restaurantDetailScreen.selectTimeSlot()
-                .addFirstName(userDetails.get("firstName").toString())
-                .addLastName(userDetails.get("lastName").toString())
-                .addEmail(userDetails.get("userEmail").toString())
-                .addPhoneNumber(userDetails.get("phoneNo").toString())
+                .enterFirstName(userDetails.get("firstName").toString())
+                .enterLastName(userDetails.get("lastName").toString())
+                .enterUserEmail(userDetails.get("userEmail").toString())
+                .enterPhoneNumber(userDetails.get("phoneNo").toString())
                 .clickBookButton();
 
         return this;

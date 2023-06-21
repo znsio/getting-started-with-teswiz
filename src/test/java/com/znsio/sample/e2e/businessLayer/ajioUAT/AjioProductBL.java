@@ -37,7 +37,7 @@ public class AjioProductBL {
     }
 
 
-    public AjioProductBL wishlistTheProductFromSearchResult(int itemNumber) {
+    public AjioProductBL wishlistTheProductAndMoveToCart(int itemNumber) {
         LOGGER.info("Adding the Product to Wishlist from Product Details");
 
         assertThat(AjioSearchResultsScreen.get()
@@ -64,13 +64,16 @@ public class AjioProductBL {
                 .as(" Product is not added to wishlist ")
                 .isTrue();
 
-        return this;
-    }
-
-    public AjioProductBL moveTheProductToCart() {
         LOGGER.info("Moving the product to Cart from wishlist");
-        String productSize = "6";
-        assertThat(AjioWishlistScreen.get()
+        String productSize = "10";
+        AjioWishlistScreen ajioWishlistScreen = AjioWishlistScreen.get();
+
+        assertThat(ajioWishlistScreen
+                .isproductSizeInStock(productSize))
+                .as("Product is out of stock for size : " + productSize)
+                .isTrue();
+
+        assertThat(ajioWishlistScreen
                 .selectSizeAndMoveToBag(productSize)
                 .proceedToBag()
                 .isProductAddedToBag())
@@ -79,10 +82,13 @@ public class AjioProductBL {
         return this;
     }
 
-    public AjioHomeBL removeProductFromCart() {
+    private AjioHomeBL removeProductFromCart() {
         LOGGER.info("Removing Product from Cart");
-        AjioCartScreen.get()
-                .removeProductFromCart();
+        softly.assertThat(AjioCartScreen.get()
+                        .removeProductFromCart()
+                        .isProductRemovedMessageVisible())
+                .as("Product Removed from bag : alert message not visible")
+                .isTrue();
         return new AjioHomeBL();
     }
 

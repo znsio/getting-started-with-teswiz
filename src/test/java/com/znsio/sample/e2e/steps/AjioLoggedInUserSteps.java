@@ -37,8 +37,7 @@ public class AjioLoggedInUserSteps {
     @When("I search for for {string} and wishlist the {int}th product and move it to cart")
     public void iSearchForForAndWishlistTheThProductAndMoveItToCart(String product, int itemNumber) {
         new AjioHomeBL(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER, Runner.getPlatform()).searchFor(product)
-                .wishlistTheProductFromSearchResult(itemNumber)
-                .moveTheProductToCart();
+                .wishlistTheProductAndMoveToCart(itemNumber);
     }
 
     @Then("I remove the product from cart and verify cart is empty by relog")

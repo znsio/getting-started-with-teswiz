@@ -17,6 +17,7 @@ public class AjioCartScreenWeb
     private static final By byProductInCartClassName = By.className("product-card");
     private static final By bySignOutXpath = By.xpath("//a[text()='Sign Out']");
     private static final By byDeleteProductClassName = By.className("delete-btn");
+    private static final By byAlertMessageClassName = By.className("msg-content");
     private static final By bySubmitDeleteProductXpath = By.xpath("//div[text()='DELETE']");
     private static final By byEmptyBagMessageClassName = By.className("empty-msg");
 
@@ -32,7 +33,7 @@ public class AjioCartScreenWeb
     @Override
     public boolean isProductAddedToBag() {
         LOGGER.info("Checking if product is added to Bag");
-       return driver.isElementPresent(byProductInCartClassName);
+        return driver.isElementPresent(byProductInCartClassName);
     }
 
     @Override
@@ -42,6 +43,13 @@ public class AjioCartScreenWeb
         JavascriptExecutor js = (JavascriptExecutor) driver.getInnerDriver();
         js.executeScript("arguments[0].click()", driver.waitTillElementIsVisible(bySubmitDeleteProductXpath));
         return this;
+    }
+
+    @Override
+    public boolean isProductRemovedMessageVisible() {
+        LOGGER.info("verifying product is removed from Cart");
+        String productRemovedMessage = "Removed from bag";
+        return driver.waitTillElementIsVisible(byAlertMessageClassName).getText().equals(productRemovedMessage);
     }
 
     @Override

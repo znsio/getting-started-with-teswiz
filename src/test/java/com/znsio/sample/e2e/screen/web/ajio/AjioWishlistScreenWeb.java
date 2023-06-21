@@ -13,7 +13,7 @@ public class AjioWishlistScreenWeb
     private static final String SCREEN_NAME = AjioWishlistScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
     private static final By byProductNameClassName = By.className("nameCls");
-    private static final String selectSizeXpath = "//div[@class='slick-slide slick-active size-swatch']//div[contains(text(),'%s')] ";
+    private static final String selectSizeXpath = "//div[@class='size-variant-section']//div[contains(text(),'%s')]";
     private static final By byProceedToBagClassName = By.className("mini-cart-btn");
     private static final By byMoveToBagIcon = By.className("wishlist-card-bag");
 
@@ -36,9 +36,18 @@ public class AjioWishlistScreenWeb
     }
 
     @Override
+    public boolean isproductSizeInStock(String productSize) {
+        LOGGER.info("Checking if product is in stock for size : " + productSize);
+        driver.waitTillElementIsVisible(byMoveToBagIcon).click();
+        return driver.waitTillElementIsVisible(
+                        By.xpath(String.format(selectSizeXpath, productSize)))
+                .getAttribute("class")
+                .contains("instock");
+    }
+
+    @Override
     public AjioWishlistScreen selectSizeAndMoveToBag(String productSize) {
         LOGGER.info("Selecting Size and moving to bag from Wishlist");
-        driver.waitTillElementIsVisible(byMoveToBagIcon).click();
         driver.waitTillElementIsVisible(By.xpath(String.format(selectSizeXpath, productSize))).click();
         return this;
     }

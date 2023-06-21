@@ -31,8 +31,9 @@ public abstract class AjioCartScreen {
 
     public abstract AjioCartScreen removeProductFromCart();
 
-
     public abstract boolean isCartEmpty();
 
     public abstract AjioHomeScreen signOut();
+
+    public abstract boolean isProductRemovedMessageVisible();
 }

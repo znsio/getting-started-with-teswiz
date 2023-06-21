@@ -15,7 +15,7 @@ public class DineOutScreenWeb extends DineOutScreen {
     private final Visual visually;
     private final By byRestaurantNameXpath = By.xpath("((//img[@alt='Restaurant Card'])[3]//following::h4)[1]");
     private final By byRestaurantCityXpath = By.xpath("//h1[contains(text(), 'Best Dining Restaurants near')]");
-    private By byRestaurantsDetailCardXpath = By.ByCssSelector.xpath("//img[@alt='Restaurant Card']//ancestor::div[@class = 'jumbo-tracker']");
+    private final By byRestaurantsDetailCardXpath = By.ByCssSelector.xpath("//img[@alt='Restaurant Card']//ancestor::div[@class = 'jumbo-tracker']");
 
 
     public DineOutScreenWeb(Driver driver, Visual visually) {

@@ -30,7 +30,7 @@ public class RestaurantDetailScreenWeb extends RestaurantDetailScreen {
     private final By byBookButtonXpath = By.xpath("//span[text()='Book']");
     private final String byGuestCountXpath = "//span[text()='%s']";
     private final By byLoginHeaderXpath = By.xpath("//h2[text()='Login']");
-    private String byLoginFrameId = "auth-login-ui";
+    private final String byLoginFrameId = "auth-login-ui";
     private final By bySelectTimeOptionXpath = By.xpath("//h4[text()='Select time']//parent::section");
     private final By byFirstNameInputCSS = By.cssSelector("input[name='firstName']");
     private final By byLastNameInputCSS = By.cssSelector("input[name='lastName']");

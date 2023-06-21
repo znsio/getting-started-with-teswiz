@@ -26,9 +26,9 @@ public class ZomatoSteps {
         new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).launchHomePageAndValidate();
     }
 
-    @When("I click on dining option")
+    @When("I select dining option")
     public void clickOnDiningOption() {
-        new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).clickOnDiningOption();
+        new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).selectDiningOption();
     }
 
     @Then("I should be redirected to dine-out page")
@@ -36,32 +36,32 @@ public class ZomatoSteps {
         new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).verifyRedirectionToDineoutPage();
     }
 
-    @When("I select location as {string}")
-    public void selectLocationForRestaurants(String location) {
-        new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).selectLocationForRestaurants(location);
+    @When("I select a specific location")
+    public void selectLocationForRestaurant() {
+        new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).selectLocationForRestaurant();
     }
 
-    @Then("I should get location selected as {string}")
-    public void verifySelectedLocation(String location) {
-        new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).verifySelectedLocation(location);
+    @Then("the same location should be displayed")
+    public void verifySelectedLocationWithLocationDisplayed() {
+        new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).verifySelectedLocationWithLocationDisplayed();
     }
 
-    @When("I select restaurant number 3 from results")
-    public void selectSpecificRestaurant() {
-        new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).selectSpecificRestaurant();
+    @When("I choose a restaurant from selected location")
+    public void chooseSpecificRestaurant() {
+        new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).chooseRestaurantFromSelectedLocation();
     }
 
-    @Then("I should get same restaurant which was selected")
-    public void verifySelectedRestaurant() {
-        new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).verifySelectedRestaurant();
+    @Then("the same restaurant should be displayed")
+    public void verifySelectedRestaurantWithRestaurantDisplayed() {
+        new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).verifySelectedRestaurantWithRestaurantDisplayed();
     }
 
-    @When("I try to book a table for 4 guests on a date day after tomorrow")
-    public void bookTableForGuestDayForASpecificDate() {
-        new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).bookTableForGuestDayForASpecificDate();
+    @When("I try to book a table")
+    public void bookATableOnASpecificDateAndTimeForGuests() {
+        new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).bookATableOnASpecificDateAndTimeForGuests();
     }
 
-    @Then("I should get login pop up message")
+    @Then("a login pop-up message should be displayed")
     public void verifyLoginPopUpMessage() {
         new ZomatoBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).verifyLoginPopUpMessage();
     }

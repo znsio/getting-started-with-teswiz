@@ -9,6 +9,7 @@ import com.znsio.teswiz.runner.Visual;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.Color;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -28,11 +29,11 @@ public class RestaurantScreenWeb extends RestaurantScreen {
     private final By byBookATable = By.linkText("Book a Table");
     private final By byBookATableVerificationText = By.xpath("//h4[text()='Please select your booking details']");
     private final By bySelectDateDropdown = By.xpath("(//span[starts-with(@class,'sc-qnejpk-6')])[1]");
-    private String bySelectDateDropdownOption = "//*[contains(text(),'%s')]";
+    private String bySelectDateDropdownOption = "//span[contains(text(),'%s')]";
     private final By bySelectGuestsDropdown = By.xpath("(//span[starts-with(@class,'sc-qnejpk-6')])[2]");
     private final By bySelectGuestsDropdownOption = By.xpath("(//span[starts-with(@class,'sc-qnejpk-0')])[2]/section/div/span/span[contains(text(),'4')]");
     private String bySelectTimeSlot = "//li[text()='%s']";
-    private By byAllTimeSlotsXPath = By.xpath("//section/ul/li[starts-with(@class,'sc')]");
+    private final By byAllTimeSlotsXPath = By.xpath("//section/ul/li[starts-with(@class,'sc')]");
     private final By byFirstNameInputField = By.xpath("//input[@name='firstName']");
     private final By byLastNameInputField = By.xpath("//input[@name='lastName']");
     private final By byEmailInputField = By.xpath("//input[@name='email']");
@@ -48,124 +49,140 @@ public class RestaurantScreenWeb extends RestaurantScreen {
         context = SessionContext.getTestExecutionContext(Thread.currentThread().getId());
     }
 
-    public boolean isCorrectRestaurantSelected() {
+    public boolean verifyRestaurantDisplayed() {
         driver.getInnerDriver().manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         driver.getInnerDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        LOGGER.info("Verifying restaurant name using context");
         return driver.isElementPresent(By.xpath(String.format(restaurantNameHeading, context.getTestState(SAMPLE_TEST_CONTEXT.RESTAURANT_NAME))));
     }
 
     public RestaurantScreen clickOnBookATable() {
-        visually.checkWindow(SCREEN_NAME, "Restaurant Screen opened, after Restaurant selection");
+        visually.checkWindow(SCREEN_NAME, "Restaurant Screen");
+        LOGGER.info("Clicking on Book a Table");
         driver.waitTillElementIsPresent(byBookATable);
         driver.findElement(byBookATable).click();
         return this;
     }
 
-    public boolean isBookATableOptionSelected() {
+    public boolean verifyBookATableOptionSelected() {
         driver.getInnerDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        LOGGER.info("Verifying Book a Table element clicked by text verification");
         return driver.isElementPresent(byBookATableVerificationText);
     }
 
     public RestaurantScreen selectDate() {
-        visually.checkWindow(SCREEN_NAME, "Restaurant Screen opened, Book a Table selected");
+        visually.checkWindow(SCREEN_NAME, "Restaurant Screen");
+        LOGGER.info("Clicking on Date dropdown");
         driver.waitTillElementIsPresent(bySelectDateDropdown);
         driver.findElement(bySelectDateDropdown).click();
         driver.getInnerDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         String futureDate = calculateDateInFuture(2);
+        LOGGER.info("Selecting Today's date + 2 days (ex format, Fri, 22 Jun), if available");
         if (driver.isElementPresent(By.xpath(String.format(bySelectDateDropdownOption, futureDate))))
             driver.findElement(By.xpath(String.format(bySelectDateDropdownOption, futureDate))).click();
         return this;
     }
 
-    public boolean isCorrectDateSelected() {
+    public boolean verifyDateSelectedMatchingWithDateDisplayed() {
         driver.getInnerDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        LOGGER.info("Verifying date selected or not in format yyyy-MM-dd (ex format, 2023-06-22)");
         return driver.findElement(bySelectDateDropdown).getText().contains(calculateDateInFuture(2, "yyyy-MM-dd"));
     }
 
     public RestaurantScreen selectNumberOfGuests() {
-        visually.checkWindow(SCREEN_NAME, "Restaurant Screen opened, correct Date Selected");
+        visually.checkWindow(SCREEN_NAME, "Restaurant Screen");
+        LOGGER.info("Clicking on Guests dropdown");
         driver.waitTillElementIsPresent(bySelectGuestsDropdown);
         driver.findElement(bySelectGuestsDropdown).click();
         driver.getInnerDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        LOGGER.info("Selecting 4 guests option, if available");
         if (driver.isElementPresent(bySelectGuestsDropdownOption))
             driver.findElement(bySelectGuestsDropdownOption).click();
         return this;
     }
 
-    public boolean areCorrectNumberOfGuestsSelected() {
+    public boolean verifyNumberOfGuestsSelectedMatchingWithNumberOfGuestsDisplayed() {
         driver.getInnerDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        LOGGER.info("Verifying number of guests selected or not");
         return driver.findElement(bySelectGuestsDropdown).getText().contains("4");
     }
 
     public RestaurantScreen selectTimeSlot() {
-        visually.checkWindow(SCREEN_NAME, "Restaurant Screen opened, correct number of Guests selected");
+        visually.checkWindow(SCREEN_NAME, "Restaurant Screen");
+        LOGGER.info("Created an array of pre-defined Dinner time slot");
+        String[] possibleTimeSlots = {"07:00 PM", "07:30 PM", "08:00 PM", "08:30 PM", "09:00 PM", "09:30 PM", "10:00 PM", "10:30 PM", "11:00 PM", "11:30 PM"};
         driver.getInnerDriver().manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
-        for (int hour = 7; hour <= 11; hour++) {
-            if (driver.isElementPresent(By.xpath(String.format(bySelectTimeSlot, "0" + hour + ":00 PM")))) {
-                driver.findElement(By.xpath(String.format(bySelectTimeSlot, "0" + hour + ":00 PM"))).click();
-                context.addTestState(SAMPLE_TEST_CONTEXT.TIMESLOT_BOOKED, "0" + hour + ":00 PM");
-                break;
-            } else if (driver.isElementPresent(By.xpath(String.format(bySelectTimeSlot, "0" + hour + ":30 PM")))) {
-                driver.findElement(By.xpath(String.format(bySelectTimeSlot, "0" + hour + ":30 PM"))).click();
-                context.addTestState(SAMPLE_TEST_CONTEXT.TIMESLOT_BOOKED, "0" + hour + ":00 PM");
+        LOGGER.info("Trying to select a timeslot available from possible timeslots");
+        for (String timeSlot : possibleTimeSlots) {
+            if (driver.isElementPresent(By.xpath(String.format(bySelectTimeSlot, timeSlot)))) {
+                driver.findElement(By.xpath(String.format(bySelectTimeSlot, timeSlot))).click();
                 break;
             }
         }
-
         return this;
     }
 
-    public boolean isCorrectTimeSlotSelected() {
+    public boolean verifyTimeSlotSelected() {
         boolean flag = false;
         driver.waitTillPresenceOfAllElements(byAllTimeSlotsXPath);
+        LOGGER.info("Getting all available timeslots in list");
         List<WebElement> timeSlotList = driver.findElements(byAllTimeSlotsXPath);
-        if (timeSlotList.size() > 1) {
-            for (int i = 1; i < timeSlotList.size(); i++) {
-                if (!timeSlotList.get(0).getAttribute("class").equals(timeSlotList.get(i).getAttribute("class"))) {
+        if (timeSlotList.size() < 1) {
+            flag = false;
+        } else {
+            LOGGER.info("Comparing color of time slot elements, as selected time slot has white color (different from unselected timeslot)");
+            for (WebElement timeSlot : timeSlotList) {
+                String timeSlotColorAsHex = Color.fromString(timeSlot.getCssValue("color")).asHex();
+                if (timeSlotColorAsHex.equals("#ffffff")) {
                     flag = true;
+                    break;
                 }
-            }
-        } else if (timeSlotList.size() == 1) {
-            if (timeSlotList.get(0).getText().equals(context.getTestState(SAMPLE_TEST_CONTEXT.TIMESLOT_BOOKED))) {
-                flag = true;
             }
         }
         return flag;
     }
 
     public RestaurantScreen fillGuestBasicDetails() {
-        visually.checkWindow(SCREEN_NAME, "Restaurant Screen opened, dinner time slot selected");
+        visually.checkWindow(SCREEN_NAME, "Restaurant Screen");
         driver.waitTillElementIsPresent(byFirstNameInputField);
+        LOGGER.info("Entering First Name");
         driver.findElement(byFirstNameInputField).sendKeys("Max");
         driver.waitTillElementIsPresent(byLastNameInputField);
+        LOGGER.info("Entering Last Name");
         driver.findElement(byLastNameInputField).sendKeys("Payne");
         driver.waitTillElementIsPresent(byEmailInputField);
+        LOGGER.info("Entering Email");
         driver.findElement(byEmailInputField).sendKeys("maxpayne@gmail.com");
         driver.waitTillElementIsPresent(byISDCodeInputField);
+        LOGGER.info("Entering ISD, if not already present");
         if (driver.findElement(byISDCodeInputField).getAttribute("value").trim().isEmpty()) {
             driver.findElement(byISDCodeInputField).sendKeys("91");
         }
         driver.waitTillElementIsPresent(byPhoneNumberInputField);
+        LOGGER.info("Entering Phone Number");
         driver.findElement(byPhoneNumberInputField).sendKeys("9980768956");
-        visually.checkWindow(SCREEN_NAME, "Restaurant Screen opened, basic guest details filled");
+        visually.checkWindow(SCREEN_NAME, "Restaurant Screen");
         return this;
     }
 
-    public boolean areGuestDetailsCorrect() {
-        boolean flag= driver.findElement(byFirstNameInputField).getAttribute("value").equals("Max") &&
+    public boolean verifyGuestDetails() {
+        LOGGER.info("Verifying Guest details entered earlier");
+        boolean flag = driver.findElement(byFirstNameInputField).getAttribute("value").equals("Max") &&
                 driver.findElement(byLastNameInputField).getAttribute("value").equals("Payne") &&
                 driver.findElement(byEmailInputField).getAttribute("value").equals("maxpayne@gmail.com") &&
                 driver.findElement(byISDCodeInputField).getAttribute("value").equals("91") &&
                 driver.findElement(byPhoneNumberInputField).getAttribute("value").equals("9980768956");
+        LOGGER.info("Booking Table");
         driver.waitTillElementIsPresent(byBookButton);
         driver.findElement(byBookButton).click();
         return flag;
     }
 
-    public boolean isLoginPopUpMessageVisible() {
+    public boolean verifyLoginPopUpMessageDisplayed() {
         driver.getInnerDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        LOGGER.info("Switching to frame and verifying login pop-up display");
         driver.getInnerDriver().switchTo().frame("auth-login-ui");
-        visually.checkWindow(SCREEN_NAME, "Restaurant Screen opened,, switched to frame, checking pop up");
+        visually.checkWindow(SCREEN_NAME, "Restaurant Screen");
         return driver.isElementPresent(bySendOneTimePassword) && driver.isElementPresent(byContinueWithGoogle);
     }
 

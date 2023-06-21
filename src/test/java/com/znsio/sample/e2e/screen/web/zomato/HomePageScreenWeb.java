@@ -22,15 +22,17 @@ public class HomePageScreenWeb extends HomePageScreen {
     }
 
     @Override
-    public boolean isHomePageLaunchedSuccessfully() {
+    public boolean verifyHomePageLaunch() {
         driver.getInnerDriver().manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+        LOGGER.info("Verifying Home Page launch");
         return driver.getInnerDriver().getCurrentUrl().contains(homePagePartialUrl);
     }
 
     @Override
-    public HomePageScreen clickOnDiningOption() {
+    public HomePageScreen selectDiningOption() {
         driver.waitTillElementIsPresent(byDiningCardText);
-        visually.checkWindow(SCREEN_NAME, "HomePage Screen opened");
+        visually.checkWindow(SCREEN_NAME, "HomePage Screen");
+        LOGGER.info("Selecting Dining option");
         driver.findElement(byDiningCardText).click();
         return this;
     }

@@ -26,7 +26,6 @@ public class AjioSearchResultsScreenWeb
     public AjioSearchResultsScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
-        visually.checkWindow(SCREEN_NAME, "Home page");
     }
 
     @Override

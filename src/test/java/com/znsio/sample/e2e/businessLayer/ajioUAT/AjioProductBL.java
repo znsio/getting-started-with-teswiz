@@ -8,6 +8,8 @@ import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AjioProductBL {
@@ -82,5 +84,14 @@ public class AjioProductBL {
         AjioCartScreen.get()
                 .removeProductFromCart();
         return new AjioHomeBL();
+    }
+
+    public AjioProductBL removeProductFromCartAndVerifyCartIsEmpty(Map<String, Object> userDetails) {
+        LOGGER.info("Starting removeProductFromCartAndVerifyCartIsEmpty()");
+        removeProductFromCart().
+                signOutUser().
+                signinAsValidUser(userDetails).
+                verifyCartIsEmpty();
+        return this;
     }
 }

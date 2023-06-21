@@ -36,8 +36,7 @@ public class AjioLoggedInUserSteps {
 
     @When("I search for for {string} and wishlist the {int}th product and move it to cart")
     public void iSearchForForAndWishlistTheThProductAndMoveItToCart(String product, int itemNumber) {
-        new AjioHomeBL(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER, Runner.getPlatform())
-                .searchFor(product)
+        new AjioHomeBL(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER, Runner.getPlatform()).searchFor(product)
                 .wishlistTheProductFromSearchResult(itemNumber)
                 .moveTheProductToCart();
     }
@@ -46,11 +45,7 @@ public class AjioLoggedInUserSteps {
     public void iRemoveTheProductFromCartAndVerifyCartIsEmpty() {
         Map<String, Object> userDetails = Runner.getTestDataAsMap(
                 context.getTestStateAsString(SAMPLE_TEST_CONTEXT.LOGGEDIN_USER));
-        new AjioProductBL()
-                .removeProductFromCart()
-                .signOutUser()
-                .signinAsValidUser(userDetails)
-                .verifyCartIsEmpty();
+        new AjioProductBL().removeProductFromCartAndVerifyCartIsEmpty(userDetails);
     }
 
 

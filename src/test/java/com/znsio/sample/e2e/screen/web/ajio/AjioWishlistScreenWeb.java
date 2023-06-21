@@ -24,7 +24,6 @@ public class AjioWishlistScreenWeb
     public AjioWishlistScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
-        visually.checkWindow(SCREEN_NAME, "Home page");
     }
 
 

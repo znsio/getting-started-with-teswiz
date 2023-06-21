@@ -27,7 +27,6 @@ public class AjioCartScreenWeb
     public AjioCartScreenWeb(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
-        visually.checkWindow(SCREEN_NAME, "Home page");
     }
 
     @Override

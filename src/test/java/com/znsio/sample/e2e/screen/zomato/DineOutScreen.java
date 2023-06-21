@@ -29,9 +29,9 @@ public abstract class DineOutScreen {
 
     public abstract boolean verifyRedirectionToDineoutPage();
 
-    public abstract DineOutScreen selectLocationForRestaurants(String location);
+    public abstract DineOutScreen selectLocation();
 
-    public abstract boolean isCorrectLocationSelected(String location);
+    public abstract boolean verifyLocationDisplayed();
 
     public abstract DineOutScreen selectSpecificRestaurant();
 }

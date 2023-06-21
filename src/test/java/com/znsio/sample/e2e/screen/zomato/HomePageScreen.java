@@ -27,7 +27,7 @@ public abstract class HomePageScreen {
                 SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
-    public abstract boolean isHomePageLaunchedSuccessfully();
+    public abstract boolean verifyHomePageLaunch();
 
-    public abstract HomePageScreen clickOnDiningOption();
+    public abstract HomePageScreen selectDiningOption();
 }

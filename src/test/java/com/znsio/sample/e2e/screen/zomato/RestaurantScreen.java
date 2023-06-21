@@ -27,27 +27,27 @@ public abstract class RestaurantScreen {
                 SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
-    public abstract boolean isCorrectRestaurantSelected();
+    public abstract boolean verifyRestaurantDisplayed();
 
     public abstract RestaurantScreen clickOnBookATable();
 
-    public abstract boolean isBookATableOptionSelected();
+    public abstract boolean verifyBookATableOptionSelected();
 
     public abstract RestaurantScreen selectDate();
 
-    public abstract boolean isCorrectDateSelected();
+    public abstract boolean verifyDateSelectedMatchingWithDateDisplayed();
 
     public abstract RestaurantScreen selectNumberOfGuests();
 
-    public abstract boolean areCorrectNumberOfGuestsSelected();
+    public abstract boolean verifyNumberOfGuestsSelectedMatchingWithNumberOfGuestsDisplayed();
 
     public abstract RestaurantScreen selectTimeSlot();
 
     public abstract RestaurantScreen fillGuestBasicDetails();
 
-    public abstract boolean isCorrectTimeSlotSelected();
+    public abstract boolean verifyTimeSlotSelected();
 
-    public abstract boolean areGuestDetailsCorrect();
+    public abstract boolean verifyGuestDetails();
 
-    public abstract boolean isLoginPopUpMessageVisible();
+    public abstract boolean verifyLoginPopUpMessageDisplayed();
 }

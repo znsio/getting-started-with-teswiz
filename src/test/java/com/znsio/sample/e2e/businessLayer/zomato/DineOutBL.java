@@ -48,7 +48,7 @@ public class DineOutBL {
 
         String restaurantName = dineOutScreen.getRestaurantName();
 
-        assertThat(dineOutScreen.selectRestaurant().isRestaurantNameVisible(restaurantName))
+        softly.assertThat(dineOutScreen.selectRestaurant().isRestaurantNameVisible(restaurantName))
                 .as(String.format("User is no on the selected restaurant page: ", restaurantName)).isTrue();
 
         return new BookATableBL();

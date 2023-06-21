@@ -58,9 +58,9 @@ public class BookATableBL {
                 .addFirstName(userDetails.get("firstName").toString())
                 .addLastName(userDetails.get("lastName").toString())
                 .addEmail(userDetails.get("userEmail").toString())
-                .addPhoneNumber(userDetails.get("phoneNo").toString());
+                .addPhoneNumber(userDetails.get("phoneNo").toString())
+                .clickBookButton();
 
-        restaurantDetailScreen.clickBookButton();
         return this;
     }
 }

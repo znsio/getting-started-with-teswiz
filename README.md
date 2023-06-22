@@ -1,9 +1,9 @@
 # getting-started-with-teswiz
 
-# ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Breaking changes in teswiz v0.0.72 ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
+# ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Breaking changes in teswiz v0.0.80 ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
 
 ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
-Refer to the [breaking changes](https://github.com/znsio/teswiz/blob/cleanUp/README.md#breaking-changes-in-v0072) section in [teswiz](https://github.com/znsio/teswiz) repo
+Refer to the [breaking changes](https://github.com/znsio/teswiz/blob/main/README.md#-breaking-changes-in-latest-teswiz-v0080) section in [teswiz](https://github.com/znsio/teswiz) repo
 ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
 
 ### This is a sample project to understand and start using [teswiz](https://github.com/znsio/teswiz)

@@ -22,6 +22,7 @@ public class InAMeetingScreenAndroid
     private final By byMeetingId = By.id("com.jio.rilconferences:id/caller_number");
     private final By byMeetingPasswordId = By.id("com.jio.rilconferences:id/caller_password");
     private final By byTopHeaderControlsPanelId = By.id("videoTopLayout1");
+    private static final By byMeetingNotificationXpath = By.xpath("//android.widget.TextView[@text='JioMeet Video call']");
 
     public InAMeetingScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -125,5 +126,12 @@ public class InAMeetingScreenAndroid
 
     private boolean areInMeetingControlsDisplayed() {
         return driver.isElementPresent(byTopHeaderControlsPanelId);
+    }
+
+    @Override
+    public InAMeetingScreen openJioMeetNotification() {
+        LOGGER.info("Opening Jio Meeting notification from notification bar ");
+        driver.selectNotificationFromNotificationDrawer(byMeetingNotificationXpath);
+        return this;
     }
 }

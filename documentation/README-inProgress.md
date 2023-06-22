@@ -20,8 +20,26 @@ Accordingly, the following changes will need to be made in your existing tests.
 
 There are some method name changes as listed below:
 
-| Purpose                                          | ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Old ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) | ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) New ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) |
-|:-------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
+| Purpose                                                                                            | ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Old ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) | ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) New ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) |
+|:---------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
+| To put App in Background for number of Seconds                                                     | putAppInBackground                                                                                                    | putAppInBackgroundFor                                                                                                 |
+| Method Selects Device Notification from Notification Drawer                                        | selectNotification()	                                                                                                 | selectNotificationFromNotificationDrawer()                                                                            |
+| A new method is added for swipe by passing the screen height and width in percentage as parameters | -                                                                                                                     | swipeByPassingPercentageAttributes(int percentScreenHeight, int fromPercentScreenWidth, int toPercentScreenWidth)     |
+| Scroll In Dynamic Layer method is using Direction Enum instead of a String Parameter               | scrollInDynamicLayer(String direction)                                                                                | scrollInDynamicLayer(Direction direction)                                                                             |
+
+## Minor Enhancement
+
+1. setWebViewContext() - Updated use of AppiumDriver to SupportsContextSwitching for switching to Web View context.
+2. setNativeAppContext() - Updated use of AppiumDriver to SupportsContextSwitching for switching to Native App
+   context.
+3. scroll(Point fromPoint, Point toPoint) - Updated use of AppiumDriver using PointerInput and Sequence to scroll using
+   2 points
+4. tapOnMiddleOfScreenOnDevice() - Updated use of AppiumDriver using PointerInput to tap in the middle of the screen
+5. scrollDownByScreenSize() - Updated use of AppiumDriver to perform scroll as per the screen size
+6. swipeLeft() - Updated use of AppiumDriver & swiping points percentage changed(swiping from the edge of the screen)
+7. swipeRight() - Updated use of AppiumDriver & swiping points percentage changed(swiping from the edge of the screen)
+8. swipe(int height, int fromWidth, int toWidth) - Updated use of AppiumDriver
+9. scrollVertically - Updated use of AppiumDriver
 
 ## Logging to ReportPortal
 

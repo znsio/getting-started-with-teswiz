@@ -1,12 +1,12 @@
 {
   "prod": {
-    "GMAIL_USER_1_EMAIL": "mytestemail@gmail.com",
-    "GMAIL_USER_1_PASSWORD": "Invalid passw0rd",
+    "GMAIL_USER_1_EMAIL": "Vineet.Joshi@ril.com",
+    "GMAIL_USER_1_PASSWORD": "AJIO@261998",
     "Host": {
-      "username": "eot.testing@gmail.com",
-      "password": "eotTesting@0",
-      "firstName": "Eot",
-      "lastName": "Testing"
+      "username": "Vineet.Joshi@ril.com",
+      "password": "AJIO@261998",
+      "firstName": "Vineet",
+      "lastName": "Joshi"
     }
   }
 }

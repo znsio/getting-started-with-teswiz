@@ -6,7 +6,6 @@
       "disable-default-apps",
       "disable-extensions",
       "enable-user-metrics",
-      "incognito",
       "show-taps",
       "disable-infobars"
     ],
@@ -21,7 +20,8 @@
       "jhb": true
     },
     "arguments": [
-      "use-fake-device-for-media-stream"
+      "use-fake-device-for-media-stream",
+      "incognito"
     ],
     "maximize": true,
     "acceptInsecureCerts": true,

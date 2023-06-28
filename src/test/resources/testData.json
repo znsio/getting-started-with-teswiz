@@ -7,6 +7,12 @@
       "password": "eotTesting@0",
       "firstName": "Eot",
       "lastName": "Testing"
+    },
+    "userDetail": {
+      "firstName": "test",
+      "lastName": "user",
+      "userEmail": "testUser@gmail.com",
+      "phoneNo": "1111111111"
     }
   }
 }

@@ -24,6 +24,8 @@ Refer to the [breaking changes](https://github.com/znsio/teswiz/blob/main/README
 
 # [Prerequisites](https://github.com/znsio/teswiz/blob/main/docs/GettingStartedUsingTeswiz-README.md)
 
+# [Getting started using teswiz](https://github.com/znsio/teswiz/blob/main/docs/GettingStartedUsingTeswiz-README.md)
+
 # [Running the sample tests](https://github.com/znsio/teswiz/blob/main/docs/SampleTests-README.md)
 
 # [Visual Test Automation](https://github.com/znsio/teswiz/blob/main/docs/RunningVisualTests-README.md)

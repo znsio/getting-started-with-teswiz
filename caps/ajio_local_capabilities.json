@@ -14,7 +14,7 @@
     "newCommandTimeout": 12000,
     "noSign": true,
     "platformName": "android",
-    "platformVersion": "11.0",
+    "platformVersion": "12",
     "printPageSourceOnFindFailure": true,
     "skipUnlock": true,
     "noReset": false
@@ -30,16 +30,5 @@
         }
       }
     }
-  },
-  "hostMachines": [
-    {
-      "machineIP": "127.0.0.1",
-      "simulators": [
-        {
-          "deviceName": "iPhone 11",
-          "OS": "13.5"
-        }
-      ]
-    }
-  ]
+  }
 }

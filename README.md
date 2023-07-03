@@ -1,6 +1,6 @@
 # getting-started-with-teswiz
 
-# ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Breaking changes in teswiz v0.0.80 ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
+# ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Breaking changes in teswiz v0.0.81 ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
 
 ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
 Refer to the [breaking changes](https://github.com/znsio/teswiz/blob/main/README.md#-breaking-changes-in-latest-teswiz-v0080) section in [teswiz](https://github.com/znsio/teswiz) repo

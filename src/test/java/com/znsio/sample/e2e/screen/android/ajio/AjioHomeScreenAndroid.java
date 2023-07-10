@@ -1,9 +1,12 @@
 package com.znsio.sample.e2e.screen.android.ajio;
 
+import com.znsio.sample.e2e.screen.ajio.AjioCartScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
+import com.znsio.sample.e2e.screen.ajio.AjioWishlistScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -36,5 +39,30 @@ public class AjioHomeScreenAndroid
         visually.checkWindow(SCREEN_NAME, String.format("Search for product: %s", product));
         driver.waitTillElementIsPresent(byStartSearchId).click();
         return AjioSearchResultsScreen.get();
+    }
+
+    @Override
+    public AjioHomeScreen signInUser(String emailId, String password) {
+        throw new NotImplementedException(NOT_YET_IMPLEMENTED);
+    }
+
+    @Override
+    public boolean isUserSignedIn() {
+        throw new NotImplementedException(NOT_YET_IMPLEMENTED);
+    }
+
+    @Override
+    public boolean isUserSignedOut() {
+        throw new NotImplementedException(NOT_YET_IMPLEMENTED);
+    }
+
+    @Override
+    public AjioCartScreen goToCart() {
+        throw new NotImplementedException(NOT_YET_IMPLEMENTED);
+    }
+
+    @Override
+    public AjioWishlistScreen goToWishList() {
+        throw new NotImplementedException(NOT_YET_IMPLEMENTED);
     }
 }

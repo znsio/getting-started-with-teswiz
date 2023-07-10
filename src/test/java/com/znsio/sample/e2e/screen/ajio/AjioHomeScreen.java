@@ -20,7 +20,7 @@ public abstract class AjioHomeScreen {
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
         Visual visually = Drivers.getVisualDriverForCurrentUser(Thread.currentThread().getId());
 
-        switch(platform) {
+        switch (platform) {
             case android:
                 return new AjioHomeScreenAndroid(driver, visually);
             case web:
@@ -31,4 +31,14 @@ public abstract class AjioHomeScreen {
     }
 
     public abstract AjioSearchResultsScreen searchFor(String product);
+
+    public abstract AjioHomeScreen signInUser(String emailId, String password);
+
+    public abstract boolean isUserSignedIn();
+
+    public abstract boolean isUserSignedOut();
+
+    public abstract AjioCartScreen goToCart();
+
+    public abstract AjioWishlistScreen goToWishList();
 }

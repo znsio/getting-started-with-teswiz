@@ -1,8 +1,10 @@
 package com.znsio.sample.e2e.screen.android.ajio;
 
+import com.znsio.sample.e2e.screen.ajio.AjioProductDetailsScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
@@ -25,7 +27,7 @@ public class AjioSearchResultsScreenAndroid
     @Override
     public int getNumberOfProductsFound() {
         String numberOfProducts = driver.waitTillElementIsPresent(byNumberOfProductsFoundId)
-                                        .getText();
+                .getText();
         LOGGER.info(String.format("Found '%s'", numberOfProducts));
         return Integer.parseInt(numberOfProducts.split(" ")[0]);
     }
@@ -36,5 +38,10 @@ public class AjioSearchResultsScreenAndroid
         LOGGER.info(String.format("Actual search was for: '%s'", actualSearchString));
         visually.checkWindow(SCREEN_NAME, "Search results screen");
         return actualSearchString;
+    }
+
+    @Override
+    public AjioProductDetailsScreen goToProductDetails(int itemNumber) {
+        throw new NotImplementedException("Not implemented for Android");
     }
 }

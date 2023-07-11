@@ -158,7 +158,7 @@ public class VodqaScreenAndroid extends VodqaScreen {
     @Override
     public VodqaScreen scrollDownInDynamicLayer(Direction direction) {
         driver.waitTillElementIsPresent(byCLanguageTextView);
-        driver.scrollInDynamicLayer(direction);
+        driver.scrollInDynamicLayer(direction, driver.findElement(byCLanguageTextView));
         return this;
     }
 

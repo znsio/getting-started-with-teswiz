@@ -4,6 +4,7 @@ import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -34,5 +35,17 @@ public class AjioHomeScreenWeb
         visually.checkWindow(SCREEN_NAME, "Search string entered");
         driver.waitTillElementIsPresent(bySearchIconClassName);
         return AjioSearchResultsScreen.get();
+    }
+
+    @Override
+    public AjioHomeScreen goToMenu() {
+        throw new NotImplementedException(
+                SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
+    }
+
+    @Override
+    public AjioSearchResultsScreen selectProductFromCategory(String product, String category, String gender) {
+        throw new NotImplementedException(
+                SCREEN_NAME + ":" + new Throwable().getStackTrace()[0].getMethodName() + NOT_YET_IMPLEMENTED);
     }
 }

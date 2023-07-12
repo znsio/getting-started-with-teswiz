@@ -4,6 +4,7 @@ import com.context.SessionContext;
 import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.businessLayer.jiocinema.JioCinemaBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.teswiz.entities.Direction;
 import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
 import io.cucumber.java.en.Given;
@@ -39,5 +40,11 @@ public class JioCinemaSteps {
     @Then("I am able to view number {int} trending movie")
     public void iAmAbleToViewNumberTrendingCinema(int movieNumberOnScreen) {
         new JioCinemaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).verifyMovieNumberVisibleOnScreen(movieNumberOnScreen);
+    }
+
+    @When("I swipe {string} trending no {int} on trending in india section")
+    public void iSwipeTrendingNoOnTrendingInIndiaSection(String direction, int movieNumberOnScreen) {
+        new JioCinemaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform())
+                .swipeMovieTrendingInIndiaSection(Direction.valueOf(direction.toUpperCase()),movieNumberOnScreen);
     }
 }

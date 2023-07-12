@@ -35,6 +35,9 @@ public class VodqaScreenAndroid extends VodqaScreen {
     private final By byLongPressOptionXpath = AppiumBy.xpath("//android.widget.TextView[@content-desc='longPress']");
     private final By byLongPressButtonAccessibilityId = AppiumBy.accessibilityId("longpress");
     private final By byLongPressedPopupId = AppiumBy.id("android:id/alertTitle");
+    private final By byDoubleTapElementXpath = AppiumBy.xpath("//android.view.ViewGroup[@content-desc='doubleTapMe']");
+    private final By byDoubleTapScreenXpath = AppiumBy.xpath("//android.widget.TextView[@text='Double Tap']");
+    private final By byDoubleTapSuccessfulXpath = AppiumBy.xpath("//android.widget.TextView[@text='Double tap successful!']");
 
     public VodqaScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -177,5 +180,22 @@ public class VodqaScreenAndroid extends VodqaScreen {
     public boolean isLongPressedPopupVisible() {
         visually.checkWindow(SCREEN_NAME, "Long pressed popup");
         return driver.isElementPresent(byLongPressedPopupId);
+    }
+
+    @Override
+    public VodqaScreen doubleTapOnElement() {
+        LOGGER.info("Performing Double tap on element in Double tap screen");
+        driver.waitTillElementIsVisible(byDoubleTapScreenXpath).click();
+        visually.check(SCREEN_NAME, "Double Tap Element Screen", Target.window());
+        driver.doubleTap(driver.waitTillElementIsVisible(byDoubleTapElementXpath));
+        return this;
+    }
+
+    @Override
+    public boolean isDoubleTapSuccessful() {
+        LOGGER.info("Checking if double tap on element is successful");
+        driver.waitTillElementIsVisible(byDoubleTapSuccessfulXpath);
+        visually.check(SCREEN_NAME, "Double Tap Successful Message", Target.region(byDoubleTapSuccessfulXpath));
+        return driver.isElementPresent(byDoubleTapSuccessfulXpath);
     }
 }

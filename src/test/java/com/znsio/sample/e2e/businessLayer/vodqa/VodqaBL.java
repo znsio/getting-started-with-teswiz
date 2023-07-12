@@ -126,4 +126,12 @@ public class VodqaBL {
         assertThat(VodqaScreen.get().isLongPressedPopupVisible()).as("Long Pressed Popup is not visible").isTrue();
         return this;
     }
+
+    public VodqaBL doubleTapOnAnElement() {
+        assertThat(VodqaScreen.get().doubleTapOnElement()
+                .isDoubleTapSuccessful())
+                .as("Double tap on element failed")
+                .isTrue();
+        return this;
+    }
 }

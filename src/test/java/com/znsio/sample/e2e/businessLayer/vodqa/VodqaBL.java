@@ -4,7 +4,6 @@ import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.vodqa.VodqaScreen;
 import com.znsio.sample.e2e.screen.vodqa.WebViewScreen;
-import com.znsio.teswiz.entities.Direction;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
@@ -110,11 +109,6 @@ public class VodqaBL {
     public VodqaBL selectScreenAndSwipeByPassingPercentageAttributes(int atPercentScreenHeight, int fromPercentScreenWidth, int toPercentScreenWidth, String screenName) {
         VodqaScreen.get().selectScreen(screenName)
                 .swipeByPassingPercentageAttributes(atPercentScreenHeight, fromPercentScreenWidth, toPercentScreenWidth);
-        return this;
-    }
-
-    public VodqaBL scrollInDynamicLayerOnVerticalSwipingScreen(Direction direction) {
-        VodqaScreen.get().openVerticalSwipingScreen().scrollDownInDynamicLayer(direction);
         return this;
     }
 

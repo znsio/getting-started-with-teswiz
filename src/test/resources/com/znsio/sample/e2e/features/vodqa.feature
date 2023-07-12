@@ -43,13 +43,6 @@ Feature: Vodqa test
     When I swipe at 60 percent height from 10 percent width to 70 percent width on "carousel" screen
     Then I am able to see element with text "3" on the screen
 
-  #  CONFIG=./configs/vodqa_local_config.properties TAG=@scrollInDynamicLayer PLATFORM=android ./gradlew run
-  @android @scrollInDynamicLayer
-  Scenario: Validating scroll in dynamic layer functionality
-    Given I login to vodqa application using valid credentials
-    When I scroll "down" in dynamic layer on vertical swiping screen
-    Then Element text ".net" should be visible
-
   #  CONFIG=./configs/vodqa_local_config.properties TAG=@scrollVertically PLATFORM=android ./gradlew run
   @android @scrollVertically
   Scenario: Validate that user is able to scroll vertically by screen percentage

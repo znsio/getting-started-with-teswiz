@@ -4,7 +4,6 @@ import com.applitools.eyes.appium.Target;
 import com.znsio.sample.e2e.screen.vodqa.NativeViewScreen;
 import com.znsio.sample.e2e.screen.vodqa.VodqaScreen;
 import com.znsio.sample.e2e.screen.vodqa.WebViewScreen;
-import com.znsio.teswiz.entities.Direction;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Runner;
 import com.znsio.teswiz.runner.Visual;
@@ -154,14 +153,6 @@ public class VodqaScreenAndroid extends VodqaScreen {
         driver.swipeByPassingPercentageAttributes(atPercentScreenHeight, fromPercentageWidth, toPercentScreenWidth);
         return this;
     }
-
-    @Override
-    public VodqaScreen scrollDownInDynamicLayer(Direction direction) {
-        driver.waitTillElementIsPresent(byCLanguageTextView);
-        driver.scrollInDynamicLayer(direction, driver.findElement(byCLanguageTextView));
-        return this;
-    }
-
     @Override
     public VodqaScreen scrollVerticallyByPercentage(int fromPercentHeight, int toPercentHeight, int percentWidth) {
         driver.waitTillElementIsPresent(byCLanguageTextView);

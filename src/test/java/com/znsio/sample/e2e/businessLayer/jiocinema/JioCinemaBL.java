@@ -1,6 +1,7 @@
 package com.znsio.sample.e2e.businessLayer.jiocinema;
 
 import com.context.TestExecutionContext;
+import com.znsio.teswiz.entities.Direction;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
 import com.znsio.sample.e2e.screen.jiocinema.JioCinemaScreen;
@@ -45,6 +46,11 @@ public class JioCinemaBL {
         assertThat(JioCinemaScreen.get().isMovieNumberVisibleOnScreen(movieNumberOnScreen))
                 .as(String.format("movie number %s is not visible on screen", movieNumberOnScreen))
                 .isTrue();
+        return this;
+    }
+
+    public JioCinemaBL swipeMovieTrendingInIndiaSection(Direction direction, int movieNumberOnScreen) {
+        JioCinemaScreen.get().swipeTrendingItem(direction, movieNumberOnScreen);
         return this;
     }
 }

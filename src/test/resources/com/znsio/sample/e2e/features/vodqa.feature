@@ -49,3 +49,10 @@ Feature: Vodqa test
     Given I login to vodqa application using valid credentials
     When I scroll vertically from 60 percent height to 20 percent height and 50 percent width
     Then Element text "Ruby" should be visible
+
+  #  CONFIG=./configs/vodqa_local_config.properties TAG=@longPress PLATFORM=android ./gradlew run
+  @android @longPress
+  Scenario: Validate that user is able to long press on an element
+    Given I login to vodqa application using valid credentials
+    When I long press on element
+    Then long pressed popup should be visible

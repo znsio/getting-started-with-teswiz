@@ -32,6 +32,9 @@ public class VodqaScreenAndroid extends VodqaScreen {
     private final String screenSelectionXpath = "//android.view.ViewGroup[@content-desc='%s']";
     private final String swipeViewXpath = "//android.widget.TextView[@text='%s']";
     private final String swipeViewTileXpath = "//android.view.ViewGroup[@content-desc='view%s']/android.view.ViewGroup";
+    private final By byLongPressOptionXpath = AppiumBy.xpath("//android.widget.TextView[@content-desc='longPress']");
+    private final By byLongPressButtonAccessibilityId = AppiumBy.accessibilityId("longpress");
+    private final By byLongPressedPopupId = AppiumBy.id("android:id/alertTitle");
 
     public VodqaScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -159,5 +162,20 @@ public class VodqaScreenAndroid extends VodqaScreen {
         driver.scrollVertically(fromPercentHeight, toPercentHeight, percentWidth);
         visually.checkWindow(SCREEN_NAME, "Screen scrolled down");
         return this;
+    }
+
+    @Override
+    public VodqaScreen longPressOnElement() {
+        driver.waitForClickabilityOf(byLongPressOptionXpath).click();
+        LOGGER.info("Performing long press on element");
+        visually.checkWindow(SCREEN_NAME, "Long press screen");
+        driver.longPress(byLongPressButtonAccessibilityId,3);
+        return this;
+    }
+
+    @Override
+    public boolean isLongPressedPopupVisible() {
+        visually.checkWindow(SCREEN_NAME, "Long pressed popup");
+        return driver.isElementPresent(byLongPressedPopupId);
     }
 }

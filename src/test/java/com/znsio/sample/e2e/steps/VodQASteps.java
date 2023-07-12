@@ -93,4 +93,9 @@ public class VodQASteps {
     public void longPressedPopupShouldBeVisible() {
         new VodqaBL().verifyLongPressedPopup();
     }
+
+    @Then("I should be able to double tap on an element")
+    public void iShouldBeAbleToDoubleTapOnAnElement() {
+        new VodqaBL().doubleTapOnAnElement();
+    }
 }

@@ -1,9 +1,7 @@
 {
   "android": {
     "adbExecTimeout": 45000,
-    "app": {
-      "local": "https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/main/com.jio.rilconferences_v4.21.6.7-421607_Android-5.0.apk"
-    },
+    "app": "https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/main/com.jio.rilconferences_v4.21.6.7-421607_Android-5.0.apk",
     "appActivity": "org.jio.meet.introduction.views.SplashActivity",
     "appPackage": "com.jio.rilconferences",
     "appWaitDuration": 45000,
@@ -21,15 +19,16 @@
     "skipUnlock": true,
     "noReset": false
   },
-  "hostMachines": [
-    {
-      "machineIP": "127.0.0.1",
-      "simulators": [
-        {
-          "deviceName": "iPhone 11",
-          "OS": "13.5"
+  "serverConfig" : {
+    "server": {
+      "port": 31337,
+      "use-plugins": ["device-farm", "appium-dashboard"],
+      "plugin": {
+        "device-farm": {
+          "platform": "android",
+          "skipChromeDownload": true
         }
-      ]
+      }
     }
-  ]
+  }
 }

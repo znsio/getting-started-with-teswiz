@@ -1,9 +1,7 @@
 {
   "android": {
     "adbExecTimeout": 45000,
-    "app": {
-      "local": "https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/main/ajio-8-3-4.apk"
-    },
+    "app": "https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/main/ajio-8-3-4.apk",
     "appActivity": "com.ril.ajio.launch.activity.SplashScreenActivity",
     "appPackage": "com.ril.ajio",
     "appWaitDuration": 45000,
@@ -16,20 +14,21 @@
     "newCommandTimeout": 12000,
     "noSign": true,
     "platformName": "android",
-    "platformVersion": "11.0",
+    "platformVersion": "12",
     "printPageSourceOnFindFailure": true,
     "skipUnlock": true,
     "noReset": false
   },
-  "hostMachines": [
-    {
-      "machineIP": "127.0.0.1",
-      "simulators": [
-        {
-          "deviceName": "iPhone 11",
-          "OS": "13.5"
+  "serverConfig" : {
+    "server": {
+      "port": 31337,
+      "use-plugins": ["device-farm", "appium-dashboard"],
+      "plugin": {
+        "device-farm": {
+          "platform": "android",
+          "skipChromeDownload": true
         }
-      ]
+      }
     }
-  ]
+  }
 }

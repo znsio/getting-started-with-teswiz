@@ -1,7 +1,6 @@
-package com.znsio.sample.e2e.screen.jiomeet;
+package com.znsio.sample.e2e.screen.vodqa;
 
-import com.znsio.sample.e2e.screen.android.jiomeet.InAMeetingScreenAndroid;
-import com.znsio.sample.e2e.screen.web.jiomeet.InAMeetingScreenWeb;
+import com.znsio.sample.e2e.screen.android.vodqa.WebViewScreenAndroid;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Drivers;
@@ -10,11 +9,11 @@ import com.znsio.teswiz.runner.Visual;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
-public abstract class InAMeetingScreen {
-    private static final String SCREEN_NAME = InAMeetingScreen.class.getSimpleName();
+public abstract class WebViewScreen {
+    private static final String SCREEN_NAME = WebViewScreen.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
 
-    public static InAMeetingScreen get() {
+    public static WebViewScreen get() {
         Driver driver = Drivers.getDriverForCurrentUser(Thread.currentThread().getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread().getId());
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
@@ -22,24 +21,15 @@ public abstract class InAMeetingScreen {
 
         switch(platform) {
             case android:
-                return new InAMeetingScreenAndroid(driver, visually);
-            case web:
-                return new InAMeetingScreenWeb(driver, visually);
+                return new WebViewScreenAndroid(driver, visually);
         }
         throw new NotImplementedException(
                 SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
-    public abstract boolean isMeetingStarted();
+    public abstract boolean isUserOnNewsWebViewScreen();
 
-    public abstract String getMeetingId();
+    public abstract boolean isLoginOptionVisible();
 
-    public abstract String getMeetingPassword();
-
-    public abstract InAMeetingScreen unmute();
-
-    public abstract InAMeetingScreen mute();
-
-    public abstract String getMicLabelText();
-    public abstract InAMeetingScreen openJioMeetNotification();
+    public abstract VodqaScreen navigateToSamplesList();
 }

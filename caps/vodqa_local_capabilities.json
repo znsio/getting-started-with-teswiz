@@ -1,9 +1,9 @@
 {
   "android": {
     "adbExecTimeout": 45000,
-    "app": "https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/main/AndroidCalculator.apk",
-    "appPackage": "com.android2.calculator3",
-    "appActivity": "com.android2.calculator3.Calculator",
+    "app": "https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/main/VodQA.apk",
+    "appPackage": "com.vodqareactnative",
+    "appActivity": "com.vodqareactnative.MainActivity",
     "appWaitDuration": 45000,
     "automationName": "UiAutomator2",
     "autoGrantPermissions": true,
@@ -19,7 +19,6 @@
   },
   "serverConfig" : {
     "server": {
-      "port": 31337,
       "use-plugins": ["device-farm", "appium-dashboard"],
       "plugin": {
         "device-farm": {
@@ -28,10 +27,5 @@
         }
       }
     }
-  },
-  "hostMachines": [
-    {
-      "machineIP": "127.0.0.1"
-    }
-  ]
+  }
 }

@@ -2,6 +2,7 @@ package com.znsio.sample.e2e.businessLayer.vodqa;
 
 import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.sample.e2e.screen.vodqa.DragAndDropScreen;
 import com.znsio.sample.e2e.screen.vodqa.VodqaScreen;
 import com.znsio.sample.e2e.screen.vodqa.WebViewScreen;
 import com.znsio.teswiz.entities.Platform;
@@ -138,6 +139,17 @@ public class VodqaBL {
     public VodqaBL performMultiTouchForBothSilders(float sliderValue) {
         VodqaScreen.get().multiTouchOnElements();
         assertThat(VodqaScreen.get().getSliderValue()).as("Multi Touch failed as slider value is not equal").isEqualTo(sliderValue);
+        return this;
+    }
+
+    public VodqaBL dragAndDropElement() {
+        VodqaScreen.get().openDragAndDropScreen().dragAndDropCircleObject();
+        return this;
+    }
+
+    public VodqaBL isMessageDisplayedOnTheScreen(String displayedMessage) {
+        assertThat(DragAndDropScreen.get().isMessageVisible())
+                .as(String.format("The %s message is not displayed", displayedMessage)).isTrue();
         return this;
     }
 }

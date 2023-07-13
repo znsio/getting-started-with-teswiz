@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
 
 
 public class VodqaScreenAndroid extends VodqaScreen {
@@ -38,6 +39,10 @@ public class VodqaScreenAndroid extends VodqaScreen {
     private final By byDoubleTapElementXpath = AppiumBy.xpath("//android.view.ViewGroup[@content-desc='doubleTapMe']");
     private final By byDoubleTapScreenXpath = AppiumBy.xpath("//android.widget.TextView[@text='Double Tap']");
     private final By byDoubleTapSuccessfulXpath = AppiumBy.xpath("//android.widget.TextView[@text='Double tap successful!']");
+    private final By bySliderSectionXpath = AppiumBy.xpath("//android.view.ViewGroup[@content-desc='slider1']/android.view.ViewGroup");
+    private final By byFirstSliderElementId = AppiumBy.accessibilityId("slider");
+    private final By bySecondSliderElementId = AppiumBy.accessibilityId("slider1");
+    private final By bySliderValueXpath = AppiumBy.xpath("//android.view.ViewGroup/android.widget.TextView[2]");
 
     public VodqaScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -197,5 +202,23 @@ public class VodqaScreenAndroid extends VodqaScreen {
         driver.waitTillElementIsVisible(byDoubleTapSuccessfulXpath);
         visually.check(SCREEN_NAME, "Double Tap Successful Message", Target.region(byDoubleTapSuccessfulXpath));
         return driver.isElementPresent(byDoubleTapSuccessfulXpath);
+    }
+
+    @Override
+    public VodqaScreen multiTouchOnElements() {
+        LOGGER.info("Performing multi touch action in Slider Screen");
+        driver.waitTillElementIsVisible(bySliderSectionXpath).click();
+        visually.check(SCREEN_NAME,"Slider Section Screen",Target.window());
+        WebElement firstSliderElement = driver.findElement(byFirstSliderElementId);
+        WebElement secondSliderElement = driver.findElement(bySecondSliderElementId);
+        driver.multiTouchOnElements(firstSliderElement, secondSliderElement);
+        return this;
+    }
+
+    @Override
+    public float getSliderValue() {
+        float actualSliderValue = Float.parseFloat(driver.waitTillElementIsPresent(bySliderValueXpath).getText());
+        visually.check(SCREEN_NAME, "Slider value check", Target.region(bySliderValueXpath));
+        return actualSliderValue;
     }
 }

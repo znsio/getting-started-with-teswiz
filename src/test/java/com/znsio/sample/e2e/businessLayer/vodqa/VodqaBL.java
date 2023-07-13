@@ -134,4 +134,10 @@ public class VodqaBL {
                 .isTrue();
         return this;
     }
+
+    public VodqaBL performMultiTouchForBothSilders(float sliderValue) {
+        VodqaScreen.get().multiTouchOnElements();
+        assertThat(VodqaScreen.get().getSliderValue()).as("Multi Touch failed as slider value is not equal").isEqualTo(sliderValue);
+        return this;
+    }
 }

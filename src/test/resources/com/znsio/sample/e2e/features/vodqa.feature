@@ -68,3 +68,10 @@ Feature: Vodqa test
   Scenario: Validate that user is able to multi touch on an element
     Given I login to vodqa application using valid credentials
     Then I should be able set both sliders to value 50 by multi touch action
+
+  #  CONFIG=./configs/vodqa_local_config.properties TAG=@dragAndDrop PLATFORM=android ./gradlew run
+  @android @dragAndDrop
+  Scenario: Validate that user is able to drag and drop
+    Given I login to vodqa application using valid credentials
+    When I drag the circle object to the drop target
+    Then I am able to view "Circle dropped" message

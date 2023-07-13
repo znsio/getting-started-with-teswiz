@@ -1,6 +1,7 @@
 package com.znsio.sample.e2e.screen.android.vodqa;
 
 import com.applitools.eyes.appium.Target;
+import com.znsio.sample.e2e.screen.vodqa.DragAndDropScreen;
 import com.znsio.sample.e2e.screen.vodqa.NativeViewScreen;
 import com.znsio.sample.e2e.screen.vodqa.VodqaScreen;
 import com.znsio.sample.e2e.screen.vodqa.WebViewScreen;
@@ -43,6 +44,7 @@ public class VodqaScreenAndroid extends VodqaScreen {
     private final By byFirstSliderElementId = AppiumBy.accessibilityId("slider");
     private final By bySecondSliderElementId = AppiumBy.accessibilityId("slider1");
     private final By bySliderValueXpath = AppiumBy.xpath("//android.view.ViewGroup/android.widget.TextView[2]");
+    private final By byDragAndDropTextView = AppiumBy.xpath("//android.widget.TextView[@content-desc='dragAndDrop']");
 
     public VodqaScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -220,5 +222,13 @@ public class VodqaScreenAndroid extends VodqaScreen {
         float actualSliderValue = Float.parseFloat(driver.waitTillElementIsPresent(bySliderValueXpath).getText());
         visually.check(SCREEN_NAME, "Slider value check", Target.region(bySliderValueXpath));
         return actualSliderValue;
+    }
+
+    @Override
+    public DragAndDropScreen openDragAndDropScreen() {
+        driver.waitTillElementIsPresent(byDragAndDropTextView);
+        visually.checkWindow(SCREEN_NAME, "Home Screen");
+        driver.findElement(byDragAndDropTextView).click();
+        return DragAndDropScreen.get();
     }
 }

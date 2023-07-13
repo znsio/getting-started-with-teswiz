@@ -69,4 +69,6 @@ public abstract class VodqaScreen {
     public abstract VodqaScreen multiTouchOnElements();
 
     public abstract float getSliderValue();
+
+    public abstract DragAndDropScreen openDragAndDropScreen();
 }

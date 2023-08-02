@@ -58,7 +58,6 @@ public class TeswizPublicMethodsBL {
         Runner.isRunningInCI();
         Runner.getBrowser();
         Runner.getProxyURL();
-        Runner.getWebDriverManagerProxyURL();
         Runner.getBrowserConfigFileContents();
         Runner.getBrowserConfigFile();
 

@@ -46,4 +46,26 @@ public class AjioSteps {
     public void iShouldBeAbleToPerformFlickAndViewImages() {
         new AjioProductBL().flickAndViewImages();
     }
+
+    @Given("I search for products using {string}")
+    public void iSearchForProductsUsing(String searchtype) {
+        LOGGER.info(System.out.printf("iSearchForProductsUsing:'%s' - Persona:'%s'", searchtype,
+                SAMPLE_TEST_CONTEXT.ME));
+        Drivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform(), context);
+        new AjioSearchBL().searchProduct(Runner.getTestDataAsMap(searchtype));
+    }
+
+    @When("I add the product to the cart")
+    public void iAddTheProductToTheCart() {
+        LOGGER.info(System.out.printf("iAddTheProductToTheCart:- Persona:'%s'",
+                SAMPLE_TEST_CONTEXT.ME));
+        new AjioSearchBL().prepareCart();
+    }
+
+    @Then("I should see the product in the cart")
+    public void iShouldSeeTheProductInTheCart() {
+        LOGGER.info(System.out.printf("iShouldSeeTheProductInTheCart:- Persona:'%s'",
+                SAMPLE_TEST_CONTEXT.ME));
+        new AjioSearchBL().verifyCart();
+    }
 }

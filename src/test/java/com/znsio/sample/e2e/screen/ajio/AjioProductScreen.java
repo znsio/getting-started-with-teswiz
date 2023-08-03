@@ -32,4 +32,8 @@ public abstract class AjioProductScreen {
     public abstract AjioProductScreen flickImage();
 
     public abstract String isElementIdChanged();
+
+    public abstract String getProductName();
+
+    public abstract AjioCartScreen addProductToCart();
 }

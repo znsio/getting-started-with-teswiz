@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.Map;
+
 public class AjioHomeScreenAndroid extends AjioHomeScreen {
     private static final String SCREEN_NAME = AjioHomeScreenAndroid.class.getSimpleName();
     private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
@@ -17,6 +19,16 @@ public class AjioHomeScreenAndroid extends AjioHomeScreen {
     private static final By byStartSearchId = By.id("com.ril.ajio:id/search_image");
     private static final By bySideMenuId = By.id("com.ril.ajio:id/fahIvMenu");
     private static final String byFilterProductXpath = "//android.widget.TextView[@text='%s']";
+    private static final By byDismissButtonId = By.id("com.ril.ajio:id/footer_button_2");
+    private static final By byUploadPhotoButtonId = By.id("com.ril.ajio:id/layout_select_photo");
+    private static final By bySystemPermissionMessageId = By.id(
+            "com.android.permissioncontroller:id/permission_message");
+    private static final By byAllowButtonId = By.id(
+            "com.android.permissioncontroller:id/permission_allow_button");
+    private static final By byImageDirectoryXpath = By.xpath(
+            "//android.widget.TextView[contains(@text, 'Images')]");
+    private static final By byImageXpath = By.xpath(
+            "//android.view.ViewGroup[contains(@content-desc,'Photo taken')][1]");
     private final Driver driver;
     private final Visual visually;
 
@@ -56,4 +68,33 @@ public class AjioHomeScreenAndroid extends AjioHomeScreen {
         return AjioSearchResultsScreen.get();
     }
 
+    @Override
+    public AjioHomeScreen attachFileToDevice(Map imageData) {
+        String sourceFileLocation = System.getProperty("user.dir") + imageData.get(
+                "IMAGE_FILE_LOCATION");
+        String destinationFileLocation = (String) imageData.get("UPLOAD_IMAGE_LOCATION");
+        LOGGER.info("searchByImage");
+
+        if (driver.isElementPresent(byDismissButtonId)) {
+            driver.findElement(byDismissButtonId).click();
+        }
+
+        driver.waitTillElementIsPresent(byStartSearchBoxId).click();
+        visually.checkWindow(SCREEN_NAME, "Upload a Photo");
+        driver.waitTillElementIsPresent(byUploadPhotoButtonId).click();
+        if (driver.isElementPresent(bySystemPermissionMessageId)) {
+            driver.waitTillElementIsPresent(byAllowButtonId).click();
+        }
+
+        driver.pushFileToDevice(sourceFileLocation, destinationFileLocation);
+        LOGGER.info("Image Pushed to Device path" + destinationFileLocation);
+        return this;
+    }
+
+    @Override
+    public AjioSearchResultsScreen searchByImage() {
+        driver.waitTillElementIsPresent(byImageDirectoryXpath).click();
+        driver.waitTillElementIsPresent(byImageXpath).click();
+        return AjioSearchResultsScreen.get();
+    }
 }

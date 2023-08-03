@@ -2,12 +2,16 @@ package com.znsio.sample.e2e.businessLayer.ajio;
 
 import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.sample.e2e.screen.ajio.AjioCartScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
+import com.znsio.sample.e2e.screen.ajio.AjioProductScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -44,6 +48,32 @@ public class AjioSearchBL {
         int numberOfProductsFound = ajioSearchResultsScreen.getNumberOfProductsFound();
         assertThat(numberOfProductsFound).as("Insufficient search results retrieved")
                                          .isGreaterThan(100);
+        return this;
+    }
+    public AjioSearchBL searchProduct(Map searchData) {
+        LOGGER.info("searchProduct" + searchData);
+        AjioSearchResultsScreen searchScreen = AjioHomeScreen.get().attachFileToDevice(searchData).searchByImage();
+        assertThat(searchScreen.numberOfProductFound()).as("Number of results found for product")
+                .isGreaterThan(0);
+        searchScreen.selectProduct();
+        return this;
+    }
+
+
+    public AjioSearchBL prepareCart() {
+        AjioProductScreen productScreen = AjioProductScreen.get();
+        context.addTestState("productName", productScreen.getProductName());
+        LOGGER.info("productName: " + context.getTestState("productName"));
+        productScreen.addProductToCart();
+        return this;
+    }
+
+
+    public AjioSearchBL verifyCart() {
+        String actualProductName = AjioCartScreen.get().getActualProductName();
+        LOGGER.info("Actual product name in the cart" + actualProductName);
+        assertThat(actualProductName).as("Product in the Cart")
+                .isEqualTo(context.getTestState("productName"));
         return this;
     }
 }

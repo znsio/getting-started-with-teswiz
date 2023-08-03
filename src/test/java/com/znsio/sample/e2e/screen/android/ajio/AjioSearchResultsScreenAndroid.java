@@ -22,7 +22,7 @@ public class AjioSearchResultsScreenAndroid
     private static final By byProductListTitleId = By.id("com.ril.ajio:id/toolbar_title_tv");
     private static final By byProductLayoutId = By.id("com.ril.ajio:id/layout_category_container");
     private static final By byProductId = By.id("com.ril.ajio:id/plp_row_product_iv");
-
+    private static final By byResultsId = By.id("com.ril.ajio:id/tv_count_plp_header_is");
 
     public AjioSearchResultsScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -64,5 +64,14 @@ public class AjioSearchResultsScreenAndroid
         List<WebElement> list = driver.waitTillPresenceOfAllElements(byProductId);
         list.get(0).click();
         return AjioProductScreen.get();
+    }
+
+    @Override
+    public int numberOfProductFound() {
+        int numberOfProductFound = Integer.parseInt(
+                driver.waitTillElementIsPresent(byResultsId).getText().split(" ")[0]);
+        visually.checkWindow(SCREEN_NAME, "Result for Image search");
+        LOGGER.info("numberOfProductFound: " + numberOfProductFound);
+        return numberOfProductFound;
     }
 }

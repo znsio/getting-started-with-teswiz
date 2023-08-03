@@ -35,4 +35,5 @@ public abstract class AjioSearchResultsScreen {
 
     public abstract AjioProductScreen selectProduct();
 
+    public abstract int numberOfProductFound();
 }

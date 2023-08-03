@@ -20,7 +20,7 @@ public class AjioSearchResultsScreenAndroid
     private final Visual visually;
     private final By bySearchStringId = By.id("com.ril.ajio:id/toolbar_title_tv");
     private static final By byProductListTitleId = By.id("com.ril.ajio:id/toolbar_title_tv");
-    private static final By byProductLayoutId = By.id("com.ril.ajio:id/layout_category_container");
+    private static final By byProductLayoutId = By.id("com.ril.ajio:id/layout_category_container_iv");
     private static final By byProductId = By.id("com.ril.ajio:id/plp_row_product_iv");
     private static final By byResultsId = By.id("com.ril.ajio:id/tv_count_plp_header_is");
 

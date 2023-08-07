@@ -75,3 +75,10 @@ Feature: Vodqa test
     Given I login to vodqa application using valid credentials
     When I drag the circle object to the drop target
     Then I am able to view "Circle dropped" message
+
+  #  CONFIG=./configs/vodqa_local_config.properties PLATFORM=android TAG=tapInMiddleOfScreen ./gradlew run
+  @android @tapInMiddleOfScreen
+  Scenario: User tap in the middle of the screen
+    Given I login to vodqa application using valid credentials
+    When I tap in the middle of the screen
+    Then I am able to move from "Samples List" page to next page

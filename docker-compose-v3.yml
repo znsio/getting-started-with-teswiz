@@ -5,6 +5,7 @@ version: "3"
 services:
   chrome:
     image: ${DOCKER_REGISTRY}/${CHROME_REPO}:latest
+    container_name: "${PROJECT_NAME}-chrome"
     shm_size: 2gb
     volumes:
       - /dev/shm:/dev/shm
@@ -16,11 +17,12 @@ services:
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
       - SE_NODE_MAX_SESSIONS=2
-      - SE_NODE_GRID_URL=http://localhost:${GRID_PORT}
+      - SE_NODE_GRID_URL=http://${HOST_IP}:${GRID_PORT}
       - SE_NODE_SESSION_TIMEOUT=30
 
   firefox:
     image: ${DOCKER_REGISTRY}/${FIREFOX_REPO}:latest
+    container_name: "${PROJECT_NAME}-firefox"
     shm_size: 2gb
     volumes:
       - /dev/shm:/dev/shm
@@ -32,12 +34,12 @@ services:
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
       - SE_NODE_MAX_SESSIONS=2
-      - SE_NODE_GRID_URL=http://localhost:${GRID_PORT}
+      - SE_NODE_GRID_URL=http://${HOST_IP}:${GRID_PORT}
       - SE_NODE_SESSION_TIMEOUT=30
 
   selenium-hub:
     image: ${DOCKER_REGISTRY}/${SELENIUM_HUB_REPO}:latest
-    container_name: selenium-hub
+    container_name: "${PROJECT_NAME}-selenium-hub"
     ports:
       - "${GRID_PORT_1}:4442"
       - "${GRID_PORT_2}:4443"

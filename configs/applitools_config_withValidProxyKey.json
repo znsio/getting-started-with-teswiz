@@ -9,6 +9,5 @@
   "useUFG": true,
   "testConcurrency": 10,
   "showLogs": true,
-  "ignoreDisplacement": true,
-  "APPLITOOLS_PROXY_KEY": ""
+  "APPLITOOLS_PROXY_KEY": "user.dir"
 }

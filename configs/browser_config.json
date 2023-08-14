@@ -25,13 +25,15 @@
     ],
     "maximize": true,
     "acceptInsecureCerts": true,
-    "verboseLogging": true,
+    "verboseLogging": false,
     "headlessOptions": {
       "headless": false,
       "include": [
         "disable-gpu"
       ]
-    }
+    },
+    "noProxy": "localhost,127.0.0.1",
+    "proxyType": "manual"
   },
   "firefox": {
     "firefoxProfile": {
@@ -48,14 +50,20 @@
     ],
     "maximize": true,
     "acceptInsecureCerts": true,
-    "verboseLogging": true,
+    "verboseLogging": false,
     "headlessOptions": {
       "headless": false
-    }
+    },
+    "noProxy": "localhost,127.0.0.1",
+    "proxyType": "manual"
   },
   "safari": {
     "maximize": true,
     "acceptInsecureCerts": true,
     "setUseTechnologyPreview": false
-  }
+  },
+  "tab1": "iPad mini",
+  "tab2": "iPad Pro",
+  "mobile1": "iPhone SE",
+  "mobile2": "iPhone 8"
 }

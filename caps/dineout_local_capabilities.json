@@ -1,18 +1,20 @@
 {
   "android": {
     "adbExecTimeout": 45000,
-    "browserName": "Chrome",
-    "platformVersion": "12",
+    "app": "https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/main/dineout.book_2022-10-18.apk",
+    "appActivity": "com.dineout.book.splash.presentation.view.NewSplashActivity",
+    "appPackage": "com.dineout.book",
     "appWaitDuration": 45000,
     "automationName": "UiAutomator2",
     "autoGrantPermissions": true,
-    "device": "android",
+    "deviceName": "android",
     "dontStopAppOnReset": true,
     "enablePerformanceLogging": true,
     "eventTimings": true,
     "newCommandTimeout": 12000,
     "noSign": true,
     "platformName": "android",
+    "platformVersion": "11.0",
     "printPageSourceOnFindFailure": true,
     "skipUnlock": true,
     "noReset": false

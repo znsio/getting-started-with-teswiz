@@ -1,12 +1,13 @@
 {
   "android": {
     "adbExecTimeout": 45000,
-    "browserName": "Chrome",
-    "platformVersion": "12",
+    "app": "https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/main/ajio-8-3-4.apk",
+    "appActivity": "com.ril.ajio.launch.activity.SplashScreenActivity",
+    "appPackage": "com.ril.ajio",
     "appWaitDuration": 45000,
     "automationName": "UiAutomator2",
     "autoGrantPermissions": true,
-    "device": "android",
+    "deviceName": "android",
     "dontStopAppOnReset": true,
     "enablePerformanceLogging": true,
     "eventTimings": true,
@@ -17,10 +18,10 @@
     "skipUnlock": true,
     "noReset": false
   },
+  "appiumServerPath": "./node_modules/appium/build/lib/main.js",
   "serverConfig" : {
     "server": {
-      "port": 31337,
-      "use-plugins": ["device-farm", "appium-dashboard"],
+      "use-plugins": ["device-farm", "appium-dashboard","relaxed-caps-plugin"],
       "plugin": {
         "device-farm": {
           "platform": "android",
@@ -28,6 +29,5 @@
         }
       }
     }
-  },
-  "appiumServerPath": "./node_modules/appium/build/lib/main.js"
+  }
 }

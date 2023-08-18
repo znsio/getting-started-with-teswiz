@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@appium/doctor": "^2.0.22",
+    "@appium/doctor": "^2.0.23",
     "appium": "^2.0.1",
     "appium-uiautomator2-driver": "^2.29.4",
     "appium-device-farm": "^8.2.2"

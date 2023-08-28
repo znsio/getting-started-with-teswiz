@@ -26,6 +26,7 @@
 * Create a copy of an existing capabilities file - ex: ./caps/myapp_capabilities.json
   * Update `android->app->local`, `android->appActivity` and `android->appPackage`
 * Update `src\test\resources\reportportal.properties` file
+* [Run the sample test](https://github.com/znsio/teswiz/blob/main/docs/SampleTests-README.md) 
 
 # ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Breaking changes in teswiz v0.0.81 ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
 

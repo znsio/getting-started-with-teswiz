@@ -1,12 +1,19 @@
 # getting-started-with-teswiz
-
-# ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Breaking changes in teswiz v0.0.81 ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
-
-![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
-Refer to the [breaking changes](https://github.com/znsio/teswiz/blob/main/README.md#-breaking-changes-in-latest-teswiz-v0080) section in [teswiz](https://github.com/znsio/teswiz) repo
-![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
-
 ### This is a sample project to understand and start using [teswiz](https://github.com/znsio/teswiz)
+
+## teswiz
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/znsio/teswiz)
+[![GitHub stars](https://img.shields.io/github/stars/znsio/teswiz.svg?style=flat)](https://github.com/znsio/teswiz/stargazers)
+[ ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat )](https://github.com/znsio/teswiz/pulls)
+[![GitHub forks](https://img.shields.io/github/forks/znsio/teswiz.svg?style=social&label=Fork)](https://github.com/znsio/teswiz/network)
+
+## Latest teswiz release status:
+[![0.0.86](https://jitpack.io/v/znsio/teswiz.svg)](https://jitpack.io/#znsio/teswiz)
+[![CI](https://github.com/znsio/teswiz/actions/workflows/CI.yml/badge.svg)](https://github.com/znsio/teswiz/actions/workflows/CI.yml)
+[![CodeQL](https://github.com/znsio/teswiz/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/znsio/teswiz/actions/workflows/codeql-analysis.yml)
+
+## Latest successful teswiz build id:
+[![Latest Commit](https://img.shields.io/badge/commit-3d4df2876b-blue.svg)](https://jitpack.io/#znsio/teswiz)
 
 ## Step to start using tewiz in your project:
 
@@ -17,8 +24,14 @@ Refer to the [breaking changes](https://github.com/znsio/teswiz/blob/main/README
 * Create a copy of an existing configs file - ex: ./configs/myapp.properties
   Update `APP_PACKAGE_NAME` and `APP_NAME`, `BASE_URL`
 * Create a copy of an existing capabilities file - ex: ./caps/myapp_capabilities.json
-    * Update `android->app->local`, `android->appActivity` and `android->appPackage`
+  * Update `android->app->local`, `android->appActivity` and `android->appPackage`
 * Update `src\test\resources\reportportal.properties` file
+
+# ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Breaking changes in teswiz v0.0.81 ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
+
+![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
+Refer to the [breaking changes](https://github.com/znsio/teswiz/blob/main/README.md#-breaking-changes-in-latest-teswiz-v0080) section in [teswiz](https://github.com/znsio/teswiz) repo
+![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
 
 ## Additional information
 

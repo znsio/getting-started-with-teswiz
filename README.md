@@ -28,12 +28,6 @@
 * Update `src\test\resources\reportportal.properties` file
 * [Run the sample test](https://github.com/znsio/teswiz/blob/main/docs/SampleTests-README.md) 
 
-# ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Breaking changes in teswiz v0.0.81 ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
-
-![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
-Refer to the [breaking changes](https://github.com/znsio/teswiz/blob/main/README.md#-breaking-changes-in-latest-teswiz-v0080) section in [teswiz](https://github.com/znsio/teswiz) repo
-![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
-
 ## Additional information
 
 # [Prerequisites](https://github.com/znsio/teswiz/blob/main/docs/GettingStartedUsingTeswiz-README.md)
@@ -49,7 +43,10 @@ Refer to the [breaking changes](https://github.com/znsio/teswiz/blob/main/README
 # [Configuration options](https://github.com/znsio/teswiz/blob/main/docs/ConfigurationParameters-README.md)
 Test execution using teswiz is highly configurable. This enables you to control what type of tests you want to execute, and where (environment, local/cloud), etc, without making changes to your code.
 
-# Know the [Feature/Functional coverage](https://github.com/znsio/teswiz/blob/main/docs/FeatureCoverage-README.md) from your test execution
+# ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Breaking changes in teswiz v0.0.81 ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
+Refer to the [breaking changes](https://github.com/znsio/teswiz/blob/main/docs/BreakingChanges-README.md) section in [teswiz](https://github.com/znsio/teswiz) repo
+
+# [Feature/Functional coverage](https://github.com/znsio/teswiz/blob/main/docs/FeatureCoverage-README.md) from your test execution
 
 # Using teswiz for your automation?
 

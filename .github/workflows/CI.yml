@@ -25,7 +25,28 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
+      - name: Update README with teswiz's latest successful commit id
+        run: |
+          COMMIT_ID=curl -H "Authorization: token $PAT_TOKEN" \
+               -H "Accept: application/vnd.github.v3+json" \
+               "https://api.github.com/repos/znsio/teswiz/actions/workflows/CI.yml/runs?&status=success&per_page=1" \
+               | jq -r '.workflow_runs[0].head_commit.id' | head -c 10
+          echo "teswiz last successful COMMIT_ID=$COMMIT_ID"
+          awk -v id="$COMMIT_ID" '{gsub("commit-.*-blue", "commit-"id"-blue")}1' README.md > README_new.md
+          mv README_new.md README.md
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+      - name: Get last successful commit-id for teswiz
+        run: |
+          echo "COMMIT_ID=$COMMIT_ID"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add README.md
+          git commit -m "Update README with teswiz's latest successful commit ID - $COMMIT_ID"
+          git push -u origin main
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@3122f2c659b52a78671a7862f5bc93f72823bb43
+        uses: gradle/gradle-build-action@8f08e41675472b8aa0aa2c356e8b2c1561af3bf9
         with:
           arguments: build --refresh-dependencies

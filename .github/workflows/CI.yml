@@ -27,10 +27,10 @@ jobs:
           distribution: 'temurin'
       - name: Update README with teswiz's latest successful commit id
         run: |
-          COMMIT_ID=curl -H "Authorization: token $PAT_TOKEN" \
+          COMMIT_ID=$(curl -H "Authorization: token $PAT_TOKEN" \
                -H "Accept: application/vnd.github.v3+json" \
                "https://api.github.com/repos/znsio/teswiz/actions/workflows/CI.yml/runs?&status=success&per_page=1" \
-               | jq -r '.workflow_runs[0].head_commit.id' | head -c 10
+               | jq -r '.workflow_runs[0].head_commit.id' | head -c 10) >> "$GITHUB_ENV"
           echo "teswiz last successful COMMIT_ID=$COMMIT_ID"
           awk -v id="$COMMIT_ID" '{gsub("commit-.*-blue", "commit-"id"-blue")}1' README.md > README_new.md
           mv README_new.md README.md

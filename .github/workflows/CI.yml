@@ -12,6 +12,9 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  repository_dispatch:
+    types:
+      - UpdateREADME  # Match the custom event name from the source repository
 
 jobs:
   build:

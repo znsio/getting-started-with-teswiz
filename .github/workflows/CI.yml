@@ -5,7 +5,7 @@
 # This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Java CI with Gradle
+name: CI
 
 on:
   push:
@@ -34,11 +34,6 @@ jobs:
           echo "teswiz last successful COMMIT_ID=$COMMIT_ID"
           awk -v id="$COMMIT_ID" '{gsub("commit-.*-blue", "commit-"id"-blue")}1' README.md > README_new.md
           mv README_new.md README.md
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-      - name: Get last successful commit-id for teswiz
-        run: |
-          echo "COMMIT_ID=$COMMIT_ID"
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add README.md

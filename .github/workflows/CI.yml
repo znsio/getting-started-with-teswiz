@@ -32,7 +32,7 @@ jobs:
         run: |
           teswiz_commit_id=${{ github.event.client_payload.teswiz_commit_id }}
           echo "teswiz_commit_id (var): $teswiz_commit_id"
-          if [ -n "$teswiz_commit_id" ]; then
+          if [ -n "${{ github.event.client_payload.teswiz_commit_id }}" ]; then
             echo "teswiz_commit_id is not empty. Update README"
             COMMIT_ID=$(curl -H "Authorization: token $PAT_TOKEN" \
                  -H "Accept: application/vnd.github.v3+json" \

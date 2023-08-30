@@ -30,19 +30,27 @@ jobs:
           distribution: 'temurin'
       - name: Update README with teswiz's latest successful commit id
         run: |
-          echo "teswiz_commit_id: '${{ github.event.client_payload.teswiz_commit_id }}'"
-          COMMIT_ID=$(curl -H "Authorization: token $PAT_TOKEN" \
-               -H "Accept: application/vnd.github.v3+json" \
-               "https://api.github.com/repos/znsio/teswiz/actions/workflows/CI.yml/runs?&status=success&per_page=1" \
-               | jq -r '.workflow_runs[0].head_commit.id' | head -c 10) >> "$GITHUB_ENV"
-          echo "teswiz last successful COMMIT_ID=$COMMIT_ID"
-          awk -v id="$COMMIT_ID" '{gsub("commit-.*-blue", "commit-"id"-blue")}1' README.md > README_new.md
-          mv README_new.md README.md
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add README.md
-          git commit -m "Update README with teswiz's latest successful commit ID - $COMMIT_ID"
-          git push -u origin main
+          teswiz_commit_id=${{ github.event.client_payload.teswiz_commit_id }}
+          echo "teswiz_commit_id (var): $teswiz_commit_id"
+          echo "teswiz_commit_id (client_payload): '${{ github.event.client_payload.teswiz_commit_id }}'"
+          echo "client_payload: '${{ github.event.client_payload }}'"
+          if [ -n "$teswiz_commit_id" ]; then
+            echo "teswiz_commit_id is not empty. Update README"
+            COMMIT_ID=$(curl -H "Authorization: token $PAT_TOKEN" \
+                 -H "Accept: application/vnd.github.v3+json" \
+                 "https://api.github.com/repos/znsio/teswiz/actions/workflows/CI.yml/runs?&status=success&per_page=1" \
+                 | jq -r '.workflow_runs[0].head_commit.id' | head -c 10) >> "$GITHUB_ENV"
+            echo "teswiz last successful COMMIT_ID=$COMMIT_ID"
+            awk -v id="$COMMIT_ID" '{gsub("commit-.*-blue", "commit-"id"-blue")}1' README.md > README_new.md
+            mv README_new.md README.md
+            git config --global user.name "GitHub Actions"
+            git config --global user.email "actions@github.com"
+            git add README.md
+            git commit -m "Update README with teswiz's latest successful commit ID - $COMMIT_ID"
+            git push -u origin main
+          else
+            echo "teswiz_commit_id is empty."
+          fi
         env:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
       - name: Build with Gradle

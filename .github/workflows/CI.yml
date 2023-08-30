@@ -49,7 +49,7 @@ jobs:
             git commit -m "Update README with teswiz's latest successful commit ID - $COMMIT_ID"
             git push -u origin main
           else
-            echo "teswiz_commit_id is empty."
+            echo "teswiz_commit_id is empty. No need to update README."
           fi
         env:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}

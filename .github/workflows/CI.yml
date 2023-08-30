@@ -30,6 +30,7 @@ jobs:
           distribution: 'temurin'
       - name: Update README with teswiz's latest successful commit id
         run: |
+          echo "teswiz_commit_id: '${{ .event.client_payload.teswiz_commit_id }}'"
           COMMIT_ID=$(curl -H "Authorization: token $PAT_TOKEN" \
                -H "Accept: application/vnd.github.v3+json" \
                "https://api.github.com/repos/znsio/teswiz/actions/workflows/CI.yml/runs?&status=success&per_page=1" \

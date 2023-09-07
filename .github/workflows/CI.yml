@@ -33,7 +33,7 @@ jobs:
           echo "client_payload: ${{ toJson(github.event.client_payload) }}"
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git pull
+          git pull --rebase origin main
           COMMIT_ID=$(curl -H "Authorization: token $PAT_TOKEN" \
                -H "Accept: application/vnd.github.v3+json" \
                "https://api.github.com/repos/znsio/teswiz/actions/workflows/Build_And_Run_Unit_Tests_CI.yml/runs?&status=success&per_page=1" \

@@ -2,7 +2,7 @@ import java.text.SimpleDateFormat
 
 buildscript {
     ext {
-        gradleVersion = '8.3'
+        gradleVersion = '8.4'
         teswizVersion = '0.0.88'
     }
     repositories {

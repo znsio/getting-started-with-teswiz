@@ -51,6 +51,6 @@ jobs:
         env:
           PAT_TOKEN: ${{ secrets.TESWIZ_PAT }}
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@62cce3c597efd445cd71ee868887b8b1117703a7
+        uses: gradle/gradle-build-action@0bfe00a136db5e61ba3416b372542a65863a9fee
         with:
           arguments: build --refresh-dependencies

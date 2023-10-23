@@ -37,29 +37,42 @@ public class TeswizPublicMethodsBL {
 
     private void teswizPublicMethodsCheck() {
         long threadId = Thread.currentThread().getId();
+
+        new Runner();
+        new Runner("configFilePath", "stepDefDirName", "featuresDirName");
+        Runner.getPlatformForUser("me");
+        Runner.shouldFailTestOnVisualDifference();
+        Runner.getTestExecutionContext(1);
+
         Runner.getPlatform();
         Runner.getApplitoolsConfiguration();
         Runner.getCloudKey();
         Runner.getCloudName();
         Runner.getCloudUser();
+
         Runner.getRemoteDriverGridPort();
         Runner.getMaxNumberOfAppiumDrivers();
         Runner.getMaxNumberOfWebDrivers();
         Runner.isVisualTestingEnabled();
         Runner.getFromEnvironmentConfiguration("BASE_URL");
+
         Runner.getTestData("USERNAME");
         Runner.getTestDataAsMap("ENV");
         Runner.getSoftAssertion(threadId);
         Runner.setCurrentDriverForUser(currentUserPersona, currentPlatform, context);
         Runner.fetchPlatform(threadId);
+
         Runner.getTargetEnvironment();
         Runner.getBaseURLForWeb();
         Runner.getAppPackageName();
         Runner.isRunningInCI();
         Runner.getBrowser();
+
         Runner.getProxyURL();
         Runner.getBrowserConfigFileContents();
         Runner.getBrowserConfigFile();
+        Runner.getRemoteDriverGridHostName();
+        Runner.getHostName();
 
         Drivers.setDriverFor(currentUserPersona, currentPlatform, context);
         Drivers.createDriverFor(currentUserPersona, currentPlatform, context);

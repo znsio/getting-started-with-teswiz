@@ -19,6 +19,26 @@
       "longitude": "77.2090",
       "hourly": "temperature_2m",
       "days": "17"
+    },
+    "Crypto_API":{
+      "url": "https://data.binance.com/api/v3/ticker/24hr?"
+    },
+    "RestUser_API":{
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "postBody": {
+        "title": "Teswiz",
+        "body": "API workflow test",
+        "userId": "1"
+      },
+      "patchBody": {
+        "title": "Automation"
+      },
+      "updatedTitle": "Automation"
     }
+  },
+  "dev": {},
+  "browserStack": {
+    "username": "eot.testing@gmail.com",
+    "password": "eotTesting@0"
   }
 }

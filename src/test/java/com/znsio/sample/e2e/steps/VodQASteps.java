@@ -13,7 +13,6 @@ import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 
 public class VodQASteps {
-
     private static final Logger LOGGER = Logger.getLogger(VodQASteps.class.getName());
     private final TestExecutionContext context;
 
@@ -31,26 +30,6 @@ public class VodQASteps {
     @When("I scroll from one to another element point on vertical swiping screen")
     public void scrollToElement() {
         new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).scrollFromOneElementPointToAnother();
-    }
-
-    @Then("Element text {string} should be visible")
-    public void elementTextShouldBeVisible(String elementText) {
-        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).isElementWithTextVisible(elementText);
-    }
-
-    @Then("App should work in background for {int} sec")
-    public void appShouldWorkInBackgroundForDefinedTime(int time) {
-        new VodqaBL().verifyAppWorksInBackground(time);
-    }
-
-    @Then("I am able to view hacker news login button inside web view section")
-    public void iAmAbleToViewHackerNewsLoginButtonInsideWebViewSection() {
-        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).enterAndVerifyLoginOptionUnderWebViewSection();
-    }
-
-    @And("I am able to view section header by navigating inside native view section")
-    public void iAmAbleToViewSectionHeaderByNavigatingInsideNativeViewSection() {
-        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).enterIntoNativeViewSection();
     }
 
     @When("I tap in the middle of the screen")
@@ -79,6 +58,26 @@ public class VodQASteps {
                 .selectScreenAndSwipeByPassingPercentageAttributes(atPercentileHeight, fromPercentageWidth, toPercentageWidth, screenName);
     }
 
+    @Then("I am able to view hacker news login button inside web view section")
+    public void iAmAbleToViewHackerNewsLoginButtonInsideWebViewSection() {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).enterAndVerifyLoginOptionUnderWebViewSection();
+    }
+
+    @And("I am able to view section header by navigating inside native view section")
+    public void iAmAbleToViewSectionHeaderByNavigatingInsideNativeViewSection() {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).enterIntoNativeViewSection();
+    }
+
+    @Then("App should work in background for {int} sec")
+    public void appShouldWorkInBackgroundForDefinedTime(int time) {
+        new VodqaBL().verifyAppWorksInBackground(time);
+    }
+
+    @Then("Element text {string} should be visible")
+    public void elementTextShouldBeVisible(String elementText) {
+        new VodqaBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).isElementWithTextVisible(elementText);
+    }
+
     @When("I scroll vertically from {int} percent height to {int} percent height and {int} percent width")
     public void iScrollVerticallyFromPercentHeightToPercentHeightAndPercentWidth(int fromPercentHeight, int toPercentHeight, int percentWidth) {
         new VodqaBL().scrollVerticallyByPercentageOnVerticalSwipingScreen(fromPercentHeight, toPercentHeight, percentWidth);
@@ -94,16 +93,6 @@ public class VodQASteps {
         new VodqaBL().verifyLongPressedPopup();
     }
 
-    @Then("I should be able to double tap on an element")
-    public void iShouldBeAbleToDoubleTapOnAnElement() {
-        new VodqaBL().doubleTapOnAnElement();
-    }
-
-    @Then("I should be able set both sliders to value {float} by multi touch action")
-    public void iShouldBeAbleSetBothSlidersToValueByMultiTouchAction(float setSliderValue) {
-        new VodqaBL().performMultiTouchForBothSilders(setSliderValue);
-    }
-
     @When("I drag the circle object to the drop target")
     public void iDragTheCircleObjectToDropTarget() {
         new VodqaBL().dragAndDropElement();
@@ -112,5 +101,25 @@ public class VodQASteps {
     @Then("I am able to view {string} message")
     public void iAmAbleToViewMessage(String displayedMessage) {
         new VodqaBL().isMessageDisplayedOnTheScreen(displayedMessage);
+    }
+
+    @Then("I should be able to double tap on an element")
+    public void iShouldBeAbleToDoubleTapOnAnElement() {
+        new VodqaBL().doubleTapOnAnElement();
+    }
+
+    @Then("I should be able to pinch and zoom in on an element")
+    public void iShouldBeAbleToPinchAndZoomInOnAnElement() {
+        new VodqaBL().pinchAndZoomInOnAnElement();
+    }
+
+    @And("I should be able to pinch and zoom out on an element")
+    public void iShouldBeAbleToPinchAndZoomOutOnAnElement() {
+        new VodqaBL().pinchAndZoomOutOnAnElement();
+    }
+
+    @Then("I should be able set both sliders to value {float} by multi touch action")
+    public void iShouldBeAbleSetBothSlidersToValueByMultiTouchAction(float setSliderValue) {
+        new VodqaBL().performMultiTouchForBothSilders(setSliderValue);
     }
 }

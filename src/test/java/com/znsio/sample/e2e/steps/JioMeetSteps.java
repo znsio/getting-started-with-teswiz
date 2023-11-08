@@ -6,8 +6,8 @@ import com.znsio.sample.e2e.businessLayer.jiomeet.AuthBL;
 import com.znsio.sample.e2e.businessLayer.jiomeet.InAMeetingBL;
 import com.znsio.sample.e2e.businessLayer.jiomeet.JoinAMeetingBL;
 import com.znsio.sample.e2e.businessLayer.jiomeet.LandingBL;
-import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.teswiz.entities.Platform;
+import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.teswiz.exceptions.InvalidTestDataException;
 import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
@@ -78,7 +78,7 @@ public class JioMeetSteps {
         appName = appName.toLowerCase(Locale.ROOT);
         Platform onPlatform = Platform.valueOf(platform);
         LOGGER.info(System.out.printf("startOn - Persona:'%s', AppName: '%s', Platform: '%s'",
-                                      userPersona, appName, onPlatform.name()));
+                userPersona, appName, onPlatform.name()));
         context.addTestState(userPersona, userPersona);
         Drivers.createDriverFor(userPersona, appName, onPlatform, context);
         new AuthBL(userPersona, onPlatform).signInAndStartMeeting(
@@ -90,9 +90,9 @@ public class JioMeetSteps {
         appName = appName.toLowerCase(Locale.ROOT);
         Platform onPlatform = Platform.valueOf(platform);
         LOGGER.info(System.out.printf("startOn - Persona:'%s', AppName: '%s', Platform: '%s'",
-                                      userPersona, appName, onPlatform.name()));
+                userPersona, appName, onPlatform.name()));
         context.addTestState(userPersona, userPersona);
-        switch(onPlatform) {
+        switch (onPlatform) {
             case android:
             case iOS:
             case windows:
@@ -112,6 +112,7 @@ public class JioMeetSteps {
         String meetingPassword = context.getTestStateAsString(SAMPLE_TEST_CONTEXT.MEETING_PASSWORD);
         new JoinAMeetingBL(userPersona, onPlatform).joinMeeting(meetingId, meetingPassword);
     }
+
     @When("I open the JioMeet meeting notification from notification bar")
     public void iOpenTheNotificationFromNotificationBar() {
         new InAMeetingBL().openNotificationFromNotificationBar();

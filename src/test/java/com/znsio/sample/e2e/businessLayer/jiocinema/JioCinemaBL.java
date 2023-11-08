@@ -41,16 +41,16 @@ public class JioCinemaBL {
         return this;
     }
 
+    public JioCinemaBL swipeMovieTrendingInIndiaSection(Direction direction, int movieNumberOnScreen) {
+        JioCinemaScreen.get().swipeTrendingItem(direction, movieNumberOnScreen);
+        return this;
+    }
+
     public JioCinemaBL verifyMovieNumberVisibleOnScreen(int movieNumberOnScreen) {
         LOGGER.info("verifying movie number visible on trending in india screen after swipe");
         assertThat(JioCinemaScreen.get().isMovieNumberVisibleOnScreen(movieNumberOnScreen))
                 .as(String.format("movie number %s is not visible on screen", movieNumberOnScreen))
                 .isTrue();
-        return this;
-    }
-
-    public JioCinemaBL swipeMovieTrendingInIndiaSection(Direction direction, int movieNumberOnScreen) {
-        JioCinemaScreen.get().swipeTrendingItem(direction, movieNumberOnScreen);
         return this;
     }
 }

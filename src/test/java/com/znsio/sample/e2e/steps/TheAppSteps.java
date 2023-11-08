@@ -5,10 +5,12 @@ import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.businessLayer.theapp.AppBL;
 import com.znsio.sample.e2e.businessLayer.theapp.ClipboardBL;
 import com.znsio.sample.e2e.businessLayer.theapp.EchoBL;
-import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.sample.e2e.businessLayer.theapp.FileUploadBL;
 import com.znsio.teswiz.entities.Platform;
+import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -27,12 +29,12 @@ public class TheAppSteps {
     public void iLoginWithInvalidCredentials(String username, String password) {
         LOGGER.info(System.out.printf(
                 "iLoginWithInvalidCredentials - Persona:'%s', Username: '%s', Password:'%s', " +
-                "Platform: '%s'",
+                        "Platform: '%s'",
                 SAMPLE_TEST_CONTEXT.ME, username, password, Runner.getPlatform()));
         Drivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform(), context);
         context.addTestState(SAMPLE_TEST_CONTEXT.ME, username);
-        new AppBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).provideInvalidDetailsForSignup(
-                username, password);
+        new AppBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).provideInvalidDetailsForSignup(username,
+                password);
     }
 
     @When("I go back")
@@ -45,7 +47,7 @@ public class TheAppSteps {
                                               String onPlatform) {
         LOGGER.info(System.out.printf(
                 "LoginWithInvalidCredentials - Persona:'%s', Username: '%s', Password:'%s', " +
-                "Platform: '%s'",
+                        "Platform: '%s'",
                 userPersona, username, password, onPlatform));
         context.addTestState(userPersona, username);
         Drivers.createDriverFor(userPersona, Platform.valueOf(onPlatform), context);
@@ -66,7 +68,7 @@ public class TheAppSteps {
         Platform onPlatform = Runner.getPlatformForUser(userPersona);
         LOGGER.info(System.out.printf(
                 "LoginWithInvalidCredentials - Persona:'%s', Username: '%s', Password:'%s', " +
-                "Platform: '%s'",
+                        "Platform: '%s'",
                 SAMPLE_TEST_CONTEXT.ME, username, password, onPlatform.name()));
         new AppBL(userPersona, onPlatform).provideInvalidDetailsForSignup(username, password);
     }
@@ -77,7 +79,7 @@ public class TheAppSteps {
         Platform onPlatform = Runner.getPlatformForUser(userPersona);
         LOGGER.info(System.out.printf(
                 "LoginWithInvalidCredentials - Persona:'%s', Username: '%s', Password:'%s', " +
-                "Platform: '%s'",
+                        "Platform: '%s'",
                 SAMPLE_TEST_CONTEXT.ME, username, password, onPlatform.name()));
         new AppBL(userPersona, onPlatform).loginAgain(username, password);
     }
@@ -109,8 +111,50 @@ public class TheAppSteps {
     public void iSaveInTheClipboard(String content) {
         LOGGER.info(System.out.printf("iStartTheApp - Persona:'%s'", SAMPLE_TEST_CONTEXT.ME));
         Drivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform(), context);
-        new ClipboardBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).saveContentInClipboard(
-                content);
+        new ClipboardBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).saveContentInClipboard(content);
+    }
+
+    @Given("I am on file upload page")
+    public void iAmOnFileUploadPage() {
+        LOGGER.info(System.out.printf("iStartTheApp - Persona:'%s'", SAMPLE_TEST_CONTEXT.ME));
+        Drivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform(), context);
+        new FileUploadBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).navigationToUploadScreen();
+    }
+
+    @When("I upload the {string} file")
+    public void iUploadTheFile(String file) {
+        new FileUploadBL().uploadFile(Runner.getTestDataAsMap(file));
+    }
+
+    @Then("File is uploaded successfully")
+    public void fileIsUploadedSuccessfully() {
+        new FileUploadBL().verifyFileUpload();
+    }
+
+    @When("{string} switch my role to {string}")
+    public void switchMyRoleTo(String currentUserPersona, String newUserPersona) {
+        Drivers.assignNewPersonaToExistingDriver(currentUserPersona, newUserPersona, context);
+    }
+
+    @Then("{string} can login again with invalid credentials - {string}, {string}")
+    public void canLoginAgainWithInvalidCredentials(String userPersona, String username,
+                                                    String password) {
+        LOGGER.info(System.out.printf(
+                "'%s' canLoginAgainWithInvalidCredentials - Username: '%s', Password:'%s'",
+                userPersona, username, password));
+        Platform platformForUser = Runner.getPlatformForUser(userPersona);
+        new AppBL(userPersona, platformForUser).loginAgain(username, password);
+    }
+
+    @And("{string} login to TheApp with invalid credentials - {string}, " + "{string}")
+    public void loginToTheAppWithInvalidCredentials(String userPersona, String username,
+                                                    String password) {
+        LOGGER.info(System.out.printf(
+                "'%s' loginToTheAppWithInvalidCredentials - Username: '%s', Password:'%s'",
+                userPersona, username, password));
+        Platform currentPlatform = Runner.getPlatform();
+        Drivers.createDriverFor(userPersona, currentPlatform, context);
+        new AppBL(userPersona, currentPlatform).provideInvalidDetailsForSignup(username, password);
     }
 
     @When("{string} changed to {string}")

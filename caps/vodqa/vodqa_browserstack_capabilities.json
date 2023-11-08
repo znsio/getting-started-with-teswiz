@@ -1,0 +1,35 @@
+{
+  "android": {
+    "app": "https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/main/VodQA.apk",
+    "automationName": "UIAutomator2",
+    "noSign": true,
+    "project": "teswiz",
+    "browserstack.appium_version": "2.0.1",
+    "browserstack.enableCameraImageInjection": true,
+    "browserstack.debug": true,
+    "browserstack.geoLocation": "IN",
+    "browserstack.timezone": "Kolkata",
+    "browserstack.networkLogs": "true",
+    "browserstack.gpsLocation": "22,75",
+    "browserstack.locale": "IN"
+  },
+  "serverConfig" : {
+    "server": {
+      "use-plugins": ["device-farm"],
+      "plugin": {
+        "device-farm": {
+          "platform": "android",
+          "skipChromeDownload": true,
+          "cloud": {
+            "cloudName": "browserstack",
+            "url": "http://hub-cloud.browserstack.com",
+            "apiUrl": "https://api-cloud.browserstack.com/app-automate/",
+            "devices": [
+            ]
+          }
+        }
+      }
+    }
+  },
+  "appiumServerPath": "./node_modules/appium/build/lib/main.js"
+}

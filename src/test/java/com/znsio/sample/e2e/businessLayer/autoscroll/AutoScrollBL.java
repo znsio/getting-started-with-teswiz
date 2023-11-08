@@ -1,10 +1,10 @@
 package com.znsio.sample.e2e.businessLayer.autoscroll;
 
 import com.context.TestExecutionContext;
-import com.znsio.sample.e2e.screen.autoscroll.AutoScrollScreen;
 import com.znsio.teswiz.entities.Direction;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
+import com.znsio.sample.e2e.screen.autoscroll.AutoScrollScreen;
 import org.apache.log4j.Logger;
 
 import static org.assertj.core.api.Assertions.assertThat;

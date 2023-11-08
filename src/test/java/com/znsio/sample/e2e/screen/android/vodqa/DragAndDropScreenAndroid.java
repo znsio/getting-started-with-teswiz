@@ -1,8 +1,8 @@
 package com.znsio.sample.e2e.screen.android.vodqa;
 
-import com.znsio.sample.e2e.screen.vodqa.DragAndDropScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
+import com.znsio.sample.e2e.screen.vodqa.DragAndDropScreen;
 import io.appium.java_client.AppiumBy;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;

@@ -1,17 +1,18 @@
 package com.znsio.sample.e2e.screen.android.googlesearch;
 
 import com.context.TestExecutionContext;
-import com.znsio.sample.e2e.screen.googlesearch.GoogleSearchResultsScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Runner;
 import com.znsio.teswiz.runner.Visual;
+import com.znsio.sample.e2e.screen.googlesearch.GoogleSearchResultsScreen;
+import com.znsio.sample.e2e.screen.web.dineout.DineoutLandingScreenWeb;
 import org.openqa.selenium.By;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class GoogleSearchResultsScreenAndroid extends GoogleSearchResultsScreen {
-    private static final String SCREEN_NAME = GoogleSearchResultsScreenAndroid.class.getSimpleName();
+    private static final String SCREEN_NAME = DineoutLandingScreenWeb.class.getSimpleName();
     private final Driver driver;
     private final Visual visually;
     private final TestExecutionContext context;

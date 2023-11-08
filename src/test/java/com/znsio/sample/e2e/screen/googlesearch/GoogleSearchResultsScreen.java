@@ -1,11 +1,12 @@
 package com.znsio.sample.e2e.screen.googlesearch;
 
-import com.znsio.sample.e2e.screen.android.googlesearch.GoogleSearchResultsScreenAndroid;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
 import com.znsio.teswiz.runner.Visual;
+import com.znsio.sample.e2e.screen.android.googlesearch.GoogleSearchResultsScreenAndroid;
+import com.znsio.sample.e2e.screen.web.googlesearch.GoogleSearchResultsScreenWeb;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 
@@ -24,8 +25,11 @@ public abstract class GoogleSearchResultsScreen {
         switch (platform) {
             case android:
                 return new GoogleSearchResultsScreenAndroid(driver, visually);
+            case web:
+                return new GoogleSearchResultsScreenWeb(driver, visually);
             default:
-                throw new NotImplementedException(SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
+                throw new NotImplementedException(
+                        SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
         }
     }
 

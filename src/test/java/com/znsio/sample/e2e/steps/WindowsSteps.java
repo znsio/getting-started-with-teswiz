@@ -24,7 +24,7 @@ public class WindowsSteps {
         Drivers.createDriverFor(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform(), context);
         LOGGER.info(
                 System.out.printf("iHaveLaunchedNotepadApplication - Persona:'%s', Platform: '%s'",
-                                  SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()));
+                        SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()));
         new NotepadBL(SAMPLE_TEST_CONTEXT.ME, Runner.getPlatform()).verifyLaunched();
     }
 

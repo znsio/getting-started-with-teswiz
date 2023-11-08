@@ -35,5 +35,7 @@ public abstract class JioCinemaScreen {
     public abstract JioCinemaScreen scrollTillTrendingInIndiaSection();
 
     public abstract boolean isMovieNumberVisibleOnScreen(int movieNumberOnScreen);
+
     public abstract JioCinemaScreen swipeTrendingItem(Direction direction, int movieNumberOnScreen);
+
 }

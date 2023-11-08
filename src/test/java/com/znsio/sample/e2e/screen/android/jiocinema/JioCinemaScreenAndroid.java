@@ -19,7 +19,6 @@ public class JioCinemaScreenAndroid extends JioCinemaScreen {
     private final String visibleMovieNumberXpath = "//android.widget.TextView[@text='%s']";
     private final String movieXpath = "//android.widget.TextView[@text='%s']//parent::android.view.View";
 
-
     public JioCinemaScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
         this.visually = visually;
@@ -54,6 +53,7 @@ public class JioCinemaScreenAndroid extends JioCinemaScreen {
                 Target.region(AppiumBy.xpath(String.format(visibleMovieNumberXpath, movieNumberOnScreen))));
         return isMovieVisibleOnScreen;
     }
+
     @Override
     public JioCinemaScreen swipeTrendingItem(Direction direction, int movieNumberOnScreen) {
         LOGGER.info(String.format("Swiping %s movie number : %s ", direction, movieNumberOnScreen));

@@ -3,8 +3,8 @@ package com.znsio.sample.e2e.steps;
 import com.context.SessionContext;
 import com.context.TestExecutionContext;
 import com.znsio.sample.e2e.businessLayer.calculator.CalculatorBL;
-import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.teswiz.entities.Platform;
+import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
 import io.cucumber.java.en.And;
@@ -56,7 +56,7 @@ public class CalculatorSteps {
     public void press(String userPersona, String action) {
         Platform onPlatform = Runner.getPlatformForUser(userPersona);
         new CalculatorBL(userPersona, onPlatform).pressOperation(action);
-        if(action.equalsIgnoreCase("equals")) {
+        if (action.equalsIgnoreCase("equals")) {
             waitFor(10);
         }
     }

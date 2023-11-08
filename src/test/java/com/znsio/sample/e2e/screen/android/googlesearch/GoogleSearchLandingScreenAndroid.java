@@ -1,11 +1,11 @@
 package com.znsio.sample.e2e.screen.android.googlesearch;
 
 import com.context.TestExecutionContext;
-import com.znsio.sample.e2e.screen.googlesearch.GoogleSearchLandingScreen;
-import com.znsio.sample.e2e.screen.googlesearch.GoogleSearchResultsScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Runner;
 import com.znsio.teswiz.runner.Visual;
+import com.znsio.sample.e2e.screen.googlesearch.GoogleSearchLandingScreen;
+import com.znsio.sample.e2e.screen.googlesearch.GoogleSearchResultsScreen;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;

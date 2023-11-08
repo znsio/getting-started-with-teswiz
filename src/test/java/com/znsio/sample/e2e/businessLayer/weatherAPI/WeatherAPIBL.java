@@ -1,7 +1,7 @@
 package com.znsio.sample.e2e.businessLayer.weatherAPI;
 
-import com.znsio.sample.e2e.services.UnirestService;
 import com.znsio.teswiz.runner.Runner;
+import com.znsio.sample.e2e.services.UnirestService;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.json.JSONObject;

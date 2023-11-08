@@ -1,10 +1,10 @@
 package com.znsio.sample.e2e.screen.android.autoscroll;
 
 import com.applitools.eyes.appium.Target;
-import com.znsio.sample.e2e.screen.autoscroll.AutoScrollScreen;
 import com.znsio.teswiz.entities.Direction;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
+import com.znsio.sample.e2e.screen.autoscroll.AutoScrollScreen;
 import io.appium.java_client.AppiumBy;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;

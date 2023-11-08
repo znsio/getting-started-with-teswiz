@@ -1,11 +1,11 @@
 package com.znsio.sample.e2e.screen.notepad;
 
-import com.znsio.sample.e2e.screen.windows.notepad.NotepadScreenWindows;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
 import com.znsio.teswiz.runner.Visual;
+import com.znsio.sample.e2e.screen.windows.notepad.NotepadScreenWindows;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.log4j.Logger;
 

@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat
 buildscript {
     ext {
         gradleVersion = '8.4'
-        teswizVersion = '397ad4cbfa'
+        teswizVersion = '22f4f4aff7'
     }
     repositories {
         mavenLocal()

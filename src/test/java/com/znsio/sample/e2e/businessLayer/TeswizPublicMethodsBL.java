@@ -6,6 +6,7 @@ import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
 import com.znsio.teswiz.tools.ReportPortalLogger;
+import io.cucumber.java.Scenario;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
@@ -86,7 +87,8 @@ public class TeswizPublicMethodsBL {
         Drivers.getNameOfDeviceUsedByUser(currentUserPersona);
         Drivers.isDriverAssignedForUser(currentUserPersona);
         Drivers.getAvailableUserPersonas();
-        Drivers.attachLogsAndCloseAllDrivers();
+        Scenario scenario = null;
+        Drivers.attachLogsAndCloseAllDrivers(scenario);
 
         ReportPortalLogger.logDebugMessage("logDebugMessage");
         ReportPortalLogger.logInfoMessage("logInfoMessage");

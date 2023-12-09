@@ -55,6 +55,7 @@ task run(type: JavaExec) {
         println "Using LOG_DIR: $logDirectory"
         System.setProperty "LOG_DIR", "$logDirectory"
         environment "APPLITOOLS_API_KEY", System.getenv("teswiz_APPLITOOLS_API_KEY")
+        environment "APPLITOOLS_LOG_DIR", "$logDirectory/applitools_logs"
 
         def configFile = System.getenv("CONFIG")
         if(null == configFile || !file(configFile).exists()) {
@@ -68,13 +69,22 @@ task run(type: JavaExec) {
 //        configFile = System.getenv("CONFIG") ? System.getenv("CONFIG") : configFile
 
         print "configFile: $configFile"
-        systemProperties = System.properties
+        systemProperties = System.properties as Map<String, ?>
         def runnerArgs = [
                 "${configFile}",
                 "com/znsio/sample/e2e",
                 "src/test/resources"
         ]
         args = runnerArgs
+
+        println("Debug mode: " + System.getProperty('debug', 'false'))
+        // attach debugger
+        // example: ./gradlew run -Ddebug=true
+        if (System.getProperty('debug', 'false') == 'true') {
+            println("In debug mode")
+            jvmArgs '-Xdebug', '-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,' +
+                    'address=*:5005'
+        }
     }
     mainClass = "com.znsio.teswiz.runner.Runner"
     classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output

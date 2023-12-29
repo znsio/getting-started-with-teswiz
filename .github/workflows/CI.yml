@@ -33,20 +33,27 @@ jobs:
           echo "client_payload: ${{ toJson(github.event.client_payload) }}"
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git pull --rebase origin main
-          COMMIT_ID=$(curl -H "Authorization: token $PAT_TOKEN" \
-               -H "Accept: application/vnd.github.v3+json" \
-               "https://api.github.com/repos/znsio/teswiz/actions/workflows/Build_And_Run_Unit_Tests_CI.yml/runs?&status=success&per_page=1" \
-               | jq -r '.workflow_runs[0].head_commit.id' | head -c 10) >> "$GITHUB_ENV"
-          echo "teswiz last successful COMMIT_ID=$COMMIT_ID"
-          awk -v id="$COMMIT_ID" '{gsub("commit-.*-blue", "commit-"id"-blue")}1' README.md > README_new.md
-          mv README_new.md README.md
-          if [ -n "$(git status --porcelain)" ]; then
-            git add README.md
-            git commit -m "Update README with teswiz's latest successful commit ID - $COMMIT_ID"
-            git push -u origin main
+          git status
+          BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+          echo "Running on branch: '$BRANCH_NAME'"
+          if [[ "$BRANCH_NAME" = "main" ]]; then
+            git pull --rebase origin main
+            COMMIT_ID=$(curl -H "Authorization: token $PAT_TOKEN" \
+                 -H "Accept: application/vnd.github.v3+json" \
+                 "https://api.github.com/repos/znsio/teswiz/actions/workflows/Build_And_Run_Unit_Tests_CI.yml/runs?&status=success&per_page=1" \
+                 | jq -r '.workflow_runs[0].head_commit.id' | head -c 10) >> "$GITHUB_ENV"
+            echo "teswiz last successful COMMIT_ID=$COMMIT_ID"
+            awk -v id="$COMMIT_ID" '{gsub("commit-.*-blue", "commit-"id"-blue")}1' README.md > README_new.md
+            mv README_new.md README.md
+            if [ -n "$(git status --porcelain)" ]; then
+              git add README.md
+              git commit -m "Update README with teswiz's latest successful commit ID - $COMMIT_ID"
+              git push -u origin main
+            else
+              echo "No local changes."
+            fi
           else
-            echo "No local changes."
+            echo "Not running in 'main'. No need to update README for branch: '$BRANCH_NAME'"
           fi
         env:
           PAT_TOKEN: ${{ secrets.TESWIZ_PAT }}

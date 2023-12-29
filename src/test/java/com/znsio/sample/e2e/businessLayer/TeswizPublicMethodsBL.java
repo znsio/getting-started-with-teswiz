@@ -71,6 +71,7 @@ public class TeswizPublicMethodsBL {
 
         Runner.getProxyURL();
         Runner.getBrowserConfigFileContents();
+        Runner.getBrowserConfigFileContents("non-default-browserConfig.json");
         Runner.getBrowserConfigFile();
         Runner.getRemoteDriverGridHostName();
         Runner.getHostName();

@@ -3,7 +3,8 @@ package com.znsio.sample.e2e.screen.web.theapp;
 import com.znsio.sample.e2e.screen.theapp.LoginScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -12,7 +13,7 @@ import static com.znsio.teswiz.tools.Wait.waitFor;
 public class LoginScreenWeb
         extends LoginScreen {
     private static final String SCREEN_NAME = LoginScreenWeb.class.getSimpleName();
-    private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
+    private static final Logger LOGGER = LogManager.getLogger(SCREEN_NAME);
     private final Driver driver;
     private final Visual visually;
     private final By byUserNameId = By.id("username");

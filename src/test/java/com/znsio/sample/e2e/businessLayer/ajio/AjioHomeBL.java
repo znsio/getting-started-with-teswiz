@@ -5,13 +5,14 @@ import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.assertj.core.api.SoftAssertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AjioHomeBL {
-    private static final Logger LOGGER = Logger.getLogger(AjioHomeBL.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(AjioHomeBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;

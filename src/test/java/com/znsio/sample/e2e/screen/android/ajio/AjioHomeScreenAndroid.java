@@ -4,7 +4,8 @@ import com.znsio.sample.e2e.screen.ajio.AjioHomeScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -12,7 +13,7 @@ import java.util.Map;
 
 public class AjioHomeScreenAndroid extends AjioHomeScreen {
     private static final String SCREEN_NAME = AjioHomeScreenAndroid.class.getSimpleName();
-    private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
+    private static final Logger LOGGER = LogManager.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private static final By byStartSearchBoxId = By.id("com.ril.ajio:id/llpsTvSearch");
     private static final By bySearchFieldId = By.id("com.ril.ajio:id/searchETV");

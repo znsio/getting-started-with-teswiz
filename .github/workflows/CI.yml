@@ -38,6 +38,14 @@ jobs:
           echo "Running on branch: '$BRANCH_NAME'"
           if [[ "$BRANCH_NAME" = "main" ]]; then
             git pull --rebase origin main
+            curl -H "Authorization: token $PAT_TOKEN" \
+                 -H "Accept: application/vnd.github.v3+json" \
+                 "https://api.github.com/repos/znsio/teswiz/actions/workflows/Build_And_Run_Unit_Tests_CI.yml/runs?&status=success" \
+                 | jq -r '.workflow_runs.[] | select (.head_branch | contains("main"))'
+            curl -H "Authorization: token $PAT_TOKEN" \
+                 -H "Accept: application/vnd.github.v3+json" \
+                 "https://api.github.com/repos/znsio/teswiz/actions/workflows/Build_And_Run_Unit_Tests_CI.yml/runs?&status=success" \
+                 | jq -r '.workflow_runs.[] | select (.head_branch | contains("main")) | .head_commit.id[0:10]'
             COMMIT_ID=$(curl -H "Authorization: token $PAT_TOKEN" \
                  -H "Accept: application/vnd.github.v3+json" \
                  "https://api.github.com/repos/znsio/teswiz/actions/workflows/Build_And_Run_Unit_Tests_CI.yml/runs?&status=success" \

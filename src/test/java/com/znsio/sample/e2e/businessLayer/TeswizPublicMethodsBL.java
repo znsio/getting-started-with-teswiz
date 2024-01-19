@@ -7,13 +7,14 @@ import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
 import com.znsio.teswiz.tools.ReportPortalLogger;
 import io.cucumber.java.Scenario;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.assertj.core.api.SoftAssertions;
 
 import java.io.File;
 
 public class TeswizPublicMethodsBL {
-    private static final Logger LOGGER = Logger.getLogger(TeswizPublicMethodsBL.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(TeswizPublicMethodsBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;

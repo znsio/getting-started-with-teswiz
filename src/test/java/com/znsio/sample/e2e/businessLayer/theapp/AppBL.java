@@ -6,11 +6,12 @@ import com.znsio.teswiz.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.theapp.AppLaunchScreen;
 import com.znsio.sample.e2e.screen.theapp.LoginScreen;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.assertj.core.api.SoftAssertions;
 
 public class AppBL {
-    private static final Logger LOGGER = Logger.getLogger(AppBL.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(AppBL.class.getName());
     private final TestExecutionContext context;
     private final SoftAssertions softly;
     private final String currentUserPersona;

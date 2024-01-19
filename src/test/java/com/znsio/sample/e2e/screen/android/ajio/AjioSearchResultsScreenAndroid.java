@@ -4,7 +4,8 @@ import com.znsio.sample.e2e.screen.ajio.AjioProductScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioSearchResultsScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Visual;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 public class AjioSearchResultsScreenAndroid
         extends AjioSearchResultsScreen {
     private static final String SCREEN_NAME = AjioSearchResultsScreenAndroid.class.getSimpleName();
-    private static final Logger LOGGER = Logger.getLogger(SCREEN_NAME);
+    private static final Logger LOGGER = LogManager.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
     private static final By byNumberOfProductsFoundId = By.id(
             "com.ril.ajio:id/toolbar_subtitle_tv");

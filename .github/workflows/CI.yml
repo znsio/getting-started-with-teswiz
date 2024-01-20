@@ -41,7 +41,7 @@ jobs:
             COMMIT_ID=$(curl -H "Authorization: token $PAT_TOKEN" \
                  -H "Accept: application/vnd.github.v3+json" \
                  "https://api.github.com/repos/znsio/teswiz/actions/workflows/Build_And_Run_Unit_Tests_CI.yml/runs?&status=success" \
-                 | jq -r '.workflow_runs' | jq -r '.[] | select (.head_branch | contains("main")) | .head_commit.id[0:10]') >> "$GITHUB_ENV"
+                 | jq -r ' [.workflow_runs[] | select (.head_branch=="main") | .head_commit.id][0][0:10] ') >> "$GITHUB_ENV"
             echo "teswiz last successful COMMIT_ID=$COMMIT_ID"
             awk -v id="$COMMIT_ID" '{gsub("commit-.*-blue", "commit-"id"-blue")}1' README.md > README_new.md
             mv README_new.md README.md

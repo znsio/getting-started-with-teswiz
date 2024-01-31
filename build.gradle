@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat
 buildscript {
     ext {
         gradleVersion = '8.5'
-        teswizVersion = '1c554c8c5b' // pCloudyAppium2 branch
+        teswizVersion = '907fe47541' // main branch
     }
     repositories {
         mavenLocal()

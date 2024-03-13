@@ -31,7 +31,6 @@
       "use-plugins": [
         "device-farm"
       ],
-      "port": 31337,
       "plugin": {
         "device-farm": {
           "platform": "android",

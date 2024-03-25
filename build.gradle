@@ -2,8 +2,8 @@ import java.text.SimpleDateFormat
 
 buildscript {
     ext {
-        gradleVersion = '8.6'
-        teswizVersion = '0.0.94' // main branch (latest ATD-main)
+        gradleVersion = '8.7'
+        teswizVersion = '0.0.96' // main branch (latest ATD-main)
     }
     repositories {
         mavenLocal()

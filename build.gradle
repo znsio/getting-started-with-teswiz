@@ -18,6 +18,11 @@ plugins {
 
 version '0.0.1'
 
+java {
+    sourceCompatibility = "17"
+    targetCompatibility = "17"
+}
+
 repositories {
     mavenLocal()
     maven { url 'https://jitpack.io' }

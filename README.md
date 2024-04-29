@@ -36,6 +36,8 @@
 
 # [Running the sample tests](https://github.com/znsio/teswiz/blob/main/docs/SampleTests-README.md)
 
+# [Setting up the Hard Gate](https://github.com/znsio/teswiz/blob/main/docs/HardGate.md)
+
 # [Visual Test Automation](https://github.com/znsio/teswiz/blob/main/docs/RunningVisualTests-README.md)
 
 # [Configure your test execution](https://github.com/znsio/teswiz/blob/main/docs/ConfiguringTestExecution-README.md)

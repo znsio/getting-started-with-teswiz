@@ -1,9 +1,9 @@
 @theapp
 Feature: Scenarios for "The App"
 
-#  CONFIG=./configs/theapp/theapp_local_web_config.properties PLATFORM=web TAG="@theapp and @switchUser" ./gradlew run
-#  CONFIG=./configs/theapp/theapp_local_android_config.properties PLATFORM=android TAG="@theapp and @switchUser" ./gradlew run
-  @android @web @switchUser @theapp
+#  CONFIG=./configs/theapp/theapp_local_web_config.properties PLATFORM=web TAG="@theapp and @switchUser1" ./gradlew run
+#  CONFIG=./configs/theapp/theapp_local_android_config.properties PLATFORM=android TAG="@theapp and @switchUser1" ./gradlew run
+  @android @web @switchUser1 @theapp
   Scenario: Switch user persona
     And "I" login to TheApp with invalid credentials - "znsio1", "invalid password"
     When "I" switch my role to "You"

@@ -33,3 +33,4 @@ upload
 libs
 reportportal.*
 *sampleApps*/
+src/test/resources/reportportal.properties

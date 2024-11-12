@@ -2,47 +2,53 @@
 
 set -e
 
-# Get the IP address using ifconfig
-ip_address="$(ifconfig | grep "inet " | grep -v 127 | grep -E "192" | awk 'NR==1 {print $2} ')"
+OS="$(uname)"
+arch="$(uname -m)"  # -i is only linux, -m is linux and apple
+MY_OS="NOT_SET"
+DOCKER_REGISTRY="selenium"
+CHROME_REPO="node-chromium"
+FIREFOX_REPO="node-firefox"
+SELENIUM_HUB_REPO="hub"
+
+case "$OS" in
+  "Linux")
+    echo "You are running Linux."
+    MY_OS="linux"
+    ip_address="$(ifconfig | grep -Eo 'inet (192|172|10)\.[0-9]+\.[0-9]+\.[0-9]+' | awk '{print $2}' | head -n 1)"
+    ;;
+  "Darwin")
+    echo "You are running macOS."
+    MY_OS="macOS"
+    ip_address="$(ifconfig | grep -Eo 'inet (192|172|10)\.[0-9]+\.[0-9]+\.[0-9]+' | awk '{print $2}' | head -n 1)"
+    ;;
+  "CYGWIN"*|"MINGW"*|"MSYS"*)
+    echo "You are running Windows (via Cygwin or Git Bash)."
+    MY_OS="Windows"
+    ip_address=$(ipconfig | grep "IPv4" | grep -E "192" | awk '{print $NF}' | head -n 1)
+    ;;
+  *)
+    echo "Unknown OS: $OS"
+    ;;
+esac
+
+echo "Running on OS: " $OS "-" $MY_OS
+echo "Running on arch: $arch"
 echo "Host IP Address: $ip_address"
+
 if [[ "$ip_address" == "" ]]; then
   echo "IP address not found based on the criteria. Exit."
   ifconfig | grep "inet "
   exit 1
 fi
 
-arch="$(uname -m)"  # -i is only linux, -m is linux and apple
-echo "Running on arch: $arch"
-DOCKER_REGISTRY="selenium"
-CHROME_REPO="node-chrome"
-FIREFOX_REPO="node-firefox"
-SELENIUM_HUB_REPO="hub"
-
-if [[ "$arch" = x86_64* ]]; then
-    if [[ "$(uname -a)" = *ARM64* ]]; then
-        echo 'a64'
-        DOCKER_REGISTRY="seleniarm"
-        CHROME_REPO="node-chromium"
-    else
-        echo 'x64'
-    fi
-elif [[ "$arch" = i*86 ]]; then
-    echo 'x32'
-elif [[ "$arch" = arm* ]]; then
-    echo 'a32'
-    DOCKER_REGISTRY="seleniarm"
-    CHROME_REPO="node-chromium"
-elif test "$arch" = aarch64; then
-    echo 'a64'
-    DOCKER_REGISTRY="seleniarm"
-    CHROME_REPO="node-chromium"
-else
-    exit 1
-fi
-
-echo "Using the containers from DOCKER_REGISTRY: $DOCKER_REGISTRY for architecture: $arch"
-
 export DOCKER_REGISTRY=$DOCKER_REGISTRY
+export SELENIUM_HUB_IMAGE="$DOCKER_REGISTRY/${SELENIUM_HUB_REPO}:latest"
+export CHROME_IMAGE="$DOCKER_REGISTRY/${CHROME_REPO}:latest"
+export FIREFOX_IMAGE="$DOCKER_REGISTRY/${FIREFOX_REPO}:latest"
+echo "Using the containers from DOCKER_REGISTRY: $DOCKER_REGISTRY for architecture: $arch"
+echo "Selenium-hub image: ${SELENIUM_HUB_IMAGE}"
+echo "Chrome image: ${CHROME_IMAGE}"
+echo "Firefox image: ${FIREFOX_IMAGE}"
 
 if [[ -z "${TESWIZ_GRID_PORT}" ]]; then
   echo "GRID_PORT is not set. Use default: 4444"
@@ -91,19 +97,19 @@ DOCKER_COMPOSE_DOWN_CMD="docker-compose -f $DOCKER_COMPOSE_FILE_NAME -p ${PROJEC
 DOCKER_COMPOSE_UP_CMD="docker-compose -f $DOCKER_COMPOSE_FILE_NAME -p ${PROJECT_NAME} up --force-recreate -d"
 
 if [[ ( $1 == "up" ) || ( $1 == "start" ) ]]; then
-    echo "Start docker containers using command: '${DOCKER_COMPOSE_UP_CMD}'"
-    ${DOCKER_COMPOSE_UP_CMD}
-    ./wait_for_containers_to_be_up.sh
+  echo "Start docker containers using command: '${DOCKER_COMPOSE_UP_CMD}'"
+  ${DOCKER_COMPOSE_UP_CMD}
+  ./wait_for_containers_to_be_up.sh
 elif [[ ( $1 == "down" ) || ( $1 == "stop" ) ]]; then
-    echo "Stop docker containers using command: '${DOCKER_COMPOSE_DOWN_CMD}'"
-    ${DOCKER_COMPOSE_DOWN_CMD}
+  echo "Stop docker containers using command: '${DOCKER_COMPOSE_DOWN_CMD}'"
+  ${DOCKER_COMPOSE_DOWN_CMD}
 elif [[ ( $1 == "restart" ) ]]; then
-    echo "Restarting docker containers using command: '${DOCKER_COMPOSE_DOWN_CMD}' and then '${DOCKER_COMPOSE_UP_CMD}'"
-    ${DOCKER_COMPOSE_DOWN_CMD}
-    sleep 2
-    ${DOCKER_COMPOSE_UP_CMD}
-    ./wait_for_containers_to_be_up.sh
+  echo "Restarting docker containers using command: '${DOCKER_COMPOSE_DOWN_CMD}' and then '${DOCKER_COMPOSE_UP_CMD}'"
+  ${DOCKER_COMPOSE_DOWN_CMD}
+  sleep 2
+  ${DOCKER_COMPOSE_UP_CMD}
+  ./wait_for_containers_to_be_up.sh
 else
-    echo "Invalid command provided. Pass either 'up/start' or 'down/stop' as a parameter"
-    exit 1
+  echo "Invalid command provided. Pass either 'up/start' or 'down/stop' as a parameter"
+  exit 1
 fi

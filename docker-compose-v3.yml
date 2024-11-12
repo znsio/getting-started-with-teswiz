@@ -1,10 +1,9 @@
 # To execute this docker-compose yml file use `docker-compose -f docker-compose-v3.yml up`
 # Add the `-d` flag at the end for detached execution
 # To stop the execution, hit Ctrl+C, and then `docker-compose -f docker-compose-v3.yml down`
-version: "3"
 services:
   chrome:
-    image: ${DOCKER_REGISTRY}/${CHROME_REPO}:latest
+    image: ${CHROME_IMAGE}
     container_name: "${PROJECT_NAME}-chrome"
     shm_size: 2gb
     volumes:
@@ -21,7 +20,7 @@ services:
       - SE_NODE_SESSION_TIMEOUT=30
 
   firefox:
-    image: ${DOCKER_REGISTRY}/${FIREFOX_REPO}:latest
+    image: ${FIREFOX_IMAGE}
     container_name: "${PROJECT_NAME}-firefox"
     shm_size: 2gb
     volumes:
@@ -38,7 +37,7 @@ services:
       - SE_NODE_SESSION_TIMEOUT=30
 
   selenium-hub:
-    image: ${DOCKER_REGISTRY}/${SELENIUM_HUB_REPO}:latest
+    image: ${SELENIUM_HUB_IMAGE}
     container_name: "${PROJECT_NAME}-selenium-hub"
     ports:
       - "${GRID_PORT_1}:4442"

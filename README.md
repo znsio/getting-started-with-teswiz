@@ -13,7 +13,7 @@
 [![CodeQL](https://github.com/znsio/teswiz/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/znsio/teswiz/actions/workflows/codeql-analysis.yml)
 
 ## Latest successful teswiz build id:
-[![Latest Commit](https://img.shields.io/badge/commit-46fab45506-blue.svg)](https://jitpack.io/#znsio/teswiz)
+[![Latest Commit](https://img.shields.io/badge/commit-95a5e9a48b-blue.svg)](https://jitpack.io/#znsio/teswiz)
 
 ## Step to start using tewiz in your project:
 

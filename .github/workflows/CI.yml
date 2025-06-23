@@ -25,6 +25,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: 📦 Set up Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: wrapper
+
       - name: 📝 Update README with Teswiz Commit ID
         run: |
           set -eo pipefail
@@ -59,10 +64,8 @@ jobs:
         env:
           PAT_TOKEN: ${{ secrets.TESWIZ_PAT }}
 
-      - name: 🛠️ Build Project with Gradle
-        uses: gradle/gradle-build-action@v3
-        with:
-          arguments: build --refresh-dependencies
+      - name: 🛠️ Run Gradle Build
+        run: ./gradlew build --refresh-dependencies
 
       - name: 🧾 Build Summary (on failure)
         if: failure()

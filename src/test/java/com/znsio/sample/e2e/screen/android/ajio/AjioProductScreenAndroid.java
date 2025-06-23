@@ -1,6 +1,6 @@
 package com.znsio.sample.e2e.screen.android.ajio;
 
-import com.context.TestExecutionContext;
+import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.sample.e2e.screen.ajio.AjioCartScreen;
 import com.znsio.sample.e2e.screen.ajio.AjioProductScreen;

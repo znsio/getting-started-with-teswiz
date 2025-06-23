@@ -1,7 +1,7 @@
 package com.znsio.sample.e2e.steps;
 
-import com.context.SessionContext;
-import com.context.TestExecutionContext;
+import com.znsio.teswiz.context.SessionContext;
+import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.sample.e2e.businessLayer.jiomeet.AuthBL;
 import com.znsio.sample.e2e.businessLayer.jiomeet.InAMeetingBL;
 import com.znsio.sample.e2e.businessLayer.jiomeet.JoinAMeetingBL;

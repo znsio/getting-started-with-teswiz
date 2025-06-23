@@ -2,7 +2,7 @@ package com.znsio.sample.e2e.businessLayer.pdfValidator;
 
 import com.applitools.eyes.TestResults;
 import com.applitools.eyes.TestResultsStatus;
-import com.context.TestExecutionContext;
+import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.sample.e2e.screen.pdfValidator.PDFValidatorScreen;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.entities.TEST_CONTEXT;

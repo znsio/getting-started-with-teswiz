@@ -1,21 +1,20 @@
 import java.text.SimpleDateFormat
+import org.codehaus.groovy.runtime.GStringImpl
 
 buildscript {
     ext {
-        teswizVersion = '1.0.13'
-    }
-    repositories {
-        mavenLocal()
     }
 }
 
 plugins {
     id "java"
     id "idea"
-    id "maven-publish"
 }
 
-version '0.0.1'
+def teswizVersion = "1.0.13"
+
+group = "com.github.znsio"
+version = "$teswizVersion"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -26,14 +25,14 @@ java {
 }
 
 repositories {
-    mavenLocal()
     flatDir {
         dirs 'libs'
     }
     mavenCentral()
     maven {
-        url 'https://jitpack.io'
+        url = 'https://jitpack.io'
     }
+    mavenLocal()
 }
 
 configurations {
@@ -42,18 +41,60 @@ configurations {
     }
 }
 
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
 // Define the libs directory in the project root
 ext.libsDir = file("$projectDir/libs")
+
+def isJarInLocalCache(String group, String artifact, String version, String fileNameSuffix) {
+    def m2Path = new File(System.getProperty("user.home"),
+            ".m2/repository/${group.replace('.', '/')}/${artifact}/${version}/${artifact}-${version}${fileNameSuffix}.jar")
+    def gradlePath = new File(System.getProperty("user.home"),
+            ".gradle/caches/modules-2/files-2.1/${group}/${artifact}/${version}")
+
+    if (m2Path.exists()) {
+        println "\t✔ Found in local .m2 cache: $m2Path"
+        return m2Path
+    }
+
+    if (gradlePath.exists()) {
+        def cachedJar = gradlePath.listFiles()?.find { it.name.endsWith(".jar") }
+        if (cachedJar) {
+            println "\t✔ Found in .gradle cache: ${cachedJar}"
+            return cachedJar
+        }
+    }
+
+    return null
+}
 
 def downloadDependency(String name, String type, Map<String, String> params) {
     if (!libsDir.exists()) {
         libsDir.mkdirs()
     }
 
-    println "Download dependency: ${name} from ${type}"
+    println "Processing dependency: ${name} from ${type}"
     def jarFile = new File(libsDir, "${name}-${params.version}.jar")
-    if (jarFile.exists()) {
-        println "\tDependency $name already exists at: $jarFile. No need to redownload it"
+
+    if (params.forceUpdate?.toString() == "true") {
+        if (jarFile.exists()) {
+            println "\t🧹 Force update enabled. Deleting existing jar: $jarFile"
+            jarFile.delete()
+        }
+    } else if (jarFile.exists()) {
+        println "\t✔ Dependency $name already exists at: $jarFile. Skipping download."
+        return jarFile
+    }
+
+    def cachedJar = isJarInLocalCache(params.group, params.artifact, params.version, params.fileNameSuffix ?: "")
+    if (cachedJar != null) {
+        jarFile.bytes = cachedJar.bytes
+        println "\t✅ Copied from local cache to: $jarFile"
         return jarFile
     }
 
@@ -64,13 +105,12 @@ def downloadDependency(String name, String type, Map<String, String> params) {
         def jsonSlurper = new groovy.json.JsonSlurper()
         def releaseInfo = jsonSlurper.parseText(jsonResponse)
 
-        // Ensure assets field is a list and each asset is a Map
         def assets = releaseInfo.assets
         if (!(assets instanceof List)) {
             throw new GradleException("Assets field is not a list: $assets")
         }
 
-        def jarAsset = releaseInfo.assets.find { it.name.matches(/${name}-\d+\.\d+\.\d+\.jar/) }
+        def jarAsset = assets.find { it.name.matches(/${name}-\d+\.\d+\.\d+\.jar/) }
         if (!jarAsset) {
             throw new GradleException("No ${name} JAR file found in the latest GitHub release.")
         }
@@ -81,32 +121,29 @@ def downloadDependency(String name, String type, Map<String, String> params) {
         throw new GradleException("Unknown type: $type")
     }
 
-    println "\tDownloading ${name} JAR from ${jarUrl}"
-    def downloadCommand
-    if (System.getProperty("os.name").toLowerCase().contains("win")) {
-        downloadCommand = ["cmd", "/c", "curl", "-o", jarFile.absolutePath, jarUrl]
-    } else {
-        downloadCommand = ["wget", "-O", jarFile.absolutePath, jarUrl]
-    }
-    // Explicitly convert all elements to String
+    println "\t⬇ Downloading ${name} JAR from ${jarUrl}"
+    def downloadCommand = System.getProperty("os.name").toLowerCase().contains("win") ?
+            ["cmd", "/c", "curl", "-L", "-o", jarFile.absolutePath, jarUrl] :
+            ["wget", "-O", jarFile.absolutePath, jarUrl]
+
     downloadCommand = downloadCommand.collect { it.toString() }
 
-    println "\tDownloading using command: ${downloadCommand}"
+    println "\t📥 Downloading using command: ${downloadCommand}"
 
     def process = new ProcessBuilder(downloadCommand).redirectErrorStream(true).start()
     process.inputStream.eachLine { println it }
     process.waitFor()
 
     if (process.exitValue() != 0) {
-        throw new GradleException("Failed to download ${name} JAR.")
+        throw new GradleException("❌ Failed to download ${name} JAR.")
     }
 
-    println "${name} JAR downloaded to $jarFile"
+    println "✅ ${name} JAR downloaded to $jarFile"
     return jarFile
 }
 
 // Define a custom task to download dependencies
-task downloadDependencies {
+tasks.register('downloadDependencies') {
     doLast {
         println "Downloading required dependencies..."
         def dependencies = [
@@ -115,7 +152,7 @@ task downloadDependencies {
                         type  : "github",
                         params: [
                                 repoUrl: "https://api.github.com/repos/znsio/teswiz/releases/latest",
-                                version : "$project.teswizVersion"
+                                version: "$teswizVersion"
                         ]
                 ]
         ]
@@ -139,9 +176,15 @@ tasks.compileJava {
 
 dependencies {
     implementation fileTree(dir: "$project.projectDir/libs", include: ['*.jar'])
-    implementation("com.github.znsio:teswiz:${project.teswizVersion}") {
+    implementation files(layout.buildDirectory.files("/classes/main"))
+    implementation files(layout.buildDirectory.files("/classes/test"))
+    implementation("com.github.znsio:teswiz:${teswizVersion}") {
         transitive = false
     }
+}
+
+wrapper {
+    gradleVersion = "8.14.2"
 }
 
 static def getCurrentDatestamp() {
@@ -162,7 +205,7 @@ static def getCurrentTimestamp() {
     return df.format(today)
 }
 
-project.ext.logDir = "./target/" + getMonth() + "/" + getCurrentDatestamp() + "/" + getCurrentTimestamp()
+def logDir = "./target/" + getMonth() + "/" + getCurrentDatestamp() + "/" + getCurrentTimestamp()
 
 def copyRpPropertiesIfMissing() {
     def rpFile = file('src/test/resources/reportportal.properties')
@@ -179,7 +222,7 @@ def copyRpPropertiesIfMissing() {
     System.setProperty("reportportal.properties.file", rpFile.absolutePath)
 }
 
-task copyRpPropertiesIfMissing {
+tasks.register('copyRpPropertiesIfMissing') {
     doLast {
         copyRpPropertiesIfMissing()
     }
@@ -193,10 +236,10 @@ gradle.taskGraph.whenReady { taskGraph ->
 
 tasks.register('run', JavaExec) {
     doFirst {
-        println "Using LOG_DIR: ${project.logDir}"
-        System.setProperty "LOG_DIR", "${project.logDir}"
-        environment "APPLITOOLS_API_KEY", System.getenv("teswiz_APPLITOOLS_API_KEY")
-        environment "APPLITOOLS_LOG_DIR", "${project.logDir}/applitools_logs"
+        println "Using LOG_DIR: ${logDir}"
+        System.setProperty "LOG_DIR", "${logDir}"
+        environment "APPLITOOLS_LOG_DIR", "${logDir}/applitools_logs"
+        environment "APPLITOOLS_API_KEY", System.getenv("TESWIZ_APPLITOOLS_API_KEY")
 
         def hostname = InetAddress.getLocalHost().getHostName()
         println "Hostname: $hostname"
@@ -228,12 +271,11 @@ tasks.register('run', JavaExec) {
 //                : "./configs/theapp/theapp_local_android_config.properties"
 //        configFile = System.getenv("CONFIG") ? System.getenv("CONFIG") : configFile
 
-        println "ConfigFile: $configFile"
         systemProperties = System.properties as Map<String, ?>
         def runnerArgs = [
                 "${configFile}",
-                "com/znsio/sample/e2e",
-                "src/test/resources"
+                "com/znsio/teswiz/steps",
+                "./src/test/resources/com/znsio/teswiz/features"
         ]
         args = runnerArgs
 
@@ -250,6 +292,12 @@ tasks.register('run', JavaExec) {
     classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
 }
 
-wrapper {
-    gradleVersion = "8.14.2"
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ['--release', '17']
+}
+
+tasks.withType(JavaExec).configureEach {
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }

@@ -1,6 +1,6 @@
 package com.znsio.sample.e2e.googlesearch;
 
-import com.context.TestExecutionContext;
+import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
 import org.apache.logging.log4j.Logger;

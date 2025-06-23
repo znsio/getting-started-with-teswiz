@@ -1,7 +1,7 @@
 package com.znsio.sample.e2e.steps;
 
-import com.context.SessionContext;
-import com.context.TestExecutionContext;
+import com.znsio.teswiz.context.SessionContext;
+import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.sample.e2e.businessLayer.pdfValidator.PDFValidatorBL;
 import com.znsio.sample.e2e.businessLayer.theapp.AppBL;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;

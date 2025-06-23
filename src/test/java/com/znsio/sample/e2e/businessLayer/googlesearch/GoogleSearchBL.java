@@ -1,6 +1,6 @@
 package com.znsio.sample.e2e.businessLayer.googlesearch;
 
-import com.context.TestExecutionContext;
+import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.teswiz.runner.Runner;

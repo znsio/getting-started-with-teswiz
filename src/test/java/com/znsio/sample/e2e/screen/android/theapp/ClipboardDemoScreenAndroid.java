@@ -1,6 +1,6 @@
 package com.znsio.sample.e2e.screen.android.theapp;
 
-import com.context.TestExecutionContext;
+import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.sample.e2e.screen.theapp.ClipboardDemoScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Runner;

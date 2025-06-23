@@ -1,7 +1,7 @@
 package com.znsio.sample.e2e.steps;
 
-import com.context.SessionContext;
-import com.context.TestExecutionContext;
+import com.znsio.teswiz.context.SessionContext;
+import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.sample.e2e.businessLayer.search.SearchBL;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;

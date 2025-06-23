@@ -154,7 +154,7 @@ tasks.register('downloadDependencies') {
                                 artifact      : "teswiz",
                                 version       : "$teswizVersion",
                                 fileNameSuffix: "",
-                                forceUpdate   : false
+                                forceUpdate   : true
                         ]
                 ]
         ]

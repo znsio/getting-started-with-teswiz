@@ -15,6 +15,33 @@
 ## Latest successful teswiz build id:
 [![Latest Commit](https://img.shields.io/badge/commit-0973617bad-blue.svg)](https://jitpack.io/#znsio/teswiz)
 
+
+## 🚨 Breaking Changes
+
+### From Version `1.0.13` onward
+
+As part of package restructuring, context-related classes have moved to a new package.
+
+#### ❗ Required Update in Imports
+
+Replace:
+
+```java
+import com.context.SessionContext;
+import com.context.TestExecutionContext;
+```
+
+With:
+
+```java
+import com.znsio.teswiz.context.SessionContext;
+import com.znsio.teswiz.context.TestExecutionContext;
+```
+
+# NOTE
+
+    Use JDK v17 or higher
+
 ## Step to start using tewiz in your project:
 
 * Clone/download the getting-started-with-teswiz repo

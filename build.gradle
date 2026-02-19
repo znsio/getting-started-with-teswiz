@@ -10,7 +10,7 @@ plugins {
     id "idea"
 }
 
-def teswizVersion = "1.0.14"
+def teswizVersion = "1.0.16"
 
 group = "com.github.znsio"
 version = "$teswizVersion"
@@ -186,7 +186,7 @@ dependencies {
 }
 
 wrapper {
-    gradleVersion = "8.14.2"
+    gradleVersion = "9.3.1"
 }
 
 static def getCurrentDatestamp() {

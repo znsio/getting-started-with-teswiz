@@ -1,0 +1,51 @@
+{
+  "iOS": {
+    "app": "https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/main/TheApp.ipa",
+    "automationName": "XCUITest",
+    "platformName": "iOS",
+    "deviceName": "iPhone 15",
+    "platformVersion": "17",
+    "autoAcceptAlerts": true,
+    "newCommandTimeout": 300,
+    "fullReset": true,
+    "noReset": false,
+    "printPageSourceOnFindFailure": true,
+    "lt:options": {
+      "isRealMobile": true,
+      "video": true,
+      "network": true,
+      "appProfiling": true,
+      "visual": true
+    }
+  },
+  "web": {
+    "browserName": "chrome",
+    "browserstackOptions": {
+      "os": "Windows",
+      "osVersion": "11",
+      "browserVersion": "latest",
+      "debug": "true",
+      "networkLogs": "true"
+    }
+  },
+  "serverConfig": {
+    "server": {
+      "use-plugins": ["device-farm"],
+      "plugin": {
+        "device-farm": {
+          "platform": "iOS",
+          "skipChromeDownload": true,
+          "iosDeviceType": "real",
+          "cloud": {
+            "cloudName": "browserstack",
+            "url": "https://hub-cloud.browserstack.com",
+            "apiUrl": "https://api-cloud.browserstack.com/app-automate/",
+            "devices": [],
+            "web": {}
+          }
+        }
+      }
+    }
+  },
+  "appiumServerPath": "./node_modules/appium/build/lib/main.js"
+}

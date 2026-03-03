@@ -1,12 +1,12 @@
 package com.znsio.sample.e2e.screen.android.theapp;
 
 import com.znsio.teswiz.context.TestExecutionContext;
-import com.znsio.sample.e2e.screen.theapp.ClipboardDemoScreen;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Runner;
 import com.znsio.teswiz.runner.Visual;
-import org.apache.logging.log4j.Logger;
+import com.znsio.sample.e2e.screen.theapp.ClipboardDemoScreen;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 
 import static com.znsio.teswiz.tools.Wait.waitFor;
@@ -43,7 +43,7 @@ public class ClipboardDemoScreenAndroid
         boolean isElementPresentByAccessibilityId = driver.isElementPresentByAccessibilityId(
                 contentExpectedInClipboard);
         LOGGER.info(String.format("Is content present in clipboad: '%s':: '%s'",
-                contentExpectedInClipboard, isElementPresentByAccessibilityId));
+                                  contentExpectedInClipboard, isElementPresentByAccessibilityId));
         return isElementPresentByAccessibilityId;
     }
 
@@ -54,8 +54,8 @@ public class ClipboardDemoScreenAndroid
 
     private ClipboardDemoScreenAndroid enterTextToAddInClipboard(String content) {
         waitFor(2);
-        WebElement contentElement = driver.findElementByAccessibilityId(
-                byMessageInputAccessibilityId);
+        WebElement contentElement =
+                driver.findElementByAccessibilityId(byMessageInputAccessibilityId);
         contentElement.click();
         contentElement.clear();
         contentElement.sendKeys(content);

@@ -4,16 +4,23 @@
     "automationName": "UIAutomator2",
     "noSign": true,
     "project": "teswiz",
-    "browserstack.appium_version": "2.0.1",
-    "browserstack.enableCameraImageInjection": true,
+    "browserstack.appiumVersion": "3.1.0",
     "browserstack.debug": true,
-    "browserstack.geoLocation": "IN",
-    "browserstack.timezone": "Kolkata",
     "browserstack.networkLogs": "true",
     "browserstack.gpsLocation": "22,75",
     "browserstack.locale": "IN"
   },
-  "serverConfig" : {
+  "web": {
+    "browserName": "chrome",
+    "browserstackOptions": {
+      "os": "Windows",
+      "osVersion": "11",
+      "browserVersion": "latest",
+      "debug": "true",
+      "networkLogs": "true"
+    }
+  },
+  "serverConfig": {
     "server": {
       "use-plugins": ["device-farm"],
       "plugin": {
@@ -22,10 +29,10 @@
           "skipChromeDownload": true,
           "cloud": {
             "cloudName": "browserstack",
-            "url": "http://hub-cloud.browserstack.com",
+            "url": "https://hub-cloud.browserstack.com",
             "apiUrl": "https://api-cloud.browserstack.com/app-automate/",
-            "devices": [
-            ]
+            "devices": [],
+            "web": {}
           }
         }
       }

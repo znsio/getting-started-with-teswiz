@@ -1,0 +1,30 @@
+{
+  "iOS": {
+    "app": "https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/refs/heads/main/TheApp-v1.10.0.app.zip",
+    "iPhoneOnly": true,
+    "automationName": "XCUITest",
+    "clearSystemFiles": true,
+    "deviceName": "iPhone 16 Pro",
+    "platformVersion": "18.1",
+    "maxTypingFrequency": 10,
+    "fullReset": false,
+    "noReset": false,
+    "platformName": "iOS",
+    "preventWDAAttachments": true,
+    "printPageSourceOnFindFailure": true,
+    "usePrebuiltWDA": false
+  },
+  "serverConfig": {
+    "server": {
+      "use-plugins": ["device-farm", "relaxed-caps"],
+      "plugin": {
+        "device-farm": {
+          "platform": "iOS",
+          "skipChromeDownload": true,
+          "iosDeviceType": "simulated"
+        }
+      }
+    }
+  },
+  "appiumServerPath": "./node_modules/appium/build/lib/main.js"
+}

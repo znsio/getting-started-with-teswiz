@@ -43,11 +43,6 @@ public class TeswizPublicMethodsBL {
     private void teswizPublicMethodsCheck() {
         long threadId = Thread.currentThread().getId();
 
-        String osName = Runner.OS_NAME;
-        boolean isWindows = Runner.IS_WINDOWS;
-        boolean isMac = Runner.IS_MAC;
-        String userDirectory = Runner.USER_DIRECTORY;
-        String userName = Runner.USER_NAME;
         String notSet = Runner.NOT_SET;
         String aDefault = Runner.DEFAULT;
         String debug = Runner.DEBUG;
@@ -82,6 +77,7 @@ public class TeswizPublicMethodsBL {
         Runner.getAppPackageName();
         Runner.isRunningInCI();
         Runner.isCLI();
+        Runner.isPDF();
         Runner.isAPI();
         Runner.getBrowser();
         Runner.getProxyURL();
@@ -101,9 +97,11 @@ public class TeswizPublicMethodsBL {
         Drivers.getVisualDriverForCurrentUser(threadId);
         Drivers.getNameOfDeviceUsedByUser(currentUserPersona);
         Drivers.getAvailableUserPersonas();
+        Drivers.createPDFDriverFor(currentUserPersona, currentPlatform, context, "sample.pdf");
         Scenario scenario = null;
         Drivers.attachLogsAndCloseAllDrivers(scenario);
 
+        new UnirestService();
         ReportPortalLogger.logDebugMessage("logDebugMessage");
         ReportPortalLogger.logInfoMessage("logInfoMessage");
         ReportPortalLogger.logWarningMessage("logWarningMessage");
@@ -116,8 +114,10 @@ public class TeswizPublicMethodsBL {
         UnirestService.patchHttpRequest("", "");
         UnirestService.deleteHttpRequest("");
 
+        new DateTime();
         DateTime.getFormattedMeetingTime(5);
 
+        new IPAddress();
         IPAddress.getPublicIPAddress();
         IPAddress.getPrivateIPAddress();
 
@@ -132,6 +132,7 @@ public class TeswizPublicMethodsBL {
         JsonFile.convertToArray("");
         JsonFile.compareFiles("", "");
 
+        new JsonSchemaValidator();
         JsonSchemaValidator.validateJsonFileAgainstSchema("", "", "");
 
         Randomizer.randomize(5);
@@ -141,7 +142,12 @@ public class TeswizPublicMethodsBL {
         Randomizer.getRandomNumberBetween(1, 2);
         Randomizer.getRandomNumberBetween(1L, 2L);
 
+        new Wait();
         Wait.waitFor(1);
+
+        HeartBeat heartBeat = new HeartBeat("me", "teswiz", 1);
+        heartBeat.getHeartBeatCounter();
+        heartBeat.stopHeartBeat();
 
         YamlFile.compareFiles("", "");
     }

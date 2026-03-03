@@ -4,10 +4,9 @@ import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
 import com.znsio.teswiz.runner.Runner;
-import com.znsio.sample.e2e.screen.ScreenShotScreen;
 import com.znsio.sample.e2e.screen.helloWorld.HelloWorldScreen;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
 public class HelloWorldBL {

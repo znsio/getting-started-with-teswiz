@@ -1,0 +1,56 @@
+{
+  "android": {
+    "app": "https://github.com/anandbagmar/sampleAppsForNativeMobileAutomation/raw/main/TheApp-release.apk",
+    "appPackage": "com.appiumpro.the_app",
+    "appActivity": "com.appiumpro.the_app.MainActivity",
+    "appiumVersion": "3.1.0",
+    "autoAcceptAlerts": true,
+    "autoGrantPermissions": true,
+    "automationName": "UIAutomator2",
+    "browserstack.appiumVersion": "3.1.0",
+    "browserstack.debug": true,
+    "browserstack.networkLogs": "true",
+    "browserstack.gpsLocation": "22,75",
+    "browserstack.locale": "IN",
+    "device": "Samsung",
+    "launchTimeout": 90000,
+    "newCommandTimeout": 300,
+    "fullReset": true,
+    "noSign": true,
+    "os_version": "12",
+    "platformName": "Android",
+    "project": "teswiz",
+    "resetKeyboard": true,
+    "unicodeKeyboard": true
+  },
+  "web": {
+    "browserName": "chrome",
+    "browserstackOptions": {
+      "os": "Windows",
+      "osVersion": "11",
+      "browserVersion": "latest",
+      "debug": "true",
+      "networkLogs": "true"
+    }
+  },
+  "serverConfig": {
+    "server": {
+      "use-plugins": ["device-farm"],
+      "plugin": {
+        "device-farm": {
+          "platform": "android",
+          "skipChromeDownload": true,
+          "cloud": {
+            "cloudName": "browserstack",
+            "url": "https://hub-cloud.browserstack.com",
+            "apiUrl": "https://api-cloud.browserstack.com/app-automate/",
+            "devices": [
+            ],
+            "web": {}
+          }
+        }
+      }
+    }
+  },
+  "appiumServerPath": "./node_modules/appium/build/lib/main.js"
+}

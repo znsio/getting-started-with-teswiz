@@ -6,8 +6,9 @@ import com.znsio.sample.e2e.screen.theapp.AppLaunchScreen;
 import com.znsio.sample.e2e.screen.theapp.ClipboardDemoScreen;
 import com.znsio.sample.e2e.screen.theapp.EchoScreen;
 import com.znsio.sample.e2e.screen.theapp.LoginScreen;
-import org.apache.logging.log4j.Logger;
+import io.appium.java_client.AppiumBy;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 
 public class AppLaunchScreenAndroid
@@ -21,7 +22,7 @@ public class AppLaunchScreenAndroid
     private final Driver driver;
     private final Visual visually;
     private final String byClipboardDemoAccessibilityId = "Clipboard Demo";
-    private final String loginScreenAccessibilityId = "Login Screen";
+    private final By byLoginScreenAccessibilityId = AppiumBy.accessibilityId("Login Screen");
 
     public AppLaunchScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -30,7 +31,8 @@ public class AppLaunchScreenAndroid
 
     @Override
     public LoginScreen selectLogin() {
-        driver.findElementByAccessibilityId(loginScreenAccessibilityId).click();
+        driver.findElement(byLoginScreenAccessibilityId).click();
+        visually.checkWindow(SCREEN_NAME, "Login Screen");
         return LoginScreen.get();
     }
 

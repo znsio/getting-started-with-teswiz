@@ -2,12 +2,14 @@ package com.znsio.sample.e2e.businessLayer.theapp;
 
 import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.teswiz.entities.Platform;
-import com.znsio.teswiz.runner.Runner;
 import com.znsio.sample.e2e.entities.SAMPLE_TEST_CONTEXT;
+import com.znsio.teswiz.runner.Runner;
+import com.znsio.sample.e2e.screen.ScreenShotScreen;
 import com.znsio.sample.e2e.screen.theapp.AppLaunchScreen;
 import com.znsio.sample.e2e.screen.theapp.LoginScreen;
-import org.apache.logging.log4j.Logger;
+import com.znsio.teswiz.tools.cmd.CommandLineExecutor;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 
 public class AppBL {
@@ -41,10 +43,10 @@ public class AppBL {
 
     public LoginBL loginAgain(String username, String password) {
         String errorMessage = "Invalid login credentials error message is incorrect";
-        String androidErrorMessage = "Invalid login credentials, please try again";
+        String androidIOSErrorMessage = "Invalid login credentials, please try again";
         String webErrorMessage = "Your username is invalid!";
         String expectedErrorMessage =
-                currentPlatform.equals(Platform.android) ? androidErrorMessage : webErrorMessage;
+                currentPlatform.equals(Platform.web) ? webErrorMessage : androidIOSErrorMessage;
 
         LoginScreen loginScreen = LoginScreen.get().enterLoginDetails(username, password).login();
         String actualErrorMessage = loginScreen.getInvalidLoginError();
@@ -58,6 +60,27 @@ public class AppBL {
 
     public AppBL goBack() {
         AppLaunchScreen.get().goBack();
+        return this;
+    }
+
+    public AppBL stopTheAppAndLaunchItAgain() {
+        forceStopTheApp();
+        LOGGER.info("Start theapp");
+        String[] startTheApp = new String[] {"adb shell am start com.appiumpro.the_app/com.appiumpro.the_app.MainActivity"};
+        CommandLineExecutor.execCommand(startTheApp);
+        ScreenShotScreen.get().takeScreenshot();
+        return this;
+    }
+
+    public AppBL forceStopTheApp() {
+        LOGGER.info("ForceStop TheApp");
+        String[] forceStopTheApp = new String[] {"adb shell am force-stop com.appiumpro.the_app"};
+        CommandLineExecutor.execCommand(forceStopTheApp);
+        return this;
+    }
+
+    public AppBL launchAndTakeScreenshot() {
+        ScreenShotScreen.get().takeScreenshot();
         return this;
     }
 

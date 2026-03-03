@@ -10,7 +10,7 @@ plugins {
     id "idea"
 }
 
-def teswizVersion = "4df2d1b60c"
+def teswizVersion = "1.0.18"
 
 group = "com.github.znsio"
 version = "$teswizVersion"

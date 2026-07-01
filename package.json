@@ -4,7 +4,7 @@
     "@appium/relaxed-caps-plugin": "2.2.4",
     "appium": "3.5.2",
     "appium-device-farm": "11.3.2",
-    "appium-uiautomator2-driver": "7.6.2",
+    "appium-uiautomator2-driver": "8.0.1",
     "appium-xcuitest-driver": "11.15.0",
     "go-ios": "1.2.0"
   },

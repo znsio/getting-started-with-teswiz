@@ -20,7 +20,7 @@ public class ScreenShotScreenWeb
     @Override
     public ScreenShotScreen takeScreenshot() {
         visually.checkWindow(SCREEN_NAME, "Take Screenshot");
-        driver.getInnerDriver().get("https://github.com/znsio/teswiz");
+        driver.getInnerDriver().get("https://github.com/anandbagmar/teswiz");
         waitFor(3);
         visually.checkWindow(SCREEN_NAME, "teswiz");
         return this;

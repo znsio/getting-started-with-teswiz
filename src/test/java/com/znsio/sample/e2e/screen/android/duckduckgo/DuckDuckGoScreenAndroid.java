@@ -53,7 +53,7 @@ public class DuckDuckGoScreenAndroid
     @Override
     public DuckDuckGoScreen switchToNativeContextAndGoToTeswizGithub() {
         driver.setNativeAppContext();
-        driver.getInnerDriver().get("https://github.com/znsio/teswiz");
+        driver.getInnerDriver().get("https://github.com/anandbagmar/teswiz");
         waitFor(3);
         visually.checkWindow(SCREEN_NAME, "teswiz github");
         return this;

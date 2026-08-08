@@ -3,21 +3,21 @@
 > [!IMPORTANT]
 > **This repository has temporarily moved to [anandbagmar/getting-started-with-teswiz](https://github.com/anandbagmar/getting-started-with-teswiz)**. Please refer to the fork for active updates, branches, and submissions.
 
-### This is a sample project to understand and start using [teswiz](https://github.com/znsio/teswiz)
+### This is a sample project to understand and start using [teswiz](https://github.com/anandbagmar/teswiz)
 
 ## teswiz
-[![](https://badges.frapsoft.com/os/v3/open-source.svg)](https://github.com/znsio/teswiz)
-[![GitHub stars](https://img.shields.io/github/stars/znsio/teswiz.svg?style=flat)](https://github.com/znsio/teswiz/stargazers)
-[ ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat )](https://github.com/znsio/teswiz/pulls)
-[![GitHub forks](https://img.shields.io/github/forks/znsio/teswiz.svg?style=social&label=Fork)](https://github.com/znsio/teswiz/network)
+[![](https://badges.frapsoft.com/os/v3/open-source.svg)](https://github.com/anandbagmar/teswiz)
+[![GitHub stars](https://img.shields.io/github/stars/anandbagmar/teswiz.svg?style=flat)](https://github.com/anandbagmar/teswiz/stargazers)
+[ ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat )](https://github.com/anandbagmar/teswiz/pulls)
+[![GitHub forks](https://img.shields.io/github/forks/anandbagmar/teswiz.svg?style=social&label=Fork)](https://github.com/anandbagmar/teswiz/network)
 
 ## Latest teswiz release status:
-[![0.0.86](https://jitpack.io/v/znsio/teswiz.svg)](https://jitpack.io/#znsio/teswiz)
-[![CI](https://github.com/znsio/teswiz/actions/workflows/Build_And_Run_Unit_Tests_CI.yml/badge.svg)](https://github.com/znsio/teswiz/actions/workflows/Build_And_Run_Unit_Tests_CI.yml)
-[![CodeQL](https://github.com/znsio/teswiz/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/znsio/teswiz/actions/workflows/codeql-analysis.yml)
+[![0.0.86](https://jitpack.io/v/anandbagmar/teswiz.svg)](https://jitpack.io/#anandbagmar/teswiz)
+[![CI](https://github.com/anandbagmar/teswiz/actions/workflows/Build_And_Run_Unit_Tests_CI.yml/badge.svg)](https://github.com/anandbagmar/teswiz/actions/workflows/Build_And_Run_Unit_Tests_CI.yml)
+[![CodeQL](https://github.com/anandbagmar/teswiz/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/anandbagmar/teswiz/actions/workflows/codeql-analysis.yml)
 
 ## Latest successful teswiz build id:
-[![Latest Commit](https://img.shields.io/badge/commit-f9aa68b661-blue.svg)](https://jitpack.io/#znsio/teswiz)
+[![Latest Commit](https://img.shields.io/badge/commit-f9aa68b661-blue.svg)](https://jitpack.io/#anandbagmar/teswiz)
 
 
 ## 🚨 Breaking Changes
@@ -57,29 +57,29 @@ import com.znsio.teswiz.context.TestExecutionContext;
 * Create a copy of an existing capabilities file - ex: ./caps/myapp_capabilities.json
   * Update `android->app->local`, `android->appActivity` and `android->appPackage`
 * Update `src\test\resources\reportportal.properties` file
-* [Run the sample test](https://github.com/znsio/teswiz/blob/main/docs/SampleTests-README.md) 
+* [Run the sample test](https://github.com/anandbagmar/teswiz/blob/main/docs/guides/SampleTests-README.md) 
 
 ## Additional information
 
-# [Prerequisites](https://github.com/znsio/teswiz/blob/main/docs/GettingStartedUsingTeswiz-README.md)
+# [Prerequisites](https://github.com/anandbagmar/teswiz/blob/main/docs/guides/Prerequisites-README.md)
 
-# [Getting started using teswiz](https://github.com/znsio/teswiz/blob/main/docs/GettingStartedUsingTeswiz-README.md)
+# [Getting started using teswiz](https://github.com/anandbagmar/teswiz/blob/main/docs/guides/GettingStartedUsingTeswiz-README.md)
 
-# [Running the sample tests](https://github.com/znsio/teswiz/blob/main/docs/SampleTests-README.md)
+# [Running the sample tests](https://github.com/anandbagmar/teswiz/blob/main/docs/guides/SampleTests-README.md)
 
-# [Setting up the Hard Gate](https://github.com/znsio/teswiz/blob/main/docs/HardGate.md)
+# [Setting up the Hard Gate](https://github.com/anandbagmar/teswiz/blob/main/docs/features/HardGate.md)
 
-# [Visual Test Automation](https://github.com/znsio/teswiz/blob/main/docs/RunningVisualTests-README.md)
+# [Visual Test Automation](https://github.com/anandbagmar/teswiz/blob/main/docs/features/RunningVisualTests-README.md)
 
-# [Configure your test execution](https://github.com/znsio/teswiz/blob/main/docs/ConfiguringTestExecution-README.md)
+# [Configure your test execution](https://github.com/anandbagmar/teswiz/blob/main/docs/guides/ConfiguringTestExecution-README.md)
 
-# [Configuration options](https://github.com/znsio/teswiz/blob/main/docs/ConfigurationParameters-README.md)
+# [Configuration options](https://github.com/anandbagmar/teswiz/blob/main/docs/features/ConfigurationParameters-README.md)
 Test execution using teswiz is highly configurable. This enables you to control what type of tests you want to execute, and where (environment, local/cloud), etc, without making changes to your code.
 
 # ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Breaking changes in teswiz v0.0.81 ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
-Refer to the [breaking changes](https://github.com/znsio/teswiz/blob/main/docs/BreakingChanges-README.md) section in [teswiz](https://github.com/znsio/teswiz) repo
+Refer to the [breaking changes](https://github.com/anandbagmar/teswiz/blob/main/docs/internals/BreakingChanges-README.md) section in [teswiz](https://github.com/anandbagmar/teswiz) repo
 
-# [Feature/Functional coverage](https://github.com/znsio/teswiz/blob/main/docs/FeatureCoverage-README.md) from your test execution
+# [Feature/Functional coverage](https://github.com/anandbagmar/teswiz/blob/main/docs/internals/FeatureCoverage-README.md) from your test execution
 
 # Using teswiz for your automation?
 

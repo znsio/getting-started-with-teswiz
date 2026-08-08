@@ -8,8 +8,8 @@
     "INDIGO_BASE_URL": "https://www.goindigo.in/",
     "BOOKINGDOTCOM_BASE_URL": "https://www.booking.com/",
     "DINEOUT_BASE_URL": "https://www.dineout.co.in/",
-    "TESWIZ_BASE_URL": "https://github.com/znsio/teswiz",
-    "CHROME-WEB_BASE_URL": "https://github.com/znsio/teswiz"
+    "TESWIZ_BASE_URL": "https://github.com/anandbagmar/teswiz",
+    "CHROME-WEB_BASE_URL": "https://github.com/anandbagmar/teswiz"
   },
   "dev": {
     "CONFENGINE_BASE_URL": "https://www.dev.confengine.com/"

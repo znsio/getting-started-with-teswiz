@@ -44,7 +44,7 @@ jobs:
             git pull --rebase origin main
             COMMIT_ID=$(curl -s -H "Authorization: token $PAT_TOKEN" \
               -H "Accept: application/vnd.github.v3+json" \
-              "https://api.github.com/repos/znsio/teswiz/actions/workflows/Build_And_Run_Unit_Tests_CI.yml/runs?status=success" \
+              "https://api.github.com/repos/anandbagmar/teswiz/actions/workflows/Build_And_Run_Unit_Tests_CI.yml/runs?status=success" \
               | jq -r '[.workflow_runs[] | select(.head_branch == "main") | .head_commit.id][0][0:10]')
             echo "Latest successful Teswiz commit: $COMMIT_ID"
 

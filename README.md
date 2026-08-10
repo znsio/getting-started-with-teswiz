@@ -1,8 +1,5 @@
 # getting-started-with-teswiz
 
-> [!IMPORTANT]
-> **This repository has temporarily moved to [anandbagmar/getting-started-with-teswiz](https://github.com/anandbagmar/getting-started-with-teswiz)**. Please refer to the fork for active updates, branches, and submissions.
-
 ### This is a sample project to understand and start using [teswiz](https://github.com/anandbagmar/teswiz)
 
 ## teswiz

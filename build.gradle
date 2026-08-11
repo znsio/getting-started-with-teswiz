@@ -180,8 +180,8 @@ dependencies {
     implementation fileTree(dir: "$project.projectDir/libs", include: ['*.jar'])
     implementation files(layout.buildDirectory.files("/classes/main"))
     implementation files(layout.buildDirectory.files("/classes/test"))
-    testImplementation "org.junit.jupiter:junit-jupiter:5.10.3"
-    testRuntimeOnly "org.junit.platform:junit-platform-launcher:1.10.3"
+    testImplementation "org.junit.jupiter:junit-jupiter:5.14.4"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher:1.14.4"
     // implementation("com.github.znsio:teswiz:${teswizVersion}") {
     //     transitive = false
     // }
